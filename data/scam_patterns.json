@@ -1,0 +1,87 @@
+{
+  "patterns": [
+    {
+      "name": "kyc_urgency",
+      "pattern": "(?i)(kyc|know your customer).*(block|suspend|deactivate|expire)",
+      "scam_type": "KYC_PHISHING",
+      "base_score": 70,
+      "description": "KYC urgency with account threat"
+    },
+    {
+      "name": "lottery_prize",
+      "pattern": "(?i)(won|winner|lucky draw|lottery|prize).*(lakh|crore|rs\\.?|₹|inr)",
+      "scam_type": "LOTTERY_PRIZE",
+      "base_score": 80,
+      "description": "Lottery or prize winning claims"
+    },
+    {
+      "name": "investment_guaranteed",
+      "pattern": "(?i)(invest|return|profit).*(guaranteed|assured|100%|double)",
+      "scam_type": "INVESTMENT_FRAUD",
+      "base_score": 75,
+      "description": "Guaranteed investment returns"
+    },
+    {
+      "name": "bank_impersonation",
+      "pattern": "(?i)(sbi|hdfc|icici|axis|pnb|bob|bank).*(block|suspend|verify|update)",
+      "scam_type": "KYC_PHISHING",
+      "base_score": 65,
+      "description": "Bank impersonation with urgency"
+    },
+    {
+      "name": "otp_request",
+      "pattern": "(?i)(share|send|provide).*(otp|pin|password|cvv)",
+      "scam_type": "OTP_THEFT",
+      "base_score": 90,
+      "description": "Request for OTP or credentials"
+    },
+    {
+      "name": "job_offer",
+      "pattern": "(?i)(job|work from home|earning|income).*(whatsapp|telegram|contact)",
+      "scam_type": "JOB_SCAM",
+      "base_score": 60,
+      "description": "Suspicious job offers"
+    },
+    {
+      "name": "loan_instant",
+      "pattern": "(?i)(instant|easy|quick).*(loan|credit|finance).*(no document|no kyc)?",
+      "scam_type": "LOAN_SCAM",
+      "base_score": 65,
+      "description": "Instant loan offers"
+    },
+    {
+      "name": "tech_support",
+      "pattern": "(?i)(virus|hack|compromise|infected).*(call|contact|support)",
+      "scam_type": "TECH_SUPPORT",
+      "base_score": 70,
+      "description": "Fake tech support claims"
+    },
+    {
+      "name": "government_impersonation",
+      "pattern": "(?i)(income tax|it department|uidai|aadhaar|pan).*(verify|update|block)",
+      "scam_type": "IMPERSONATION",
+      "base_score": 75,
+      "description": "Government agency impersonation"
+    }
+  ],
+  "url_patterns": [
+    {
+      "name": "typosquatting",
+      "pattern": "(amaz0n|amazn|g00gle|gogle|faceb00k|facebok|paytm[0-9]|phonpe[0-9])",
+      "base_score": 85,
+      "description": "Common typosquatting domains"
+    },
+    {
+      "name": "suspicious_tld",
+      "pattern": "\\.(xyz|top|work|click|link|gq|ml|ga|cf|tk)(/|$)",
+      "base_score": 50,
+      "description": "Suspicious top-level domains"
+    },
+    {
+      "name": "bank_fake_domain",
+      "pattern": "(sbi|hdfc|icici|axis)[-_]?(verify|update|kyc|login)",
+      "base_score": 80,
+      "description": "Fake bank domains"
+    }
+  ]
+}

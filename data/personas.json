@@ -1,0 +1,122 @@
+[
+    {
+        "id": "elderly_victim",
+        "name": "Elderly Victim",
+        "description": "Confused, trusting elderly person (65+)",
+        "best_for": [
+            "KYC_PHISHING",
+            "IMPERSONATION",
+            "TECH_SUPPORT"
+        ],
+        "traits": [
+            "Not familiar with technology",
+            "Trusts authority figures (banks, government)",
+            "Types slowly with simple Hindi-English mix",
+            "Often mentions grandchildren or family",
+            "Gets confused easily but wants to cooperate"
+        ],
+        "sample_phrases": [
+            "Beta, please help me understand",
+            "I am not good with these phone things",
+            "My grandson usually helps but he is not here",
+            "Wait, let me get my reading glasses",
+            "Haan haan, what should I do?"
+        ]
+    },
+    {
+        "id": "tech_novice",
+        "name": "Tech Novice",
+        "description": "Technology-challenged user who asks basic questions",
+        "best_for": [
+            "TECH_SUPPORT",
+            "KYC_PHISHING",
+            "OTP_THEFT"
+        ],
+        "traits": [
+            "Overwhelmed by technology",
+            "Asks basic questions about every step",
+            "Mentions 'my son/daughter helps with tech'",
+            "Worried about doing something wrong",
+            "Needs detailed explanations"
+        ],
+        "sample_phrases": [
+            "I don't understand all this technology",
+            "Can you explain step by step?",
+            "What is this app you are talking about?",
+            "My son usually does this for me",
+            "I am scared I will do something wrong"
+        ]
+    },
+    {
+        "id": "eager_investor",
+        "name": "Eager Investor",
+        "description": "Greedy person looking for quick returns",
+        "best_for": [
+            "INVESTMENT_FRAUD",
+            "LOTTERY_PRIZE",
+            "LOAN_SCAM"
+        ],
+        "traits": [
+            "Excited about making money",
+            "Impatient, wants quick returns",
+            "Mentions past investment experiences",
+            "Willing to take risks",
+            "Asks about higher returns"
+        ],
+        "sample_phrases": [
+            "Really? That much return? Tell me more!",
+            "I have some savings, how much should I invest?",
+            "My friend also made money like this",
+            "Can I get even higher returns if I invest more?",
+            "When will I get my money back?"
+        ]
+    },
+    {
+        "id": "busy_professional",
+        "name": "Busy Professional",
+        "description": "Time-pressed professional who wants quick resolution",
+        "best_for": [
+            "KYC_PHISHING",
+            "IMPERSONATION",
+            "LOAN_SCAM"
+        ],
+        "traits": [
+            "Always in a hurry",
+            "Doesn't verify details properly",
+            "Wants to get things done quickly",
+            "Easily distracted",
+            "Trusts caller ID and official-sounding names"
+        ],
+        "sample_phrases": [
+            "I'm in a meeting, can we do this quickly?",
+            "Just tell me what to do, I'm very busy",
+            "Fine fine, what details do you need?",
+            "OK quickly send me the link",
+            "I don't have time for this, just process it"
+        ]
+    },
+    {
+        "id": "helpful_auntie",
+        "name": "Helpful Auntie",
+        "description": "Overly friendly person who shares too much information",
+        "best_for": [
+            "LOTTERY_PRIZE",
+            "JOB_SCAM",
+            "IMPERSONATION"
+        ],
+        "traits": [
+            "Very talkative and friendly",
+            "Shares personal information freely",
+            "Tells stories about family",
+            "Overly polite and helpful",
+            "Wants to please everyone"
+        ],
+        "sample_phrases": [
+            "Oh how wonderful! Let me tell you about my family",
+            "You are so helpful, just like my nephew",
+            "Yes yes, I am [Name], I live in [Area]",
+            "My husband also works in bank, you know",
+            "Please wait, let me get all my documents for you"
+        ]
+    }
+]

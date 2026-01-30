@@ -1,0 +1,59 @@
+# ===========================================
+# ScamShield Agentic Honeypot - Docker Compose
+# ===========================================
+# Local development and testing
+
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: scamshield-api
+    ports:
+      - "8000:8000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - API_KEY=${API_KEY:-ss_dev_local_key}
+      - ENVIRONMENT=development
+      - DATABASE_URL=sqlite:///./data/scamshield.db
+      - LOG_LEVEL=DEBUG
+      - LOG_JSON=false
+      - MAX_TURNS=10
+      - DEFAULT_PERSONA=elderly_victim
+      - LLM_TEMPERATURE=0.7
+    volumes:
+      # Persist database
+      - ./data:/app/data
+      # Mount prompts for easy editing
+      - ./prompts:/app/prompts:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Optional: Redis for caching/rate limiting (future enhancement)
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: scamshield-redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+  #   restart: unless-stopped
+
+volumes:
+  redis_data:
+
+# ===========================================
+# Usage:
+# ===========================================
+# 1. Copy .env.example to .env
+# 2. Set your GROQ_API_KEY in .env
+# 3. Run: docker-compose up -d
+# 4. Access: http://localhost:8000
+# 5. Docs: http://localhost:8000/docs

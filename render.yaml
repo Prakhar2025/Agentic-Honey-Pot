@@ -1,0 +1,73 @@
+# Render.com Deployment Configuration
+# https://render.com/docs/yaml-spec
+
+services:
+  - type: web
+    name: scamshield-honeypot
+    runtime: python
+    region: singapore
+    plan: free
+    
+    # Build configuration
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    
+    # Start command
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    
+    # Environment variables
+    envVars:
+      # Required - set manually in Render dashboard
+      - key: GROQ_API_KEY
+        sync: false
+      
+      - key: API_KEY
+        sync: false
+      
+      # Application config
+      - key: ENVIRONMENT
+        value: production
+      
+      - key: LOG_LEVEL
+        value: INFO
+      
+      - key: LOG_JSON
+        value: "true"
+      
+      # Agentic config
+      - key: MAX_TURNS
+        value: "10"
+      
+      - key: DEFAULT_PERSONA
+        value: elderly_victim
+      
+      - key: SESSION_TIMEOUT_SECONDS
+        value: "1800"
+      
+      # LLM config
+      - key: GROQ_MODEL
+        value: llama-3.2-90b-vision-preview
+      
+      - key: LLM_TEMPERATURE
+        value: "0.7"
+      
+      - key: LLM_MAX_TOKENS
+        value: "1024"
+      
+      # Database (persistent disk recommended for production)
+      - key: DATABASE_URL
+        value: sqlite:///./data/scamshield.db
+      
+      # Security
+      - key: RATE_LIMIT_RPM
+        value: "100"
+    
+    # Health check
+    healthCheckPath: /health
+    
+    # Auto deploy on push
+    autoDeploy: true
+    
+    # Branch to deploy
+    branch: main
