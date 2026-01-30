@@ -1,6 +1,6 @@
 # 🚀 Deployment Guide
 
-> ScamShield Honeypot API — Production Deployment on Render.com
+> ScamShield Agentic Honeypot — Production Deployment on Render.com
 
 ---
 
@@ -38,6 +38,9 @@ Create a `.env` file or configure in your deployment platform:
 | `DATABASE_URL` | ❌ | SQLite database path | `sqlite:///./data/scamshield.db` |
 | `ENVIRONMENT` | ❌ | Runtime environment | `production` |
 | `LOG_LEVEL` | ❌ | Logging verbosity | `INFO` |
+| `MAX_TURNS` | ❌ | Max conversation turns per session | `10` |
+| `DEFAULT_PERSONA` | ❌ | Default victim persona | `elderly_victim` |
+| `MOCK_SCAMMER_URL` | ❌ | Mock Scammer API base URL | `https://mock-scammer.hackathon.ai` |
 | `CORS_ORIGINS` | ❌ | Allowed CORS origins | `["https://yourdomain.com"]` |
 | `RATE_LIMIT_RPM` | ❌ | Default rate limit per minute | `60` |
 
@@ -48,6 +51,9 @@ GROQ_API_KEY=gsk_your_production_key
 DATABASE_URL=sqlite:///./data/scamshield.db
 ENVIRONMENT=production
 LOG_LEVEL=WARNING
+MAX_TURNS=10
+DEFAULT_PERSONA=elderly_victim
+MOCK_SCAMMER_URL=https://mock-scammer.hackathon.ai
 CORS_ORIGINS=["https://api.scamshield.in"]
 RATE_LIMIT_RPM=100
 ```
@@ -212,11 +218,13 @@ docker-compose up -d
 {
   "status": "healthy",
   "version": "1.0.0",
-  "timestamp": "2026-01-30T11:50:00+05:30",
+  "timestamp": "2026-01-30T15:40:00+05:30",
   "components": {
     "database": "healthy",
-    "llm_service": "healthy"
-  }
+    "llm_service": "healthy",
+    "agent_loop": "healthy"
+  },
+  "active_sessions": 3
 }
 ```
 
@@ -319,6 +327,9 @@ Render.com free tier sleeps after 15 minutes of inactivity.
 
 - [ ] `GROQ_API_KEY` set in environment
 - [ ] `ENVIRONMENT=production` configured
+- [ ] `MAX_TURNS` set appropriately (default: 10)
+- [ ] `DEFAULT_PERSONA` configured
+- [ ] `MOCK_SCAMMER_URL` configured (for hackathon)
 - [ ] Health check endpoint responding
 - [ ] CORS origins configured correctly
 - [ ] Rate limiting enabled

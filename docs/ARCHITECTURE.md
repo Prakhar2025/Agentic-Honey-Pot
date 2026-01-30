@@ -1,61 +1,72 @@
 # 🏗️ Architecture Documentation
 
-> ScamShield Honeypot API — System Architecture & Design
+> ScamShield Agentic Honeypot — System Architecture & Design
 
 ---
 
 ## Table of Contents
 
 - [System Overview](#system-overview)
+- [Agentic Loop Architecture](#agentic-loop-architecture)
 - [Component Architecture](#component-architecture)
-- [Data Flow](#data-flow)
+- [Conversation Flow](#conversation-flow)
+- [Persona System](#persona-system)
+- [Intelligence Extraction](#intelligence-extraction)
 - [Database Schema](#database-schema)
 - [API Design](#api-design)
+- [Mock Scammer API Integration](#mock-scammer-api-integration)
 - [Security Considerations](#security-considerations)
-- [Scalability Strategy](#scalability-strategy)
 
 ---
 
 ## System Overview
 
-ScamShield Honeypot API is designed as a **stateless, horizontally scalable** microservice that provides real-time scam detection capabilities. The architecture follows **clean architecture principles** with clear separation of concerns.
+ScamShield is an **autonomous AI honeypot** designed to actively engage scammers in conversation, extract intelligence, and report findings. Unlike passive detection systems, it uses an **agentic loop** to maintain multi-turn dialogues with scammers.
 
 ### High-Level Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                              CLIENT LAYER                                    │
+│                           EXTERNAL INTERFACES                                │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  Mobile Apps  │  Web Dashboards  │  Third-Party Integrations  │  CLI Tools  │
-└───────┬───────┴────────┬─────────┴──────────────┬─────────────┴──────┬──────┘
-        │                │                        │                    │
-        └────────────────┴────────────────────────┴────────────────────┘
-                                    │
-                                    ▼
+│  Mock Scammer API  │  Manual Submissions  │  Webhook Integrations           │
+└───────┬────────────┴──────────┬───────────┴──────────────┬──────────────────┘
+        │                       │                          │
+        └───────────────────────┼──────────────────────────┘
+                                │
+                                ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                            API GATEWAY LAYER                                 │
+│                           API GATEWAY LAYER                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  Rate Limiting  │  Authentication  │  Request Validation  │  Load Balancing │
+│  Rate Limiting  │  Authentication  │  Request Validation  │  Session Mgmt   │
 └───────────────────────────────────┬─────────────────────────────────────────┘
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                           APPLICATION LAYER                                  │
+│                         🤖 AGENTIC CORE                                      │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│                         FastAPI Application                                  │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │
-│  │   Honeypot   │  │   Analytics  │  │    Health    │  │    Admin     │     │
-│  │   Service    │  │   Service    │  │   Service    │  │   Service    │     │
-│  └──────┬───────┘  └──────┬───────┘  └──────────────┘  └──────────────┘     │
-└─────────┼─────────────────┼─────────────────────────────────────────────────┘
-          │                 │
-          ▼                 ▼
+│                                                                              │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐  │
+│   │  Scam       │    │  Persona    │    │  Response   │    │  Intel      │  │
+│   │  Detector   │───▶│  Selector   │───▶│  Generator  │───▶│  Extractor  │  │
+│   └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘  │
+│         │                                      │                  │          │
+│         └────────────────┬─────────────────────┘                  │          │
+│                          ▼                                        ▼          │
+│                  ┌─────────────────┐                   ┌─────────────────┐   │
+│                  │  Conversation   │                   │  Intelligence   │   │
+│                  │  State Manager  │                   │  Aggregator     │   │
+│                  └─────────────────┘                   └─────────────────┘   │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          INTELLIGENCE LAYER                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐     │
-│  │   Groq LLM Client  │  │  Pattern Matcher   │  │  URL Analyzer      │     │
-│  │   (LLaMA 3.2)      │  │  (Rule Engine)     │  │  (Domain Intel)    │     │
+│  │   Groq LLM Client  │  │  Pattern Matcher   │  │  Entity Extractor  │     │
+│  │   (LLaMA 3.2)      │  │  (Scam Detection)  │  │  (UPI, Bank, URLs) │     │
 │  └────────────────────┘  └────────────────────┘  └────────────────────┘     │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
@@ -64,8 +75,8 @@ ScamShield Honeypot API is designed as a **stateless, horizontally scalable** mi
 │                            DATA LAYER                                        │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐     │
-│  │   SQLite Database  │  │   Scam Patterns    │  │    Threat Intel    │     │
-│  │   (Persistence)    │  │   (Cache)          │  │    (Feed Store)    │     │
+│  │   SQLite Database  │  │   Conversation     │  │   Intelligence     │     │
+│  │   (Sessions)       │  │   History Store    │  │   Repository       │     │
 │  └────────────────────┘  └────────────────────┘  └────────────────────┘     │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -74,11 +85,56 @@ ScamShield Honeypot API is designed as a **stateless, horizontally scalable** mi
 
 | Principle | Implementation |
 |-----------|----------------|
-| **Single Responsibility** | Each service handles one domain (detection, analytics, admin) |
-| **Dependency Inversion** | Core logic depends on abstractions, not concrete implementations |
-| **Open/Closed** | New scam types can be added without modifying existing code |
-| **Stateless Design** | No server-side session; all state in database |
-| **Fail-Safe Defaults** | Unknown messages default to "review required" not "safe" |
+| **Agentic Autonomy** | Agent makes decisions without human intervention |
+| **Stateful Conversations** | Each session maintains full dialogue context |
+| **Fail-Safe Defaults** | Unknown situations trigger safe exit strategies |
+| **Intelligence-First** | Every response aims to extract more information |
+| **Ethical Boundaries** | Agent never provides real sensitive data |
+
+---
+
+## Agentic Loop Architecture
+
+The core innovation is the **Agentic Loop** — an autonomous decision-making cycle that drives scammer engagement.
+
+### The Loop
+
+```mermaid
+graph TD
+    A[📩 Receive Scammer Message] --> B{🔍 Is it a Scam?}
+    B -->|No| C[🚫 End Session]
+    B -->|Yes| D[🎭 Select/Load Persona]
+    D --> E[💭 Analyze Scam Type]
+    E --> F[✍️ Generate Victim Response]
+    F --> G[🔎 Extract Intelligence from Context]
+    G --> H{📊 Enough Intel Extracted?}
+    H -->|Yes| I[📤 Report & End Session]
+    H -->|No| J{🔄 Max Turns Reached?}
+    J -->|Yes| I
+    J -->|No| K[📨 Send Response to Scammer]
+    K --> L[⏳ Wait for Scammer Reply]
+    L --> A
+```
+
+### Loop Components
+
+| Component | Responsibility | Decision Points |
+|-----------|----------------|-----------------|
+| **Scam Detector** | Confirms message is a scam | Exit if legitimate message |
+| **Persona Selector** | Chooses best victim personality | Based on scam type |
+| **Response Generator** | Creates believable victim reply | Uses LLM with persona context |
+| **Intelligence Extractor** | Parses for bank/UPI/links | Runs after each message |
+| **State Manager** | Tracks conversation progress | Decides continue vs. exit |
+
+### Exit Conditions
+
+| Condition | Action |
+|-----------|--------|
+| Intelligence successfully extracted | Report and close |
+| Maximum turns reached (default: 10) | Report partial intel and close |
+| Scammer disengages | Save session and close |
+| Threat/abuse detected | Immediately close |
+| Non-scam message | Ignore and close |
 
 ---
 
@@ -86,135 +142,263 @@ ScamShield Honeypot API is designed as a **stateless, horizontally scalable** mi
 
 ```mermaid
 graph TB
-    subgraph "Client Applications"
-        A[Mobile App]
-        B[Web Dashboard]
-        C[API Consumers]
+    subgraph "External"
+        A[Mock Scammer API]
+        B[Manual Input]
     end
 
     subgraph "API Layer"
-        D[FastAPI Router]
-        E[Middleware Stack]
-        F[Request Validators]
+        C[FastAPI Router]
+        D[Session Manager]
+        E[Auth Middleware]
     end
 
-    subgraph "Service Layer"
-        G[HoneypotService]
-        H[AnalyticsService]
-        I[AuthService]
+    subgraph "Agentic Core"
+        F[AgentOrchestrator]
+        G[ScamDetector]
+        H[PersonaManager]
+        I[ResponseGenerator]
+        J[IntelExtractor]
     end
 
-    subgraph "Intelligence Layer"
-        J[GroqLLMClient]
-        K[PatternMatcher]
-        L[URLAnalyzer]
-        M[ScamClassifier]
+    subgraph "LLM Layer"
+        K[GroqClient]
+        L[PromptTemplates]
+        M[PersonaPrompts]
     end
 
     subgraph "Data Layer"
-        N[(SQLite DB)]
-        O[Repository Layer]
-        P[Cache Layer]
+        N[(SQLite)]
+        O[SessionRepository]
+        P[IntelRepository]
     end
 
-    A --> D
-    B --> D
-    C --> D
-    D --> E
-    E --> F
+    A --> C
+    B --> C
+    C --> E
+    E --> D
+    D --> F
     F --> G
     F --> H
     F --> I
-    G --> J
-    G --> K
-    G --> L
-    G --> M
-    G --> O
-    H --> O
-    O --> N
+    F --> J
+    I --> K
+    K --> L
+    H --> M
+    F --> O
     J --> P
+    O --> N
+    P --> N
 ```
 
 ### Component Descriptions
 
-| Component | Responsibility | Technology |
-|-----------|----------------|------------|
-| **FastAPI Router** | HTTP request routing and OpenAPI docs | FastAPI |
-| **Middleware Stack** | CORS, logging, error handling, timing | Starlette |
-| **Request Validators** | Input sanitization and schema validation | Pydantic |
-| **HoneypotService** | Core scam detection orchestration | Python |
-| **AnalyticsService** | Aggregation and reporting | Python |
-| **AuthService** | API key validation and rate limiting | Python |
-| **GroqLLMClient** | LLM API communication | httpx/aiohttp |
-| **PatternMatcher** | Regex-based quick detection | Python re |
-| **URLAnalyzer** | Domain reputation and URL parsing | urllib/tldextract |
-| **ScamClassifier** | Final classification logic | Python |
-| **Repository Layer** | Database abstraction (CRUD) | SQLAlchemy |
-| **Cache Layer** | Response caching for repeated queries | Python dict/Redis |
+| Component | Responsibility |
+|-----------|----------------|
+| **AgentOrchestrator** | Main controller that runs the agentic loop |
+| **ScamDetector** | Analyzes incoming message to confirm scam |
+| **PersonaManager** | Loads and maintains victim persona state |
+| **ResponseGenerator** | Uses LLM to generate believable victim replies |
+| **IntelExtractor** | Uses regex + LLM to extract bank/UPI/links |
+| **SessionRepository** | CRUD for conversation sessions |
+| **IntelRepository** | Stores extracted intelligence |
+| **GroqClient** | Async client for Groq API |
+| **PromptTemplates** | System prompts for different tasks |
+| **PersonaPrompts** | Persona-specific behavior instructions |
 
 ---
 
-## Data Flow
+## Conversation Flow
 
-### Request → Response Lifecycle
+### Multi-Turn Dialogue Example
 
 ```mermaid
 sequenceDiagram
-    participant C as Client
-    participant G as API Gateway
-    participant F as FastAPI
-    participant H as HoneypotService
-    participant L as GroqLLM
-    participant P as PatternMatcher
-    participant D as Database
+    participant S as 🦹 Scammer
+    participant A as 🤖 Agent
+    participant LLM as 🧠 Groq LLM
+    participant DB as 💾 Database
 
-    C->>G: POST /v1/honeypot
-    G->>G: Validate API Key
-    G->>G: Check Rate Limit
-    G->>F: Forward Request
-    F->>F: Validate Schema (Pydantic)
-    F->>H: analyze(message)
-    
-    par Parallel Analysis
-        H->>P: quick_scan(message)
-        P-->>H: pattern_matches[]
-        H->>L: deep_analyze(message)
-        L-->>H: llm_response
-    end
-    
-    H->>H: merge_results()
-    H->>H: calculate_risk_score()
-    H->>D: log_analysis(result)
-    D-->>H: logged
-    H-->>F: AnalysisResult
-    F-->>G: JSON Response
-    G-->>C: 200 OK + Body
+    S->>A: "Your account blocked! Share details to unblock"
+    A->>A: Detect scam (KYC_PHISHING)
+    A->>A: Select persona (elderly_victim)
+    A->>LLM: Generate victim response
+    LLM-->>A: "Oh no! Please help, what details needed?"
+    A->>S: "Oh no! Please help, what details needed?"
+    A->>DB: Save turn 1
+
+    S->>A: "Send account number to 9876543210"
+    A->>A: Extract intel (phone: +91-9876543210)
+    A->>LLM: Generate response (seek more info)
+    LLM-->>A: "Okay, and where do I send money?"
+    A->>S: "Okay, and where do I send money?"
+    A->>DB: Save turn 2
+
+    S->>A: "Pay ₹500 to scammer@upi"
+    A->>A: Extract intel (UPI: scammer@upi)
+    A->>A: Sufficient intel collected
+    A->>DB: Save session complete
+    A->>A: Generate final report
 ```
 
-### Analysis Pipeline
+### Conversation State Machine
 
 ```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   INPUT     │    │   STAGE 1   │    │   STAGE 2   │    │   STAGE 3   │
-│   Message   │───▶│   Pattern   │───▶│   LLM       │───▶│   Score     │
-│             │    │   Matching  │    │   Analysis  │    │   Fusion    │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
-                          │                  │                  │
-                          ▼                  ▼                  ▼
-                   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-                   │ Known Scam  │    │ Semantic    │    │ Final Risk  │
-                   │ Patterns    │    │ Analysis    │    │ Assessment  │
-                   │ (Fast Path) │    │ (Deep Path) │    │ (Output)    │
-                   └─────────────┘    └─────────────┘    └─────────────┘
+┌─────────┐    Scam Detected    ┌──────────┐
+│  IDLE   │ ─────────────────▶  │  ACTIVE  │
+└─────────┘                     └────┬─────┘
+                                     │
+                    ┌────────────────┼────────────────┐
+                    │                │                │
+                    ▼                ▼                ▼
+            ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+            │  EXTRACTING │  │  MAX_TURNS  │  │  DISENGAGED │
+            └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+                   │                │                │
+                   └────────────────┴────────────────┘
+                                    │
+                                    ▼
+                            ┌─────────────┐
+                            │  COMPLETED  │
+                            └─────────────┘
 ```
 
-### Stage Descriptions
+---
 
-| Stage | Latency | Purpose |
-|-------|---------|---------|
-| **Pattern Matching** | < 5ms | Quick regex scan for known scam patterns |
-| **LLM Analysis** | 100-300ms | Deep semantic analysis with Groq/LLaMA |
-| **Score Fusion** | < 2ms | Weighted combination of all signals |
+## Persona System
+
+### Persona Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       PERSONA MANAGER                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │ Elderly Victim  │  │ Tech Novice     │  │ Eager Investor  │  │
+│  │                 │  │                 │  │                 │  │
+│  │ • Confused      │  │ • Overwhelmed   │  │ • Greedy        │  │
+│  │ • Trusting      │  │ • Asks basic    │  │ • Impatient     │  │
+│  │ • Slow to type  │  │   questions     │  │ • Risk-taker    │  │
+│  │ • References    │  │ • Mentions      │  │ • Mentions      │  │
+│  │   grandchildren │  │   "my son helps"│  │   past gains    │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+│                                                                  │
+│  ┌─────────────────┐  ┌─────────────────┐                       │
+│  │ Busy Prof.      │  │ Helpful Auntie  │                       │
+│  │                 │  │                 │                       │
+│  │ • Distracted    │  │ • Overshares    │                       │
+│  │ • Wants quick   │  │ • Chatty        │                       │
+│  │   resolution    │  │ • Tells stories │                       │
+│  │ • Time-pressed  │  │ • Very polite   │                       │
+│  └─────────────────┘  └─────────────────┘                       │
+│                                                                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Persona Selection Logic
+
+| Scam Type | Best Persona | Why |
+|-----------|--------------|-----|
+| KYC_PHISHING | elderly_victim | Trusting, seeks help |
+| TECH_SUPPORT | tech_novice | Believes tech claims |
+| INVESTMENT_FRAUD | eager_investor | Wants quick money |
+| LOTTERY_PRIZE | helpful_auntie | Shares too much info |
+| URGENCY_SCAM | busy_professional | Rushes, doesn't verify |
+
+### Persona Prompt Template
+
+```python
+ELDERLY_VICTIM_PROMPT = """
+You are role-playing as an elderly Indian person (65+ years) who:
+- Is not familiar with technology
+- Trusts authority figures (banks, government)
+- Types slowly with simple Hindi-English mix
+- Often mentions grandchildren or family
+- Gets confused easily but wants to cooperate
+- Never provides REAL sensitive information
+
+Your goal: Keep the scammer engaged and extract:
+- Bank account numbers they mention
+- UPI IDs they ask you to pay
+- Phone numbers they provide
+- Links they send
+
+Respond in a confused, trusting manner. Ask clarifying questions.
+Use phrases like "beta", "please help", "I don't understand".
+"""
+```
+
+---
+
+## Intelligence Extraction
+
+### Extraction Pipeline
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Raw Message    │────▶│  Regex Patterns │────▶│  LLM Extraction │
+│                 │     │  (Fast Path)    │     │  (Deep Path)    │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                │                       │
+                                └───────────┬───────────┘
+                                            ▼
+                                ┌─────────────────────┐
+                                │  Merge & Validate   │
+                                └──────────┬──────────┘
+                                           │
+                                           ▼
+                                ┌─────────────────────┐
+                                │  Intelligence Store │
+                                └─────────────────────┘
+```
+
+### Extraction Patterns
+
+| Type | Regex Pattern | Example Match |
+|------|---------------|---------------|
+| **UPI ID** | `[a-zA-Z0-9._-]+@[a-zA-Z]+` | scammer@ybl |
+| **Phone** | `(\+91)?[6-9]\d{9}` | +91-9876543210 |
+| **Bank Account** | `\d{9,18}` | 123456789012 |
+| **IFSC** | `[A-Z]{4}0[A-Z0-9]{6}` | HDFC0001234 |
+| **Phishing URL** | `https?://[^\s]+` | http://fake-bank.xyz |
+
+### Intelligence Output Schema
+
+```json
+{
+  "extracted_intelligence": {
+    "bank_accounts": [
+      {
+        "account_number": "123456789012",
+        "ifsc_code": "HDFC0001234",
+        "confidence": 0.95
+      }
+    ],
+    "upi_ids": [
+      {
+        "id": "scammer@ybl",
+        "confidence": 0.98
+      }
+    ],
+    "phone_numbers": [
+      {
+        "number": "+91-9876543210",
+        "confidence": 0.99
+      }
+    ],
+    "phishing_links": [
+      {
+        "url": "http://fake-bank.xyz/login",
+        "domain": "fake-bank.xyz",
+        "confidence": 0.97
+      }
+    ]
+  },
+  "extraction_method": "hybrid",
+  "total_entities_found": 4
+}
+```
 
 ---
 
@@ -224,108 +408,79 @@ sequenceDiagram
 
 ```mermaid
 erDiagram
-    ANALYSIS_REQUESTS ||--o{ ANALYSIS_RESULTS : generates
-    ANALYSIS_REQUESTS ||--o{ INDICATORS : contains
-    API_KEYS ||--o{ ANALYSIS_REQUESTS : authenticates
-    SCAM_PATTERNS ||--o{ INDICATORS : matches
+    SESSIONS ||--o{ MESSAGES : contains
+    SESSIONS ||--o| INTELLIGENCE : extracts
+    SESSIONS }|--|| PERSONAS : uses
     
-    ANALYSIS_REQUESTS {
+    SESSIONS {
         uuid id PK
-        text message
-        varchar source_type
-        jsonb metadata
-        timestamp created_at
-        varchar api_key_id FK
-    }
-    
-    ANALYSIS_RESULTS {
-        uuid id PK
-        uuid request_id FK
-        boolean is_scam
-        integer risk_score
-        varchar risk_level
+        varchar status
         varchar scam_type
-        text recommendation
-        float confidence
-        integer analysis_time_ms
+        varchar persona_id FK
+        integer turn_count
+        timestamp started_at
+        timestamp ended_at
+    }
+    
+    MESSAGES {
+        uuid id PK
+        uuid session_id FK
+        varchar role
+        text content
+        integer turn_number
         timestamp created_at
     }
     
-    INDICATORS {
+    INTELLIGENCE {
         uuid id PK
-        uuid request_id FK
-        text indicator_text
-        varchar indicator_type
-        float weight
+        uuid session_id FK
+        jsonb bank_accounts
+        jsonb upi_ids
+        jsonb phone_numbers
+        jsonb phishing_links
+        timestamp extracted_at
     }
     
-    API_KEYS {
-        uuid id PK
-        varchar key_hash
-        varchar owner_name
-        varchar owner_email
-        integer rate_limit
+    PERSONAS {
+        varchar id PK
+        varchar name
+        text system_prompt
+        varchar best_for_scam_types
         boolean is_active
-        timestamp created_at
-        timestamp expires_at
-    }
-    
-    SCAM_PATTERNS {
-        uuid id PK
-        varchar pattern_name
-        text regex_pattern
-        varchar scam_type
-        float base_score
-        boolean is_active
-        timestamp created_at
     }
 ```
 
 ### Table Definitions
 
-#### `analysis_requests`
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY | Unique request identifier |
-| `message` | TEXT | NOT NULL | Original message content |
-| `source_type` | VARCHAR(20) | NOT NULL | sms, whatsapp, email, voice |
-| `metadata` | JSONB | NULLABLE | Additional context (sender, region) |
-| `created_at` | TIMESTAMP | DEFAULT NOW() | Request timestamp |
-| `api_key_id` | UUID | FOREIGN KEY | Reference to API key used |
+#### `sessions`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | UUID | Unique session identifier |
+| `status` | VARCHAR | ACTIVE, EXTRACTING, COMPLETED, DISENGAGED |
+| `scam_type` | VARCHAR | KYC_PHISHING, LOTTERY, etc. |
+| `persona_id` | VARCHAR | Reference to persona used |
+| `turn_count` | INTEGER | Number of conversation turns |
+| `started_at` | TIMESTAMP | Session start time |
+| `ended_at` | TIMESTAMP | Session end time |
 
-#### `analysis_results`
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY | Unique result identifier |
-| `request_id` | UUID | FOREIGN KEY | Reference to request |
-| `is_scam` | BOOLEAN | NOT NULL | Binary classification |
-| `risk_score` | INTEGER | CHECK (0-100) | Numerical risk score |
-| `risk_level` | VARCHAR(20) | NOT NULL | SAFE, LOW, MEDIUM, HIGH, CRITICAL |
-| `scam_type` | VARCHAR(50) | NULLABLE | Classification category |
-| `recommendation` | TEXT | NOT NULL | User-facing advice |
-| `confidence` | FLOAT | CHECK (0-1) | Model confidence |
-| `analysis_time_ms` | INTEGER | NOT NULL | Processing duration |
+#### `messages`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | UUID | Unique message ID |
+| `session_id` | UUID | Parent session |
+| `role` | VARCHAR | "scammer" or "agent" |
+| `content` | TEXT | Message content |
+| `turn_number` | INTEGER | Turn in conversation |
 
-#### `api_keys`
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY | Key identifier |
-| `key_hash` | VARCHAR(64) | UNIQUE, NOT NULL | SHA-256 hash of API key |
-| `owner_name` | VARCHAR(100) | NOT NULL | Key owner name |
-| `owner_email` | VARCHAR(255) | NOT NULL | Contact email |
-| `rate_limit` | INTEGER | DEFAULT 100 | Requests per minute |
-| `is_active` | BOOLEAN | DEFAULT TRUE | Key status |
-| `expires_at` | TIMESTAMP | NULLABLE | Optional expiration |
-
-#### `scam_patterns`
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| `id` | UUID | PRIMARY KEY | Pattern identifier |
-| `pattern_name` | VARCHAR(100) | NOT NULL | Human-readable name |
-| `regex_pattern` | TEXT | NOT NULL | Regex pattern |
-| `scam_type` | VARCHAR(50) | NOT NULL | Category |
-| `base_score` | FLOAT | CHECK (0-100) | Base risk contribution |
-| `is_active` | BOOLEAN | DEFAULT TRUE | Pattern status |
+#### `intelligence`
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | UUID | Unique intel ID |
+| `session_id` | UUID | Parent session |
+| `bank_accounts` | JSONB | Array of extracted accounts |
+| `upi_ids` | JSONB | Array of UPI IDs |
+| `phone_numbers` | JSONB | Array of phone numbers |
+| `phishing_links` | JSONB | Array of malicious URLs |
 
 ---
 
@@ -333,114 +488,88 @@ erDiagram
 
 ### Endpoint Overview
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| `POST` | `/v1/honeypot` | Analyze message for scams | API Key |
-| `GET` | `/v1/honeypot/{id}` | Retrieve analysis result | API Key |
-| `GET` | `/v1/analytics/summary` | Aggregated statistics | API Key |
-| `GET` | `/v1/analytics/trends` | Scam trend data | API Key |
-| `GET` | `/health` | Service health check | None |
-| `GET` | `/docs` | OpenAPI documentation | None |
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/v1/honeypot/engage` | Start new honeypot session |
+| `POST` | `/v1/honeypot/continue` | Continue existing conversation |
+| `GET` | `/v1/honeypot/session/{id}` | Get session details & intel |
+| `DELETE` | `/v1/honeypot/session/{id}` | End session early |
+| `GET` | `/v1/analytics/summary` | Aggregated statistics |
+| `GET` | `/health` | Service health check |
 
-### REST Conventions
+---
 
-| Aspect | Convention |
-|--------|------------|
-| **Versioning** | URI prefix (`/v1/`) |
-| **Naming** | Lowercase, hyphen-separated |
-| **Methods** | POST for actions, GET for retrieval |
-| **Status Codes** | 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 429 Too Many Requests, 500 Internal Error |
-| **Content Type** | `application/json` |
-| **Error Format** | `{"error": {"code": "...", "message": "...", "details": {}}}` |
+## Mock Scammer API Integration
+
+### Integration Architecture
+
+```
+┌─────────────────────┐         ┌─────────────────────┐
+│  Mock Scammer API   │◀───────▶│  ScamShield Agent   │
+│  (Hackathon Server) │         │  (Our System)       │
+└──────────┬──────────┘         └──────────┬──────────┘
+           │                               │
+           │  1. Webhook: Scam message     │
+           │────────────────────────────▶  │
+           │                               │
+           │  2. Agent response            │
+           │◀────────────────────────────  │
+           │                               │
+           │  3. Scammer follow-up         │
+           │────────────────────────────▶  │
+           │                               │
+           └───────────────────────────────┘
+```
+
+### Webhook Handler
+
+```python
+@app.post("/webhook/scammer")
+async def handle_scammer_message(payload: ScammerWebhook):
+    """
+    Receives messages from Mock Scammer API.
+    """
+    session = await get_or_create_session(payload.conversation_id)
+    response = await agent.process_message(
+        session_id=session.id,
+        message=payload.message
+    )
+    return {"reply": response.agent_message}
+```
 
 ---
 
 ## Security Considerations
 
-### 🔐 Authentication & Authorization
+### 🔐 Data Protection
 
 | Control | Implementation |
 |---------|----------------|
-| **API Key Authentication** | Required `X-API-Key` header for all protected endpoints |
-| **Key Hashing** | SHA-256 hashing of keys at rest |
-| **Key Rotation** | Support for key expiration and regeneration |
-| **Scope Limitation** | Keys can be scoped to specific endpoints |
+| **No Real Data** | Agent never provides real bank/UPI/personal info |
+| **Fake Credentials** | Maintains list of dummy data if needed |
+| **PII Isolation** | Extracted scammer data stored encrypted |
+| **Retention Limits** | Auto-delete raw messages after 90 days |
 
-### 🛡️ Input Validation & Sanitization
-
-| Control | Implementation |
-|---------|----------------|
-| **Schema Validation** | Pydantic models enforce strict typing |
-| **Size Limits** | Maximum message length: 10,000 characters |
-| **Content Filtering** | Strip executable content, sanitize HTML |
-| **SQL Injection Prevention** | Parameterized queries via SQLAlchemy ORM |
-
-### 🚦 Rate Limiting & Abuse Prevention
+### 🛡️ Agentic Safety
 
 | Control | Implementation |
 |---------|----------------|
-| **Per-Key Limits** | Configurable RPM (requests per minute) |
-| **Global Limits** | Burst protection at gateway level |
-| **Sliding Window** | Token bucket algorithm for smooth limiting |
-| **Abuse Detection** | Flag repeated identical requests |
+| **Turn Limits** | Max 10 turns per conversation (configurable) |
+| **Abuse Detection** | Exit if scammer becomes threatening |
+| **Content Filtering** | Never generate harmful content |
+| **Human Override** | Admin can terminate any session |
 
-### 🔒 Data Protection
+### 📋 Ethical Guidelines
 
-| Control | Implementation |
-|---------|----------------|
-| **TLS Enforcement** | HTTPS-only in production |
-| **PII Minimization** | Hash/truncate phone numbers in logs |
-| **Retention Policy** | Auto-delete analysis data after 90 days |
-| **Encryption at Rest** | SQLite encryption extension (optional) |
-
-### 📋 Logging & Monitoring
-
-| Control | Implementation |
-|---------|----------------|
-| **Structured Logging** | JSON format with correlation IDs |
-| **Audit Trail** | Log all API key usage |
-| **Anomaly Detection** | Alert on unusual request patterns |
-| **No Sensitive Data** | Never log full messages or API keys |
-
----
-
-## Scalability Strategy
-
-### Horizontal Scaling
-
-```
-                    ┌─────────────┐
-                    │   Load      │
-                    │   Balancer  │
-                    └──────┬──────┘
-                           │
-           ┌───────────────┼───────────────┐
-           │               │               │
-           ▼               ▼               ▼
-    ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-    │  Instance 1 │ │  Instance 2 │ │  Instance N │
-    │  (FastAPI)  │ │  (FastAPI)  │ │  (FastAPI)  │
-    └──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-           │               │               │
-           └───────────────┴───────────────┘
-                           │
-                    ┌──────┴──────┐
-                    │   Shared    │
-                    │   Database  │
-                    └─────────────┘
-```
-
-### Performance Targets
-
-| Metric | Target | Current |
-|--------|--------|---------|
-| **P50 Latency** | < 200ms | TBD |
-| **P99 Latency** | < 500ms | TBD |
-| **Throughput** | 1000 RPM | TBD |
-| **Availability** | 99.9% | TBD |
+| Principle | Implementation |
+|-----------|----------------|
+| **Only Target Scammers** | Verify scam before engaging |
+| **No Entrapment** | Don't solicit new scams |
+| **Report to Authorities** | Auto-report to cybercrime.gov.in ready |
+| **Transparency** | Clear documentation of methods |
 
 ---
 
 <p align="center">
-  <em>Architecture designed for reliability, security, and scale.</em>
+  <em>Architecture designed for autonomous, ethical scam engagement.</em>
 </p>
