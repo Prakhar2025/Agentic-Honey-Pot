@@ -288,6 +288,23 @@ class SessionRepository(BaseRepository[SessionModel]):
         type_result = await self.session.execute(type_query)
         type_counts = {row[0]: row[1] for row in type_result.fetchall()}
         
+        # Count by persona
+        persona_query = (
+            select(SessionModel.persona_id, func.count())
+            .group_by(SessionModel.persona_id)
+        )
+        persona_result = await self.session.execute(persona_query)
+        persona_counts = {row[0]: row[1] for row in persona_result.fetchall()}
+        
+        # Total Intel (Sum of total_entities from Intelligence link)
+        # Note: IntelligenceModel.session_id maps to SessionModel.id
+        intel_query = (
+            select(func.sum(IntelligenceModel.total_entities))
+            .select_from(IntelligenceModel)
+        )
+        intel_result = await self.session.execute(intel_query)
+        total_intel = intel_result.scalar() or 0
+        
         # Average turn count
         avg_turns_query = select(func.avg(SessionModel.turn_count))
         avg_turns_result = await self.session.execute(avg_turns_query)
@@ -297,5 +314,7 @@ class SessionRepository(BaseRepository[SessionModel]):
             "total_sessions": total_count,
             "by_status": status_counts,
             "by_scam_type": type_counts,
+            "by_persona": persona_counts,
+            "total_intel": total_intel,
             "average_turns": round(float(avg_turns), 2),
         }

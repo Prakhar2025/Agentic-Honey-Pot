@@ -12,11 +12,10 @@ Endpoints:
 """
 
 import logging
-import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, HTTPException, Query, status
 from pydantic import BaseModel, Field
 
 from app.db.database import get_db_context
@@ -54,21 +53,19 @@ class IntelligenceResponse(BaseModel):
     emails: List[Dict[str, Any]] = Field(default_factory=list)
     other_intel: List[Dict[str, Any]] = Field(default_factory=list)
     total_entities: int = Field(..., description="Total extracted entities")
-    intel_score: float = Field(..., description="Intelligence score (0.0-1.0)")
 
 
 class SessionResponse(BaseModel):
     """Response model for full session details."""
     
     id: str = Field(..., description="Session ID")
-    source_type: str = Field(..., description="Source type")
-    source_identifier: Optional[str] = Field(None, description="Source identifier")
+    source_type: Optional[str] = Field(None, description="Source type")
     persona_used: str = Field(..., description="Persona used")
-    scam_type_detected: str = Field(..., description="Detected scam type")
+    scam_type: Optional[str] = Field(None, description="Detected scam type")
     status: str = Field(..., description="Session status")
     turn_count: int = Field(..., description="Total turns")
-    created_at: str = Field(..., description="Creation timestamp")
-    updated_at: str = Field(..., description="Last update timestamp")
+    started_at: str = Field(..., description="Creation timestamp")
+    ended_at: Optional[str] = Field(None, description="End timestamp")
     messages: List[MessageResponse] = Field(default_factory=list)
     intelligence: Optional[IntelligenceResponse] = None
 
@@ -77,13 +74,12 @@ class SessionSummary(BaseModel):
     """Summary model for session list."""
     
     id: str
-    source_type: str
+    source_type: Optional[str]
     persona_used: str
-    scam_type_detected: str
+    scam_type: Optional[str]
     status: str
     turn_count: int
-    intel_count: int
-    created_at: str
+    started_at: str
 
 
 class SessionListResponse(BaseModel):
@@ -120,56 +116,46 @@ async def list_sessions(
 ) -> SessionListResponse:
     """
     List all honeypot sessions.
-    
-    Supports pagination and filtering by status or scam type.
-    Returns summary information for each session.
-    
-    Args:
-        limit: Maximum number of results (1-100).
-        offset: Pagination offset.
-        status_filter: Optional status filter.
-        scam_type: Optional scam type filter.
-    
-    Returns:
-        SessionListResponse with list of session summaries.
-    
-    Example:
-        GET /v1/sessions?limit=10&status=ONGOING&scam_type=KYC_PHISHING
     """
     logger.info(f"List sessions: limit={limit}, offset={offset}")
     
     async with get_db_context() as db:
         session_repo = SessionRepository(db)
         
-        # Get sessions with filters
-        sessions = await session_repo.list_all(
-            limit=limit,
-            offset=offset,
-            status=status_filter,
-            scam_type=scam_type,
-        )
+        # Get sessions based on filters
+        if status_filter:
+            sessions = await session_repo.get_by_status(
+                status=status_filter,
+                limit=limit,
+                offset=offset,
+            )
+        elif scam_type:
+            sessions = await session_repo.get_by_scam_type(
+                scam_type=scam_type,
+                limit=limit,
+            )
+        else:
+            sessions = await session_repo.list(
+                limit=limit,
+                offset=offset,
+                order_by="started_at",
+                order_desc=True,
+            )
         
         # Get total count
-        total = await session_repo.count(
-            status=status_filter,
-            scam_type=scam_type,
-        )
+        total = await session_repo.count()
         
         # Convert to summaries
         summaries = []
         for session in sessions:
-            intel = session.extracted_intelligence or {}
-            intel_count = intel.get("total_entities", 0) if intel else 0
-            
             summaries.append(SessionSummary(
-                id=str(session.id),
-                source_type=session.source_type or "unknown",
-                persona_used=session.persona_used or "unknown",
-                scam_type_detected=session.scam_type_detected or "UNKNOWN",
+                id=session.id,
+                source_type=session.source_type,
+                persona_used=session.persona_id or "unknown",
+                scam_type=session.scam_type,
                 status=session.status or "UNKNOWN",
                 turn_count=session.turn_count or 0,
-                intel_count=intel_count,
-                created_at=session.created_at.isoformat() if session.created_at else "",
+                started_at=session.started_at.isoformat() if session.started_at else "",
             ))
         
         return SessionListResponse(
@@ -189,36 +175,15 @@ async def list_sessions(
 async def get_session(session_id: str) -> SessionResponse:
     """
     Get full session details.
-    
-    Returns complete session information including:
-    - Session metadata
-    - All conversation messages
-    - Extracted intelligence
-    
-    Args:
-        session_id: Session UUID.
-    
-    Returns:
-        SessionResponse with full session details.
-    
-    Raises:
-        HTTPException: 404 if session not found.
     """
     logger.info(f"Get session: session_id={session_id}")
-    
-    try:
-        session_uuid = uuid.UUID(session_id)
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid session ID format",
-        )
     
     async with get_db_context() as db:
         session_repo = SessionRepository(db)
         message_repo = MessageRepository(db)
         
-        session = await session_repo.get(session_uuid)
+        # Get session with relations
+        session = await session_repo.get_with_relations(session_id)
         if not session:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -226,10 +191,10 @@ async def get_session(session_id: str) -> SessionResponse:
             )
         
         # Get messages
-        messages = await message_repo.get_by_session(session_uuid)
+        messages = await message_repo.get_by_session(session_id)
         message_list = [
             MessageResponse(
-                id=str(msg.id),
+                id=msg.id,
                 role=msg.role,
                 content=msg.content,
                 turn_number=msg.turn_number or 1,
@@ -238,31 +203,31 @@ async def get_session(session_id: str) -> SessionResponse:
             for msg in messages
         ]
         
-        # Build intelligence response
-        intel = session.extracted_intelligence or {}
-        intel_response = IntelligenceResponse(
-            session_id=session_id,
-            phone_numbers=intel.get("phone_numbers", []),
-            upi_ids=intel.get("upi_ids", []),
-            bank_accounts=intel.get("bank_accounts", []),
-            ifsc_codes=intel.get("ifsc_codes", []),
-            phishing_links=intel.get("phishing_links", []),
-            emails=intel.get("emails", []),
-            other_intel=intel.get("other_intel", []),
-            total_entities=intel.get("total_entities", 0),
-            intel_score=0.0,  # Calculate if needed
-        )
+        # Build intelligence response if exists
+        intel_response = None
+        if session.intelligence:
+            intel = session.intelligence
+            intel_response = IntelligenceResponse(
+                session_id=session_id,
+                phone_numbers=intel.phone_numbers or [],
+                upi_ids=intel.upi_ids or [],
+                bank_accounts=intel.bank_accounts or [],
+                ifsc_codes=[],
+                phishing_links=intel.phishing_links or [],
+                emails=[],
+                other_intel=intel.other_intel or [],
+                total_entities=intel.total_entities or 0,
+            )
         
         return SessionResponse(
-            id=str(session.id),
-            source_type=session.source_type or "unknown",
-            source_identifier=session.source_identifier,
-            persona_used=session.persona_used or "unknown",
-            scam_type_detected=session.scam_type_detected or "UNKNOWN",
+            id=session.id,
+            source_type=session.source_type,
+            persona_used=session.persona_id or "unknown",
+            scam_type=session.scam_type,
             status=session.status or "UNKNOWN",
             turn_count=session.turn_count or 0,
-            created_at=session.created_at.isoformat() if session.created_at else "",
-            updated_at=session.updated_at.isoformat() if session.updated_at else "",
+            started_at=session.started_at.isoformat() if session.started_at else "",
+            ended_at=session.ended_at.isoformat() if session.ended_at else None,
             messages=message_list,
             intelligence=intel_response,
         )
@@ -277,52 +242,43 @@ async def get_session(session_id: str) -> SessionResponse:
 async def get_session_intelligence(session_id: str) -> IntelligenceResponse:
     """
     Get extracted intelligence for a session.
-    
-    Returns all financial entities and scam artifacts extracted
-    from the conversation.
-    
-    Args:
-        session_id: Session UUID.
-    
-    Returns:
-        IntelligenceResponse with all extracted entities.
-    
-    Raises:
-        HTTPException: 404 if session not found.
     """
     logger.info(f"Get intelligence: session_id={session_id}")
-    
-    try:
-        session_uuid = uuid.UUID(session_id)
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid session ID format",
-        )
     
     async with get_db_context() as db:
         session_repo = SessionRepository(db)
         
-        session = await session_repo.get(session_uuid)
+        session = await session_repo.get_with_relations(session_id)
         if not session:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Session not found: {session_id}",
             )
         
-        intel = session.extracted_intelligence or {}
+        intel = session.intelligence
+        if not intel:
+            return IntelligenceResponse(
+                session_id=session_id,
+                phone_numbers=[],
+                upi_ids=[],
+                bank_accounts=[],
+                ifsc_codes=[],
+                phishing_links=[],
+                emails=[],
+                other_intel=[],
+                total_entities=0,
+            )
         
         return IntelligenceResponse(
             session_id=session_id,
-            phone_numbers=intel.get("phone_numbers", []),
-            upi_ids=intel.get("upi_ids", []),
-            bank_accounts=intel.get("bank_accounts", []),
-            ifsc_codes=intel.get("ifsc_codes", []),
-            phishing_links=intel.get("phishing_links", []),
-            emails=intel.get("emails", []),
-            other_intel=intel.get("other_intel", []),
-            total_entities=intel.get("total_entities", 0),
-            intel_score=0.0,
+            phone_numbers=intel.phone_numbers or [],
+            upi_ids=intel.upi_ids or [],
+            bank_accounts=intel.bank_accounts or [],
+            ifsc_codes=[],
+            phishing_links=intel.phishing_links or [],
+            emails=[],
+            other_intel=intel.other_intel or [],
+            total_entities=intel.total_entities or 0,
         )
 
 
@@ -335,45 +291,26 @@ async def get_session_intelligence(session_id: str) -> IntelligenceResponse:
 async def get_session_messages(session_id: str) -> List[MessageResponse]:
     """
     Get all messages for a session.
-    
-    Returns the complete conversation history ordered by turn number.
-    
-    Args:
-        session_id: Session UUID.
-    
-    Returns:
-        List of MessageResponse objects.
-    
-    Raises:
-        HTTPException: 404 if session not found.
     """
     logger.info(f"Get messages: session_id={session_id}")
-    
-    try:
-        session_uuid = uuid.UUID(session_id)
-    except ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid session ID format",
-        )
     
     async with get_db_context() as db:
         session_repo = SessionRepository(db)
         message_repo = MessageRepository(db)
         
         # Verify session exists
-        session = await session_repo.get(session_uuid)
+        session = await session_repo.get(session_id)
         if not session:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Session not found: {session_id}",
             )
         
-        messages = await message_repo.get_by_session(session_uuid)
+        messages = await message_repo.get_by_session(session_id)
         
         return [
             MessageResponse(
-                id=str(msg.id),
+                id=msg.id,
                 role=msg.role,
                 content=msg.content,
                 turn_number=msg.turn_number or 1,

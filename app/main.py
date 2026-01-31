@@ -112,7 +112,7 @@ phishing links).
 - `/v1/analytics` - Dashboard and intelligence summary
 
 ### Built for
-Google GenAI Hackathon 2025 - Scam Prevention Track
+India AI Impact Buildathon 2026 - Agentic Honey-Pot for Scam Detection & Intelligence Extraction
         """,
         version="1.0.0",
         docs_url="/docs",

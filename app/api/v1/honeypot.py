@@ -11,7 +11,6 @@ Endpoints:
 
 import logging
 import time
-import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
@@ -83,7 +82,7 @@ class ContinueRequest(BaseModel):
     session_id: str = Field(
         ...,
         description="Session ID from engage response",
-        examples=["550e8400-e29b-41d4-a716-446655440000"],
+        examples=["sess_abc123def456"],
     )
     scammer_message: str = Field(
         ...,
@@ -130,71 +129,51 @@ async def engage_scammer(
     3. Selects appropriate persona
     4. Generates initial victim response
     5. Saves session and messages to database
-    
-    Args:
-        request: EngageRequest with scammer message and metadata.
-        orchestrator: Agent orchestrator (injected).
-    
-    Returns:
-        EngageResponse with session ID and generated response.
-    
-    Raises:
-        HTTPException: 400 for invalid input, 500 for processing errors.
-    
-    Example:
-        POST /v1/honeypot/engage
-        {
-            "scammer_message": "Your KYC is expiring",
-            "source_type": "sms",
-            "source_identifier": "+919876543210"
-        }
-        
-        Response:
-        {
-            "session_id": "abc-123",
-            "response": "Beta, what KYC? Please explain...",
-            "persona_used": "elderly_victim",
-            "scam_type": "KYC_PHISHING"
-        }
     """
     start_time = time.perf_counter()
-    session_id = str(uuid.uuid4())
     
-    logger.info(f"New engage request: session_id={session_id}, source={request.source_type}")
+    logger.info(f"New engage request: source={request.source_type}")
     
     try:
-        # Process message with orchestrator
-        result = await orchestrator.process_message(
-            scammer_message=request.scammer_message,
-            session_id=session_id,
-            conversation_history=[],
-            current_persona=request.persona_preference,
-            current_intel=None,
-            current_status="INITIAL",
-        )
-        
-        # Save session to database
         async with get_db_context() as db:
             session_repo = SessionRepository(db)
             message_repo = MessageRepository(db)
             
-            # Create session record
-            session_data = {
-                "id": uuid.UUID(session_id),
-                "source_type": request.source_type,
-                "source_identifier": request.source_identifier,
-                "persona_used": result["persona_used"],
-                "scam_type_detected": result["scam_type"],
-                "status": result["conversation_status"],
-                "turn_count": result["turn_count"],
-                "extracted_intelligence": result["extracted_intel"],
-                "metadata": request.metadata or {},
-            }
-            session = await session_repo.create(session_data)
+            # Create session first to get the ID
+            session = await session_repo.create_session(
+                scam_type=None,  # Will be updated after processing
+                persona_id=request.persona_preference or "elderly_victim",
+                source_type=request.source_type,
+                is_scam=True,
+                metadata=request.metadata,
+            )
+            
+            session_id = session.id
+            
+            # Process message with orchestrator
+            result = await orchestrator.process_message(
+                scammer_message=request.scammer_message,
+                session_id=session_id,
+                conversation_history=[],
+                current_persona=request.persona_preference,
+                current_intel=None,
+                current_status="INITIAL",
+            )
+            
+            # Update session with scam type and status
+            await session_repo.update(
+                session_id,
+                {
+                    "scam_type": result["scam_type"],
+                    "persona_id": result["persona_used"],
+                    "status": result["conversation_status"],
+                    "turn_count": result["turn_count"],
+                },
+            )
             
             # Save scammer message
             await message_repo.create({
-                "session_id": session.id,
+                "session_id": session_id,
                 "role": "scammer",
                 "content": request.scammer_message,
                 "turn_number": 1,
@@ -202,11 +181,11 @@ async def engage_scammer(
             
             # Save agent response
             await message_repo.create({
-                "session_id": session.id,
+                "session_id": session_id,
                 "role": "agent",
                 "content": result["response"],
                 "turn_number": 1,
-                "metadata": {
+                "metadata_json": {
                     "processing_time_ms": result["processing_time_ms"],
                     "intel_score": result["intel_score"],
                 },
@@ -234,7 +213,7 @@ async def engage_scammer(
         )
         
     except Exception as e:
-        logger.exception(f"Engage failed: session_id={session_id}, error={e}")
+        logger.exception(f"Engage failed: error={e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to process message: {str(e)}",
@@ -253,55 +232,23 @@ async def continue_conversation(
 ) -> ContinueResponse:
     """
     Continue an existing honeypot conversation.
-    
-    This endpoint:
-    1. Fetches the existing session
-    2. Retrieves conversation history
-    3. Processes new message with context
-    4. Updates session with new intelligence
-    5. Saves messages to database
-    
-    Args:
-        request: ContinueRequest with session ID and new message.
-        orchestrator: Agent orchestrator (injected).
-    
-    Returns:
-        ContinueResponse with generated response and updated stats.
-    
-    Raises:
-        HTTPException: 404 if session not found, 400 if session terminated.
-    
-    Example:
-        POST /v1/honeypot/continue
-        {
-            "session_id": "abc-123",
-            "scammer_message": "Send OTP now"
-        }
     """
     start_time = time.perf_counter()
+    session_id = request.session_id
     
-    logger.info(f"Continue request: session_id={request.session_id}")
+    logger.info(f"Continue request: session_id={session_id}")
     
     try:
-        # Parse and validate session ID
-        try:
-            session_uuid = uuid.UUID(request.session_id)
-        except ValueError:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Invalid session ID format",
-            )
-        
         async with get_db_context() as db:
             session_repo = SessionRepository(db)
             message_repo = MessageRepository(db)
             
             # Fetch existing session
-            session = await session_repo.get(session_uuid)
+            session = await session_repo.get(session_id)
             if not session:
                 raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND,
-                    detail=f"Session not found: {request.session_id}",
+                    detail=f"Session not found: {session_id}",
                 )
             
             # Check if session is still active
@@ -312,37 +259,47 @@ async def continue_conversation(
                 )
             
             # Get conversation history
-            messages = await message_repo.get_by_session(session_uuid)
+            messages = await message_repo.get_by_session(session_id)
             history = [
                 {"role": msg.role, "content": msg.content}
                 for msg in messages
             ]
             
+            # Get current intel from session
+            session_with_intel = await session_repo.get_with_relations(session_id)
+            current_intel = {}
+            if session_with_intel and session_with_intel.intelligence:
+                intel = session_with_intel.intelligence
+                current_intel = {
+                    "phone_numbers": intel.phone_numbers or [],
+                    "upi_ids": intel.upi_ids or [],
+                    "bank_accounts": intel.bank_accounts or [],
+                    "phishing_links": intel.phishing_links or [],
+                }
+            
             # Process message with orchestrator
             result = await orchestrator.process_message(
                 scammer_message=request.scammer_message,
-                session_id=request.session_id,
+                session_id=session_id,
                 conversation_history=history,
-                current_persona=session.persona_used,
-                current_intel=session.extracted_intelligence or {},
+                current_persona=session.persona_id,
+                current_intel=current_intel,
                 current_status=session.status,
             )
             
             # Update session
             new_turn = result["turn_count"]
             await session_repo.update(
-                session_uuid,
+                session_id,
                 {
                     "status": result["conversation_status"],
                     "turn_count": new_turn,
-                    "extracted_intelligence": result["extracted_intel"],
-                    "updated_at": datetime.now(timezone.utc),
                 },
             )
             
             # Save scammer message
             await message_repo.create({
-                "session_id": session_uuid,
+                "session_id": session_id,
                 "role": "scammer",
                 "content": request.scammer_message,
                 "turn_number": new_turn,
@@ -350,11 +307,11 @@ async def continue_conversation(
             
             # Save agent response
             await message_repo.create({
-                "session_id": session_uuid,
+                "session_id": session_id,
                 "role": "agent",
                 "content": result["response"],
                 "turn_number": new_turn,
-                "metadata": {
+                "metadata_json": {
                     "processing_time_ms": result["processing_time_ms"],
                     "intel_score": result["intel_score"],
                 },
@@ -369,13 +326,13 @@ async def continue_conversation(
         new_intel_count = new_intel.get("total_entities", 0) if new_intel else 0
         
         logger.info(
-            f"Continue complete: session_id={request.session_id}, "
+            f"Continue complete: session_id={session_id}, "
             f"turn={new_turn}, status={result['conversation_status']}, "
             f"time={total_time:.0f}ms"
         )
         
         return ContinueResponse(
-            session_id=request.session_id,
+            session_id=session_id,
             response=result["response"],
             conversation_status=result["conversation_status"],
             turn_count=new_turn,
@@ -387,7 +344,7 @@ async def continue_conversation(
     except HTTPException:
         raise
     except Exception as e:
-        logger.exception(f"Continue failed: session_id={request.session_id}, error={e}")
+        logger.exception(f"Continue failed: session_id={session_id}, error={e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to process message: {str(e)}",
