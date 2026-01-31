@@ -1,9 +1,13 @@
 """
-API Version 1 - Honeypot Endpoints.
+API v1 Package.
 
-Endpoints:
-    - POST /v1/honeypot/engage - Start new engagement session
-    - POST /v1/honeypot/continue - Continue existing conversation
-    - GET /v1/honeypot/session/{id} - Get session details
-    - DELETE /v1/honeypot/session/{id} - Terminate session
+This package contains all v1 API endpoints:
+- Honeypot: Scammer engagement endpoints
+- Sessions: Session management endpoints
+- Analytics: Dashboard and statistics
+- Health: Health check endpoints
 """
+
+from app.api.v1.router import router
+
+__all__ = ["router"]
