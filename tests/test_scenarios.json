@@ -1,0 +1,1369 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "Important: Your HDFC account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "HDFC"
+        ],
+        "bank_accounts": [
+          "96567132423"
+        ]
+      },
+      "expected_scam_confidence": 0.82,
+      "region": "Chennai"
+    },
+    {
+      "id": 2,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "telegram",
+      "message": "Pre-approved personal loan Rs. 8 Lakhs @ 2% interest. Apply now: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.79,
+      "region": "Bangalore"
+    },
+    {
+      "id": 3,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Dear customer, your BoB KYC will expire today. Update now: http://... or call 9881154028",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9881154028"
+        ],
+        "bank_mentions": [
+          "BoB"
+        ]
+      },
+      "expected_scam_confidence": 0.85,
+      "region": "Chennai"
+    },
+    {
+      "id": 4,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Hi, I am sending money by mistake to your QR code. Please scan to receive.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.98,
+      "region": "Kolkata"
+    },
+    {
+      "id": 5,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "Jackpot alert! You won Rs. 43000. Contact manager at 9XXXXXXXXX.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.9,
+      "region": "Bangalore"
+    },
+    {
+      "id": 6,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Warning: Your SBI access is suspended. Call 9925762250 to restore access.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9925762250"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Chennai"
+    },
+    {
+      "id": 7,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 8965508712.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8965508712"
+        ]
+      },
+      "expected_scam_confidence": 0.82,
+      "region": "Delhi"
+    },
+    {
+      "id": 8,
+      "scam_type": "JOB_SCAM",
+      "source_type": "sms",
+      "message": "HR Manager: Your profile selected. Registration fee Rs. 136. Pay to user@upi.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.96,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 9,
+      "scam_type": "OTP_THEFT",
+      "source_type": "telegram",
+      "message": "Electricity power cut notice. Update status or power cut tonight. Call 7414292255.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7414292255"
+        ],
+        "bank_mentions": [
+          "BoB"
+        ]
+      },
+      "expected_scam_confidence": 0.87,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 10,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Hello, this is Inspector Sharma from police station. Your son is in trouble. Call 8674140694.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8674140694"
+        ],
+        "bank_mentions": [
+          "HDFC"
+        ],
+        "bank_accounts": [
+          "37625501465"
+        ]
+      },
+      "expected_scam_confidence": 0.99,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 11,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "whatsapp",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 9723451221.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9723451221"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Kolkata"
+    },
+    {
+      "id": 12,
+      "scam_type": "JOB_SCAM",
+      "source_type": "telegram",
+      "message": "Part-time job. Like youtube videos and earn Rs. 1476. WhatsApp 6799667729.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "6799667729"
+        ]
+      },
+      "expected_scam_confidence": 0.93,
+      "region": "Mumbai"
+    },
+    {
+      "id": 13,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "telegram",
+      "message": "Pre-approved personal loan Rs. 4 Lakhs @ 2% interest. Apply now: http://tinyurl/4510",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://tinyurl/4510"
+        ]
+      },
+      "expected_scam_confidence": 0.86,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 14,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Hi Dad, lost my phone. Need money for urgent bill. Send Rs. 2249 to merchant840@axl. New number.",
+      "expected_extractions": {
+        "upi_ids": [
+          "merchant840@axl"
+        ],
+        "ifsc_codes": [
+          "BOB9229488"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Mumbai"
+    },
+    {
+      "id": 15,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "sms",
+      "message": "Paperless loan in 10 mins. Download app: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.95,
+      "region": "Delhi"
+    },
+    {
+      "id": 16,
+      "scam_type": "OTP_THEFT",
+      "source_type": "telegram",
+      "message": "Redeem your reward points worth Rs. 79000. Share OTP sent to mobile.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "BoB"
+        ],
+        "bank_accounts": [
+          "75123853256"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Mumbai"
+    },
+    {
+      "id": 17,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Warning: Your Axis Bank access is suspended. Call 9XXXXXXXXX to restore access.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.83,
+      "region": "Bangalore"
+    },
+    {
+      "id": 18,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "whatsapp",
+      "message": "Claim your Diwali bonanza of Rs. 68000. Pay processing fee to shop439@axl to release funds.",
+      "expected_extractions": {
+        "upi_ids": [
+          "shop439@axl"
+        ]
+      },
+      "expected_scam_confidence": 0.99,
+      "region": "Pune"
+    },
+    {
+      "id": 19,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Important: Your ICICI account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.92,
+      "region": "Chennai"
+    },
+    {
+      "id": 20,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Your card ending 3287 is used for Rs. 46000. If not you, share OTP to cancel.",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "PNB9320982"
+        ]
+      },
+      "expected_scam_confidence": 0.88,
+      "region": "Pune"
+    },
+    {
+      "id": 21,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Warning: Your SBI access is suspended. Call 9364087088 to restore access.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9364087088"
+        ],
+        "bank_mentions": [
+          "SBI"
+        ],
+        "bank_accounts": [
+          "56039047166"
+        ]
+      },
+      "expected_scam_confidence": 0.94,
+      "region": "Pune"
+    },
+    {
+      "id": 22,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "telegram",
+      "message": "Congratulations! You won Rs. 38000 in Diwali Lucky Draw. Call 7597067805 to claim prize.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7597067805"
+        ],
+        "ifsc_codes": [
+          "BOB6585475"
+        ]
+      },
+      "expected_scam_confidence": 0.99,
+      "region": "Mumbai"
+    },
+    {
+      "id": 23,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "sms",
+      "message": "Your loan limit increased to Rs. 6 Lakhs. Call 9XXXXXXXXX to activate.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "PNB"
+        ],
+        "ifsc_codes": [
+          "PNB5441682"
+        ]
+      },
+      "expected_scam_confidence": 0.9,
+      "region": "Kolkata"
+    },
+    {
+      "id": 24,
+      "scam_type": "TECH_SUPPORT",
+      "source_type": "whatsapp",
+      "message": "Your computer has been hacked. Call support 9XXXXXXXXX for refund.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "Axis Bank"
+        ],
+        "bank_accounts": [
+          "18160119439"
+        ]
+      },
+      "expected_scam_confidence": 0.83,
+      "region": "Delhi"
+    },
+    {
+      "id": 25,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "whatsapp",
+      "message": "Paperless loan in 10 mins. Download app: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.82,
+      "region": "Delhi"
+    },
+    {
+      "id": 26,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Hi, I am sending money by mistake to your QR code. Please scan to receive.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "SBI"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Pune"
+    },
+    {
+      "id": 27,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "telegram",
+      "message": "Claim your Summer bonanza of Rs. 55000. Pay processing fee to user@upi to release funds.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "SBI"
+        ],
+        "bank_accounts": [
+          "55022689856"
+        ]
+      },
+      "expected_scam_confidence": 0.82,
+      "region": "Pune"
+    },
+    {
+      "id": 28,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Important: Your ICICI account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.81,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 29,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "Claim your New Year bonanza of Rs. 1000. Pay processing fee to admin563@axl to release funds.",
+      "expected_extractions": {
+        "upi_ids": [
+          "admin563@axl"
+        ],
+        "bank_mentions": [
+          "BoB"
+        ]
+      },
+      "expected_scam_confidence": 0.77,
+      "region": "Kolkata"
+    },
+    {
+      "id": 30,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "Axis Bank Alert: PAN card not linked. Update immediately at http://... to avoid penalty.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "Axis Bank"
+        ],
+        "ifsc_codes": [
+          "AXIS7852059"
+        ],
+        "bank_accounts": [
+          "92445780851"
+        ]
+      },
+      "expected_scam_confidence": 0.9,
+      "region": "Chennai"
+    },
+    {
+      "id": 31,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "whatsapp",
+      "message": "Double your money in 21 days! Guaranteed returns. Join WhatsApp group: http://...",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "BOB7258779"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Kolkata"
+    },
+    {
+      "id": 32,
+      "scam_type": "JOB_SCAM",
+      "source_type": "telegram",
+      "message": "Data entry job. No skill needed. Daily payment Rs. 793. Contact 8252311873.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8252311873"
+        ]
+      },
+      "expected_scam_confidence": 0.98,
+      "region": "Mumbai"
+    },
+    {
+      "id": 33,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "KBC Winner! Your number won Rs. 11000. WhatsApp 7926512073 immediately.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7926512073"
+        ],
+        "bank_mentions": [
+          "SBI"
+        ],
+        "ifsc_codes": [
+          "SBI9864476"
+        ]
+      },
+      "expected_scam_confidence": 0.97,
+      "region": "Chennai"
+    },
+    {
+      "id": 34,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "telegram",
+      "message": "Jackpot alert! You won Rs. 25000. Contact manager at 9XXXXXXXXX.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "SBI"
+        ],
+        "ifsc_codes": [
+          "SBI7475652"
+        ]
+      },
+      "expected_scam_confidence": 0.79,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 35,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Dear customer, your PNB KYC will expire today. Update now: http://... or call 9XXXXXXXXX",
+      "expected_extractions": {
+        "bank_mentions": [
+          "PNB"
+        ],
+        "bank_accounts": [
+          "53659536142"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Bangalore"
+    },
+    {
+      "id": 36,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "sms",
+      "message": "Crypto trading tips for guaranteed profit. Join exclusive channel: http://update-bank-kyc.com/3922",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://update-bank-kyc.com/3922"
+        ],
+        "bank_mentions": [
+          "PNB"
+        ],
+        "ifsc_codes": [
+          "PNB2510206"
+        ]
+      },
+      "expected_scam_confidence": 0.85,
+      "region": "Bangalore"
+    },
+    {
+      "id": 37,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "Warning: Your BoB access is suspended. Call 7571764035 to restore access.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7571764035"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 38,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Verification code for your order. Share with delivery boy.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "BoB"
+        ],
+        "ifsc_codes": [
+          "BOB3917290"
+        ],
+        "bank_accounts": [
+          "29765990062"
+        ]
+      },
+      "expected_scam_confidence": 0.78,
+      "region": "Bangalore"
+    },
+    {
+      "id": 39,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "sms",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 8687270865.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8687270865"
+        ]
+      },
+      "expected_scam_confidence": 0.95,
+      "region": "Bangalore"
+    },
+    {
+      "id": 40,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "Claim your Holi bonanza of Rs. 19000. Pay processing fee to user@upi to release funds.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "HDFC"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Kolkata"
+    },
+    {
+      "id": 41,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Important: Your Axis Bank account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "Axis Bank"
+        ]
+      },
+      "expected_scam_confidence": 0.83,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 42,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "Important: Your BoB account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "BOB2364496"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Pune"
+    },
+    {
+      "id": 43,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "whatsapp",
+      "message": "KBC Winner! Your number won Rs. 29000. WhatsApp 7417777318 immediately.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7417777318"
+        ]
+      },
+      "expected_scam_confidence": 0.92,
+      "region": "Kolkata"
+    },
+    {
+      "id": 44,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "whatsapp",
+      "message": "Double your money in 21 days! Guaranteed returns. Join WhatsApp group: http://...",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "SBI1698549"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Mumbai"
+    },
+    {
+      "id": 45,
+      "scam_type": "TECH_SUPPORT",
+      "source_type": "whatsapp",
+      "message": "Subscription renewed for Rs. 23000. Call 7593718582 to cancel.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7593718582"
+        ]
+      },
+      "expected_scam_confidence": 0.83,
+      "region": "Kolkata"
+    },
+    {
+      "id": 46,
+      "scam_type": "JOB_SCAM",
+      "source_type": "whatsapp",
+      "message": "Part-time job. Like youtube videos and earn Rs. 711. WhatsApp 9XXXXXXXXX.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.93,
+      "region": "Bangalore"
+    },
+    {
+      "id": 47,
+      "scam_type": "IMPERSONATION",
+      "source_type": "sms",
+      "message": "Hello, this is Inspector Sharma from police station. Your son is in trouble. Call 9XXXXXXXXX.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "PNB"
+        ],
+        "ifsc_codes": [
+          "PNB3493313"
+        ]
+      },
+      "expected_scam_confidence": 0.85,
+      "region": "Chennai"
+    },
+    {
+      "id": 48,
+      "scam_type": "JOB_SCAM",
+      "source_type": "telegram",
+      "message": "Hiring for Amazon/Flipkart. WFH usage. Salary Rs. 33000. Apply: http://offer-prize.in/5753",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://offer-prize.in/5753"
+        ]
+      },
+      "expected_scam_confidence": 0.88,
+      "region": "Delhi"
+    },
+    {
+      "id": 49,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "Dear customer, your ICICI KYC will expire today. Update now: http://... or call 9734053873",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9734053873"
+        ]
+      },
+      "expected_scam_confidence": 0.97,
+      "region": "Kolkata"
+    },
+    {
+      "id": 50,
+      "scam_type": "OTP_THEFT",
+      "source_type": "sms",
+      "message": "Verification code for your order. Share with delivery boy.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.91,
+      "region": "Bangalore"
+    },
+    {
+      "id": 51,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "PNB Alert: PAN card not linked. Update immediately at http://... to avoid penalty.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "PNB"
+        ],
+        "bank_accounts": [
+          "70895012892"
+        ]
+      },
+      "expected_scam_confidence": 0.91,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 52,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 9599491762.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9599491762"
+        ]
+      },
+      "expected_scam_confidence": 0.77,
+      "region": "Delhi"
+    },
+    {
+      "id": 53,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Sir, parcel stuck at customs. Pay duty Rs. 3386 to user@upi to release.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "Axis Bank"
+        ],
+        "bank_accounts": [
+          "54179684484"
+        ]
+      },
+      "expected_scam_confidence": 0.82,
+      "region": "Pune"
+    },
+    {
+      "id": 54,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "sms",
+      "message": "Pre-approved personal loan Rs. 5 Lakhs @ 2% interest. Apply now: http://update-bank-kyc.com/3143",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://update-bank-kyc.com/3143"
+        ]
+      },
+      "expected_scam_confidence": 0.91,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 55,
+      "scam_type": "JOB_SCAM",
+      "source_type": "sms",
+      "message": "Data entry job. No skill needed. Daily payment Rs. 1906. Contact 7219713940.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7219713940"
+        ],
+        "ifsc_codes": [
+          "HDFC8031013"
+        ]
+      },
+      "expected_scam_confidence": 0.92,
+      "region": "Kolkata"
+    },
+    {
+      "id": 56,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "sms",
+      "message": "Paperless loan in 10 mins. Download app: http://...",
+      "expected_extractions": {
+        "bank_mentions": [
+          "SBI"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Mumbai"
+    },
+    {
+      "id": 57,
+      "scam_type": "OTP_THEFT",
+      "source_type": "sms",
+      "message": "Electricity power cut notice. Update status or power cut tonight. Call 9491230561.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9491230561"
+        ],
+        "ifsc_codes": [
+          "BOB9881705"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Bangalore"
+    },
+    {
+      "id": 58,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "Claim your Diwali bonanza of Rs. 99000. Pay processing fee to user@upi to release funds.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "HDFC"
+        ],
+        "bank_accounts": [
+          "24450384049"
+        ]
+      },
+      "expected_scam_confidence": 0.97,
+      "region": "Mumbai"
+    },
+    {
+      "id": 59,
+      "scam_type": "JOB_SCAM",
+      "source_type": "telegram",
+      "message": "Data entry job. No skill needed. Daily payment Rs. 1833. Contact 7567369343.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7567369343"
+        ]
+      },
+      "expected_scam_confidence": 0.91,
+      "region": "Chennai"
+    },
+    {
+      "id": 60,
+      "scam_type": "JOB_SCAM",
+      "source_type": "whatsapp",
+      "message": "Part-time job. Like youtube videos and earn Rs. 793. WhatsApp 7163875125.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7163875125"
+        ]
+      },
+      "expected_scam_confidence": 0.89,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 61,
+      "scam_type": "IMPERSONATION",
+      "source_type": "sms",
+      "message": "Hello, this is Inspector Sharma from police station. Your son is in trouble. Call 8300665198.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8300665198"
+        ]
+      },
+      "expected_scam_confidence": 0.9,
+      "region": "Delhi"
+    },
+    {
+      "id": 62,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Sir, parcel stuck at customs. Pay duty Rs. 3375 to user@upi to release.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.76,
+      "region": "Kolkata"
+    },
+    {
+      "id": 63,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Electricity power cut notice. Update status or power cut tonight. Call 8634876094.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8634876094"
+        ],
+        "ifsc_codes": [
+          "AXIS8470021"
+        ]
+      },
+      "expected_scam_confidence": 0.79,
+      "region": "Kolkata"
+    },
+    {
+      "id": 64,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "KBC Winner! Your number won Rs. 43000. WhatsApp 7694770773 immediately.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7694770773"
+        ],
+        "bank_mentions": [
+          "SBI"
+        ],
+        "ifsc_codes": [
+          "SBI3654721"
+        ]
+      },
+      "expected_scam_confidence": 0.77,
+      "region": "Pune"
+    },
+    {
+      "id": 65,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "whatsapp",
+      "message": "Instant loan approval without CIBIL score. Process fee Rs. 437. Pay to merchant404@paytm.",
+      "expected_extractions": {
+        "upi_ids": [
+          "merchant404@paytm"
+        ]
+      },
+      "expected_scam_confidence": 0.87,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 66,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Work from home opportunity. Earn Rs. 960/day. Invest Rs. 2190 via merchant651@paytm to start.",
+      "expected_extractions": {
+        "upi_ids": [
+          "merchant651@paytm"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Bangalore"
+    },
+    {
+      "id": 67,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Electricity power cut notice. Update status or power cut tonight. Call 8723866709.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8723866709"
+        ]
+      },
+      "expected_scam_confidence": 0.96,
+      "region": "Chennai"
+    },
+    {
+      "id": 68,
+      "scam_type": "JOB_SCAM",
+      "source_type": "sms",
+      "message": "Hiring for Amazon/Flipkart. WFH usage. Salary Rs. 36000. Apply: http://update-bank-kyc.com/2449",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://update-bank-kyc.com/2449"
+        ]
+      },
+      "expected_scam_confidence": 0.9,
+      "region": "Kolkata"
+    },
+    {
+      "id": 69,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Crypto trading tips for guaranteed profit. Join exclusive channel: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.81,
+      "region": "Pune"
+    },
+    {
+      "id": 70,
+      "scam_type": "IMPERSONATION",
+      "source_type": "telegram",
+      "message": "Hello, this is Inspector Sharma from police station. Your son is in trouble. Call 7700472749.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7700472749"
+        ]
+      },
+      "expected_scam_confidence": 0.78,
+      "region": "Mumbai"
+    },
+    {
+      "id": 71,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Work from home opportunity. Earn Rs. 1302/day. Invest Rs. 1386 via user@upi to start.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.81,
+      "region": "Pune"
+    },
+    {
+      "id": 72,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "whatsapp",
+      "message": "Instant loan approval without CIBIL score. Process fee Rs. 323. Pay to pay968@phonepe.",
+      "expected_extractions": {
+        "upi_ids": [
+          "pay968@phonepe"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Chennai"
+    },
+    {
+      "id": 73,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 9852845501.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9852845501"
+        ]
+      },
+      "expected_scam_confidence": 0.77,
+      "region": "Kolkata"
+    },
+    {
+      "id": 74,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Warning: Your HDFC access is suspended. Call 9XXXXXXXXX to restore access.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "HDFC"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Delhi"
+    },
+    {
+      "id": 75,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "telegram",
+      "message": "Stock market insider tips. 500% returns guaranteed. Contact 8714646541.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8714646541"
+        ]
+      },
+      "expected_scam_confidence": 0.98,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 76,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Dear customer, your BoB KYC will expire today. Update now: http://... or call 7893619604",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7893619604"
+        ],
+        "bank_mentions": [
+          "BoB"
+        ],
+        "bank_accounts": [
+          "84228686691"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Delhi"
+    },
+    {
+      "id": 77,
+      "scam_type": "IMPERSONATION",
+      "source_type": "telegram",
+      "message": "Hello, this is Officer Patil from police station. Your son is in trouble. Call 8515599539.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "8515599539"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Mumbai"
+    },
+    {
+      "id": 78,
+      "scam_type": "TECH_SUPPORT",
+      "source_type": "sms",
+      "message": "Subscription renewed for Rs. 30000. Call 6171314560 to cancel.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "6171314560"
+        ]
+      },
+      "expected_scam_confidence": 0.89,
+      "region": "Bangalore"
+    },
+    {
+      "id": 79,
+      "scam_type": "IMPERSONATION",
+      "source_type": "telegram",
+      "message": "Sir, parcel stuck at customs. Pay duty Rs. 4142 to user@upi to release.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "SBI"
+        ],
+        "ifsc_codes": [
+          "SBI8243418"
+        ],
+        "bank_accounts": [
+          "47739344611"
+        ]
+      },
+      "expected_scam_confidence": 0.89,
+      "region": "Mumbai"
+    },
+    {
+      "id": 80,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "KBC Winner! Your number won Rs. 3000. WhatsApp 7998587093 immediately.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "7998587093"
+        ]
+      },
+      "expected_scam_confidence": 0.95,
+      "region": "Pune"
+    },
+    {
+      "id": 81,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "telegram",
+      "message": "Warning: Your SBI access is suspended. Call 6352959158 to restore access.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "6352959158"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Pune"
+    },
+    {
+      "id": 82,
+      "scam_type": "TECH_SUPPORT",
+      "source_type": "sms",
+      "message": "Microsoft Windows Alert: Virus detected. Call 9909343028 to fix immediately.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9909343028"
+        ]
+      },
+      "expected_scam_confidence": 0.76,
+      "region": "Bangalore"
+    },
+    {
+      "id": 83,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Verification code for your order. Share with delivery boy.",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "AXIS1130058"
+        ]
+      },
+      "expected_scam_confidence": 0.84,
+      "region": "Kolkata"
+    },
+    {
+      "id": 84,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "sms",
+      "message": "KBC Winner! Your number won Rs. 86000. WhatsApp 9XXXXXXXXX immediately.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.78,
+      "region": "Chennai"
+    },
+    {
+      "id": 85,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "telegram",
+      "message": "Claim your Holi bonanza of Rs. 79000. Pay processing fee to admin520@paytm to release funds.",
+      "expected_extractions": {
+        "upi_ids": [
+          "admin520@paytm"
+        ],
+        "bank_mentions": [
+          "HDFC"
+        ]
+      },
+      "expected_scam_confidence": 0.95,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 86,
+      "scam_type": "IMPERSONATION",
+      "source_type": "telegram",
+      "message": "Sir, parcel stuck at customs. Pay duty Rs. 3006 to user@upi to release.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.91,
+      "region": "Chennai"
+    },
+    {
+      "id": 87,
+      "scam_type": "TECH_SUPPORT",
+      "source_type": "telegram",
+      "message": "Subscription renewed for Rs. 9000. Call 9849219105 to cancel.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9849219105"
+        ],
+        "ifsc_codes": [
+          "PNB1330538"
+        ]
+      },
+      "expected_scam_confidence": 0.75,
+      "region": "Pune"
+    },
+    {
+      "id": 88,
+      "scam_type": "OTP_THEFT",
+      "source_type": "whatsapp",
+      "message": "Redeem your reward points worth Rs. 76000. Share OTP sent to mobile.",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.88,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 89,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "sms",
+      "message": "Double your money in 21 days! Guaranteed returns. Join WhatsApp group: http://offer-prize.in/9535",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://offer-prize.in/9535"
+        ],
+        "bank_mentions": [
+          "ICICI"
+        ],
+        "bank_accounts": [
+          "63926333216"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Bangalore"
+    },
+    {
+      "id": 90,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "sms",
+      "message": "Crypto trading tips for guaranteed profit. Join exclusive channel: http://secure-login-123.com/5355",
+      "expected_extractions": {
+        "phishing_links": [
+          "http://secure-login-123.com/5355"
+        ],
+        "bank_mentions": [
+          "PNB"
+        ]
+      },
+      "expected_scam_confidence": 0.98,
+      "region": "Kolkata"
+    },
+    {
+      "id": 91,
+      "scam_type": "INVESTMENT_FRAUD",
+      "source_type": "sms",
+      "message": "Double your money in 21 days! Guaranteed returns. Join WhatsApp group: http://...",
+      "expected_extractions": {
+        "bank_mentions": [
+          "Axis Bank"
+        ],
+        "bank_accounts": [
+          "30026329000"
+        ]
+      },
+      "expected_scam_confidence": 0.88,
+      "region": "Mumbai"
+    },
+    {
+      "id": 92,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Important: Your HDFC account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "HDFC9949532"
+        ]
+      },
+      "expected_scam_confidence": 0.81,
+      "region": "Pune"
+    },
+    {
+      "id": 93,
+      "scam_type": "IMPERSONATION",
+      "source_type": "whatsapp",
+      "message": "Hi Dad, lost my phone. Need money for urgent bill. Send Rs. 4420 to pay866@paytm. New number.",
+      "expected_extractions": {
+        "upi_ids": [
+          "pay866@paytm"
+        ]
+      },
+      "expected_scam_confidence": 0.77,
+      "region": "Pune"
+    },
+    {
+      "id": 94,
+      "scam_type": "JOB_SCAM",
+      "source_type": "sms",
+      "message": "Hiring for Amazon/Flipkart. WFH usage. Salary Rs. 24000. Apply: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.88,
+      "region": "Kolkata"
+    },
+    {
+      "id": 95,
+      "scam_type": "LOAN_SCAM",
+      "source_type": "sms",
+      "message": "Paperless loan in 10 mins. Download app: http://...",
+      "expected_extractions": {},
+      "expected_scam_confidence": 0.93,
+      "region": "Hyderabad"
+    },
+    {
+      "id": 96,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "sms",
+      "message": "ICICI Alert: PAN card not linked. Update immediately at http://... to avoid penalty.",
+      "expected_extractions": {
+        "ifsc_codes": [
+          "ICIC9929944"
+        ]
+      },
+      "expected_scam_confidence": 0.9,
+      "region": "Mumbai"
+    },
+    {
+      "id": 97,
+      "scam_type": "LOTTERY_PRIZE",
+      "source_type": "whatsapp",
+      "message": "Claim your Holi bonanza of Rs. 32000. Pay processing fee to pay832@ybl to release funds.",
+      "expected_extractions": {
+        "upi_ids": [
+          "pay832@ybl"
+        ],
+        "ifsc_codes": [
+          "HDFC2956054"
+        ]
+      },
+      "expected_scam_confidence": 0.8,
+      "region": "Kolkata"
+    },
+    {
+      "id": 98,
+      "scam_type": "KYC_PHISHING",
+      "source_type": "whatsapp",
+      "message": "Important: Your ICICI account blocked due to pending KYC. Click http://... to activate immediately.",
+      "expected_extractions": {
+        "bank_mentions": [
+          "ICICI"
+        ],
+        "bank_accounts": [
+          "40687043415"
+        ]
+      },
+      "expected_scam_confidence": 0.92,
+      "region": "Delhi"
+    },
+    {
+      "id": 99,
+      "scam_type": "IMPERSONATION",
+      "source_type": "sms",
+      "message": "Hello, this is Officer Patil from police station. Your son is in trouble. Call 9751044031.",
+      "expected_extractions": {
+        "phone_numbers": [
+          "9751044031"
+        ],
+        "ifsc_codes": [
+          "HDFC9050643"
+        ]
+      },
+      "expected_scam_confidence": 0.97,
+      "region": "Kolkata"
+    },
+    {
+      "id": 100,
+      "scam_type": "IMPERSONATION",
+      "source_type": "sms",
+      "message": "Sir, parcel stuck at customs. Pay duty Rs. 1098 to merchant468@ybl to release.",
+      "expected_extractions": {
+        "upi_ids": [
+          "merchant468@ybl"
+        ],
+        "bank_mentions": [
+          "ICICI"
+        ]
+      },
+      "expected_scam_confidence": 0.85,
+      "region": "Mumbai"
+    }
+  ]
+}
