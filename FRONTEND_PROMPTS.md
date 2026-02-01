@@ -12051,11 +12051,3221 @@ Create all 75+ files with complete, production-ready code. The Analytics Dashboa
 # PROMPT 7: Chat Interface & API Integration
 
 ## 📦 Expected Output
-*To be added*
+| Output | Description |
+|--------|-------------|
+| `frontend/app/(dashboard)/chat/page.tsx` | Main chat simulator page with full layout |
+| `frontend/app/(dashboard)/chat/layout.tsx` | Chat-specific layout with sidebar |
+| `frontend/app/(dashboard)/chat/[sessionId]/page.tsx` | Existing session continuation page |
+| `frontend/app/(dashboard)/chat/loading.tsx` | Chat page loading state |
+| `frontend/components/chat/chat-container.tsx` | Main chat container with split view |
+| `frontend/components/chat/chat-header.tsx` | Chat header with session info, actions |
+| `frontend/components/chat/chat-messages.tsx` | Message list with virtual scrolling |
+| `frontend/components/chat/chat-message.tsx` | Individual message bubble component |
+| `frontend/components/chat/chat-input.tsx` | Message input with multiline, attachments |
+| `frontend/components/chat/chat-input-actions.tsx` | Quick actions, templates, emoji |
+| `frontend/components/chat/chat-sidebar.tsx` | Sidebar with scenarios, history |
+| `frontend/components/chat/chat-welcome.tsx` | Welcome screen with quick starts |
+| `frontend/components/chat/chat-typing-indicator.tsx` | AI typing animation |
+| `frontend/components/chat/chat-status-bar.tsx` | Connection status, session info |
+| `frontend/components/chat/persona-selector.tsx` | Visual persona picker with cards |
+| `frontend/components/chat/persona-avatar.tsx` | Animated persona avatar |
+| `frontend/components/chat/persona-info-card.tsx` | Detailed persona information |
+| `frontend/components/chat/scenario-library.tsx` | Scam scenario browsing library |
+| `frontend/components/chat/scenario-card.tsx` | Individual scenario preview card |
+| `frontend/components/chat/scenario-detail-modal.tsx` | Full scenario details modal |
+| `frontend/components/chat/quick-scenario-picker.tsx` | Quick scenario selection dropdown |
+| `frontend/components/chat/message-templates.tsx` | Pre-built scam message templates |
+| `frontend/components/chat/session-panel.tsx` | Active session information panel |
+| `frontend/components/chat/session-metrics.tsx` | Real-time session metrics display |
+| `frontend/components/chat/session-timeline.tsx` | Visual conversation timeline |
+| `frontend/components/chat/intelligence-feed.tsx` | Live extracted intelligence feed |
+| `frontend/components/chat/intelligence-item.tsx` | Individual intelligence item |
+| `frontend/components/chat/scam-detection-alert.tsx` | Scam detection notification |
+| `frontend/components/chat/risk-meter.tsx` | Real-time risk score gauge |
+| `frontend/components/chat/entity-highlight.tsx` | Highlighted entity in message |
+| `frontend/components/chat/message-actions.tsx` | Message action buttons |
+| `frontend/components/chat/message-context-menu.tsx` | Right-click context menu |
+| `frontend/components/chat/message-reactions.tsx` | Message reaction buttons |
+| `frontend/components/chat/chat-settings-modal.tsx` | Chat preferences modal |
+| `frontend/components/chat/chat-export-modal.tsx` | Export conversation modal |
+| `frontend/components/chat/chat-share-modal.tsx` | Share session modal |
+| `frontend/components/chat/session-summary-modal.tsx` | Session summary overlay |
+| `frontend/components/chat/end-session-dialog.tsx` | End session confirmation |
+| `frontend/components/chat/connection-status.tsx` | WebSocket connection indicator |
+| `frontend/components/chat/reconnect-banner.tsx` | Reconnection notification |
+| `frontend/components/chat/chat-empty-state.tsx` | No messages empty state |
+| `frontend/components/chat/chat-error-boundary.tsx` | Chat-specific error boundary |
+| `frontend/components/chat/chat-skeletons.tsx` | All chat loading skeletons |
+| `frontend/lib/api/client.ts` | Enhanced Axios client with interceptors |
+| `frontend/lib/api/honeypot.ts` | Honeypot API functions (engage, continue) |
+| `frontend/lib/api/sessions.ts` | Sessions API functions |
+| `frontend/lib/api/intelligence.ts` | Intelligence API functions |
+| `frontend/lib/api/analytics.ts` | Analytics API functions |
+| `frontend/lib/api/health.ts` | Health check API functions |
+| `frontend/lib/api/endpoints.ts` | All API endpoint constants |
+| `frontend/lib/api/types.ts` | API request/response types |
+| `frontend/lib/api/errors.ts` | API error handling utilities |
+| `frontend/lib/hooks/use-chat.ts` | Main chat functionality hook |
+| `frontend/lib/hooks/use-chat-session.ts` | Chat session management hook |
+| `frontend/lib/hooks/use-chat-messages.ts` | Messages management hook |
+| `frontend/lib/hooks/use-honeypot.ts` | Honeypot API hooks |
+| `frontend/lib/hooks/use-websocket.ts` | WebSocket connection hook |
+| `frontend/lib/hooks/use-realtime.ts` | Real-time updates hook |
+| `frontend/lib/hooks/use-scenarios.ts` | Scenario library hook |
+| `frontend/lib/hooks/use-typing-indicator.ts` | Typing animation hook |
+| `frontend/lib/hooks/use-scroll-to-bottom.ts` | Auto-scroll hook |
+| `frontend/lib/hooks/use-message-sound.ts` | Notification sounds hook |
+| `frontend/lib/hooks/use-chat-history.ts` | Chat history persistence |
+| `frontend/lib/stores/chat-store.ts` | Zustand chat state management |
+| `frontend/lib/stores/websocket-store.ts` | WebSocket state management |
+| `frontend/lib/websocket/client.ts` | WebSocket client implementation |
+| `frontend/lib/websocket/events.ts` | WebSocket event handlers |
+| `frontend/lib/websocket/reconnect.ts` | Auto-reconnection logic |
+| `frontend/lib/websocket/heartbeat.ts` | Connection heartbeat |
+| `frontend/lib/utils/message-parser.ts` | Message content parser |
+| `frontend/lib/utils/entity-highlighter.ts` | Entity detection in text |
+| `frontend/lib/utils/chat-helpers.ts` | Chat utility functions |
+| `frontend/lib/utils/sound.ts` | Audio notification utilities |
+| `frontend/lib/constants/scenarios.ts` | Test scenario definitions |
+| `frontend/lib/constants/message-templates.ts` | Message template definitions |
+| `frontend/lib/constants/chat-config.ts` | Chat configuration constants |
+| `frontend/types/chat.ts` | Chat TypeScript types |
+| `frontend/types/message.ts` | Message TypeScript types |
+| `frontend/types/websocket.ts` | WebSocket TypeScript types |
+| `frontend/types/scenario.ts` | Scenario TypeScript types |
+| `frontend/public/sounds/message.mp3` | Message notification sound |
+| `frontend/public/sounds/alert.mp3` | Alert notification sound |
+| **Total: 85+ files** | Complete FAANG-level chat system with API integration |
 
 ## ▶️ START PROMPT 7 ═══════════════════════════════════════════════════════════
 
-*To be added when ready*
+Create a complete FAANG/MNC-level Chat Interface and API Integration system for ScamShield Agentic Honeypot Dashboard. This is an enterprise-grade real-time chat simulation platform for testing and demonstrating scam engagement scenarios, built for India AI Impact Buildathon 2026.
+
+## PROJECT CONTEXT
+
+This is PROMPT 7 of the ScamShield frontend development. Prompts 1-6 have already established the project setup, UI components, dashboard, sessions, intelligence center, and analytics. Now we need to build the crown jewel - a professional chat interface that rivals WhatsApp, Telegram, and enterprise communication platforms in quality, with seamless backend API integration.
+
+The Chat Interface will enable:
+- **Real-time scam simulation** - Test how AI personas engage with scammers
+- **Live intelligence extraction** - Watch entities being extracted in real-time
+- **Scenario testing** - Launch pre-built scam scenarios for demonstration
+- **Session management** - Start, continue, pause, and end honeypot sessions
+- **API integration** - Full integration with FastAPI backend
+- **WebSocket support** - Optional real-time updates without polling
+
+## BACKEND API REFERENCE (Already Built & Tested)
+
+### Base Configuration
+```typescript
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_VERSION = 'v1'
+```
+
+### Honeypot Endpoints
+
+#### 1. POST /v1/honeypot/engage - Start New Session
+```typescript
+// Request
+interface EngageRequest {
+  scammer_message: string      // Initial scam message
+  persona?: string             // Optional: 'elderly_victim' | 'tech_novice' | 'eager_investor' | 'busy_professional' | 'helpful_auntie'
+  context?: {                  // Optional context
+    channel?: string           // 'sms' | 'whatsapp' | 'email' | 'call'
+    claimed_identity?: string  // Who scammer claims to be
+  }
+}
+
+// Response
+interface EngageResponse {
+  session_id: string
+  response: string             // AI persona response
+  persona_used: string
+  scam_detected: {
+    is_scam: boolean
+    scam_type: string          // 'KYC_FRAUD' | 'LOTTERY_SCAM' | 'TECH_SUPPORT' | etc.
+    confidence: number         // 0.0 to 1.0
+    risk_level: string         // 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+  }
+  entities_extracted: Array<{
+    type: string               // 'PHONE_NUMBER' | 'UPI_ID' | 'BANK_ACCOUNT' | etc.
+    value: string
+    confidence: number
+  }>
+  session_state: string        // 'ACTIVE' | 'COMPLETED' | 'FAILED'
+  turn_count: number
+  created_at: string           // ISO timestamp
+}
+```
+
+#### 2. POST /v1/honeypot/continue - Continue Conversation
+```typescript
+// Request
+interface ContinueRequest {
+  session_id: string
+  scammer_message: string
+}
+
+// Response - Same as EngageResponse with updated data
+```
+
+#### 3. GET /v1/honeypot/session/{session_id} - Get Session Details
+```typescript
+// Response
+interface SessionDetailResponse {
+  session_id: string
+  status: 'ACTIVE' | 'COMPLETED' | 'FAILED'
+  persona_used: string
+  scam_type: string
+  risk_level: string
+  turn_count: number
+  messages: Array<{
+    id: string
+    role: 'scammer' | 'victim'
+    content: string
+    timestamp: string
+    entities_extracted?: Array<{
+      type: string
+      value: string
+    }>
+  }>
+  intelligence: Array<{
+    id: string
+    type: string
+    value: string
+    confidence: number
+    verified: boolean
+  }>
+  analytics: {
+    duration_seconds: number
+    avg_response_time: number
+    entities_per_turn: number
+  }
+  created_at: string
+  updated_at: string
+}
+```
+
+#### 4. DELETE /v1/honeypot/session/{session_id} - End Session
+```typescript
+// Response
+interface DeleteSessionResponse {
+  message: string
+  session_id: string
+  final_status: string
+  summary: {
+    total_turns: number
+    entities_extracted: number
+    duration_seconds: number
+  }
+}
+```
+
+### Sessions Endpoints
+
+#### 5. GET /v1/sessions - List All Sessions
+```typescript
+// Query Parameters
+interface SessionsQuery {
+  limit?: number               // Default: 20, Max: 100
+  offset?: number              // Default: 0
+  status?: string              // Filter by status
+  scam_type?: string           // Filter by scam type
+  persona?: string             // Filter by persona
+  sort?: string                // 'created_at' | 'updated_at' | 'turn_count'
+  order?: 'asc' | 'desc'       // Default: 'desc'
+}
+
+// Response
+interface SessionsListResponse {
+  sessions: Array<{
+    id: string
+    status: string
+    persona: string
+    scam_type: string
+    risk_level: string
+    turn_count: number
+    entities_count: number
+    created_at: string
+    updated_at: string
+  }>
+  total: number
+  limit: number
+  offset: number
+  has_more: boolean
+}
+```
+
+#### 6. GET /v1/sessions/{session_id}/intelligence - Get Session Intelligence
+```typescript
+// Response
+interface SessionIntelligenceResponse {
+  session_id: string
+  entities: Array<{
+    id: string
+    type: string
+    value: string
+    confidence: number
+    verified: boolean
+    first_seen: string
+    occurrence_count: number
+  }>
+  summary: {
+    total: number
+    by_type: Record<string, number>
+    high_confidence: number
+  }
+}
+```
+
+### Intelligence Endpoints
+
+#### 7. GET /v1/intelligence - List All Intelligence
+```typescript
+// Query Parameters
+interface IntelligenceQuery {
+  limit?: number
+  offset?: number
+  type?: string                // Entity type filter
+  verified?: boolean           // Verification filter
+  min_confidence?: number      // Minimum confidence
+}
+
+// Response
+interface IntelligenceListResponse {
+  entities: Array<{
+    id: string
+    type: string
+    value: string
+    confidence: number
+    verified: boolean
+    risk_score: number
+    occurrence_count: number
+    sessions: string[]         // Session IDs
+    first_seen: string
+    last_seen: string
+  }>
+  total: number
+  limit: number
+  offset: number
+}
+```
+
+#### 8. GET /v1/intelligence/{id} - Get Intelligence Detail
+```typescript
+// Response includes full entity details with metadata
+```
+
+### Analytics Endpoints
+
+#### 9. GET /v1/analytics/summary - Analytics Summary
+```typescript
+// Response
+interface AnalyticsSummaryResponse {
+  period: {
+    start: string
+    end: string
+  }
+  sessions: {
+    total: number
+    active: number
+    completed: number
+    failed: number
+  }
+  intelligence: {
+    total_entities: number
+    verified: number
+    by_type: Record<string, number>
+  }
+  scam_types: Record<string, number>
+  personas: Record<string, {
+    sessions: number
+    success_rate: number
+  }>
+}
+```
+
+#### 10. GET /v1/analytics/scam-types - Scam Type Distribution
+#### 11. GET /v1/analytics/timeline - Timeline Analytics
+
+### Health Endpoints
+
+#### 12. GET /health - Basic Health Check
+```typescript
+// Response
+interface HealthResponse {
+  status: 'healthy' | 'degraded' | 'unhealthy'
+  timestamp: string
+}
+```
+
+#### 13. GET /health/detailed - Detailed Health Check
+```typescript
+// Response
+interface DetailedHealthResponse {
+  status: string
+  version: string
+  uptime_seconds: number
+  components: {
+    database: { status: string; latency_ms: number }
+    llm: { status: string; model: string; latency_ms: number }
+    cache: { status: string }
+  }
+}
+```
+
+## TECHNICAL REQUIREMENTS
+
+### Dependencies (Already installed)
+```json
+{
+  "@tanstack/react-query": "^5.17.0",
+  "axios": "^1.6.5",
+  "framer-motion": "^10.18.0",
+  "zustand": "^4.4.7",
+  "socket.io-client": "^4.7.4",
+  "react-virtuoso": "^4.6.2",
+  "date-fns": "^3.2.0",
+  "sonner": "^1.3.1",
+  "lucide-react": "^0.309.0",
+  "use-sound": "^4.0.1"
+}
+```
+
+### Design Principles
+1. **WhatsApp-like UX** - Familiar chat interface patterns
+2. **Real-time feel** - Instant feedback, optimistic updates
+3. **Intelligence-first** - Extracted entities highlighted prominently
+4. **Scenario-driven** - Easy to launch test scenarios
+5. **Error-resilient** - Graceful degradation, retry logic
+6. **Accessible** - Full keyboard support, screen reader friendly
+7. **Performant** - Virtual scrolling, lazy loading, memoization
+
+## FILE SPECIFICATIONS
+
+### 1. frontend/app/(dashboard)/chat/page.tsx
+
+```typescript
+// Main chat page - orchestrates the entire chat experience
+// Features:
+// - Split view: chat panel + intelligence panel
+// - Responsive layout (mobile: tabs, desktop: side-by-side)
+// - Session state management
+// - Keyboard shortcuts
+// - URL-based session restoration
+
+'use client'
+
+import { useState, useEffect, useCallback } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MessageSquare, Brain, Settings, History } from 'lucide-react'
+import { ChatContainer } from '@/components/chat/chat-container'
+import { ChatSidebar } from '@/components/chat/chat-sidebar'
+import { ChatWelcome } from '@/components/chat/chat-welcome'
+import { IntelligenceFeed } from '@/components/chat/intelligence-feed'
+import { SessionPanel } from '@/components/chat/session-panel'
+import { ChatSettingsModal } from '@/components/chat/chat-settings-modal'
+import { PageHeader } from '@/components/layout/page-header'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Button } from '@/components/ui/button'
+import { useChatStore } from '@/lib/stores/chat-store'
+import { useMediaQuery } from '@/lib/hooks/use-media-query'
+import { useKeyboardShortcuts } from '@/lib/hooks/use-keyboard-shortcuts'
+import { cn } from '@/lib/utils/cn'
+
+export default function ChatPage() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const sessionIdParam = searchParams.get('session')
+  
+  const [showSettings, setShowSettings] = useState(false)
+  const [sidebarTab, setSidebarTab] = useState<'scenarios' | 'history'>('scenarios')
+  const [rightPanelTab, setRightPanelTab] = useState<'intelligence' | 'session'>('intelligence')
+  
+  const isMobile = useMediaQuery('(max-width: 768px)')
+  const isTablet = useMediaQuery('(max-width: 1024px)')
+  
+  const { 
+    activeSession, 
+    hasActiveSession,
+    startSession,
+    loadSession,
+    clearSession 
+  } = useChatStore()
+  
+  // Load session from URL parameter
+  useEffect(() => {
+    if (sessionIdParam && sessionIdParam !== activeSession?.id) {
+      loadSession(sessionIdParam)
+    }
+  }, [sessionIdParam, activeSession?.id, loadSession])
+  
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    'mod+n': () => clearSession(), // New chat
+    'mod+e': () => setShowSettings(true), // Settings
+    'mod+i': () => setRightPanelTab('intelligence'), // Intelligence panel
+    'mod+s': () => setRightPanelTab('session'), // Session panel
+  })
+  
+  // Handle session start from welcome/scenario
+  const handleStartSession = useCallback(async (params: {
+    scammerMessage: string
+    persona?: string
+    scenario?: string
+  }) => {
+    await startSession(params)
+    // URL will be updated by the store
+  }, [startSession])
+  
+  return (
+    <div className="flex h-[calc(100vh-4rem)] flex-col">
+      {/* Header */}
+      <PageHeader
+        title="Scam Simulator"
+        description="Test scam scenarios with AI-powered victim personas"
+        actions={
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => clearSession()}
+              disabled={!hasActiveSession}
+            >
+              New Chat
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setShowSettings(true)}
+            >
+              <Settings className="h-4 w-4" />
+            </Button>
+          </div>
+        }
+      />
+      
+      {/* Main Content */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left Sidebar - Scenarios & History (Desktop only) */}
+        {!isMobile && (
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="w-64 border-r flex flex-col"
+          >
+            <Tabs value={sidebarTab} onValueChange={(v) => setSidebarTab(v as any)} className="flex-1 flex flex-col">
+              <TabsList className="grid w-full grid-cols-2 px-2 pt-2">
+                <TabsTrigger value="scenarios" className="text-xs">
+                  Scenarios
+                </TabsTrigger>
+                <TabsTrigger value="history" className="text-xs">
+                  History
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="scenarios" className="flex-1 overflow-hidden m-0">
+                <ChatSidebar mode="scenarios" onSelectScenario={handleStartSession} />
+              </TabsContent>
+              <TabsContent value="history" className="flex-1 overflow-hidden m-0">
+                <ChatSidebar mode="history" onSelectSession={(id) => router.push(`/chat?session=${id}`)} />
+              </TabsContent>
+            </Tabs>
+          </motion.div>
+        )}
+        
+        {/* Center - Chat Area */}
+        <div className="flex-1 flex flex-col min-w-0">
+          <AnimatePresence mode="wait">
+            {hasActiveSession ? (
+              <motion.div
+                key="chat"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex-1 flex flex-col"
+              >
+                <ChatContainer />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="welcome"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="flex-1"
+              >
+                <ChatWelcome onStartSession={handleStartSession} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        
+        {/* Right Panel - Intelligence & Session (Desktop only) */}
+        {!isTablet && hasActiveSession && (
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="w-80 border-l flex flex-col"
+          >
+            <Tabs value={rightPanelTab} onValueChange={(v) => setRightPanelTab(v as any)} className="flex-1 flex flex-col">
+              <TabsList className="grid w-full grid-cols-2 px-2 pt-2">
+                <TabsTrigger value="intelligence" className="text-xs">
+                  <Brain className="h-3 w-3 mr-1" />
+                  Intelligence
+                </TabsTrigger>
+                <TabsTrigger value="session" className="text-xs">
+                  <MessageSquare className="h-3 w-3 mr-1" />
+                  Session
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="intelligence" className="flex-1 overflow-hidden m-0 p-0">
+                <IntelligenceFeed sessionId={activeSession?.id} />
+              </TabsContent>
+              <TabsContent value="session" className="flex-1 overflow-hidden m-0 p-0">
+                <SessionPanel session={activeSession} />
+              </TabsContent>
+            </Tabs>
+          </motion.div>
+        )}
+      </div>
+      
+      {/* Mobile Bottom Navigation */}
+      {isMobile && hasActiveSession && (
+        <div className="border-t p-2">
+          <Tabs defaultValue="chat" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="chat">Chat</TabsTrigger>
+              <TabsTrigger value="intel">Intelligence</TabsTrigger>
+              <TabsTrigger value="session">Session</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+      )}
+      
+      {/* Settings Modal */}
+      <ChatSettingsModal open={showSettings} onOpenChange={setShowSettings} />
+    </div>
+  )
+}
+```
+
+### 2. frontend/components/chat/chat-container.tsx
+
+```typescript
+// Main chat container with messages and input
+// Features:
+// - Message list with virtual scrolling
+// - Input area with rich features
+// - Status bar
+// - Loading/error states
+
+'use client'
+
+import { useRef, useEffect, useCallback } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { ChatHeader } from './chat-header'
+import { ChatMessages } from './chat-messages'
+import { ChatInput } from './chat-input'
+import { ChatStatusBar } from './chat-status-bar'
+import { ChatTypingIndicator } from './chat-typing-indicator'
+import { ScamDetectionAlert } from './scam-detection-alert'
+import { ChatErrorBoundary } from './chat-error-boundary'
+import { useChatStore } from '@/lib/stores/chat-store'
+import { useChat } from '@/lib/hooks/use-chat'
+import { useChatMessages } from '@/lib/hooks/use-chat-messages'
+import { useScrollToBottom } from '@/lib/hooks/use-scroll-to-bottom'
+import { cn } from '@/lib/utils/cn'
+
+export function ChatContainer() {
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  const { 
+    activeSession, 
+    isLoading, 
+    isTyping,
+    lastScamDetection 
+  } = useChatStore()
+  
+  const { sendMessage, retryMessage } = useChat()
+  const { messages, isLoadingHistory, loadMoreMessages, hasMore } = useChatMessages(activeSession?.id)
+  
+  // Auto-scroll to bottom on new messages
+  useScrollToBottom(messagesEndRef, [messages.length, isTyping])
+  
+  // Handle sending message
+  const handleSendMessage = useCallback(async (content: string) => {
+    if (!content.trim()) return
+    await sendMessage(content)
+  }, [sendMessage])
+  
+  // Handle loading more history
+  const handleLoadMore = useCallback(() => {
+    if (hasMore && !isLoadingHistory) {
+      loadMoreMessages()
+    }
+  }, [hasMore, isLoadingHistory, loadMoreMessages])
+  
+  return (
+    <ChatErrorBoundary>
+      <div className="flex h-full flex-col bg-muted/30">
+        {/* Header */}
+        <ChatHeader session={activeSession} />
+        
+        {/* Scam Detection Alert */}
+        <AnimatePresence>
+          {lastScamDetection && lastScamDetection.is_scam && (
+            <ScamDetectionAlert detection={lastScamDetection} />
+          )}
+        </AnimatePresence>
+        
+        {/* Messages Area */}
+        <div 
+          ref={containerRef}
+          className="flex-1 overflow-hidden"
+        >
+          <ChatMessages
+            messages={messages}
+            isLoading={isLoadingHistory}
+            hasMore={hasMore}
+            onLoadMore={handleLoadMore}
+            onRetry={retryMessage}
+          />
+          
+          {/* Typing Indicator */}
+          <AnimatePresence>
+            {isTyping && (
+              <ChatTypingIndicator 
+                persona={activeSession?.persona_used} 
+              />
+            )}
+          </AnimatePresence>
+          
+          {/* Scroll anchor */}
+          <div ref={messagesEndRef} />
+        </div>
+        
+        {/* Input Area */}
+        <ChatInput 
+          onSend={handleSendMessage}
+          disabled={isLoading || !activeSession}
+          placeholder="Enter scammer's message..."
+        />
+        
+        {/* Status Bar */}
+        <ChatStatusBar session={activeSession} />
+      </div>
+    </ChatErrorBoundary>
+  )
+}
+```
+
+### 3. frontend/components/chat/chat-messages.tsx
+
+```typescript
+// Message list with virtual scrolling and optimizations
+// Features:
+// - Virtual scrolling for large conversations
+// - Grouped by date
+// - Load more on scroll
+// - Message animations
+
+'use client'
+
+import { memo, useCallback, forwardRef } from 'react'
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
+import { format, isToday, isYesterday, isSameDay } from 'date-fns'
+import { motion } from 'framer-motion'
+import { ChatMessage } from './chat-message'
+import { ChatMessageSkeleton } from './chat-skeletons'
+import { ChatEmptyState } from './chat-empty-state'
+import { Button } from '@/components/ui/button'
+import { Loader2, ChevronUp } from 'lucide-react'
+import { Message } from '@/types/message'
+import { cn } from '@/lib/utils/cn'
+
+interface ChatMessagesProps {
+  messages: Message[]
+  isLoading: boolean
+  hasMore: boolean
+  onLoadMore: () => void
+  onRetry: (messageId: string) => void
+}
+
+export const ChatMessages = memo(function ChatMessages({
+  messages,
+  isLoading,
+  hasMore,
+  onLoadMore,
+  onRetry,
+}: ChatMessagesProps) {
+  // Format date separator
+  const formatDateSeparator = (date: Date) => {
+    if (isToday(date)) return 'Today'
+    if (isYesterday(date)) return 'Yesterday'
+    return format(date, 'MMMM d, yyyy')
+  }
+  
+  // Check if we need a date separator before this message
+  const needsDateSeparator = (index: number): boolean => {
+    if (index === 0) return true
+    const currentDate = new Date(messages[index].timestamp)
+    const prevDate = new Date(messages[index - 1].timestamp)
+    return !isSameDay(currentDate, prevDate)
+  }
+  
+  // Render individual message with date separator
+  const renderMessage = useCallback((index: number, message: Message) => {
+    const showDateSeparator = needsDateSeparator(index)
+    
+    return (
+      <div key={message.id}>
+        {showDateSeparator && (
+          <div className="flex justify-center my-4">
+            <span className="bg-muted px-3 py-1 rounded-full text-xs text-muted-foreground">
+              {formatDateSeparator(new Date(message.timestamp))}
+            </span>
+          </div>
+        )}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChatMessage 
+            message={message} 
+            onRetry={() => onRetry(message.id)}
+          />
+        </motion.div>
+      </div>
+    )
+  }, [messages, onRetry])
+  
+  // Empty state
+  if (!isLoading && messages.length === 0) {
+    return <ChatEmptyState />
+  }
+  
+  return (
+    <div className="h-full">
+      <Virtuoso
+        style={{ height: '100%' }}
+        data={messages}
+        firstItemIndex={hasMore ? 10000 : 0}
+        initialTopMostItemIndex={messages.length - 1}
+        startReached={() => hasMore && onLoadMore()}
+        itemContent={(index, message) => renderMessage(index, message)}
+        components={{
+          Header: () => (
+            hasMore ? (
+              <div className="flex justify-center py-4">
+                {isLoading ? (
+                  <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+                ) : (
+                  <Button variant="ghost" size="sm" onClick={onLoadMore}>
+                    <ChevronUp className="h-4 w-4 mr-1" />
+                    Load earlier messages
+                  </Button>
+                )}
+              </div>
+            ) : null
+          ),
+          Footer: () => <div className="h-4" />,
+        }}
+        followOutput="smooth"
+        alignToBottom
+        className="px-4"
+      />
+    </div>
+  )
+})
+```
+
+### 4. frontend/components/chat/chat-message.tsx
+
+```typescript
+// Individual message bubble component
+// Features:
+// - Scammer/Victim styling
+// - Entity highlighting
+// - Timestamp
+// - Actions (copy, report, etc.)
+// - Error/retry state
+
+'use client'
+
+import { memo, useState } from 'react'
+import { format } from 'date-fns'
+import { motion } from 'framer-motion'
+import { 
+  Copy, 
+  Check, 
+  AlertCircle, 
+  RefreshCw,
+  MoreVertical,
+  Flag,
+  Brain,
+  Phone,
+  CreditCard,
+  Link as LinkIcon
+} from 'lucide-react'
+import { PersonaAvatar } from './persona-avatar'
+import { EntityHighlight } from './entity-highlight'
+import { MessageActions } from './message-actions'
+import { MessageContextMenu } from './message-context-menu'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { Message, MessageStatus } from '@/types/message'
+import { highlightEntities } from '@/lib/utils/entity-highlighter'
+import { cn } from '@/lib/utils/cn'
+import { toast } from 'sonner'
+
+interface ChatMessageProps {
+  message: Message
+  onRetry?: () => void
+}
+
+export const ChatMessage = memo(function ChatMessage({ 
+  message, 
+  onRetry 
+}: ChatMessageProps) {
+  const [copied, setCopied] = useState(false)
+  const isScammer = message.role === 'scammer'
+  const hasEntities = message.entities_extracted && message.entities_extracted.length > 0
+  const hasError = message.status === 'error'
+  const isSending = message.status === 'sending'
+  
+  // Copy message content
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(message.content)
+    setCopied(true)
+    toast.success('Copied to clipboard')
+    setTimeout(() => setCopied(false), 2000)
+  }
+  
+  // Parse and highlight entities in message
+  const highlightedContent = highlightEntities(message.content, message.entities_extracted || [])
+  
+  return (
+    <MessageContextMenu message={message}>
+      <div 
+        className={cn(
+          'group flex gap-3 py-2',
+          isScammer ? 'flex-row' : 'flex-row-reverse'
+        )}
+      >
+        {/* Avatar */}
+        <div className="flex-shrink-0">
+          <PersonaAvatar 
+            persona={isScammer ? 'scammer' : message.persona}
+            size="sm"
+          />
+        </div>
+        
+        {/* Message Content */}
+        <div className={cn('flex flex-col max-w-[70%]', isScammer ? 'items-start' : 'items-end')}>
+          {/* Role label */}
+          <span className="text-xs text-muted-foreground mb-1 px-1">
+            {isScammer ? 'Scammer' : message.persona?.replace(/_/g, ' ') || 'AI Victim'}
+          </span>
+          
+          {/* Bubble */}
+          <div
+            className={cn(
+              'rounded-2xl px-4 py-2.5 shadow-sm relative',
+              isScammer 
+                ? 'bg-muted text-foreground rounded-tl-none' 
+                : 'bg-primary text-primary-foreground rounded-tr-none',
+              hasError && 'border-2 border-destructive bg-destructive/10',
+              isSending && 'opacity-70'
+            )}
+          >
+            {/* Message text with entity highlighting */}
+            <div className="text-sm whitespace-pre-wrap break-words">
+              {highlightedContent}
+            </div>
+            
+            {/* Entities badge */}
+            {hasEntities && (
+              <div className="flex flex-wrap gap-1 mt-2 pt-2 border-t border-current/10">
+                {message.entities_extracted!.slice(0, 3).map((entity, i) => (
+                  <Badge 
+                    key={i} 
+                    variant="secondary" 
+                    className="text-[10px] gap-1"
+                  >
+                    {entity.type === 'PHONE_NUMBER' && <Phone className="h-2.5 w-2.5" />}
+                    {entity.type === 'UPI_ID' && <CreditCard className="h-2.5 w-2.5" />}
+                    {entity.type === 'URL' && <LinkIcon className="h-2.5 w-2.5" />}
+                    <span className="truncate max-w-[80px]">{entity.value}</span>
+                  </Badge>
+                ))}
+                {message.entities_extracted!.length > 3 && (
+                  <Badge variant="outline" className="text-[10px]">
+                    +{message.entities_extracted!.length - 3} more
+                  </Badge>
+                )}
+              </div>
+            )}
+          </div>
+          
+          {/* Bottom row: timestamp + actions */}
+          <div className="flex items-center gap-2 mt-1 px-1">
+            {/* Timestamp */}
+            <span className="text-[10px] text-muted-foreground">
+              {format(new Date(message.timestamp), 'HH:mm')}
+            </span>
+            
+            {/* Status indicators */}
+            {isSending && (
+              <span className="text-[10px] text-muted-foreground">Sending...</span>
+            )}
+            
+            {hasError && (
+              <div className="flex items-center gap-1">
+                <AlertCircle className="h-3 w-3 text-destructive" />
+                <span className="text-[10px] text-destructive">Failed</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-5 w-5"
+                  onClick={onRetry}
+                >
+                  <RefreshCw className="h-3 w-3" />
+                </Button>
+              </div>
+            )}
+            
+            {/* Actions (visible on hover) */}
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6"
+                    onClick={handleCopy}
+                  >
+                    {copied ? (
+                      <Check className="h-3 w-3 text-green-500" />
+                    ) : (
+                      <Copy className="h-3 w-3" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Copy message</TooltipContent>
+              </Tooltip>
+              
+              <MessageActions message={message} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </MessageContextMenu>
+  )
+})
+```
+
+### 5. frontend/components/chat/chat-input.tsx
+
+```typescript
+// Chat input with multiline support and actions
+// Features:
+// - Auto-resizing textarea
+// - Send on Enter, newline on Shift+Enter
+// - Template picker
+// - Character counter
+// - Disabled state handling
+
+'use client'
+
+import { useState, useRef, useCallback, useEffect, KeyboardEvent, ChangeEvent } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Send, Paperclip, Smile, Zap, Loader2, X } from 'lucide-react'
+import { ChatInputActions } from './chat-input-actions'
+import { MessageTemplates } from './message-templates'
+import { QuickScenarioPicker } from './quick-scenario-picker'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { cn } from '@/lib/utils/cn'
+
+interface ChatInputProps {
+  onSend: (message: string) => Promise<void>
+  disabled?: boolean
+  placeholder?: string
+  maxLength?: number
+}
+
+export function ChatInput({
+  onSend,
+  disabled = false,
+  placeholder = "Type a message...",
+  maxLength = 2000,
+}: ChatInputProps) {
+  const [message, setMessage] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const [showTemplates, setShowTemplates] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  
+  // Auto-resize textarea
+  useEffect(() => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      textarea.style.height = 'auto'
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`
+    }
+  }, [message])
+  
+  // Focus textarea on mount
+  useEffect(() => {
+    if (!disabled) {
+      textareaRef.current?.focus()
+    }
+  }, [disabled])
+  
+  // Handle send
+  const handleSend = useCallback(async () => {
+    const trimmedMessage = message.trim()
+    if (!trimmedMessage || isSending || disabled) return
+    
+    setIsSending(true)
+    try {
+      await onSend(trimmedMessage)
+      setMessage('')
+      // Reset textarea height
+      if (textareaRef.current) {
+        textareaRef.current.style.height = 'auto'
+      }
+    } finally {
+      setIsSending(false)
+      textareaRef.current?.focus()
+    }
+  }, [message, isSending, disabled, onSend])
+  
+  // Handle keyboard
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSend()
+    }
+  }
+  
+  // Handle input change
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value
+    if (value.length <= maxLength) {
+      setMessage(value)
+    }
+  }
+  
+  // Insert template
+  const handleTemplateSelect = (template: string) => {
+    setMessage(prev => prev ? `${prev}\n${template}` : template)
+    setShowTemplates(false)
+    textareaRef.current?.focus()
+  }
+  
+  // Clear input
+  const handleClear = () => {
+    setMessage('')
+    textareaRef.current?.focus()
+  }
+  
+  const isOverLimit = message.length >= maxLength * 0.9
+  const charCount = message.length
+  
+  return (
+    <div className="border-t bg-background p-4">
+      {/* Quick Actions Bar */}
+      <AnimatePresence>
+        {!message && !disabled && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mb-3"
+          >
+            <ChatInputActions onSelectScenario={handleTemplateSelect} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Main Input Area */}
+      <div className="flex items-end gap-2">
+        {/* Template Button */}
+        <Popover open={showTemplates} onOpenChange={setShowTemplates}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 shrink-0"
+              disabled={disabled}
+            >
+              <Zap className="h-5 w-5" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent side="top" align="start" className="w-80 p-0">
+            <MessageTemplates onSelect={handleTemplateSelect} />
+          </PopoverContent>
+        </Popover>
+        
+        {/* Input Container */}
+        <div className="flex-1 relative">
+          <Textarea
+            ref={textareaRef}
+            value={message}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            placeholder={placeholder}
+            disabled={disabled || isSending}
+            rows={1}
+            className={cn(
+              'min-h-[44px] max-h-[200px] resize-none pr-10 py-3',
+              'rounded-2xl border-2 focus-visible:ring-0 focus-visible:ring-offset-0',
+              'focus-visible:border-primary',
+              disabled && 'opacity-50 cursor-not-allowed'
+            )}
+          />
+          
+          {/* Clear button */}
+          <AnimatePresence>
+            {message && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="absolute right-3 top-3"
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 rounded-full"
+                  onClick={handleClear}
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+        
+        {/* Send Button */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              size="icon"
+              className={cn(
+                'h-10 w-10 shrink-0 rounded-full transition-all',
+                message.trim() ? 'scale-100' : 'scale-95 opacity-50'
+              )}
+              disabled={!message.trim() || isSending || disabled}
+              onClick={handleSend}
+            >
+              {isSending ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <Send className="h-5 w-5" />
+              )}
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {disabled ? 'Start a session first' : 'Send message (Enter)'}
+          </TooltipContent>
+        </Tooltip>
+      </div>
+      
+      {/* Character Counter */}
+      <div className="flex justify-between items-center mt-2 px-2">
+        <span className="text-[10px] text-muted-foreground">
+          Press <kbd className="px-1 py-0.5 bg-muted rounded text-[9px]">Enter</kbd> to send,{' '}
+          <kbd className="px-1 py-0.5 bg-muted rounded text-[9px]">Shift + Enter</kbd> for new line
+        </span>
+        <span className={cn(
+          'text-[10px] tabular-nums',
+          isOverLimit ? 'text-destructive' : 'text-muted-foreground'
+        )}>
+          {charCount}/{maxLength}
+        </span>
+      </div>
+    </div>
+  )
+}
+```
+
+### 6. frontend/components/chat/chat-welcome.tsx
+
+```typescript
+// Welcome screen with persona selection and quick starts
+// Features:
+// - Persona cards with descriptions
+// - Quick scenario launches
+// - Custom message input
+// - Animated entrance
+
+'use client'
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { 
+  MessageSquare, 
+  Zap, 
+  Shield, 
+  Users, 
+  ArrowRight,
+  Sparkles,
+  Play
+} from 'lucide-react'
+import { PersonaSelector } from './persona-selector'
+import { ScenarioLibrary } from './scenario-library'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { QUICK_START_SCENARIOS } from '@/lib/constants/scenarios'
+import { cn } from '@/lib/utils/cn'
+
+interface ChatWelcomeProps {
+  onStartSession: (params: {
+    scammerMessage: string
+    persona?: string
+    scenario?: string
+  }) => void
+}
+
+export function ChatWelcome({ onStartSession }: ChatWelcomeProps) {
+  const [selectedPersona, setSelectedPersona] = useState<string | undefined>()
+  const [customMessage, setCustomMessage] = useState('')
+  const [activeTab, setActiveTab] = useState<'quick' | 'custom' | 'scenarios'>('quick')
+  
+  // Handle quick start scenario
+  const handleQuickStart = (scenario: typeof QUICK_START_SCENARIOS[0]) => {
+    onStartSession({
+      scammerMessage: scenario.initialMessage,
+      persona: selectedPersona || scenario.suggestedPersona,
+      scenario: scenario.id,
+    })
+  }
+  
+  // Handle custom message
+  const handleCustomStart = () => {
+    if (!customMessage.trim()) return
+    onStartSession({
+      scammerMessage: customMessage,
+      persona: selectedPersona,
+    })
+  }
+  
+  return (
+    <div className="h-full overflow-auto">
+      <div className="container max-w-4xl mx-auto py-8 px-4">
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-8"
+        >
+          <div className="flex justify-center mb-4">
+            <div className="relative">
+              <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <Shield className="h-8 w-8 text-primary" />
+              </div>
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute -top-1 -right-1"
+              >
+                <Sparkles className="h-5 w-5 text-yellow-500" />
+              </motion.div>
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold mb-2">Scam Simulator</h1>
+          <p className="text-muted-foreground max-w-md mx-auto">
+            Test how our AI-powered victim personas engage with scammers and extract intelligence in real-time
+          </p>
+        </motion.div>
+        
+        {/* Stats Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex justify-center gap-6 mb-8"
+        >
+          <div className="text-center">
+            <p className="text-2xl font-bold text-primary">5</p>
+            <p className="text-xs text-muted-foreground">AI Personas</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-primary">8</p>
+            <p className="text-xs text-muted-foreground">Scam Types</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-primary">7</p>
+            <p className="text-xs text-muted-foreground">Entity Types</p>
+          </div>
+        </motion.div>
+        
+        {/* Persona Selection */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-8"
+        >
+          <h2 className="text-sm font-medium mb-3 flex items-center gap-2">
+            <Users className="h-4 w-4" />
+            Select AI Persona (Optional)
+          </h2>
+          <PersonaSelector
+            selected={selectedPersona}
+            onSelect={setSelectedPersona}
+          />
+        </motion.div>
+        
+        {/* Start Options */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="quick" className="gap-2">
+                <Zap className="h-4 w-4" />
+                Quick Start
+              </TabsTrigger>
+              <TabsTrigger value="custom" className="gap-2">
+                <MessageSquare className="h-4 w-4" />
+                Custom Message
+              </TabsTrigger>
+              <TabsTrigger value="scenarios" className="gap-2">
+                <Play className="h-4 w-4" />
+                Scenarios
+              </TabsTrigger>
+            </TabsList>
+            
+            {/* Quick Start */}
+            <TabsContent value="quick" className="mt-0">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {QUICK_START_SCENARIOS.map((scenario, i) => (
+                  <motion.div
+                    key={scenario.id}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * i }}
+                  >
+                    <Card 
+                      className="cursor-pointer hover:border-primary transition-colors group"
+                      onClick={() => handleQuickStart(scenario)}
+                    >
+                      <CardHeader className="pb-2">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-base flex items-center gap-2">
+                              <span>{scenario.icon}</span>
+                              {scenario.name}
+                            </CardTitle>
+                            <CardDescription className="text-xs mt-1">
+                              {scenario.description}
+                            </CardDescription>
+                          </div>
+                          <Badge variant="outline" className="text-[10px]">
+                            {scenario.scamType.replace(/_/g, ' ')}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="pt-0">
+                        <p className="text-sm italic text-muted-foreground border-l-2 pl-3 line-clamp-2">
+                          "{scenario.initialMessage}"
+                        </p>
+                        <div className="flex items-center justify-between mt-3">
+                          <Badge variant="secondary" className="text-[10px]">
+                            {scenario.suggestedPersona.replace(/_/g, ' ')}
+                          </Badge>
+                          <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
+            
+            {/* Custom Message */}
+            <TabsContent value="custom" className="mt-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Enter Scammer's Message</CardTitle>
+                  <CardDescription>
+                    Type the initial scam message to test how the AI persona responds
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Input
+                      placeholder="e.g., Dear Customer, your KYC is pending. Click here to verify..."
+                      value={customMessage}
+                      onChange={(e) => setCustomMessage(e.target.value)}
+                      className="h-12"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Tip: Include scam indicators like urgency, financial requests, or suspicious links
+                    </p>
+                  </div>
+                  
+                  <Button 
+                    onClick={handleCustomStart}
+                    disabled={!customMessage.trim()}
+                    className="w-full"
+                  >
+                    <MessageSquare className="h-4 w-4 mr-2" />
+                    Start Simulation
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            {/* Full Scenario Library */}
+            <TabsContent value="scenarios" className="mt-0">
+              <ScenarioLibrary onSelectScenario={(scenario) => {
+                onStartSession({
+                  scammerMessage: scenario.initialMessage,
+                  persona: selectedPersona || scenario.suggestedPersona,
+                  scenario: scenario.id,
+                })
+              }} />
+            </TabsContent>
+          </Tabs>
+        </motion.div>
+        
+        {/* Footer Tips */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-xs text-muted-foreground">
+            💡 The AI will automatically detect scam type, extract intelligence (bank accounts, UPI IDs, phone numbers), 
+            and respond as a convincing victim to keep the scammer engaged
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+```
+
+### 7. frontend/components/chat/persona-selector.tsx
+
+```typescript
+// Visual persona selection component
+// Features:
+// - Avatar cards with animations
+// - Description tooltips
+// - Selected state
+// - Responsive grid
+
+'use client'
+
+import { motion } from 'framer-motion'
+import { Check, Info } from 'lucide-react'
+import { PersonaAvatar } from './persona-avatar'
+import { PersonaInfoCard } from './persona-info-card'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
+import { PERSONAS } from '@/lib/constants/personas'
+import { cn } from '@/lib/utils/cn'
+
+interface PersonaSelectorProps {
+  selected?: string
+  onSelect: (persona: string | undefined) => void
+  compact?: boolean
+}
+
+export function PersonaSelector({ selected, onSelect, compact = false }: PersonaSelectorProps) {
+  const personas = Object.entries(PERSONAS)
+  
+  const handleSelect = (personaId: string) => {
+    if (selected === personaId) {
+      onSelect(undefined) // Deselect
+    } else {
+      onSelect(personaId)
+    }
+  }
+  
+  if (compact) {
+    return (
+      <div className="flex gap-2 overflow-x-auto pb-2">
+        {personas.map(([id, persona]) => (
+          <motion.button
+            key={id}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleSelect(id)}
+            className={cn(
+              'flex items-center gap-2 px-3 py-2 rounded-full border whitespace-nowrap transition-colors',
+              selected === id 
+                ? 'border-primary bg-primary/10' 
+                : 'border-border hover:border-primary/50'
+            )}
+          >
+            <span className="text-lg">{persona.icon}</span>
+            <span className="text-sm">{persona.label}</span>
+            {selected === id && <Check className="h-3 w-3 text-primary" />}
+          </motion.button>
+        ))}
+      </div>
+    )
+  }
+  
+  return (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+      {personas.map(([id, persona]) => (
+        <HoverCard key={id} openDelay={300}>
+          <HoverCardTrigger asChild>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => handleSelect(id)}
+              className={cn(
+                'relative flex flex-col items-center p-4 rounded-xl border-2 transition-all',
+                selected === id
+                  ? 'border-primary bg-primary/5 shadow-md'
+                  : 'border-transparent bg-muted/50 hover:bg-muted hover:border-border'
+              )}
+            >
+              {/* Selection indicator */}
+              {selected === id && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute top-2 right-2 h-5 w-5 rounded-full bg-primary flex items-center justify-center"
+                >
+                  <Check className="h-3 w-3 text-primary-foreground" />
+                </motion.div>
+              )}
+              
+              {/* Avatar */}
+              <PersonaAvatar persona={id} size="lg" animated={selected === id} />
+              
+              {/* Name */}
+              <span className="mt-2 text-sm font-medium">{persona.label}</span>
+              
+              {/* Quick trait */}
+              <span className="text-[10px] text-muted-foreground mt-0.5">
+                {persona.trait}
+              </span>
+            </motion.button>
+          </HoverCardTrigger>
+          <HoverCardContent side="top" className="w-72 p-0">
+            <PersonaInfoCard persona={id} />
+          </HoverCardContent>
+        </HoverCard>
+      ))}
+    </div>
+  )
+}
+```
+
+### 8. frontend/components/chat/intelligence-feed.tsx
+
+```typescript
+// Real-time intelligence extraction feed
+// Features:
+// - Live entity updates
+// - Animated additions
+// - Entity categorization
+// - Quick actions
+
+'use client'
+
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  Brain, 
+  Phone, 
+  CreditCard, 
+  Building2, 
+  Link as LinkIcon, 
+  Mail,
+  Hash,
+  Wallet,
+  Copy,
+  ExternalLink,
+  Shield,
+  AlertTriangle,
+  TrendingUp
+} from 'lucide-react'
+import { IntelligenceItem } from './intelligence-item'
+import { RiskMeter } from './risk-meter'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { useChatStore } from '@/lib/stores/chat-store'
+import { useSessionIntelligence } from '@/lib/hooks/use-honeypot'
+import { cn } from '@/lib/utils/cn'
+
+const ENTITY_ICONS: Record<string, typeof Phone> = {
+  PHONE_NUMBER: Phone,
+  UPI_ID: CreditCard,
+  BANK_ACCOUNT: Building2,
+  URL: LinkIcon,
+  EMAIL: Mail,
+  IFSC_CODE: Hash,
+  CRYPTO_WALLET: Wallet,
+}
+
+const ENTITY_COLORS: Record<string, string> = {
+  PHONE_NUMBER: 'text-blue-500 bg-blue-500/10',
+  UPI_ID: 'text-green-500 bg-green-500/10',
+  BANK_ACCOUNT: 'text-purple-500 bg-purple-500/10',
+  URL: 'text-red-500 bg-red-500/10',
+  EMAIL: 'text-pink-500 bg-pink-500/10',
+  IFSC_CODE: 'text-orange-500 bg-orange-500/10',
+  CRYPTO_WALLET: 'text-yellow-500 bg-yellow-500/10',
+}
+
+interface IntelligenceFeedProps {
+  sessionId?: string
+}
+
+export function IntelligenceFeed({ sessionId }: IntelligenceFeedProps) {
+  const { extractedEntities, riskScore, scamType } = useChatStore()
+  const { data: sessionIntel, isLoading } = useSessionIntelligence(sessionId)
+  
+  // Combine store entities with fetched session intelligence
+  const entities = sessionId ? (sessionIntel?.entities || []) : extractedEntities
+  
+  // Group entities by type
+  const groupedEntities = entities.reduce((acc, entity) => {
+    if (!acc[entity.type]) {
+      acc[entity.type] = []
+    }
+    acc[entity.type].push(entity)
+    return acc
+  }, {} as Record<string, typeof entities>)
+  
+  // Calculate stats
+  const totalEntities = entities.length
+  const highConfidence = entities.filter(e => e.confidence >= 0.8).length
+  
+  return (
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="p-4 border-b">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Brain className="h-5 w-5 text-primary" />
+            <h3 className="font-semibold">Intelligence Feed</h3>
+          </div>
+          <Badge variant="secondary" className="tabular-nums">
+            {totalEntities} extracted
+          </Badge>
+        </div>
+        
+        {/* Risk Score */}
+        {riskScore !== undefined && (
+          <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+            <div className="flex items-center gap-2">
+              <AlertTriangle className={cn(
+                'h-4 w-4',
+                riskScore >= 0.7 ? 'text-red-500' : 
+                riskScore >= 0.4 ? 'text-yellow-500' : 'text-green-500'
+              )} />
+              <span className="text-sm font-medium">Risk Level</span>
+            </div>
+            <RiskMeter score={riskScore} size="sm" />
+          </div>
+        )}
+        
+        {/* Scam Type */}
+        {scamType && (
+          <div className="flex items-center justify-between mt-2 p-2 rounded-lg bg-destructive/10">
+            <span className="text-sm text-destructive font-medium">
+              {scamType.replace(/_/g, ' ')}
+            </span>
+            <Shield className="h-4 w-4 text-destructive" />
+          </div>
+        )}
+      </div>
+      
+      {/* Entity List */}
+      <ScrollArea className="flex-1">
+        <div className="p-4 space-y-4">
+          {/* Empty State */}
+          {entities.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-8 text-center">
+              <Brain className="h-10 w-10 text-muted-foreground/50 mb-2" />
+              <p className="text-sm text-muted-foreground">
+                No intelligence extracted yet
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Entities will appear here as they are detected
+              </p>
+            </div>
+          )}
+          
+          {/* Grouped Entities */}
+          <AnimatePresence mode="popLayout">
+            {Object.entries(groupedEntities).map(([type, typeEntities]) => {
+              const Icon = ENTITY_ICONS[type] || Brain
+              const colorClass = ENTITY_COLORS[type] || 'text-gray-500 bg-gray-500/10'
+              
+              return (
+                <motion.div
+                  key={type}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  layout
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className={cn('p-1.5 rounded', colorClass)}>
+                      <Icon className="h-3 w-3" />
+                    </div>
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+                      {type.replace(/_/g, ' ')}
+                    </span>
+                    <Badge variant="outline" className="ml-auto text-[10px]">
+                      {typeEntities.length}
+                    </Badge>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <AnimatePresence>
+                      {typeEntities.map((entity, i) => (
+                        <IntelligenceItem
+                          key={entity.id || `${type}-${i}`}
+                          entity={entity}
+                          delay={i * 0.05}
+                        />
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {Object.keys(groupedEntities).indexOf(type) < Object.keys(groupedEntities).length - 1 && (
+                    <Separator className="my-4" />
+                  )}
+                </motion.div>
+              )
+            })}
+          </AnimatePresence>
+        </div>
+      </ScrollArea>
+      
+      {/* Footer Actions */}
+      {entities.length > 0 && (
+        <div className="p-4 border-t">
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" className="flex-1">
+              <Copy className="h-3 w-3 mr-1" />
+              Copy All
+            </Button>
+            <Button variant="outline" size="sm" className="flex-1">
+              <ExternalLink className="h-3 w-3 mr-1" />
+              Export
+            </Button>
+          </div>
+          <p className="text-[10px] text-center text-muted-foreground mt-2">
+            {highConfidence} high confidence entities
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### 9. frontend/lib/api/client.ts
+
+```typescript
+// Enhanced Axios client with interceptors, retry, and error handling
+// Features:
+// - Base URL configuration
+// - Request/response interceptors
+// - Automatic retry with exponential backoff
+// - Error transformation
+// - Request/response logging (dev mode)
+// - Timeout handling
+// - Cancel token support
+
+import axios, { AxiosInstance, AxiosError, InternalAxiosRequestConfig, AxiosResponse } from 'axios'
+import { toast } from 'sonner'
+import { ApiError } from '@/lib/api/errors'
+
+// Configuration
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API_TIMEOUT = 30000 // 30 seconds
+const MAX_RETRIES = 3
+const RETRY_DELAY = 1000
+
+// Request queue for offline handling
+let isRefreshing = false
+let failedQueue: Array<{
+  resolve: (value: unknown) => void
+  reject: (reason?: unknown) => void
+}> = []
+
+const processQueue = (error: Error | null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error)
+    } else {
+      prom.resolve(undefined)
+    }
+  })
+  failedQueue = []
+}
+
+// Create Axios instance
+export const apiClient: AxiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: API_TIMEOUT,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+})
+
+// Request Interceptor
+apiClient.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    // Add API key if available
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY
+    if (apiKey) {
+      config.headers['X-API-Key'] = apiKey
+    }
+    
+    // Add request timestamp for latency tracking
+    config.metadata = { startTime: Date.now() }
+    
+    // Development logging
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🚀 [API] ${config.method?.toUpperCase()} ${config.url}`, config.data || '')
+    }
+    
+    return config
+  },
+  (error: AxiosError) => {
+    console.error('❌ [API] Request Error:', error.message)
+    return Promise.reject(error)
+  }
+)
+
+// Response Interceptor
+apiClient.interceptors.response.use(
+  (response: AxiosResponse) => {
+    // Calculate request duration
+    const duration = Date.now() - (response.config.metadata?.startTime || Date.now())
+    
+    // Development logging
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ [API] ${response.status} ${response.config.url} (${duration}ms)`)
+    }
+    
+    return response
+  },
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: number }
+    
+    // Handle network errors
+    if (!error.response) {
+      toast.error('Network error. Please check your connection.')
+      return Promise.reject(new ApiError('NETWORK_ERROR', 'Network error', 0))
+    }
+    
+    // Handle specific status codes
+    const status = error.response.status
+    const errorData = error.response.data as { detail?: string; message?: string }
+    
+    switch (status) {
+      case 400:
+        toast.error(errorData?.detail || 'Invalid request')
+        break
+      case 401:
+        toast.error('Authentication required')
+        break
+      case 403:
+        toast.error('Access denied')
+        break
+      case 404:
+        // Don't show toast for 404s by default
+        break
+      case 429:
+        toast.error('Too many requests. Please slow down.')
+        break
+      case 500:
+      case 502:
+      case 503:
+        // Implement retry logic
+        originalRequest._retry = originalRequest._retry || 0
+        
+        if (originalRequest._retry < MAX_RETRIES) {
+          originalRequest._retry++
+          
+          // Exponential backoff
+          const delay = RETRY_DELAY * Math.pow(2, originalRequest._retry - 1)
+          
+          console.log(`🔄 [API] Retrying request (${originalRequest._retry}/${MAX_RETRIES}) in ${delay}ms`)
+          
+          await new Promise(resolve => setTimeout(resolve, delay))
+          return apiClient(originalRequest)
+        }
+        
+        toast.error('Server error. Please try again later.')
+        break
+      default:
+        toast.error(errorData?.detail || 'An error occurred')
+    }
+    
+    // Transform to ApiError
+    const apiError = new ApiError(
+      `HTTP_${status}`,
+      errorData?.detail || errorData?.message || error.message,
+      status,
+      errorData
+    )
+    
+    return Promise.reject(apiError)
+  }
+)
+
+// Utility functions
+export const api = {
+  get: <T>(url: string, config?: object) => 
+    apiClient.get<T>(url, config).then(res => res.data),
+    
+  post: <T>(url: string, data?: unknown, config?: object) => 
+    apiClient.post<T>(url, data, config).then(res => res.data),
+    
+  put: <T>(url: string, data?: unknown, config?: object) => 
+    apiClient.put<T>(url, data, config).then(res => res.data),
+    
+  patch: <T>(url: string, data?: unknown, config?: object) => 
+    apiClient.patch<T>(url, data, config).then(res => res.data),
+    
+  delete: <T>(url: string, config?: object) => 
+    apiClient.delete<T>(url, config).then(res => res.data),
+}
+
+// Health check function
+export async function checkApiHealth(): Promise<boolean> {
+  try {
+    const response = await apiClient.get('/health', { timeout: 5000 })
+    return response.data?.status === 'healthy'
+  } catch {
+    return false
+  }
+}
+
+export default apiClient
+```
+
+### 10. frontend/lib/api/honeypot.ts
+
+```typescript
+// Honeypot API functions
+// Features:
+// - Type-safe API calls
+// - Request/response type definitions
+// - Error handling
+
+import { api } from './client'
+import { API_ENDPOINTS } from './endpoints'
+import {
+  EngageRequest,
+  EngageResponse,
+  ContinueRequest,
+  ContinueResponse,
+  SessionDetailResponse,
+  DeleteSessionResponse,
+} from '@/types/api'
+
+export const honeypotApi = {
+  /**
+   * Start a new honeypot engagement session
+   */
+  async engage(data: EngageRequest): Promise<EngageResponse> {
+    return api.post<EngageResponse>(API_ENDPOINTS.HONEYPOT.ENGAGE, {
+      scammer_message: data.scammerMessage,
+      persona: data.persona,
+      context: data.context,
+    })
+  },
+  
+  /**
+   * Continue an existing session
+   */
+  async continue(data: ContinueRequest): Promise<ContinueResponse> {
+    return api.post<ContinueResponse>(API_ENDPOINTS.HONEYPOT.CONTINUE, {
+      session_id: data.sessionId,
+      scammer_message: data.scammerMessage,
+    })
+  },
+  
+  /**
+   * Get session details with full conversation history
+   */
+  async getSession(sessionId: string): Promise<SessionDetailResponse> {
+    return api.get<SessionDetailResponse>(
+      API_ENDPOINTS.HONEYPOT.SESSION(sessionId)
+    )
+  },
+  
+  /**
+   * End/delete a session
+   */
+  async deleteSession(sessionId: string): Promise<DeleteSessionResponse> {
+    return api.delete<DeleteSessionResponse>(
+      API_ENDPOINTS.HONEYPOT.SESSION(sessionId)
+    )
+  },
+}
+```
+
+### 11. frontend/lib/hooks/use-chat.ts
+
+```typescript
+// Main chat functionality hook
+// Features:
+// - Session management
+// - Message sending
+// - Optimistic updates
+// - Error handling
+
+'use client'
+
+import { useCallback } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { toast } from 'sonner'
+import { useChatStore } from '@/lib/stores/chat-store'
+import { honeypotApi } from '@/lib/api/honeypot'
+import { useMessageSound } from '@/lib/hooks/use-message-sound'
+import { Message } from '@/types/message'
+import { v4 as uuidv4 } from 'uuid'
+
+export function useChat() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const queryClient = useQueryClient()
+  const { playReceived, playError } = useMessageSound()
+  
+  const {
+    activeSession,
+    addMessage,
+    updateMessage,
+    setIsTyping,
+    setLastScamDetection,
+    addExtractedEntities,
+    setRiskScore,
+    setScamType,
+    updateSession,
+  } = useChatStore()
+  
+  // Engage mutation (start new session)
+  const engageMutation = useMutation({
+    mutationFn: honeypotApi.engage,
+    onSuccess: (data) => {
+      // Update session info
+      updateSession({
+        id: data.session_id,
+        status: data.session_state,
+        persona_used: data.persona_used,
+        scam_type: data.scam_detected.scam_type,
+        risk_level: data.scam_detected.risk_level,
+        turn_count: data.turn_count,
+      })
+      
+      // Add AI response as message
+      const aiMessage: Message = {
+        id: uuidv4(),
+        role: 'victim',
+        content: data.response,
+        timestamp: new Date().toISOString(),
+        persona: data.persona_used,
+        status: 'sent',
+        entities_extracted: data.entities_extracted,
+      }
+      addMessage(aiMessage)
+      
+      // Update scam detection
+      setLastScamDetection(data.scam_detected)
+      
+      // Add extracted entities
+      if (data.entities_extracted.length > 0) {
+        addExtractedEntities(data.entities_extracted)
+      }
+      
+      // Update risk
+      setScamType(data.scam_detected.scam_type)
+      setRiskScore(data.scam_detected.confidence)
+      
+      // Play sound
+      playReceived()
+      
+      // Update URL with session ID
+      router.push(`/chat?session=${data.session_id}`, { scroll: false })
+      
+      // Invalidate queries
+      queryClient.invalidateQueries({ queryKey: ['sessions'] })
+    },
+    onError: (error) => {
+      playError()
+      toast.error('Failed to start session')
+      console.error('Engage error:', error)
+    },
+  })
+  
+  // Continue mutation
+  const continueMutation = useMutation({
+    mutationFn: honeypotApi.continue,
+    onMutate: async (variables) => {
+      // Optimistically add the scammer message
+      const optimisticMessage: Message = {
+        id: uuidv4(),
+        role: 'scammer',
+        content: variables.scammerMessage,
+        timestamp: new Date().toISOString(),
+        status: 'sending',
+      }
+      addMessage(optimisticMessage)
+      setIsTyping(true)
+      
+      return { optimisticMessage }
+    },
+    onSuccess: (data, variables, context) => {
+      // Update the optimistic message status
+      if (context?.optimisticMessage) {
+        updateMessage(context.optimisticMessage.id, { status: 'sent' })
+      }
+      
+      // Add AI response
+      const aiMessage: Message = {
+        id: uuidv4(),
+        role: 'victim',
+        content: data.response,
+        timestamp: new Date().toISOString(),
+        persona: data.persona_used,
+        status: 'sent',
+        entities_extracted: data.entities_extracted,
+      }
+      addMessage(aiMessage)
+      
+      // Update session
+      updateSession({
+        turn_count: data.turn_count,
+        status: data.session_state,
+      })
+      
+      // Update scam detection
+      setLastScamDetection(data.scam_detected)
+      
+      // Add extracted entities
+      if (data.entities_extracted.length > 0) {
+        addExtractedEntities(data.entities_extracted)
+      }
+      
+      // Update risk
+      setRiskScore(data.scam_detected.confidence)
+      
+      setIsTyping(false)
+      playReceived()
+    },
+    onError: (error, variables, context) => {
+      setIsTyping(false)
+      playError()
+      
+      // Update optimistic message to error state
+      if (context?.optimisticMessage) {
+        updateMessage(context.optimisticMessage.id, { status: 'error' })
+      }
+      
+      toast.error('Failed to send message')
+      console.error('Continue error:', error)
+    },
+  })
+  
+  // Send message function
+  const sendMessage = useCallback(async (content: string) => {
+    if (!content.trim()) return
+    
+    if (!activeSession) {
+      // Start new session
+      await engageMutation.mutateAsync({
+        scammerMessage: content,
+      })
+    } else {
+      // Continue existing session
+      await continueMutation.mutateAsync({
+        sessionId: activeSession.id,
+        scammerMessage: content,
+      })
+    }
+  }, [activeSession, engageMutation, continueMutation])
+  
+  // Retry failed message
+  const retryMessage = useCallback(async (messageId: string) => {
+    const { messages } = useChatStore.getState()
+    const message = messages.find(m => m.id === messageId)
+    
+    if (message && message.status === 'error' && activeSession) {
+      // Remove the failed message
+      useChatStore.getState().removeMessage(messageId)
+      
+      // Retry sending
+      await continueMutation.mutateAsync({
+        sessionId: activeSession.id,
+        scammerMessage: message.content,
+      })
+    }
+  }, [activeSession, continueMutation])
+  
+  return {
+    sendMessage,
+    retryMessage,
+    isLoading: engageMutation.isPending || continueMutation.isPending,
+    isEngaging: engageMutation.isPending,
+    isContinuing: continueMutation.isPending,
+  }
+}
+```
+
+### 12. frontend/lib/stores/chat-store.ts
+
+```typescript
+// Zustand store for chat state management
+// Features:
+// - Session state
+// - Messages
+// - Typing indicators
+// - Extracted entities
+// - Persistence
+
+import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
+import { Message, MessageStatus } from '@/types/message'
+import { ExtractedEntity, ScamDetection, SessionInfo } from '@/types/chat'
+
+interface ChatState {
+  // Session
+  activeSession: SessionInfo | null
+  hasActiveSession: boolean
+  
+  // Messages
+  messages: Message[]
+  
+  // UI State
+  isLoading: boolean
+  isTyping: boolean
+  
+  // Intelligence
+  extractedEntities: ExtractedEntity[]
+  lastScamDetection: ScamDetection | null
+  riskScore: number | undefined
+  scamType: string | null
+  
+  // Settings
+  soundEnabled: boolean
+  autoScroll: boolean
+  
+  // Actions
+  startSession: (params: { scammerMessage: string; persona?: string; scenario?: string }) => Promise<void>
+  loadSession: (sessionId: string) => Promise<void>
+  clearSession: () => void
+  updateSession: (updates: Partial<SessionInfo>) => void
+  
+  // Message actions
+  addMessage: (message: Message) => void
+  updateMessage: (id: string, updates: Partial<Message>) => void
+  removeMessage: (id: string) => void
+  clearMessages: () => void
+  
+  // State setters
+  setIsLoading: (loading: boolean) => void
+  setIsTyping: (typing: boolean) => void
+  setLastScamDetection: (detection: ScamDetection | null) => void
+  addExtractedEntities: (entities: ExtractedEntity[]) => void
+  setRiskScore: (score: number | undefined) => void
+  setScamType: (type: string | null) => void
+  
+  // Settings
+  setSoundEnabled: (enabled: boolean) => void
+  setAutoScroll: (enabled: boolean) => void
+}
+
+export const useChatStore = create<ChatState>()(
+  persist(
+    immer((set, get) => ({
+      // Initial state
+      activeSession: null,
+      hasActiveSession: false,
+      messages: [],
+      isLoading: false,
+      isTyping: false,
+      extractedEntities: [],
+      lastScamDetection: null,
+      riskScore: undefined,
+      scamType: null,
+      soundEnabled: true,
+      autoScroll: true,
+      
+      // Session actions
+      startSession: async (params) => {
+        set((state) => {
+          state.isLoading = true
+          state.messages = []
+          state.extractedEntities = []
+          state.lastScamDetection = null
+          state.riskScore = undefined
+          state.scamType = null
+        })
+        
+        // Add initial scammer message
+        const scammerMessage: Message = {
+          id: crypto.randomUUID(),
+          role: 'scammer',
+          content: params.scammerMessage,
+          timestamp: new Date().toISOString(),
+          status: 'sent',
+        }
+        
+        set((state) => {
+          state.messages.push(scammerMessage)
+        })
+        
+        // Note: Actual API call is handled by use-chat hook
+      },
+      
+      loadSession: async (sessionId) => {
+        set((state) => {
+          state.isLoading = true
+        })
+        
+        // Note: Actual loading is handled by the hook
+        set((state) => {
+          state.activeSession = { id: sessionId } as SessionInfo
+          state.hasActiveSession = true
+          state.isLoading = false
+        })
+      },
+      
+      clearSession: () => {
+        set((state) => {
+          state.activeSession = null
+          state.hasActiveSession = false
+          state.messages = []
+          state.extractedEntities = []
+          state.lastScamDetection = null
+          state.riskScore = undefined
+          state.scamType = null
+          state.isTyping = false
+        })
+      },
+      
+      updateSession: (updates) => {
+        set((state) => {
+          if (state.activeSession) {
+            state.activeSession = { ...state.activeSession, ...updates }
+          } else {
+            state.activeSession = updates as SessionInfo
+          }
+          state.hasActiveSession = true
+          state.isLoading = false
+        })
+      },
+      
+      // Message actions
+      addMessage: (message) => {
+        set((state) => {
+          state.messages.push(message)
+        })
+      },
+      
+      updateMessage: (id, updates) => {
+        set((state) => {
+          const index = state.messages.findIndex((m) => m.id === id)
+          if (index !== -1) {
+            state.messages[index] = { ...state.messages[index], ...updates }
+          }
+        })
+      },
+      
+      removeMessage: (id) => {
+        set((state) => {
+          state.messages = state.messages.filter((m) => m.id !== id)
+        })
+      },
+      
+      clearMessages: () => {
+        set((state) => {
+          state.messages = []
+        })
+      },
+      
+      // State setters
+      setIsLoading: (loading) => {
+        set((state) => {
+          state.isLoading = loading
+        })
+      },
+      
+      setIsTyping: (typing) => {
+        set((state) => {
+          state.isTyping = typing
+        })
+      },
+      
+      setLastScamDetection: (detection) => {
+        set((state) => {
+          state.lastScamDetection = detection
+        })
+      },
+      
+      addExtractedEntities: (entities) => {
+        set((state) => {
+          // Deduplicate by value
+          const existingValues = new Set(state.extractedEntities.map((e) => e.value))
+          const newEntities = entities.filter((e) => !existingValues.has(e.value))
+          state.extractedEntities.push(...newEntities)
+        })
+      },
+      
+      setRiskScore: (score) => {
+        set((state) => {
+          state.riskScore = score
+        })
+      },
+      
+      setScamType: (type) => {
+        set((state) => {
+          state.scamType = type
+        })
+      },
+      
+      // Settings
+      setSoundEnabled: (enabled) => {
+        set((state) => {
+          state.soundEnabled = enabled
+        })
+      },
+      
+      setAutoScroll: (enabled) => {
+        set((state) => {
+          state.autoScroll = enabled
+        })
+      },
+    })),
+    {
+      name: 'scamshield-chat',
+      storage: createJSONStorage(() => sessionStorage),
+      partialize: (state) => ({
+        soundEnabled: state.soundEnabled,
+        autoScroll: state.autoScroll,
+        // Don't persist messages or session - they're session-specific
+      }),
+    }
+  )
+)
+```
+
+### 13. frontend/lib/constants/scenarios.ts
+
+```typescript
+// Test scenario definitions
+// Features:
+// - Pre-built scam scenarios
+// - Initial messages
+// - Suggested personas
+// - Categories
+
+export interface ScamScenario {
+  id: string
+  name: string
+  description: string
+  icon: string
+  category: string
+  scamType: string
+  initialMessage: string
+  suggestedPersona: string
+  difficulty: 'easy' | 'medium' | 'hard'
+  tags: string[]
+  expectedEntities: string[]
+}
+
+export const QUICK_START_SCENARIOS: ScamScenario[] = [
+  {
+    id: 'kyc-bank',
+    name: 'KYC Bank Fraud',
+    description: 'Fake bank KYC verification request',
+    icon: '🏦',
+    category: 'Financial',
+    scamType: 'KYC_FRAUD',
+    initialMessage: 'Dear Customer, Your SBI account has been suspended due to incomplete KYC. Update immediately: http://sbi-kyc-update.com or call 9876543210',
+    suggestedPersona: 'elderly_victim',
+    difficulty: 'easy',
+    tags: ['bank', 'kyc', 'urgent'],
+    expectedEntities: ['URL', 'PHONE_NUMBER'],
+  },
+  {
+    id: 'lottery-winner',
+    name: 'Lottery Winner',
+    description: 'Fake lottery prize notification',
+    icon: '🎰',
+    category: 'Prize Scam',
+    scamType: 'LOTTERY_SCAM',
+    initialMessage: 'CONGRATULATIONS! You have won ₹50,00,000 in the Google Lucky Draw! Pay ₹5000 processing fee to claim. UPI: lottery.winner@ybl',
+    suggestedPersona: 'eager_investor',
+    difficulty: 'easy',
+    tags: ['lottery', 'prize', 'payment'],
+    expectedEntities: ['UPI_ID'],
+  },
+  {
+    id: 'tech-support',
+    name: 'Tech Support Scam',
+    description: 'Fake Microsoft support call',
+    icon: '💻',
+    category: 'Tech Support',
+    scamType: 'TECH_SUPPORT',
+    initialMessage: 'ALERT: This is Microsoft Security Team. Your computer has been compromised with virus. Please download TeamViewer and share code to fix immediately.',
+    suggestedPersona: 'tech_novice',
+    difficulty: 'medium',
+    tags: ['microsoft', 'virus', 'remote'],
+    expectedEntities: ['URL'],
+  },
+  {
+    id: 'investment-scheme',
+    name: 'Crypto Investment',
+    description: 'Fake cryptocurrency investment scheme',
+    icon: '📈',
+    category: 'Investment',
+    scamType: 'INVESTMENT_FRAUD',
+    initialMessage: 'Earn ₹1 Lakh daily! Join our exclusive crypto trading group. Minimum investment ₹10,000. Guaranteed 300% returns. WhatsApp: 8765432109',
+    suggestedPersona: 'eager_investor',
+    difficulty: 'medium',
+    tags: ['crypto', 'investment', 'returns'],
+    expectedEntities: ['PHONE_NUMBER'],
+  },
+]
+
+export const ALL_SCENARIOS: ScamScenario[] = [
+  ...QUICK_START_SCENARIOS,
+  {
+    id: 'job-offer',
+    name: 'Work From Home Job',
+    description: 'Fake job offer requiring payment',
+    icon: '💼',
+    category: 'Employment',
+    scamType: 'JOB_SCAM',
+    initialMessage: 'Hi! Amazon is hiring work-from-home data entry operators. Salary ₹30,000/month. Registration fee ₹500 only. Apply now: http://amazon-jobs-india.in',
+    suggestedPersona: 'busy_professional',
+    difficulty: 'easy',
+    tags: ['job', 'amazon', 'work-from-home'],
+    expectedEntities: ['URL'],
+  },
+  {
+    id: 'loan-offer',
+    name: 'Instant Loan Offer',
+    description: 'Fake instant loan approval',
+    icon: '💰',
+    category: 'Financial',
+    scamType: 'LOAN_SCAM',
+    initialMessage: 'Pre-approved loan ₹5 Lakhs! No documents needed. Low interest 2% only. Processing fee ₹2000. Transfer to: A/C 12345678901234 IFSC: SBIN0001234',
+    suggestedPersona: 'helpful_auntie',
+    difficulty: 'medium',
+    tags: ['loan', 'instant', 'approval'],
+    expectedEntities: ['BANK_ACCOUNT', 'IFSC_CODE'],
+  },
+  {
+    id: 'otp-request',
+    name: 'OTP Theft Attempt',
+    description: 'Social engineering for OTP',
+    icon: '🔐',
+    category: 'Identity Theft',
+    scamType: 'OTP_FRAUD',
+    initialMessage: 'This is HDFC Bank. A suspicious transaction of ₹49,999 detected on your account. Share OTP received on your mobile to block the transaction.',
+    suggestedPersona: 'elderly_victim',
+    difficulty: 'hard',
+    tags: ['otp', 'bank', 'transaction'],
+    expectedEntities: [],
+  },
+  {
+    id: 'electricity-bill',
+    name: 'Electricity Bill Scam',
+    description: 'Fake electricity disconnection threat',
+    icon: '⚡',
+    category: 'Utility',
+    scamType: 'KYC_FRAUD',
+    initialMessage: 'URGENT: Your electricity will be disconnected today due to pending bill ₹3,500. Pay immediately via UPI: electricity.dept@oksbi or your connection will be cut.',
+    suggestedPersona: 'tech_novice',
+    difficulty: 'easy',
+    tags: ['electricity', 'bill', 'urgent'],
+    expectedEntities: ['UPI_ID'],
+  },
+  {
+    id: 'customs-parcel',
+    name: 'Customs Parcel Scam',
+    description: 'Fake customs clearance for parcel',
+    icon: '📦',
+    category: 'Customs',
+    scamType: 'KYC_FRAUD',
+    initialMessage: 'Your international parcel is held at customs. Pay clearance fee of ₹15,000 to avoid legal action. Contact: customs.india@gmail.com or call 7654321098',
+    suggestedPersona: 'busy_professional',
+    difficulty: 'medium',
+    tags: ['customs', 'parcel', 'international'],
+    expectedEntities: ['EMAIL', 'PHONE_NUMBER'],
+  },
+  {
+    id: 'insurance-claim',
+    name: 'Insurance Claim Fraud',
+    description: 'Fake unclaimed insurance money',
+    icon: '📋',
+    category: 'Insurance',
+    scamType: 'LOTTERY_SCAM',
+    initialMessage: 'Dear Policyholder, Your LIC policy has matured with bonus of ₹8,50,000. To claim, provide bank details and pay ₹6,000 tax. Reply with your bank A/C number.',
+    suggestedPersona: 'elderly_victim',
+    difficulty: 'medium',
+    tags: ['insurance', 'lic', 'maturity'],
+    expectedEntities: ['BANK_ACCOUNT'],
+  },
+]
+
+export const SCENARIO_CATEGORIES = [
+  { id: 'all', label: 'All Scenarios', count: ALL_SCENARIOS.length },
+  { id: 'financial', label: 'Financial', count: ALL_SCENARIOS.filter(s => s.category === 'Financial').length },
+  { id: 'prize', label: 'Prize Scams', count: ALL_SCENARIOS.filter(s => s.category === 'Prize Scam').length },
+  { id: 'tech', label: 'Tech Support', count: ALL_SCENARIOS.filter(s => s.category === 'Tech Support').length },
+  { id: 'employment', label: 'Employment', count: ALL_SCENARIOS.filter(s => s.category === 'Employment').length },
+  { id: 'identity', label: 'Identity Theft', count: ALL_SCENARIOS.filter(s => s.category === 'Identity Theft').length },
+]
+```
+
+### 14. frontend/lib/constants/personas.ts
+
+```typescript
+// Persona definitions with full details
+// Features:
+// - Persona characteristics
+// - Behavioral traits
+// - Effectiveness metrics
+// - Visual styling
+
+export interface PersonaConfig {
+  id: string
+  label: string
+  icon: string
+  description: string
+  trait: string
+  characteristics: string[]
+  behavioralPatterns: string[]
+  vulnerabilities: string[]
+  responseStyle: string
+  effectiveness: {
+    overall: number
+    kyc: number
+    lottery: number
+    tech_support: number
+    investment: number
+    job: number
+  }
+  color: string
+  gradient: string
+}
+
+export const PERSONAS: Record<string, PersonaConfig> = {
+  elderly_victim: {
+    id: 'elderly_victim',
+    label: 'Elderly Victim',
+    icon: '👵',
+    description: 'A confused, trusting grandparent who believes authority figures',
+    trait: 'Trusting & Confused',
+    characteristics: [
+      'Has difficulty understanding technology',
+      'Trusts official-sounding callers',
+      'Worries about family and money',
+      'Takes time to process information',
+      'Asks for repetition and clarification',
+    ],
+    behavioralPatterns: [
+      'Mentions grandchildren frequently',
+      'Confuses bank and government terms',
+      'Gets flustered with urgency',
+      'Shares personal details easily',
+      'Asks scammer to speak slowly',
+    ],
+    vulnerabilities: [
+      'Fear of authority',
+      'Technology confusion',
+      'Social isolation',
+      'Trust in official claims',
+    ],
+    responseStyle: 'Speaks slowly, asks many clarifying questions, mentions family',
+    effectiveness: {
+      overall: 85,
+      kyc: 95,
+      lottery: 80,
+      tech_support: 90,
+      investment: 75,
+      job: 70,
+    },
+    color: '#3b82f6',
+    gradient: 'from-blue-500 to-blue-700',
+  },
+  tech_novice: {
+    id: 'tech_novice',
+    label: 'Tech Novice',
+    icon: '🤷',
+    description: 'Overwhelmed by technology, needs step-by-step guidance',
+    trait: 'Confused & Overwhelmed',
+    characteristics: [
+      'Constantly confused by tech terms',
+      'Needs everything explained simply',
+      'Gets frustrated easily',
+      'Apologizes for not understanding',
+      'Asks for help repeatedly',
+    ],
+    behavioralPatterns: [
+      'Says "I don\'t understand" often',
+      'Asks what buttons to click',
+      'Mentions son/daughter who usually helps',
+      'Gets confused by simple steps',
+      'Types slowly and makes mistakes',
+    ],
+    vulnerabilities: [
+      'Digital illiteracy',
+      'Helplessness with tech',
+      'Reliance on others',
+      'Trust in helpers',
+    ],
+    responseStyle: 'Confused responses, asks for step-by-step guidance, apologetic',
+    effectiveness: {
+      overall: 80,
+      kyc: 75,
+      lottery: 70,
+      tech_support: 95,
+      investment: 65,
+      job: 75,
+    },
+    color: '#22c55e',
+    gradient: 'from-green-500 to-green-700',
+  },
+  eager_investor: {
+    id: 'eager_investor',
+    label: 'Eager Investor',
+    icon: '💰',
+    description: 'Greedy and impatient, excited about quick money',
+    trait: 'Greedy & Impatient',
+    characteristics: [
+      'Obsessed with returns and profits',
+      'Asks about minimum investment',
+      'Wants to know about guarantees',
+      'Impatient for quick results',
+      'Calculates potential earnings',
+    ],
+    behavioralPatterns: [
+      'Asks "How much can I make?"',
+      'Requests references or proof',
+      'Negotiates for better terms',
+      'Shows excitement about returns',
+      'Asks about withdrawal process',
+    ],
+    vulnerabilities: [
+      'Greed for quick money',
+      'Fear of missing out',
+      'Overconfidence',
+      'Impatience',
+    ],
+    responseStyle: 'Enthusiastic about money, calculates returns, asks about guarantees',
+    effectiveness: {
+      overall: 90,
+      kyc: 70,
+      lottery: 95,
+      tech_support: 60,
+      investment: 98,
+      job: 75,
+    },
+    color: '#8b5cf6',
+    gradient: 'from-purple-500 to-purple-700',
+  },
+  busy_professional: {
+    id: 'busy_professional',
+    label: 'Busy Professional',
+    icon: '👔',
+    description: 'Distracted and time-pressed, wants quick resolution',
+    trait: 'Distracted & Time-Pressed',
+    characteristics: [
+      'Always in a hurry',
+      'Mentions being in meetings',
+      'Wants quick solutions',
+      'Gets annoyed with lengthy processes',
+      'Multi-tasks during conversation',
+    ],
+    behavioralPatterns: [
+      'Says "I\'m very busy right now"',
+      'Asks "Can we do this quickly?"',
+      'Interrupts with "just tell me what to do"',
+      'Mentions work deadlines',
+      'Gets impatient with explanations',
+    ],
+    vulnerabilities: [
+      'Time pressure',
+      'Distraction',
+      'Desire for efficiency',
+      'Stress-induced poor decisions',
+    ],
+    responseStyle: 'Rushed responses, impatient, wants quick resolution',
+    effectiveness: {
+      overall: 75,
+      kyc: 80,
+      lottery: 60,
+      tech_support: 70,
+      investment: 85,
+      job: 90,
+    },
+    color: '#f59e0b',
+    gradient: 'from-amber-500 to-amber-700',
+  },
+  helpful_auntie: {
+    id: 'helpful_auntie',
+    label: 'Helpful Auntie',
+    icon: '👩',
+    description: 'Oversharing and chatty, loves to help everyone',
+    trait: 'Chatty & Oversharing',
+    characteristics: [
+      'Shares unsolicited personal stories',
+      'Mentions neighbors and relatives',
+      'Offers to help with everything',
+      'Gets sidetracked easily',
+      'Very talkative and friendly',
+    ],
+    behavioralPatterns: [
+      'Tells long personal stories',
+      'Mentions "my neighbor also had this problem"',
+      'Offers home remedies and advice',
+      'Gets emotional about family',
+      'Shares contact details freely',
+    ],
+    vulnerabilities: [
+      'Oversharing personal info',
+      'Desire to be helpful',
+      'Trust in strangers',
+      'Lonely and seeking connection',
+    ],
+    responseStyle: 'Long chatty responses, shares personal stories, very friendly',
+    effectiveness: {
+      overall: 82,
+      kyc: 85,
+      lottery: 80,
+      tech_support: 75,
+      investment: 80,
+      job: 85,
+    },
+    color: '#ec4899',
+    gradient: 'from-pink-500 to-pink-700',
+  },
+}
+
+export const PERSONA_ORDER = [
+  'elderly_victim',
+  'tech_novice',
+  'eager_investor',
+  'busy_professional',
+  'helpful_auntie',
+]
+```
+
+### 15. frontend/types/chat.ts
+
+```typescript
+// Chat TypeScript type definitions
+
+export interface SessionInfo {
+  id: string
+  status: 'ACTIVE' | 'COMPLETED' | 'FAILED'
+  persona_used: string
+  scam_type: string
+  risk_level: string
+  turn_count: number
+  created_at?: string
+  updated_at?: string
+}
+
+export interface ScamDetection {
+  is_scam: boolean
+  scam_type: string
+  confidence: number
+  risk_level: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
+  indicators?: string[]
+}
+
+export interface ExtractedEntity {
+  id?: string
+  type: 'PHONE_NUMBER' | 'UPI_ID' | 'BANK_ACCOUNT' | 'IFSC_CODE' | 'EMAIL' | 'URL' | 'CRYPTO_WALLET'
+  value: string
+  confidence: number
+  verified?: boolean
+  first_seen?: string
+  occurrence_count?: number
+}
+
+export interface ChatSettings {
+  soundEnabled: boolean
+  autoScroll: boolean
+  showEntities: boolean
+  showTypingIndicator: boolean
+  messageLimit: number
+}
+
+export interface ChatContextValue {
+  session: SessionInfo | null
+  messages: Message[]
+  isLoading: boolean
+  isTyping: boolean
+  sendMessage: (content: string) => Promise<void>
+  startSession: (params: StartSessionParams) => Promise<void>
+  endSession: () => Promise<void>
+  clearChat: () => void
+}
+
+export interface StartSessionParams {
+  scammerMessage: string
+  persona?: string
+  scenario?: string
+  context?: {
+    channel?: string
+    claimed_identity?: string
+  }
+}
+```
+
+### 16. frontend/types/message.ts
+
+```typescript
+// Message TypeScript type definitions
+
+export type MessageRole = 'scammer' | 'victim' | 'system'
+export type MessageStatus = 'sending' | 'sent' | 'delivered' | 'error'
+
+export interface Message {
+  id: string
+  role: MessageRole
+  content: string
+  timestamp: string
+  persona?: string
+  status: MessageStatus
+  entities_extracted?: Array<{
+    type: string
+    value: string
+    confidence?: number
+  }>
+  metadata?: {
+    processing_time_ms?: number
+    model_used?: string
+    tokens_used?: number
+  }
+  error?: {
+    code: string
+    message: string
+    retry_available: boolean
+  }
+}
+
+export interface MessageGroup {
+  date: string
+  messages: Message[]
+}
+
+export interface MessageReaction {
+  type: 'flag' | 'copy' | 'bookmark'
+  timestamp: string
+}
+```
+
+## ADDITIONAL COMPONENTS TO CREATE
+
+17. **chat-header.tsx** - Session info, persona, scam type, actions
+18. **chat-status-bar.tsx** - Connection status, turn count, metrics
+19. **chat-typing-indicator.tsx** - Animated typing dots with persona
+20. **persona-avatar.tsx** - Animated avatar with status
+21. **persona-info-card.tsx** - Full persona details card
+22. **scenario-library.tsx** - Full scenario browser with filters
+23. **scenario-card.tsx** - Scenario preview card
+24. **scenario-detail-modal.tsx** - Full scenario information
+25. **quick-scenario-picker.tsx** - Dropdown for quick selection
+26. **message-templates.tsx** - Pre-built message templates
+27. **session-panel.tsx** - Session information panel
+28. **session-metrics.tsx** - Real-time metrics display
+29. **session-timeline.tsx** - Visual timeline of conversation
+30. **intelligence-item.tsx** - Individual entity display
+31. **scam-detection-alert.tsx** - Scam type notification
+32. **risk-meter.tsx** - Animated risk gauge
+33. **entity-highlight.tsx** - Highlighted entity in text
+34. **message-actions.tsx** - Copy, report, bookmark
+35. **message-context-menu.tsx** - Right-click menu
+36. **chat-settings-modal.tsx** - Preferences modal
+37. **chat-export-modal.tsx** - Export conversation
+38. **end-session-dialog.tsx** - End session confirmation
+39. **connection-status.tsx** - WebSocket indicator
+40. **chat-empty-state.tsx** - No messages state
+41. **chat-error-boundary.tsx** - Error handling
+42. **chat-skeletons.tsx** - All loading skeletons
+43. **lib/api/endpoints.ts** - API endpoint constants
+44. **lib/api/errors.ts** - Error classes and handlers
+45. **lib/api/sessions.ts** - Sessions API functions
+46. **lib/hooks/use-honeypot.ts** - Honeypot API hooks
+47. **lib/hooks/use-chat-session.ts** - Session management
+48. **lib/hooks/use-chat-messages.ts** - Messages hook
+49. **lib/hooks/use-scroll-to-bottom.ts** - Auto-scroll
+50. **lib/hooks/use-message-sound.ts** - Sound notifications
+51. **lib/hooks/use-keyboard-shortcuts.ts** - Keyboard shortcuts
+52. **lib/hooks/use-typing-indicator.ts** - Typing animation
+53. **lib/websocket/client.ts** - WebSocket client (optional)
+54. **lib/websocket/events.ts** - Event handlers
+55. **lib/utils/entity-highlighter.ts** - Entity detection in text
+56. **lib/utils/message-parser.ts** - Message content parser
+57. **lib/utils/chat-helpers.ts** - Utility functions
+58. **lib/utils/sound.ts** - Audio utilities
+59. **types/api.ts** - API request/response types
+60. **types/websocket.ts** - WebSocket types
+
+## WEBSOCKET INTEGRATION (Optional Enhancement)
+
+```typescript
+// frontend/lib/websocket/client.ts
+// Optional WebSocket client for real-time updates
+
+import { io, Socket } from 'socket.io-client'
+import { useWebSocketStore } from '@/lib/stores/websocket-store'
+
+const WS_URL = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000/ws'
+
+class WebSocketClient {
+  private socket: Socket | null = null
+  private reconnectAttempts = 0
+  private maxReconnectAttempts = 5
+  
+  connect(sessionId?: string) {
+    if (this.socket?.connected) return
+    
+    this.socket = io(WS_URL, {
+      transports: ['websocket'],
+      query: sessionId ? { session_id: sessionId } : {},
+      reconnection: true,
+      reconnectionAttempts: this.maxReconnectAttempts,
+      reconnectionDelay: 1000,
+    })
+    
+    this.socket.on('connect', () => {
+      useWebSocketStore.getState().setConnected(true)
+      this.reconnectAttempts = 0
+    })
+    
+    this.socket.on('disconnect', () => {
+      useWebSocketStore.getState().setConnected(false)
+    })
+    
+    this.socket.on('message', (data) => {
+      useWebSocketStore.getState().handleMessage(data)
+    })
+    
+    this.socket.on('entity_extracted', (data) => {
+      useWebSocketStore.getState().handleEntityExtracted(data)
+    })
+    
+    this.socket.on('scam_detected', (data) => {
+      useWebSocketStore.getState().handleScamDetected(data)
+    })
+    
+    this.socket.on('typing', (data) => {
+      useWebSocketStore.getState().handleTyping(data)
+    })
+  }
+  
+  disconnect() {
+    this.socket?.disconnect()
+    this.socket = null
+  }
+  
+  emit(event: string, data: unknown) {
+    this.socket?.emit(event, data)
+  }
+}
+
+export const wsClient = new WebSocketClient()
+```
+
+## QUALITY REQUIREMENTS
+
+1. **Real-time Feel:**
+   - Optimistic updates
+   - Typing indicators
+   - Smooth animations
+   - No loading spinners for fast operations
+
+2. **Error Handling:**
+   - Retry logic for failed messages
+   - Graceful degradation
+   - User-friendly error messages
+   - Offline detection
+
+3. **Performance:**
+   - Virtual scrolling for messages
+   - Memoized components
+   - Debounced inputs
+   - Efficient re-renders
+
+4. **Accessibility:**
+   - Full keyboard navigation
+   - Screen reader support
+   - Focus management
+   - ARIA labels
+
+5. **Mobile Experience:**
+   - Touch-friendly
+   - Swipe gestures
+   - Responsive layout
+   - Mobile-first design
+
+6. **Security:**
+   - No sensitive data in logs
+   - Sanitized message content
+   - Secure clipboard operations
+   - XSS prevention
+
+7. **Testing:**
+   - Unit tests for hooks
+   - Component tests
+   - Integration tests
+   - E2E test scenarios
+
+Create all 85+ files with complete, production-ready code. The Chat Interface should be a professional real-time communication platform that rivals WhatsApp Web, Telegram, and enterprise chat solutions in quality and polish.
 
 ## ⏹️ END PROMPT 7 ═════════════════════════════════════════════════════════════
 
@@ -12070,14 +15280,2706 @@ Create all 75+ files with complete, production-ready code. The Analytics Dashboa
 # ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝        ╚═╝        ╚════╝ 
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# PROMPT 8: Final Polish & Production
+# PROMPT 8: Final Polish & Production - Documentation, Deployment & Enterprise Features
 
 ## 📦 Expected Output
-*To be added*
+| Output | Description |
+|--------|-------------|
+| **📚 DOCUMENTATION PAGES** | |
+| `frontend/app/(dashboard)/docs/page.tsx` | Documentation home with navigation |
+| `frontend/app/(dashboard)/docs/layout.tsx` | Documentation layout with sidebar TOC |
+| `frontend/app/(dashboard)/docs/getting-started/page.tsx` | Getting started guide |
+| `frontend/app/(dashboard)/docs/api-reference/page.tsx` | Interactive API documentation |
+| `frontend/app/(dashboard)/docs/api-reference/[endpoint]/page.tsx` | Individual endpoint docs |
+| `frontend/app/(dashboard)/docs/architecture/page.tsx` | System architecture documentation |
+| `frontend/app/(dashboard)/docs/personas/page.tsx` | Persona documentation |
+| `frontend/app/(dashboard)/docs/scam-types/page.tsx` | Scam type documentation |
+| `frontend/app/(dashboard)/docs/entities/page.tsx` | Entity types documentation |
+| `frontend/app/(dashboard)/docs/deployment/page.tsx` | Deployment guide |
+| `frontend/app/(dashboard)/docs/changelog/page.tsx` | Version changelog |
+| `frontend/app/(dashboard)/docs/faq/page.tsx` | Frequently asked questions |
+| **📄 STATIC PAGES** | |
+| `frontend/app/(marketing)/page.tsx` | Public landing page (marketing) |
+| `frontend/app/(marketing)/layout.tsx` | Marketing layout |
+| `frontend/app/(marketing)/about/page.tsx` | About ScamShield page |
+| `frontend/app/(marketing)/features/page.tsx` | Features showcase |
+| `frontend/app/(marketing)/pricing/page.tsx` | Pricing/plans page |
+| `frontend/app/(marketing)/contact/page.tsx` | Contact form page |
+| `frontend/app/(marketing)/privacy/page.tsx` | Privacy policy |
+| `frontend/app/(marketing)/terms/page.tsx` | Terms of service |
+| `frontend/app/(dashboard)/help/page.tsx` | Help center hub |
+| `frontend/app/(dashboard)/settings/page.tsx` | Complete settings page |
+| `frontend/app/(dashboard)/settings/profile/page.tsx` | Profile settings |
+| `frontend/app/(dashboard)/settings/api-keys/page.tsx` | API key management |
+| `frontend/app/(dashboard)/settings/notifications/page.tsx` | Notification preferences |
+| `frontend/app/(dashboard)/settings/appearance/page.tsx` | Theme & appearance |
+| `frontend/app/(dashboard)/settings/integrations/page.tsx` | Third-party integrations |
+| **🧩 DOCUMENTATION COMPONENTS** | |
+| `frontend/components/docs/docs-sidebar.tsx` | Documentation sidebar with TOC |
+| `frontend/components/docs/docs-header.tsx` | Documentation header with search |
+| `frontend/components/docs/docs-breadcrumbs.tsx` | Documentation breadcrumbs |
+| `frontend/components/docs/docs-toc.tsx` | Table of contents (right sidebar) |
+| `frontend/components/docs/docs-navigation.tsx` | Previous/Next navigation |
+| `frontend/components/docs/docs-search.tsx` | Documentation search (cmd+k) |
+| `frontend/components/docs/code-block.tsx` | Syntax highlighted code block |
+| `frontend/components/docs/api-endpoint.tsx` | API endpoint documentation card |
+| `frontend/components/docs/api-playground.tsx` | Interactive API testing playground |
+| `frontend/components/docs/api-response.tsx` | API response viewer |
+| `frontend/components/docs/api-request-builder.tsx` | Request builder form |
+| `frontend/components/docs/schema-viewer.tsx` | JSON schema viewer |
+| `frontend/components/docs/type-definition.tsx` | TypeScript type display |
+| `frontend/components/docs/callout.tsx` | Info/warning/error callouts |
+| `frontend/components/docs/tabs-code.tsx` | Code tabs (curl/python/js) |
+| `frontend/components/docs/copy-button.tsx` | Copy code button |
+| `frontend/components/docs/architecture-diagram.tsx` | System architecture SVG |
+| `frontend/components/docs/flow-diagram.tsx` | Flow diagram component |
+| `frontend/components/docs/entity-card.tsx` | Entity type documentation card |
+| `frontend/components/docs/persona-card.tsx` | Persona documentation card |
+| `frontend/components/docs/scam-type-card.tsx` | Scam type documentation card |
+| **🎨 MARKETING COMPONENTS** | |
+| `frontend/components/marketing/hero.tsx` | Landing page hero section |
+| `frontend/components/marketing/features-grid.tsx` | Features showcase grid |
+| `frontend/components/marketing/stats-section.tsx` | Statistics section |
+| `frontend/components/marketing/testimonials.tsx` | Testimonials carousel |
+| `frontend/components/marketing/cta-section.tsx` | Call to action section |
+| `frontend/components/marketing/footer.tsx` | Marketing footer |
+| `frontend/components/marketing/navbar.tsx` | Marketing navigation bar |
+| `frontend/components/marketing/pricing-card.tsx` | Pricing plan card |
+| `frontend/components/marketing/faq-accordion.tsx` | FAQ accordion |
+| `frontend/components/marketing/contact-form.tsx` | Contact form with validation |
+| `frontend/components/marketing/newsletter.tsx` | Newsletter signup |
+| `frontend/components/marketing/social-proof.tsx` | Social proof badges |
+| `frontend/components/marketing/demo-video.tsx` | Demo video player |
+| `frontend/components/marketing/tech-stack.tsx` | Technology stack display |
+| **⚙️ SETTINGS COMPONENTS** | |
+| `frontend/components/settings/settings-sidebar.tsx` | Settings navigation sidebar |
+| `frontend/components/settings/profile-form.tsx` | Profile settings form |
+| `frontend/components/settings/api-key-list.tsx` | API keys list with management |
+| `frontend/components/settings/api-key-create.tsx` | Create new API key modal |
+| `frontend/components/settings/notification-toggles.tsx` | Notification preferences |
+| `frontend/components/settings/theme-switcher.tsx` | Advanced theme switcher |
+| `frontend/components/settings/danger-zone.tsx` | Danger zone (delete account) |
+| `frontend/components/settings/export-data.tsx` | Export user data |
+| `frontend/components/settings/integration-card.tsx` | Integration toggle card |
+| **🚀 PRODUCTION OPTIMIZATION** | |
+| `frontend/next.config.js` | Production-optimized Next.js config |
+| `frontend/next-sitemap.config.js` | Sitemap generation config |
+| `frontend/middleware.ts` | Edge middleware (auth, rate limit) |
+| `frontend/instrumentation.ts` | OpenTelemetry instrumentation |
+| `frontend/sentry.client.config.ts` | Sentry client configuration |
+| `frontend/sentry.server.config.ts` | Sentry server configuration |
+| `frontend/sentry.edge.config.ts` | Sentry edge configuration |
+| `frontend/lib/analytics/index.ts` | Analytics initialization |
+| `frontend/lib/analytics/events.ts` | Analytics event definitions |
+| `frontend/lib/analytics/providers.tsx` | Analytics providers wrapper |
+| `frontend/lib/monitoring/performance.ts` | Performance monitoring |
+| `frontend/lib/monitoring/error-tracking.ts` | Error tracking utilities |
+| `frontend/lib/seo/metadata.ts` | SEO metadata utilities |
+| `frontend/lib/seo/structured-data.ts` | JSON-LD structured data |
+| `frontend/lib/security/csp.ts` | Content Security Policy |
+| `frontend/lib/security/headers.ts` | Security headers |
+| `frontend/lib/security/rate-limit.ts` | Rate limiting utilities |
+| **🔧 BUILD & DEPLOYMENT** | |
+| `frontend/.env.production` | Production environment variables |
+| `frontend/.env.staging` | Staging environment variables |
+| `frontend/Dockerfile` | Production Docker image |
+| `frontend/docker-compose.yml` | Docker Compose for local/staging |
+| `frontend/.dockerignore` | Docker ignore file |
+| `frontend/vercel.json` | Vercel deployment configuration |
+| `frontend/netlify.toml` | Netlify deployment configuration |
+| `frontend/render.yaml` | Render.com deployment configuration |
+| `frontend/.github/workflows/ci.yml` | GitHub Actions CI pipeline |
+| `frontend/.github/workflows/cd.yml` | GitHub Actions CD pipeline |
+| `frontend/.github/workflows/preview.yml` | Preview deployment workflow |
+| `frontend/.github/PULL_REQUEST_TEMPLATE.md` | PR template |
+| `frontend/.github/ISSUE_TEMPLATE/bug_report.md` | Bug report template |
+| `frontend/.github/ISSUE_TEMPLATE/feature_request.md` | Feature request template |
+| **📊 PERFORMANCE & TESTING** | |
+| `frontend/lighthouse.config.js` | Lighthouse CI configuration |
+| `frontend/playwright.config.ts` | Playwright E2E test config |
+| `frontend/jest.config.js` | Jest unit test configuration |
+| `frontend/jest.setup.js` | Jest setup file |
+| `frontend/vitest.config.ts` | Vitest configuration |
+| `frontend/tests/e2e/dashboard.spec.ts` | Dashboard E2E tests |
+| `frontend/tests/e2e/chat.spec.ts` | Chat E2E tests |
+| `frontend/tests/e2e/auth.spec.ts` | Authentication E2E tests |
+| `frontend/tests/unit/hooks.test.ts` | Custom hooks unit tests |
+| `frontend/tests/unit/utils.test.ts` | Utility functions tests |
+| `frontend/tests/integration/api.test.ts` | API integration tests |
+| `frontend/cypress.config.ts` | Cypress configuration |
+| `frontend/cypress/e2e/smoke.cy.ts` | Smoke tests |
+| **📝 FINAL DOCUMENTATION** | |
+| `frontend/README.md` | Complete frontend README |
+| `frontend/CONTRIBUTING.md` | Contribution guidelines |
+| `frontend/CHANGELOG.md` | Changelog with all versions |
+| `frontend/DEPLOYMENT.md` | Detailed deployment guide |
+| `frontend/ARCHITECTURE.md` | Frontend architecture docs |
+| `frontend/SECURITY.md` | Security documentation |
+| `frontend/PERFORMANCE.md` | Performance optimization guide |
+| `frontend/TESTING.md` | Testing strategy guide |
+| `frontend/ACCESSIBILITY.md` | Accessibility guidelines |
+| `frontend/CODE_OF_CONDUCT.md` | Code of conduct |
+| `frontend/LICENSE` | MIT License |
+| `frontend/public/robots.txt` | SEO robots.txt |
+| `frontend/public/sitemap.xml` | Generated sitemap |
+| `frontend/public/manifest.json` | PWA manifest |
+| `frontend/public/browserconfig.xml` | Browser configuration |
+| `frontend/public/humans.txt` | Humans.txt credits |
+| **Total: 130+ files** | Complete production-ready application with enterprise features |
 
 ## ▶️ START PROMPT 8 ═══════════════════════════════════════════════════════════
 
-*To be added when ready*
+Create a complete FAANG/MNC-level Final Polish, Documentation, and Production Deployment system for ScamShield Agentic Honeypot Dashboard. This is the culminating prompt that transforms the application into a fully production-ready, enterprise-grade platform worthy of Google, Meta, Apple, and Microsoft standards, built for India AI Impact Buildathon 2026.
+
+## PROJECT CONTEXT
+
+This is PROMPT 8 - the final prompt of the ScamShield frontend development. Prompts 1-7 have established:
+- ✅ Project Setup & Configuration (Prompt 1)
+- ✅ UI Component Library (Prompt 2)
+- ✅ Dashboard Home Page (Prompt 3)
+- ✅ Sessions Management (Prompt 4)
+- ✅ Intelligence Center (Prompt 5)
+- ✅ Analytics & Reports (Prompt 6)
+- ✅ Chat Interface & API Integration (Prompt 7)
+
+Now we need to add the final enterprise features:
+- **Complete Documentation System** - Interactive API docs, guides, architecture
+- **Marketing/Landing Pages** - Professional public-facing pages
+- **Settings & Configuration** - User preferences, API keys, integrations
+- **Production Optimization** - Performance, security, monitoring
+- **Deployment Infrastructure** - CI/CD, Docker, multi-platform deployment
+- **Testing Suite** - E2E, integration, unit tests
+- **Accessibility & SEO** - WCAG compliance, search optimization
+
+## TECHNICAL REQUIREMENTS
+
+### Core Dependencies (Add to package.json)
+```json
+{
+  "dependencies": {
+    "next-sitemap": "^4.2.3",
+    "@vercel/analytics": "^1.1.1",
+    "@vercel/speed-insights": "^1.0.2",
+    "@sentry/nextjs": "^7.91.0",
+    "sharp": "^0.33.1",
+    "plaiceholder": "^3.0.0",
+    "@headlessui/react": "^1.7.17",
+    "prism-react-renderer": "^2.3.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-highlight": "^7.0.0",
+    "remark-gfm": "^4.0.0",
+    "gray-matter": "^4.0.3",
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "next-mdx-remote": "^4.4.1",
+    "swagger-ui-react": "^5.10.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.1",
+    "vitest": "^1.1.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.1.6",
+    "cypress": "^13.6.2",
+    "@axe-core/playwright": "^4.8.2",
+    "lighthouse": "^11.4.0",
+    "@lhci/cli": "^0.13.0",
+    "bundlewatch": "^0.3.3",
+    "source-map-explorer": "^2.5.3"
+  }
+}
+```
+
+## FILE SPECIFICATIONS
+
+### 1. frontend/app/(dashboard)/docs/page.tsx
+
+```typescript
+// Documentation home page with comprehensive navigation
+// Features:
+// - Search bar with keyboard shortcuts
+// - Category cards with icons
+// - Quick links to popular sections
+// - Version selector
+// - Dark/light mode aware
+
+'use client'
+
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { 
+  Search, 
+  Book, 
+  Code, 
+  Layers, 
+  Users, 
+  Shield,
+  FileText,
+  Terminal,
+  Zap,
+  HelpCircle,
+  ExternalLink,
+  ArrowRight,
+  Sparkles,
+  Rocket,
+  Database,
+  Globe,
+  GitBranch
+} from 'lucide-react'
+import { DocsSearch } from '@/components/docs/docs-search'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Input } from '@/components/ui/input'
+import { useKeyboardShortcuts } from '@/lib/hooks/use-keyboard-shortcuts'
+import { cn } from '@/lib/utils/cn'
+
+const DOC_CATEGORIES = [
+  {
+    title: 'Getting Started',
+    description: 'Quick start guide and setup instructions',
+    icon: Rocket,
+    href: '/docs/getting-started',
+    color: 'text-green-500 bg-green-500/10',
+    popular: true,
+  },
+  {
+    title: 'API Reference',
+    description: 'Complete API documentation with examples',
+    icon: Code,
+    href: '/docs/api-reference',
+    color: 'text-blue-500 bg-blue-500/10',
+    popular: true,
+  },
+  {
+    title: 'Architecture',
+    description: 'System design and technical architecture',
+    icon: Layers,
+    href: '/docs/architecture',
+    color: 'text-purple-500 bg-purple-500/10',
+  },
+  {
+    title: 'AI Personas',
+    description: 'Documentation for all 5 victim personas',
+    icon: Users,
+    href: '/docs/personas',
+    color: 'text-orange-500 bg-orange-500/10',
+  },
+  {
+    title: 'Scam Types',
+    description: 'Detected scam categories and patterns',
+    icon: Shield,
+    href: '/docs/scam-types',
+    color: 'text-red-500 bg-red-500/10',
+  },
+  {
+    title: 'Entity Extraction',
+    description: 'Intelligence extraction documentation',
+    icon: Database,
+    href: '/docs/entities',
+    color: 'text-cyan-500 bg-cyan-500/10',
+  },
+  {
+    title: 'Deployment',
+    description: 'Production deployment guides',
+    icon: Globe,
+    href: '/docs/deployment',
+    color: 'text-indigo-500 bg-indigo-500/10',
+  },
+  {
+    title: 'Changelog',
+    description: 'Version history and release notes',
+    icon: GitBranch,
+    href: '/docs/changelog',
+    color: 'text-gray-500 bg-gray-500/10',
+  },
+]
+
+const QUICK_LINKS = [
+  { title: 'Start New Session', href: '/docs/api-reference#engage', badge: 'POST' },
+  { title: 'List Sessions', href: '/docs/api-reference#sessions', badge: 'GET' },
+  { title: 'Extract Intelligence', href: '/docs/api-reference#intelligence', badge: 'GET' },
+  { title: 'Analytics Summary', href: '/docs/api-reference#analytics', badge: 'GET' },
+]
+
+export default function DocsPage() {
+  const [searchOpen, setSearchOpen] = useState(false)
+  
+  // Keyboard shortcut for search
+  useKeyboardShortcuts({
+    'mod+k': () => setSearchOpen(true),
+  })
+  
+  return (
+    <div className="container max-w-6xl py-8">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-12"
+      >
+        <div className="flex justify-center mb-4">
+          <div className="relative">
+            <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Book className="h-8 w-8 text-primary" />
+            </div>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+              className="absolute -top-1 -right-1"
+            >
+              <Sparkles className="h-5 w-5 text-yellow-500" />
+            </motion.div>
+          </div>
+        </div>
+        <h1 className="text-4xl font-bold mb-3">ScamShield Documentation</h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Everything you need to integrate, deploy, and operate the AI-powered scam intelligence platform
+        </p>
+        
+        {/* Version Badge */}
+        <div className="flex justify-center gap-2 mt-4">
+          <Badge variant="outline" className="text-sm">
+            v1.0.0
+          </Badge>
+          <Badge variant="secondary" className="text-sm">
+            API v1
+          </Badge>
+          <Badge className="text-sm bg-green-500">
+            Stable
+          </Badge>
+        </div>
+      </motion.div>
+      
+      {/* Search Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="max-w-2xl mx-auto mb-12"
+      >
+        <div 
+          className="relative cursor-pointer"
+          onClick={() => setSearchOpen(true)}
+        >
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Input
+            readOnly
+            placeholder="Search documentation..."
+            className="pl-12 pr-20 h-14 text-lg rounded-xl border-2 focus-visible:ring-0 cursor-pointer"
+          />
+          <kbd className="absolute right-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-muted rounded text-xs text-muted-foreground">
+            ⌘K
+          </kbd>
+        </div>
+      </motion.div>
+      
+      {/* Category Grid */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-12"
+      >
+        {DOC_CATEGORIES.map((category, i) => (
+          <motion.div
+            key={category.href}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * i }}
+          >
+            <Link href={category.href}>
+              <Card className="h-full hover:border-primary/50 hover:shadow-md transition-all group cursor-pointer">
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <div className={cn('p-2 rounded-lg', category.color)}>
+                      <category.icon className="h-5 w-5" />
+                    </div>
+                    {category.popular && (
+                      <Badge variant="secondary" className="text-[10px]">Popular</Badge>
+                    )}
+                  </div>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                    {category.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{category.description}</CardDescription>
+                </CardContent>
+              </Card>
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
+      
+      {/* Quick Links */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="mb-12"
+      >
+        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <Zap className="h-5 w-5 text-yellow-500" />
+          Quick Links
+        </h2>
+        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+          {QUICK_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="flex items-center justify-between p-3 rounded-lg border hover:bg-muted transition-colors group"
+            >
+              <span className="text-sm font-medium">{link.title}</span>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-[10px]">{link.badge}</Badge>
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </motion.div>
+      
+      {/* API Stats */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="grid gap-4 md:grid-cols-4 mb-12"
+      >
+        <Card className="text-center p-4">
+          <p className="text-3xl font-bold text-primary">13</p>
+          <p className="text-sm text-muted-foreground">API Endpoints</p>
+        </Card>
+        <Card className="text-center p-4">
+          <p className="text-3xl font-bold text-primary">5</p>
+          <p className="text-sm text-muted-foreground">AI Personas</p>
+        </Card>
+        <Card className="text-center p-4">
+          <p className="text-3xl font-bold text-primary">8</p>
+          <p className="text-sm text-muted-foreground">Scam Types</p>
+        </Card>
+        <Card className="text-center p-4">
+          <p className="text-3xl font-bold text-primary">7</p>
+          <p className="text-sm text-muted-foreground">Entity Types</p>
+        </Card>
+      </motion.div>
+      
+      {/* External Links */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="flex flex-wrap justify-center gap-4"
+      >
+        <Button variant="outline" asChild>
+          <Link href="https://github.com/scamshield/agentic-honeypot" target="_blank">
+            <GitBranch className="h-4 w-4 mr-2" />
+            GitHub Repository
+            <ExternalLink className="h-3 w-3 ml-2" />
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link href="/docs/api-reference">
+            <Terminal className="h-4 w-4 mr-2" />
+            API Playground
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link href="/help">
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Get Help
+          </Link>
+        </Button>
+      </motion.div>
+      
+      {/* Search Modal */}
+      <DocsSearch open={searchOpen} onOpenChange={setSearchOpen} />
+    </div>
+  )
+}
+```
+
+### 2. frontend/app/(dashboard)/docs/api-reference/page.tsx
+
+```typescript
+// Interactive API reference with playground
+// Features:
+// - All 13 endpoints documented
+// - Request/response examples
+// - Try it out functionality
+// - Code samples in multiple languages
+// - Schema visualization
+
+'use client'
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { 
+  Code, 
+  Play, 
+  Copy, 
+  Check, 
+  ChevronDown,
+  ChevronRight,
+  Terminal,
+  Zap,
+  Shield,
+  MessageSquare,
+  Brain,
+  BarChart3,
+  Heart
+} from 'lucide-react'
+import { ApiEndpoint } from '@/components/docs/api-endpoint'
+import { ApiPlayground } from '@/components/docs/api-playground'
+import { CodeBlock } from '@/components/docs/code-block'
+import { TabsCode } from '@/components/docs/tabs-code'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { API_ENDPOINTS_DOCS } from '@/lib/constants/api-docs'
+import { cn } from '@/lib/utils/cn'
+
+const ENDPOINT_GROUPS = [
+  {
+    id: 'honeypot',
+    title: 'Honeypot',
+    icon: Shield,
+    description: 'Core scam engagement endpoints',
+    endpoints: ['engage', 'continue', 'session', 'delete-session'],
+  },
+  {
+    id: 'sessions',
+    title: 'Sessions',
+    icon: MessageSquare,
+    description: 'Session management and history',
+    endpoints: ['list-sessions', 'session-intelligence'],
+  },
+  {
+    id: 'intelligence',
+    title: 'Intelligence',
+    icon: Brain,
+    description: 'Extracted entity management',
+    endpoints: ['list-intelligence', 'intelligence-detail'],
+  },
+  {
+    id: 'analytics',
+    title: 'Analytics',
+    icon: BarChart3,
+    description: 'Statistics and reporting',
+    endpoints: ['analytics-summary', 'scam-types', 'timeline'],
+  },
+  {
+    id: 'health',
+    title: 'Health',
+    icon: Heart,
+    description: 'System health monitoring',
+    endpoints: ['health', 'health-detailed'],
+  },
+]
+
+export default function ApiReferencePage() {
+  const [activeEndpoint, setActiveEndpoint] = useState<string | null>(null)
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(['honeypot'])
+  
+  const toggleGroup = (groupId: string) => {
+    setExpandedGroups(prev =>
+      prev.includes(groupId)
+        ? prev.filter(id => id !== groupId)
+        : [...prev, groupId]
+    )
+  }
+  
+  return (
+    <div className="flex h-full">
+      {/* Sidebar Navigation */}
+      <div className="w-64 border-r hidden lg:block">
+        <div className="p-4 border-b">
+          <h2 className="font-semibold flex items-center gap-2">
+            <Code className="h-4 w-4" />
+            API Reference
+          </h2>
+          <p className="text-xs text-muted-foreground mt-1">v1 • REST API</p>
+        </div>
+        <ScrollArea className="h-[calc(100vh-12rem)]">
+          <div className="p-2">
+            {ENDPOINT_GROUPS.map((group) => (
+              <Collapsible
+                key={group.id}
+                open={expandedGroups.includes(group.id)}
+                onOpenChange={() => toggleGroup(group.id)}
+              >
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-2 rounded-lg hover:bg-muted text-left">
+                  <div className="flex items-center gap-2">
+                    <group.icon className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm font-medium">{group.title}</span>
+                  </div>
+                  {expandedGroups.includes(group.id) ? (
+                    <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  )}
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <div className="ml-6 space-y-1 py-1">
+                    {group.endpoints.map((endpointId) => {
+                      const endpoint = API_ENDPOINTS_DOCS[endpointId]
+                      if (!endpoint) return null
+                      
+                      return (
+                        <Link
+                          key={endpointId}
+                          href={`#${endpointId}`}
+                          onClick={() => setActiveEndpoint(endpointId)}
+                          className={cn(
+                            'flex items-center gap-2 p-2 rounded text-sm transition-colors',
+                            activeEndpoint === endpointId
+                              ? 'bg-primary/10 text-primary'
+                              : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+                          )}
+                        >
+                          <Badge
+                            variant="outline"
+                            className={cn(
+                              'text-[10px] w-12 justify-center',
+                              endpoint.method === 'GET' && 'border-green-500 text-green-500',
+                              endpoint.method === 'POST' && 'border-blue-500 text-blue-500',
+                              endpoint.method === 'DELETE' && 'border-red-500 text-red-500'
+                            )}
+                          >
+                            {endpoint.method}
+                          </Badge>
+                          <span className="truncate">{endpoint.title}</span>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            ))}
+          </div>
+        </ScrollArea>
+      </div>
+      
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto">
+        <div className="max-w-4xl mx-auto py-8 px-6">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8"
+          >
+            <h1 className="text-3xl font-bold mb-2">API Reference</h1>
+            <p className="text-muted-foreground">
+              Complete documentation for the ScamShield REST API. All endpoints support JSON request/response.
+            </p>
+            
+            {/* Base URL */}
+            <Card className="mt-6">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium mb-1">Base URL</p>
+                    <code className="text-sm bg-muted px-2 py-1 rounded">
+                      https://api.scamshield.ai/v1
+                    </code>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium mb-1">Authentication</p>
+                    <code className="text-sm bg-muted px-2 py-1 rounded">
+                      X-API-Key: your-api-key
+                    </code>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+          
+          {/* Quick Start */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-12"
+          >
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <Zap className="h-5 w-5 text-yellow-500" />
+              Quick Start
+            </h2>
+            <Card>
+              <CardContent className="p-0">
+                <TabsCode
+                  tabs={[
+                    {
+                      label: 'cURL',
+                      language: 'bash',
+                      code: `curl -X POST https://api.scamshield.ai/v1/honeypot/engage \\
+  -H "Content-Type: application/json" \\
+  -H "X-API-Key: your-api-key" \\
+  -d '{
+    "scammer_message": "Dear Customer, your KYC is pending...",
+    "persona": "elderly_victim"
+  }'`,
+                    },
+                    {
+                      label: 'Python',
+                      language: 'python',
+                      code: `import requests
+
+response = requests.post(
+    "https://api.scamshield.ai/v1/honeypot/engage",
+    headers={"X-API-Key": "your-api-key"},
+    json={
+        "scammer_message": "Dear Customer, your KYC is pending...",
+        "persona": "elderly_victim"
+    }
+)
+print(response.json())`,
+                    },
+                    {
+                      label: 'JavaScript',
+                      language: 'javascript',
+                      code: `const response = await fetch('https://api.scamshield.ai/v1/honeypot/engage', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'your-api-key'
+  },
+  body: JSON.stringify({
+    scammer_message: 'Dear Customer, your KYC is pending...',
+    persona: 'elderly_victim'
+  })
+});
+
+const data = await response.json();
+console.log(data);`,
+                    },
+                  ]}
+                />
+              </CardContent>
+            </Card>
+          </motion.div>
+          
+          <Separator className="my-8" />
+          
+          {/* All Endpoints */}
+          {ENDPOINT_GROUPS.map((group) => (
+            <motion.div
+              key={group.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="mb-12"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <group.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold">{group.title}</h2>
+                  <p className="text-sm text-muted-foreground">{group.description}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                {group.endpoints.map((endpointId) => {
+                  const endpoint = API_ENDPOINTS_DOCS[endpointId]
+                  if (!endpoint) return null
+                  
+                  return (
+                    <ApiEndpoint
+                      key={endpointId}
+                      id={endpointId}
+                      endpoint={endpoint}
+                    />
+                  )
+                })}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+### 3. frontend/components/docs/api-endpoint.tsx
+
+```typescript
+// Individual API endpoint documentation component
+// Features:
+// - Method badge with color coding
+// - Path with parameters highlighted
+// - Request/response schema
+// - Try it out playground
+// - Code examples in multiple languages
+
+'use client'
+
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+  ChevronDown, 
+  ChevronRight, 
+  Play, 
+  Copy, 
+  Check,
+  ExternalLink,
+  Code,
+  FileJson
+} from 'lucide-react'
+import { ApiPlayground } from './api-playground'
+import { CodeBlock } from './code-block'
+import { TabsCode } from './tabs-code'
+import { SchemaViewer } from './schema-viewer'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible'
+import { cn } from '@/lib/utils/cn'
+import { toast } from 'sonner'
+
+interface EndpointDoc {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+  path: string
+  title: string
+  description: string
+  parameters?: Array<{
+    name: string
+    type: string
+    required: boolean
+    description: string
+    example?: string
+  }>
+  requestBody?: {
+    description: string
+    schema: object
+    example: object
+  }
+  responses: {
+    [code: string]: {
+      description: string
+      schema?: object
+      example?: object
+    }
+  }
+  examples: {
+    curl: string
+    python: string
+    javascript: string
+  }
+}
+
+interface ApiEndpointProps {
+  id: string
+  endpoint: EndpointDoc
+}
+
+export function ApiEndpoint({ id, endpoint }: ApiEndpointProps) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [showPlayground, setShowPlayground] = useState(false)
+  const [activeTab, setActiveTab] = useState<'overview' | 'playground' | 'examples'>('overview')
+  const [copied, setCopied] = useState(false)
+  
+  const methodColors = {
+    GET: 'bg-green-500/10 text-green-600 border-green-500/30',
+    POST: 'bg-blue-500/10 text-blue-600 border-blue-500/30',
+    PUT: 'bg-orange-500/10 text-orange-600 border-orange-500/30',
+    DELETE: 'bg-red-500/10 text-red-600 border-red-500/30',
+    PATCH: 'bg-purple-500/10 text-purple-600 border-purple-500/30',
+  }
+  
+  const copyPath = async () => {
+    await navigator.clipboard.writeText(endpoint.path)
+    setCopied(true)
+    toast.success('Path copied to clipboard')
+    setTimeout(() => setCopied(false), 2000)
+  }
+  
+  return (
+    <Card id={id} className="scroll-mt-20">
+      <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
+        <CollapsibleTrigger asChild>
+          <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Badge
+                  variant="outline"
+                  className={cn('font-mono text-xs', methodColors[endpoint.method])}
+                >
+                  {endpoint.method}
+                </Badge>
+                <code className="text-sm font-mono text-muted-foreground">
+                  {endpoint.path}
+                </code>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    copyPath()
+                  }}
+                >
+                  {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setShowPlayground(true)
+                    setIsExpanded(true)
+                    setActiveTab('playground')
+                  }}
+                >
+                  <Play className="h-3 w-3 mr-1" />
+                  Try it
+                </Button>
+                {isExpanded ? (
+                  <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                )}
+              </div>
+            </div>
+            <div className="mt-2">
+              <h3 className="font-semibold">{endpoint.title}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{endpoint.description}</p>
+            </div>
+          </CardHeader>
+        </CollapsibleTrigger>
+        
+        <CollapsibleContent>
+          <CardContent className="pt-0">
+            <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
+              <TabsList className="mb-4">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="playground">
+                  <Play className="h-3 w-3 mr-1" />
+                  Playground
+                </TabsTrigger>
+                <TabsTrigger value="examples">
+                  <Code className="h-3 w-3 mr-1" />
+                  Examples
+                </TabsTrigger>
+              </TabsList>
+              
+              {/* Overview Tab */}
+              <TabsContent value="overview" className="space-y-6">
+                {/* Parameters */}
+                {endpoint.parameters && endpoint.parameters.length > 0 && (
+                  <div>
+                    <h4 className="font-medium mb-3">Parameters</h4>
+                    <div className="border rounded-lg overflow-hidden">
+                      <table className="w-full text-sm">
+                        <thead className="bg-muted">
+                          <tr>
+                            <th className="text-left p-3">Name</th>
+                            <th className="text-left p-3">Type</th>
+                            <th className="text-left p-3">Required</th>
+                            <th className="text-left p-3">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {endpoint.parameters.map((param) => (
+                            <tr key={param.name} className="border-t">
+                              <td className="p-3 font-mono text-xs">{param.name}</td>
+                              <td className="p-3">
+                                <Badge variant="outline" className="text-xs">
+                                  {param.type}
+                                </Badge>
+                              </td>
+                              <td className="p-3">
+                                {param.required ? (
+                                  <Badge className="text-xs">Required</Badge>
+                                ) : (
+                                  <span className="text-muted-foreground">Optional</span>
+                                )}
+                              </td>
+                              <td className="p-3 text-muted-foreground">{param.description}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Request Body */}
+                {endpoint.requestBody && (
+                  <div>
+                    <h4 className="font-medium mb-3">Request Body</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      {endpoint.requestBody.description}
+                    </p>
+                    <SchemaViewer
+                      schema={endpoint.requestBody.schema}
+                      example={endpoint.requestBody.example}
+                    />
+                  </div>
+                )}
+                
+                {/* Responses */}
+                <div>
+                  <h4 className="font-medium mb-3">Responses</h4>
+                  <div className="space-y-3">
+                    {Object.entries(endpoint.responses).map(([code, response]) => (
+                      <div key={code} className="border rounded-lg overflow-hidden">
+                        <div className="flex items-center gap-2 p-3 bg-muted">
+                          <Badge
+                            variant="outline"
+                            className={cn(
+                              'text-xs',
+                              code.startsWith('2') && 'border-green-500 text-green-500',
+                              code.startsWith('4') && 'border-red-500 text-red-500',
+                              code.startsWith('5') && 'border-orange-500 text-orange-500'
+                            )}
+                          >
+                            {code}
+                          </Badge>
+                          <span className="text-sm">{response.description}</span>
+                        </div>
+                        {response.example && (
+                          <div className="p-3">
+                            <CodeBlock
+                              language="json"
+                              code={JSON.stringify(response.example, null, 2)}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </TabsContent>
+              
+              {/* Playground Tab */}
+              <TabsContent value="playground">
+                <ApiPlayground endpoint={endpoint} />
+              </TabsContent>
+              
+              {/* Examples Tab */}
+              <TabsContent value="examples">
+                <TabsCode
+                  tabs={[
+                    { label: 'cURL', language: 'bash', code: endpoint.examples.curl },
+                    { label: 'Python', language: 'python', code: endpoint.examples.python },
+                    { label: 'JavaScript', language: 'javascript', code: endpoint.examples.javascript },
+                  ]}
+                />
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </CollapsibleContent>
+      </Collapsible>
+    </Card>
+  )
+}
+```
+
+### 4. frontend/components/docs/api-playground.tsx
+
+```typescript
+// Interactive API playground for testing endpoints
+// Features:
+// - Request builder form
+// - Real-time response display
+// - Response time tracking
+// - Copy response button
+// - Error display
+
+'use client'
+
+import { useState, useCallback } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { 
+  Play, 
+  Loader2, 
+  Copy, 
+  Check, 
+  Clock,
+  AlertCircle,
+  CheckCircle2
+} from 'lucide-react'
+import { CodeBlock } from './code-block'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
+import { apiClient } from '@/lib/api/client'
+import { cn } from '@/lib/utils/cn'
+import { toast } from 'sonner'
+
+interface ApiPlaygroundProps {
+  endpoint: {
+    method: string
+    path: string
+    parameters?: Array<{
+      name: string
+      type: string
+      required: boolean
+      description: string
+      example?: string
+    }>
+    requestBody?: {
+      example: object
+    }
+  }
+}
+
+interface PlaygroundResponse {
+  status: number
+  statusText: string
+  data: unknown
+  time: number
+}
+
+export function ApiPlayground({ endpoint }: ApiPlaygroundProps) {
+  const [isLoading, setIsLoading] = useState(false)
+  const [response, setResponse] = useState<PlaygroundResponse | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+  
+  const [requestBody, setRequestBody] = useState(
+    endpoint.requestBody?.example 
+      ? JSON.stringify(endpoint.requestBody.example, null, 2)
+      : ''
+  )
+  
+  const [pathParams, setPathParams] = useState<Record<string, string>>({})
+  const [queryParams, setQueryParams] = useState<Record<string, string>>({})
+  
+  // Build the final URL with parameters
+  const buildUrl = useCallback(() => {
+    let url = endpoint.path
+    
+    // Replace path parameters
+    Object.entries(pathParams).forEach(([key, value]) => {
+      url = url.replace(`{${key}}`, value)
+    })
+    
+    // Add query parameters
+    const queryString = Object.entries(queryParams)
+      .filter(([_, value]) => value)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join('&')
+    
+    if (queryString) {
+      url += `?${queryString}`
+    }
+    
+    return url
+  }, [endpoint.path, pathParams, queryParams])
+  
+  // Execute the request
+  const executeRequest = async () => {
+    setIsLoading(true)
+    setError(null)
+    setResponse(null)
+    
+    const startTime = Date.now()
+    
+    try {
+      let body: object | undefined
+      if (requestBody && endpoint.method !== 'GET') {
+        try {
+          body = JSON.parse(requestBody)
+        } catch {
+          throw new Error('Invalid JSON in request body')
+        }
+      }
+      
+      const url = buildUrl()
+      
+      const res = await apiClient.request({
+        method: endpoint.method,
+        url,
+        data: body,
+      })
+      
+      const time = Date.now() - startTime
+      
+      setResponse({
+        status: res.status,
+        statusText: res.statusText,
+        data: res.data,
+        time,
+      })
+    } catch (err: any) {
+      const time = Date.now() - startTime
+      
+      if (err.response) {
+        setResponse({
+          status: err.response.status,
+          statusText: err.response.statusText,
+          data: err.response.data,
+          time,
+        })
+      } else {
+        setError(err.message || 'Request failed')
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  
+  // Copy response
+  const copyResponse = async () => {
+    if (!response) return
+    await navigator.clipboard.writeText(JSON.stringify(response.data, null, 2))
+    setCopied(true)
+    toast.success('Response copied to clipboard')
+    setTimeout(() => setCopied(false), 2000)
+  }
+  
+  // Extract path parameters from endpoint path
+  const pathParamNames = endpoint.path.match(/\{(\w+)\}/g)?.map(p => p.slice(1, -1)) || []
+  
+  return (
+    <div className="space-y-6">
+      {/* Request Builder */}
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Left: Parameters */}
+        <div className="space-y-4">
+          <h4 className="font-medium">Request</h4>
+          
+          {/* Path Parameters */}
+          {pathParamNames.length > 0 && (
+            <div className="space-y-3">
+              <Label>Path Parameters</Label>
+              {pathParamNames.map((param) => (
+                <div key={param} className="flex items-center gap-2">
+                  <span className="text-sm font-mono text-muted-foreground w-24">{param}</span>
+                  <Input
+                    placeholder={`Enter ${param}`}
+                    value={pathParams[param] || ''}
+                    onChange={(e) => setPathParams(prev => ({ ...prev, [param]: e.target.value }))}
+                    className="flex-1"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {/* Query Parameters */}
+          {endpoint.parameters?.filter(p => p.name !== 'body').map((param) => (
+            <div key={param.name} className="flex items-center gap-2">
+              <div className="w-24">
+                <span className="text-sm font-mono">{param.name}</span>
+                {param.required && <span className="text-red-500 ml-1">*</span>}
+              </div>
+              <Input
+                placeholder={param.example || `Enter ${param.name}`}
+                value={queryParams[param.name] || ''}
+                onChange={(e) => setQueryParams(prev => ({ ...prev, [param.name]: e.target.value }))}
+                className="flex-1"
+              />
+            </div>
+          ))}
+          
+          {/* Request Body */}
+          {endpoint.method !== 'GET' && endpoint.requestBody && (
+            <div className="space-y-2">
+              <Label>Request Body</Label>
+              <Textarea
+                value={requestBody}
+                onChange={(e) => setRequestBody(e.target.value)}
+                rows={10}
+                className="font-mono text-sm"
+                placeholder="Enter JSON request body..."
+              />
+            </div>
+          )}
+          
+          {/* Execute Button */}
+          <Button 
+            onClick={executeRequest} 
+            disabled={isLoading}
+            className="w-full"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Sending...
+              </>
+            ) : (
+              <>
+                <Play className="h-4 w-4 mr-2" />
+                Send Request
+              </>
+            )}
+          </Button>
+        </div>
+        
+        {/* Right: Response */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h4 className="font-medium">Response</h4>
+            {response && (
+              <div className="flex items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className={cn(
+                    response.status >= 200 && response.status < 300 && 'border-green-500 text-green-500',
+                    response.status >= 400 && response.status < 500 && 'border-red-500 text-red-500',
+                    response.status >= 500 && 'border-orange-500 text-orange-500'
+                  )}
+                >
+                  {response.status} {response.statusText}
+                </Badge>
+                <Badge variant="secondary" className="gap-1">
+                  <Clock className="h-3 w-3" />
+                  {response.time}ms
+                </Badge>
+                <Button variant="ghost" size="sm" onClick={copyResponse}>
+                  {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                </Button>
+              </div>
+            )}
+          </div>
+          
+          <div className="min-h-[300px] border rounded-lg overflow-hidden bg-muted/30">
+            {!response && !error && !isLoading && (
+              <div className="flex items-center justify-center h-[300px] text-muted-foreground">
+                <p>Click "Send Request" to see the response</p>
+              </div>
+            )}
+            
+            {isLoading && (
+              <div className="flex items-center justify-center h-[300px]">
+                <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+              </div>
+            )}
+            
+            {error && (
+              <div className="flex flex-col items-center justify-center h-[300px] text-destructive">
+                <AlertCircle className="h-8 w-8 mb-2" />
+                <p>{error}</p>
+              </div>
+            )}
+            
+            {response && (
+              <CodeBlock
+                language="json"
+                code={JSON.stringify(response.data, null, 2)}
+                showLineNumbers
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+### 5. frontend/app/(marketing)/page.tsx
+
+```typescript
+// Public landing/marketing page
+// Features:
+// - Hero section with CTA
+// - Features showcase
+// - Statistics
+// - Technology stack
+// - Call to action
+
+'use client'
+
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import Image from 'next/image'
+import { 
+  Shield, 
+  Brain, 
+  Zap, 
+  Database, 
+  Users, 
+  BarChart3,
+  ArrowRight,
+  Check,
+  Play,
+  Github,
+  ExternalLink,
+  Star,
+  Sparkles,
+  Globe,
+  Lock,
+  Clock,
+  TrendingUp
+} from 'lucide-react'
+import { Hero } from '@/components/marketing/hero'
+import { FeaturesGrid } from '@/components/marketing/features-grid'
+import { StatsSection } from '@/components/marketing/stats-section'
+import { TechStack } from '@/components/marketing/tech-stack'
+import { CTASection } from '@/components/marketing/cta-section'
+import { Footer } from '@/components/marketing/footer'
+import { Navbar } from '@/components/marketing/navbar'
+import { DemoVideo } from '@/components/marketing/demo-video'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
+
+const FEATURES = [
+  {
+    title: 'AI-Powered Personas',
+    description: '5 distinct victim personas powered by LLaMA 3.3-70b for realistic scam engagement',
+    icon: Users,
+    color: 'text-blue-500 bg-blue-500/10',
+  },
+  {
+    title: 'Real-time Intelligence',
+    description: 'Automatic extraction of phone numbers, UPI IDs, bank accounts, and phishing URLs',
+    icon: Brain,
+    color: 'text-purple-500 bg-purple-500/10',
+  },
+  {
+    title: 'Scam Detection',
+    description: '8 scam type classifications with confidence scoring and risk assessment',
+    icon: Shield,
+    color: 'text-red-500 bg-red-500/10',
+  },
+  {
+    title: 'Agentic Architecture',
+    description: 'Autonomous decision-making engine that adapts responses based on scam patterns',
+    icon: Zap,
+    color: 'text-yellow-500 bg-yellow-500/10',
+  },
+  {
+    title: 'Analytics Dashboard',
+    description: 'Comprehensive analytics with charts, reports, and trend analysis',
+    icon: BarChart3,
+    color: 'text-green-500 bg-green-500/10',
+  },
+  {
+    title: 'Secure & Compliant',
+    description: 'Enterprise-grade security with data protection and ethical guidelines',
+    icon: Lock,
+    color: 'text-cyan-500 bg-cyan-500/10',
+  },
+]
+
+const STATS = [
+  { value: '₹60Cr+', label: 'Daily Losses Prevented (Target)', icon: TrendingUp },
+  { value: '13', label: 'REST API Endpoints', icon: Database },
+  { value: '5', label: 'AI Personas', icon: Users },
+  { value: '8', label: 'Scam Types Detected', icon: Shield },
+]
+
+export default function MarketingPage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-purple-500/5" />
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+        
+        <div className="container relative">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex justify-center mb-6"
+            >
+              <Badge variant="outline" className="px-4 py-1.5 text-sm border-primary/30 bg-primary/5">
+                <Sparkles className="h-3 w-3 mr-2 text-primary" />
+                India AI Impact Buildathon 2026
+              </Badge>
+            </motion.div>
+            
+            {/* Headline */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+              <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                AI-Powered
+              </span>
+              <br />
+              Scam Intelligence Platform
+            </h1>
+            
+            {/* Subheadline */}
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Autonomous honeypot that engages scammers, extracts intelligence, 
+              and protects millions from digital fraud
+            </p>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button size="lg" asChild className="text-lg px-8 h-14">
+                <Link href="/dashboard">
+                  Launch Dashboard
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="text-lg px-8 h-14">
+                <Link href="/docs/api-reference">
+                  <Play className="h-5 w-5 mr-2" />
+                  View API Docs
+                </Link>
+              </Button>
+            </div>
+            
+            {/* Trust badges */}
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1">
+                <Check className="h-4 w-4 text-green-500" />
+                Open Source
+              </div>
+              <div className="flex items-center gap-1">
+                <Check className="h-4 w-4 text-green-500" />
+                Production Ready
+              </div>
+              <div className="flex items-center gap-1">
+                <Check className="h-4 w-4 text-green-500" />
+                Free to Use
+              </div>
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 text-yellow-500" />
+                Groq Powered
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Hero Image/Demo */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-16 relative"
+          >
+            <div className="relative rounded-xl overflow-hidden border shadow-2xl bg-background">
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
+              <Image
+                src="/images/dashboard-preview.png"
+                alt="ScamShield Dashboard"
+                width={1200}
+                height={675}
+                className="w-full"
+                priority
+              />
+            </div>
+            
+            {/* Floating cards */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4 }}
+              className="absolute -left-4 top-1/4 hidden lg:block"
+            >
+              <Card className="w-48 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-red-500/10">
+                      <Shield className="h-5 w-5 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold">156</p>
+                      <p className="text-xs text-muted-foreground">Scams Detected</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+              className="absolute -right-4 top-1/3 hidden lg:block"
+            >
+              <Card className="w-48 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-green-500/10">
+                      <Brain className="h-5 w-5 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold">423</p>
+                      <p className="text-xs text-muted-foreground">Entities Extracted</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Stats Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {STATS.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center"
+              >
+                <div className="flex justify-center mb-3">
+                  <div className="p-3 rounded-xl bg-primary/10">
+                    <stat.icon className="h-6 w-6 text-primary" />
+                  </div>
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-primary">{stat.value}</p>
+                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Features Section */}
+      <section className="py-20">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <Badge variant="outline" className="mb-4">Features</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Enterprise-Grade Scam Intelligence
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Built with cutting-edge AI technology to combat the rising tide of digital fraud in India
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURES.map((feature, i) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className={`p-3 rounded-xl w-fit mb-4 ${feature.color}`}>
+                      <feature.icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Tech Stack Section */}
+      <TechStack />
+      
+      {/* CTA Section */}
+      <section className="py-20 bg-primary/5">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Fight Digital Fraud?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Join the mission to protect millions from scams. Start using ScamShield today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild>
+                <Link href="/dashboard">
+                  Get Started Free
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link href="https://github.com/scamshield/agentic-honeypot" target="_blank">
+                  <Github className="h-4 w-4 mr-2" />
+                  Star on GitHub
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      
+      <Footer />
+    </div>
+  )
+}
+```
+
+### 6. frontend/app/(dashboard)/settings/page.tsx
+
+```typescript
+// Main settings page with comprehensive configuration options
+// Features:
+// - Profile settings
+// - API key management
+// - Notification preferences
+// - Appearance customization
+// - Integration management
+// - Data export
+// - Danger zone
+
+'use client'
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { 
+  User, 
+  Key, 
+  Bell, 
+  Palette, 
+  Plug, 
+  Download,
+  Shield,
+  Settings as SettingsIcon,
+  ChevronRight
+} from 'lucide-react'
+import { SettingsSidebar } from '@/components/settings/settings-sidebar'
+import { ProfileForm } from '@/components/settings/profile-form'
+import { PageHeader } from '@/components/layout/page-header'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils/cn'
+
+const SETTINGS_SECTIONS = [
+  {
+    title: 'Profile',
+    description: 'Manage your personal information and preferences',
+    icon: User,
+    href: '/settings/profile',
+  },
+  {
+    title: 'API Keys',
+    description: 'Create and manage API keys for integrations',
+    icon: Key,
+    href: '/settings/api-keys',
+  },
+  {
+    title: 'Notifications',
+    description: 'Configure email and push notification settings',
+    icon: Bell,
+    href: '/settings/notifications',
+  },
+  {
+    title: 'Appearance',
+    description: 'Customize theme, colors, and display preferences',
+    icon: Palette,
+    href: '/settings/appearance',
+  },
+  {
+    title: 'Integrations',
+    description: 'Connect with third-party services and tools',
+    icon: Plug,
+    href: '/settings/integrations',
+  },
+]
+
+export default function SettingsPage() {
+  return (
+    <div className="container max-w-4xl py-8">
+      <PageHeader
+        title="Settings"
+        description="Manage your account settings and preferences"
+      />
+      
+      <div className="grid gap-4 mt-8">
+        {SETTINGS_SECTIONS.map((section, i) => (
+          <motion.div
+            key={section.href}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
+          >
+            <Link href={section.href}>
+              <Card className="hover:border-primary/50 hover:shadow-md transition-all cursor-pointer group">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                        <section.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold group-hover:text-primary transition-colors">
+                          {section.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          {section.description}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+      
+      {/* Quick Actions */}
+      <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Download className="h-4 w-4" />
+              Export Data
+            </CardTitle>
+            <CardDescription>
+              Download all your data in JSON or CSV format
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button variant="outline" className="w-full">
+              Export All Data
+            </Button>
+          </CardContent>
+        </Card>
+        
+        <Card className="border-destructive/30">
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2 text-destructive">
+              <Shield className="h-4 w-4" />
+              Danger Zone
+            </CardTitle>
+            <CardDescription>
+              Irreversible account actions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button variant="destructive" className="w-full">
+              Delete Account
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
+```
+
+### 7. frontend/next.config.js (Production Optimized)
+
+```javascript
+// Production-optimized Next.js configuration
+// Features:
+// - Image optimization
+// - Bundle analysis
+// - Security headers
+// - Sentry integration
+// - Performance optimizations
+
+const { withSentryConfig } = require('@sentry/nextjs')
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable React strict mode for better development experience
+  reactStrictMode: true,
+  
+  // Enable SWC minification for faster builds
+  swcMinify: true,
+  
+  // Optimize images
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+    ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
+  },
+  
+  // Experimental features
+  experimental: {
+    // Optimize package imports
+    optimizePackageImports: [
+      'lucide-react',
+      'recharts',
+      'framer-motion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+    ],
+    // Enable server actions
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'scamshield.ai'],
+    },
+  },
+  
+  // Compiler options
+  compiler: {
+    // Remove console.log in production
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
+  
+  // Output configuration
+  output: 'standalone',
+  
+  // Powered by header
+  poweredByHeader: false,
+  
+  // Compression
+  compress: true,
+  
+  // Generate ETags
+  generateEtags: true,
+  
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: `
+              default-src 'self';
+              script-src 'self' 'unsafe-eval' 'unsafe-inline' *.vercel-insights.com *.sentry.io;
+              style-src 'self' 'unsafe-inline' fonts.googleapis.com;
+              img-src 'self' data: blob: https:;
+              font-src 'self' fonts.gstatic.com;
+              connect-src 'self' *.vercel-insights.com *.sentry.io ${process.env.NEXT_PUBLIC_API_URL};
+              frame-ancestors 'none';
+              base-uri 'self';
+              form-action 'self';
+            `.replace(/\s{2,}/g, ' ').trim(),
+          },
+        ],
+      },
+    ]
+  },
+  
+  // Redirects
+  async redirects() {
+    return [
+      {
+        source: '/docs',
+        destination: '/docs/getting-started',
+        permanent: false,
+      },
+    ]
+  },
+  
+  // Rewrites for API proxy (optional)
+  async rewrites() {
+    return {
+      beforeFiles: [],
+      afterFiles: [],
+      fallback: [],
+    }
+  },
+  
+  // Webpack configuration
+  webpack: (config, { isServer }) => {
+    // Enable source maps in production
+    if (!isServer) {
+      config.devtool = 'source-map'
+    }
+    
+    // Optimize chunks
+    if (!isServer && process.env.ANALYZE === 'true') {
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          reportFilename: '../analyze/client.html',
+        })
+      )
+    }
+    
+    return config
+  },
+  
+  // Environment variables
+  env: {
+    NEXT_PUBLIC_APP_VERSION: process.env.npm_package_version || '1.0.0',
+    NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
+  },
+}
+
+// Sentry configuration for error tracking
+const sentryWebpackPluginOptions = {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  silent: true,
+  hideSourceMaps: true,
+  disableLogger: true,
+}
+
+// Export with Sentry if configured
+module.exports = process.env.SENTRY_DSN
+  ? withSentryConfig(nextConfig, sentryWebpackPluginOptions)
+  : nextConfig
+```
+
+### 8. frontend/Dockerfile
+
+```dockerfile
+# Production Dockerfile for ScamShield Frontend
+# Multi-stage build for optimized image size
+
+# ===== Stage 1: Dependencies =====
+FROM node:20-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# ===== Stage 2: Builder =====
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Set environment variables for build
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV production
+
+# Build the application
+RUN npm run build
+
+# ===== Stage 3: Runner =====
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+# Set environment variables
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Create non-root user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy necessary files from builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# Set correct permissions
+RUN chown -R nextjs:nodejs /app
+
+# Switch to non-root user
+USER nextjs
+
+# Expose port
+EXPOSE 3000
+
+# Set port environment variable
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Start the application
+CMD ["node", "server.js"]
+```
+
+### 9. frontend/.github/workflows/ci.yml
+
+```yaml
+# Continuous Integration Pipeline
+# Runs on every push and pull request
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
+jobs:
+  # ===== Lint & Type Check =====
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run TypeScript check
+        run: npm run type-check
+
+      - name: Run Prettier check
+        run: npm run format:check
+
+  # ===== Unit Tests =====
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+  # ===== Build =====
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: .next
+          retention-days: 7
+
+  # ===== E2E Tests =====
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .next
+
+      - name: Run E2E tests
+        run: npm run test:e2e
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  # ===== Lighthouse =====
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .next
+
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  # ===== Bundle Size Check =====
+  bundle-size:
+    name: Bundle Size
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: .next
+
+      - name: Check bundle size
+        run: npx bundlewatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### 10. frontend/README.md
+
+```markdown
+# 🛡️ ScamShield Frontend
+
+> AI-Powered Scam Intelligence Dashboard - India AI Impact Buildathon 2026
+
+[![CI](https://github.com/scamshield/frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/scamshield/frontend/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.1-black.svg)](https://nextjs.org/)
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/scamshield/agentic-honeypot.git
+cd agentic-honeypot/frontend
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+
+# Start development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
+
+## 📋 Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎯 **Real-time Dashboard** | Live statistics, session monitoring, intelligence feed |
+| 💬 **Chat Simulator** | Test scam scenarios with AI personas |
+| 🧠 **Intelligence Center** | View and manage extracted entities |
+| 📊 **Analytics** | Charts, reports, and trend analysis |
+| 📚 **API Documentation** | Interactive API reference with playground |
+| 🌙 **Dark Mode** | Full dark/light theme support |
+| 📱 **Responsive** | Works on desktop, tablet, and mobile |
+| ♿ **Accessible** | WCAG 2.1 AA compliant |
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript 5.3 |
+| Styling | Tailwind CSS + shadcn/ui |
+| State | TanStack Query + Zustand |
+| Charts | Recharts |
+| Forms | React Hook Form + Zod |
+| Animations | Framer Motion |
+| Testing | Vitest + Playwright |
+
+## 📁 Project Structure
+
+```
+frontend/
+├── app/                    # Next.js App Router pages
+│   ├── (dashboard)/       # Dashboard routes
+│   ├── (marketing)/       # Public pages
+│   └── api/               # API routes
+├── components/            # React components
+│   ├── ui/               # shadcn/ui components
+│   ├── dashboard/        # Dashboard components
+│   ├── chat/             # Chat interface
+│   ├── docs/             # Documentation
+│   └── marketing/        # Marketing pages
+├── lib/                   # Utilities and hooks
+│   ├── api/              # API client
+│   ├── hooks/            # Custom hooks
+│   ├── stores/           # Zustand stores
+│   └── utils/            # Helper functions
+├── types/                 # TypeScript types
+└── public/               # Static assets
+```
+
+## 🔧 Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run format       # Format with Prettier
+npm run type-check   # TypeScript check
+npm run test         # Run unit tests
+npm run test:e2e     # Run E2E tests
+npm run analyze      # Analyze bundle size
+```
+
+## 🌐 Environment Variables
+
+Create a `.env.local` file with:
+
+```bash
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# App Configuration
+NEXT_PUBLIC_APP_NAME=ScamShield
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Analytics (Optional)
+NEXT_PUBLIC_GA_ID=
+NEXT_PUBLIC_SENTRY_DSN=
+```
+
+## 📦 Deployment
+
+### Vercel (Recommended)
+
+```bash
+npm install -g vercel
+vercel
+```
+
+### Docker
+
+```bash
+docker build -t scamshield-frontend .
+docker run -p 3000:3000 scamshield-frontend
+```
+
+### Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+## 📖 Documentation
+
+- [Getting Started](./docs/GETTING_STARTED.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+- [API Reference](./docs/API.md)
+- [Deployment](./docs/DEPLOYMENT.md)
+- [Contributing](./CONTRIBUTING.md)
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Coverage report
+npm run test:coverage
+```
+
+## 📊 Performance
+
+| Metric | Score |
+|--------|-------|
+| Lighthouse Performance | 95+ |
+| First Contentful Paint | < 1.5s |
+| Time to Interactive | < 3.5s |
+| Cumulative Layout Shift | < 0.1 |
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+## 📄 License
+
+MIT License - see [LICENSE](./LICENSE) for details.
+
+## 👥 Team
+
+Built with ❤️ for India AI Impact Buildathon 2026
+
+---
+
+**ScamShield** - Protecting India from Digital Fraud
+```
+
+## ADDITIONAL FILES TO CREATE
+
+### Documentation Components (11 files)
+- `docs-sidebar.tsx` - Sidebar navigation
+- `docs-header.tsx` - Header with search
+- `docs-toc.tsx` - Table of contents
+- `docs-navigation.tsx` - Prev/next navigation
+- `docs-search.tsx` - Search modal (cmd+k)
+- `code-block.tsx` - Syntax highlighted code
+- `tabs-code.tsx` - Multi-language code tabs
+- `schema-viewer.tsx` - JSON schema display
+- `callout.tsx` - Info/warning callouts
+- `architecture-diagram.tsx` - SVG diagrams
+- `copy-button.tsx` - Copy code button
+
+### Marketing Components (14 files)
+- `hero.tsx` - Hero section
+- `features-grid.tsx` - Features display
+- `stats-section.tsx` - Statistics
+- `tech-stack.tsx` - Technology logos
+- `testimonials.tsx` - Testimonials
+- `cta-section.tsx` - Call to action
+- `footer.tsx` - Footer
+- `navbar.tsx` - Navigation
+- `pricing-card.tsx` - Pricing plans
+- `faq-accordion.tsx` - FAQ
+- `contact-form.tsx` - Contact form
+- `newsletter.tsx` - Newsletter signup
+- `demo-video.tsx` - Demo player
+- `social-proof.tsx` - Trust badges
+
+### Settings Components (9 files)
+- `settings-sidebar.tsx` - Navigation
+- `profile-form.tsx` - Profile settings
+- `api-key-list.tsx` - API keys
+- `api-key-create.tsx` - Create key modal
+- `notification-toggles.tsx` - Notifications
+- `theme-switcher.tsx` - Theme settings
+- `danger-zone.tsx` - Delete account
+- `export-data.tsx` - Data export
+- `integration-card.tsx` - Integrations
+
+### Production Files (20 files)
+- `middleware.ts` - Edge middleware
+- `instrumentation.ts` - OpenTelemetry
+- `sentry.*.config.ts` - Sentry configs
+- `lib/analytics/*` - Analytics
+- `lib/monitoring/*` - Monitoring
+- `lib/seo/*` - SEO utilities
+- `lib/security/*` - Security headers
+
+### CI/CD & Testing (15 files)
+- `.github/workflows/*.yml` - GitHub Actions
+- `playwright.config.ts` - E2E config
+- `vitest.config.ts` - Unit test config
+- `tests/**/*.ts` - Test files
+- `lighthouse.config.js` - Lighthouse CI
+
+### Documentation Files (10 files)
+- `README.md` - Main documentation
+- `CONTRIBUTING.md` - Contribution guide
+- `CHANGELOG.md` - Version history
+- `DEPLOYMENT.md` - Deployment guide
+- `ARCHITECTURE.md` - Architecture docs
+- `SECURITY.md` - Security docs
+- `PERFORMANCE.md` - Performance guide
+- `TESTING.md` - Testing guide
+- `ACCESSIBILITY.md` - A11y guidelines
+- `CODE_OF_CONDUCT.md` - Code of conduct
+
+## QUALITY REQUIREMENTS
+
+### 1. Documentation Quality
+- Complete API reference with examples
+- Interactive playground for testing
+- Architecture diagrams (ASCII + SVG)
+- Step-by-step deployment guides
+- Troubleshooting sections
+
+### 2. Performance Optimization
+- Lighthouse score 95+
+- Core Web Vitals optimized
+- Image optimization with AVIF/WebP
+- Code splitting and lazy loading
+- Efficient caching strategies
+
+### 3. Security Hardening
+- Content Security Policy
+- Security headers (HSTS, X-Frame-Options, etc.)
+- Input validation
+- XSS prevention
+- Rate limiting ready
+
+### 4. Testing Coverage
+- Unit tests for hooks and utilities
+- Component tests with React Testing Library
+- E2E tests with Playwright
+- Visual regression tests
+- Accessibility tests with axe-core
+
+### 5. CI/CD Pipeline
+- Automated linting and type checking
+- Parallel test execution
+- Bundle size monitoring
+- Lighthouse CI audits
+- Preview deployments
+
+### 6. Accessibility
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+- Focus management
+- High contrast support
+
+### 7. SEO Optimization
+- Meta tags and Open Graph
+- Structured data (JSON-LD)
+- Sitemap generation
+- Robots.txt
+- Canonical URLs
+
+### 8. PWA Ready
+- Web app manifest
+- Service worker ready
+- Offline support architecture
+- Install prompts
+
+### 9. Internationalization Ready
+- Locale structure prepared
+- RTL support architecture
+- Date/number formatting
+
+### 10. Monitoring & Analytics
+- Error tracking (Sentry)
+- Performance monitoring
+- User analytics
+- Custom events
+
+Create all 130+ files with complete, production-ready code. This final prompt transforms ScamShield into a fully polished, enterprise-grade application ready for production deployment and hackathon judging. The result should be indistinguishable from products built by Google, Meta, Apple, or Microsoft.
 
 ## ⏹️ END PROMPT 8 ═════════════════════════════════════════════════════════════
 
