@@ -189,7 +189,7 @@ curl -X POST "https://api.scamshield.in/v1/honeypot/continue" \
 ### Get Session Summary
 
 ```bash
-curl "https://api.scamshield.in/v1/honeypot/session/sess_7f3a9b2c" \
+curl "https://api.scamshield.in/v1/sessions/sess_7f3a9b2c" \
   -H "X-API-Key: your_api_key"
 ```
 
