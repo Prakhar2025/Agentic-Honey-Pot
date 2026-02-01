@@ -19,6 +19,7 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 
 from app.api.v1.router import router as v1_router
+from app.api.debug import router as debug_router
 from app.config import get_settings
 from app.middleware.auth import APIKeyMiddleware
 from app.db.database import init_db, engine
@@ -223,6 +224,7 @@ India AI Impact Buildathon 2026 - Agentic Honey-Pot for Scam Detection & Intelli
     
     # Include API routers
     app.include_router(v1_router)
+    app.include_router(debug_router, tags=["Debug"])
     
     # Root endpoint
     @app.get("/", tags=["Root"])
