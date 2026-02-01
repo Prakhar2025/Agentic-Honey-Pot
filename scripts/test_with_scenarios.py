@@ -25,6 +25,13 @@ API_BASE_URL = "http://localhost:8000"
 ENGAGE_ENDPOINT = f"{API_BASE_URL}/v1/honeypot/engage"
 CONTINUE_ENDPOINT = f"{API_BASE_URL}/v1/honeypot/continue"
 
+# Authentication
+API_KEY = "ss_live_scamshield_2026"
+HEADERS = {
+    "X-API-Key": API_KEY,
+    "Content-Type": "application/json"
+}
+
 
 def load_scenarios() -> List[Dict]:
     """Load test scenarios from JSON file."""
@@ -49,6 +56,7 @@ def test_single_scenario(scenario: Dict) -> Dict:
         # Send engage request
         response = requests.post(
             ENGAGE_ENDPOINT,
+            headers=HEADERS,
             json={
                 'scammer_message': scenario['message'],
                 'source_type': scenario['source_type']
