@@ -47,7 +47,7 @@ services:
       
       # LLM config
       - key: GROQ_MODEL
-        value: llama-3.2-90b-vision-preview
+        sync: false  # Allows changing model via dashboard without code push
       
       - key: LLM_TEMPERATURE
         value: "0.7"
