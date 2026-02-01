@@ -62,6 +62,10 @@ services:
       # Security
       - key: RATE_LIMIT_RPM
         value: "100"
+      
+      # Runtime
+      - key: PYTHON_VERSION
+        value: "3.11.9"
     
     # Health check
     healthCheckPath: /health
