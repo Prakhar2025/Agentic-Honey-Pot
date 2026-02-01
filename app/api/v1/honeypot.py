@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field
 
 from app.agent.orchestrator import AgentOrchestrator, get_orchestrator
 from app.db.database import get_db_context
@@ -41,6 +41,8 @@ class EngageRequest(BaseModel):
         max_length=2000,
         description="Initial message from the scammer",
         examples=["Your KYC is expiring. Click link to update."],
+        alias="message",  # Allow "message" as input key
+        validation_alias=AliasChoices("scammer_message", "message", "content", "text"),  # Robust aliases
     )
     source_type: str = Field(
         default="sms",
