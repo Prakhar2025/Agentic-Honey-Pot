@@ -15,10 +15,12 @@ from typing import AsyncGenerator
 
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 
 from app.api.v1.router import router as v1_router
 from app.config import get_settings
+from app.middleware.auth import APIKeyMiddleware
 from app.db.database import init_db, engine
 
 # Configure logging
@@ -120,6 +122,41 @@ India AI Impact Buildathon 2026 - Agentic Honey-Pot for Scam Detection & Intelli
         openapi_url="/openapi.json",
         lifespan=lifespan,
     )
+    
+    # Custom OpenAPI schema with security scheme for API key
+    def custom_openapi():
+        if app.openapi_schema:
+            return app.openapi_schema
+        
+        openapi_schema = get_openapi(
+            title="ScamShield Agentic Honeypot API",
+            version="1.0.0",
+            description=app.description,
+            routes=app.routes,
+        )
+        
+        # Add security scheme for API Key
+        openapi_schema["components"] = openapi_schema.get("components", {})
+        openapi_schema["components"]["securitySchemes"] = {
+            "APIKeyHeader": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-Key",
+                "description": "API key for authentication. Get from hackathon submission.",
+            }
+        }
+        
+        # Apply security globally to all endpoints
+        openapi_schema["security"] = [{"APIKeyHeader": []}]
+        
+        app.openapi_schema = openapi_schema
+        return app.openapi_schema
+    
+    app.openapi = custom_openapi
+    
+    # API Key Authentication Middleware (FIRST - before CORS)
+    # Validates X-API-Key header, returns 401 for invalid keys
+    app.add_middleware(APIKeyMiddleware)
     
     # Configure CORS (allow all for hackathon demo)
     app.add_middleware(

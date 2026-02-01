@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field
 
 from app.agent.orchestrator import AgentOrchestrator, get_orchestrator
 from app.db.database import get_db_context
+from app.db.repositories.intelligence import IntelligenceRepository
 from app.db.repositories.messages import MessageRepository
 from app.db.repositories.sessions import SessionRepository
 
@@ -191,6 +192,13 @@ async def engage_scammer(
                 },
             })
             
+            # Save extracted intelligence to database
+            extracted_intel = result.get("extracted_intel", {})
+            if extracted_intel and any(extracted_intel.values()):
+                intel_repo = IntelligenceRepository(db)
+                await intel_repo.merge_intelligence(session_id, extracted_intel)
+                logger.info(f"Intelligence saved for session {session_id}")
+            
             await db.commit()
         
         total_time = (time.perf_counter() - start_time) * 1000
@@ -316,6 +324,13 @@ async def continue_conversation(
                     "intel_score": result["intel_score"],
                 },
             })
+            
+            # Save extracted intelligence to database
+            extracted_intel = result.get("extracted_intel", {})
+            if extracted_intel and any(extracted_intel.values()):
+                intel_repo = IntelligenceRepository(db)
+                await intel_repo.merge_intelligence(session_id, extracted_intel)
+                logger.info(f"Intelligence updated for session {session_id}")
             
             await db.commit()
         
