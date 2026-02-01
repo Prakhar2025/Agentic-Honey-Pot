@@ -68,7 +68,7 @@ services:
         value: "3.11.9"
     
     # Health check
-    healthCheckPath: /health
+    healthCheckPath: /v1/health
     
     # Auto deploy on push
     autoDeploy: true
