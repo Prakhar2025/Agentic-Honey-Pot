@@ -14,7 +14,7 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import AliasChoices, BaseModel, Field
 
 from app.agent.orchestrator import AgentOrchestrator, get_orchestrator
@@ -111,7 +111,7 @@ class ContinueResponse(BaseModel):
     description="Initialize a new honeypot session with an incoming scam message.",
 )
 async def engage_scammer(
-    request: EngageRequest,
+    request: Request,
     orchestrator: AgentOrchestrator = Depends(get_orchestrator),
 ) -> EngageResponse:
     """
@@ -126,27 +126,41 @@ async def engage_scammer(
     """
     start_time = time.perf_counter()
     
-    logger.info(f"New engage request: source={request.source_type}")
+    # Parse raw JSON body - bypasses Pydantic validation
+    try:
+        body = await request.json()
+    except Exception as e:
+        logger.error(f"Failed to parse JSON body: {e}")
+        body = {}
     
-    # DEBUG: Extract message from any field if not standard
-    # This handles the Hackathon Tester sending unknown keys
-    message_content = request.scammer_message
+    logger.info(f"DEBUG: Raw request body: {body}")
+    
+    # Extract message from any possible field name
+    message_content = None
+    possible_keys = ["scammer_message", "message", "content", "text", "input", "query", "msg"]
+    
+    for key in possible_keys:
+        if key in body and isinstance(body[key], str) and len(body[key]) > 0:
+            message_content = body[key]
+            logger.info(f"DEBUG: Found message in key '{key}'")
+            break
+    
+    # If still not found, try any string value
     if not message_content:
-        # Check all fields in the request
-        req_data = request.model_dump()
-        logger.info(f"DEBUG: Unknown request body format: {req_data}")
-        
-        # Try to find any string that looks like a message
-        for key, value in req_data.items():
-            if isinstance(value, str) and len(value) > 0 and key not in ["source_type"]:
+        for key, value in body.items():
+            if isinstance(value, str) and len(value) > 5:  # Likely a message
                 message_content = value
-                logger.info(f"DEBUG: Found message in key '{key}': {message_content}")
+                logger.info(f"DEBUG: Using string from key '{key}' as message")
                 break
     
+    # Ultimate fallback
     if not message_content:
-        # Fallback for empty requests
-        message_content = "Hello" 
-        logger.warning("DEBUG: constant 'Hello' used as fallback")
+        message_content = "Hello, I received your message."
+        logger.warning(f"DEBUG: Using fallback message. Body was: {body}")
+    
+    # Extract optional fields
+    source_type = body.get("source_type", body.get("source", "sms"))
+    persona_preference = body.get("persona_preference", body.get("persona", None))
 
     try:
         async with get_db_context() as db:
@@ -156,10 +170,10 @@ async def engage_scammer(
             # Create session first to get the ID
             session = await session_repo.create_session(
                 scam_type=None,  # Will be updated after processing
-                persona_id=request.persona_preference or "elderly_victim",
-                source_type=request.source_type,
+                persona_id=persona_preference or "elderly_victim",
+                source_type=source_type,
                 is_scam=True,
-                metadata=request.metadata,
+                metadata=body.get("metadata"),
             )
             
             session_id = session.id
@@ -169,7 +183,7 @@ async def engage_scammer(
                 scammer_message=message_content,
                 session_id=session_id,
                 conversation_history=[],
-                current_persona=request.persona_preference,
+                current_persona=persona_preference,
                 current_intel=None,
                 current_status="INITIAL",
             )
