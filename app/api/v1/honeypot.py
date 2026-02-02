@@ -12,7 +12,7 @@ Endpoints:
 import logging
 import time
 from datetime import datetime, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import AliasChoices, BaseModel, Field
@@ -47,6 +47,14 @@ class EngageRequest(BaseModel):
         extra = "allow"
 
 
+class ExtractedIntelligence(BaseModel):
+    """Model for extracted intelligence data."""
+    bank_accounts: List[str] = Field(default_factory=list)
+    upi_ids: List[str] = Field(default_factory=list)
+    phone_numbers: List[str] = Field(default_factory=list)
+    phishing_links: List[str] = Field(default_factory=list)
+
+
 class EngageResponse(BaseModel):
     """Response model for engage endpoint."""
     
@@ -58,6 +66,7 @@ class EngageResponse(BaseModel):
     scam_confidence: float = Field(..., description="Scam detection confidence")
     conversation_status: str = Field(..., description="Current conversation status")
     turn_count: int = Field(..., description="Current turn number")
+    extracted_intelligence: ExtractedIntelligence = Field(..., description="Extracted intelligence data")
     processing_time_ms: float = Field(..., description="Processing time in milliseconds")
 
 
@@ -212,6 +221,15 @@ async def engage_scammer(
             f"scam_type={result['scam_type']}, time={total_time:.0f}ms"
         )
         
+        # Build extracted intelligence for response
+        intel_data = result.get("extracted_intel", {})
+        intelligence = ExtractedIntelligence(
+            bank_accounts=[b.get("account_number", "") for b in intel_data.get("bank_accounts", [])],
+            upi_ids=[u.get("id", "") for u in intel_data.get("upi_ids", [])],
+            phone_numbers=[p.get("number", "") for p in intel_data.get("phone_numbers", [])],
+            phishing_links=[l.get("url", "") for l in intel_data.get("phishing_links", [])],
+        )
+        
         return EngageResponse(
             session_id=session_id,
             response=result["response"],
@@ -221,6 +239,7 @@ async def engage_scammer(
             scam_confidence=result["scam_confidence"],
             conversation_status=result["conversation_status"],
             turn_count=result["turn_count"],
+            extracted_intelligence=intelligence,
             processing_time_ms=round(total_time, 2),
         )
         
