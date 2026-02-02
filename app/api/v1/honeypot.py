@@ -106,7 +106,7 @@ class ContinueResponse(BaseModel):
 @router.post(
     "/engage",
     response_model=EngageResponse,
-    status_code=status.HTTP_201_CREATED,
+    status_code=status.HTTP_200_OK,
     summary="Start New Scam Conversation",
     description="Initialize a new honeypot session with an incoming scam message.",
 )
