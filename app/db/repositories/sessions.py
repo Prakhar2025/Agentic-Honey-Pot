@@ -50,6 +50,7 @@ class SessionRepository(BaseRepository[SessionModel]):
         source_type: Optional[str] = None,
         is_scam: bool = True,
         metadata: Optional[Dict[str, Any]] = None,
+        session_id: Optional[str] = None,
     ) -> SessionModel:
         """
         Create a new honeypot session.
@@ -60,6 +61,7 @@ class SessionRepository(BaseRepository[SessionModel]):
             source_type: Message source (sms, whatsapp, etc.).
             is_scam: Whether message is classified as scam.
             metadata: Additional session metadata.
+            session_id: Optional custom session ID (for hackathon compatibility).
         
         Returns:
             SessionModel: The created session.
@@ -73,6 +75,11 @@ class SessionRepository(BaseRepository[SessionModel]):
             "turn_count": 0,
             "metadata_json": metadata,
         }
+        
+        # Use custom session ID if provided (for hackathon)
+        if session_id:
+            session_data["id"] = session_id
+        
         return await self.create(session_data)
     
     async def get_with_relations(
