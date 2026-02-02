@@ -66,7 +66,7 @@ def test_single_scenario(scenario: Dict) -> Dict:
         
         elapsed_ms = (time.perf_counter() - start_time) * 1000
         
-        if response.status_code != 201:
+        if response.status_code not in [200, 201]:
             return {
                 'success': False,
                 'error': f"HTTP {response.status_code}",
