@@ -1,13 +1,8 @@
-<![CDATA[# 💻 Backend Development Guide
-
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.11+-blue?style=for-the-badge&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688?style=for-the-badge&logo=fastapi)
+# 💻 Backend Development Guide
 
 **Complete Guide to Backend Development**
 
-</div>
+Python 3.11+ | FastAPI 0.109.0
 
 ---
 
@@ -62,6 +57,7 @@ nano .env     # Linux/macOS
 ```
 
 Required environment variables:
+
 ```env
 # LLM Configuration (Required)
 GROQ_API_KEY=gsk_your_api_key_here
@@ -85,6 +81,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 Access points:
+
 - **API**: http://localhost:8000
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
@@ -158,6 +155,7 @@ app/
 ## 🔧 Code Conventions
 
 ### Python Style
+
 - **Formatter**: Black (line length 88)
 - **Linter**: Ruff
 - **Type Hints**: Required for all functions
@@ -192,6 +190,7 @@ async def process_message(
 ```
 
 ### Naming Conventions
+
 | Type | Convention | Example |
 |------|------------|---------|
 | Variables | snake_case | `session_id` |
@@ -311,21 +310,25 @@ SCAM_PATTERNS = {
 ## 🧪 Testing
 
 ### Run All Tests
+
 ```bash
 pytest tests/ -v
 ```
 
 ### Run Specific Test
+
 ```bash
 pytest tests/test_honeypot.py::test_engage -v
 ```
 
 ### Run with Coverage
+
 ```bash
 pytest tests/ --cov=app --cov-report=html
 ```
 
 ### Test Scenarios
+
 ```bash
 python scripts/test_with_scenarios.py
 ```
@@ -335,6 +338,7 @@ python scripts/test_with_scenarios.py
 ## 🐛 Debugging Tips
 
 ### Enable Debug Logging
+
 ```python
 # app/config.py
 import logging
@@ -342,6 +346,7 @@ logging.basicConfig(level=logging.DEBUG)
 ```
 
 ### Use Debug Endpoint
+
 ```bash
 curl -X POST "http://localhost:8000/v1/debug/echo" \
   -H "Content-Type: application/json" \
@@ -349,6 +354,7 @@ curl -X POST "http://localhost:8000/v1/debug/echo" \
 ```
 
 ### Check LLM Responses
+
 ```python
 # Temporarily log LLM output
 logger.debug(f"LLM Response: {response}")
@@ -361,4 +367,3 @@ logger.debug(f"LLM Response: {response}")
 - [API Reference](./API_REFERENCE.md)
 - [Database Schema](./DATABASE_SCHEMA.md)
 - [Testing Guide](./TESTING.md)
-]]>

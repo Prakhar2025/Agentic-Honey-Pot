@@ -1,13 +1,8 @@
-<![CDATA[# 🗄️ Database Schema
-
-<div align="center">
-
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0.25-orange?style=for-the-badge)
-![SQLite](https://img.shields.io/badge/SQLite-Async-blue?style=for-the-badge)
+# 🗄️ Database Schema
 
 **Complete Database Documentation**
 
-</div>
+SQLAlchemy 2.0.25 | SQLite (Async)
 
 ---
 
@@ -73,6 +68,7 @@ Stores honeypot conversation sessions.
 | `updated_at` | TIMESTAMP | No | NOW | Last updated |
 
 **Status Values:**
+
 - `INITIAL` - Session created
 - `ONGOING` - Active conversation
 - `COMPLETED` - Successfully concluded
@@ -81,6 +77,7 @@ Stores honeypot conversation sessions.
 - `SAFETY_EXIT` - Safety boundary triggered
 
 **Indexes:**
+
 - `ix_sessions_status` on `status`
 - `ix_sessions_scam_type` on `scam_type`
 - `ix_sessions_created_at` on `created_at`
@@ -102,10 +99,12 @@ Stores individual messages in conversations.
 | `created_at` | TIMESTAMP | No | NOW | Message time |
 
 **Indexes:**
+
 - `ix_messages_session_id` on `session_id`
 - `ix_messages_turn_number` on `turn_number`
 
 **Foreign Key:**
+
 - `session_id` → `sessions.id` (CASCADE DELETE)
 
 ---
@@ -127,6 +126,7 @@ Stores extracted scammer information.
 | `updated_at` | TIMESTAMP | No | NOW | Last updated |
 
 **JSON Structure Example:**
+
 ```json
 {
   "bank_accounts_json": [
@@ -149,6 +149,7 @@ Stores extracted scammer information.
 ```
 
 **Foreign Key:**
+
 - `session_id` → `sessions.id` (CASCADE DELETE)
 
 ---
@@ -198,6 +199,7 @@ class SessionModel(Base):
 ## 🔄 Migration Strategy
 
 ### Current: Auto-create
+
 ```python
 # app/db/database.py
 async def init_db():
@@ -206,6 +208,7 @@ async def init_db():
 ```
 
 ### Future: Alembic (Planned)
+
 ```bash
 # Initialize Alembic
 alembic init alembic
@@ -222,6 +225,7 @@ alembic upgrade head
 ## 💾 Backup Procedures
 
 ### SQLite Backup
+
 ```bash
 # Copy database file
 cp honeypot.db honeypot_backup_$(date +%Y%m%d).db
@@ -231,6 +235,7 @@ sqlite3 honeypot.db .dump > backup.sql
 ```
 
 ### Restore
+
 ```bash
 sqlite3 honeypot_restored.db < backup.sql
 ```
@@ -241,4 +246,3 @@ sqlite3 honeypot_restored.db < backup.sql
 
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
 - [API Reference](./API_REFERENCE.md)
-]]>

@@ -1,25 +1,19 @@
-<![CDATA[# 🏗️ System Architecture
-
-<div align="center">
-
-![Architecture](https://img.shields.io/badge/Architecture-Production%20Grade-blue?style=for-the-badge)
+# 🏗️ System Architecture
 
 **ScamShield Agentic Honeypot - Technical Architecture**
-
-</div>
 
 ---
 
 ## 📋 Table of Contents
 
-- [High-Level Architecture](#high-level-architecture)
-- [Component Diagram](#component-diagram)
-- [Data Flow](#data-flow)
-- [Agentic Loop](#agentic-loop)
-- [Sequence Diagrams](#sequence-diagrams)
-- [Design Patterns](#design-patterns)
-- [Scalability](#scalability)
-- [Technology Decisions](#technology-decisions)
+- [High-Level Architecture](#-high-level-architecture)
+- [Component Diagram](#-component-diagram)
+- [Data Flow](#-data-flow)
+- [Agentic Loop](#-agentic-loop)
+- [Sequence Diagrams](#-sequence-diagrams)
+- [Design Patterns](#-design-patterns)
+- [Scalability](#-scalability)
+- [Technology Decisions](#-technology-decisions)
 
 ---
 
@@ -201,52 +195,48 @@ The core of ScamShield is an **autonomous agent loop** that handles multi-turn c
 │                          AGENTIC CONVERSATION LOOP                       │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
-│    ┌─────────────────────────────────────────────────────────────┐      │
-│    │                                                             │      │
-│    │   ┌─────────┐                                               │      │
-│    │   │ RECEIVE │◀──────────────────────────────────────┐      │      │
-│    │   │ MESSAGE │                                        │      │      │
-│    │   └────┬────┘                                        │      │      │
-│    │        │                                             │      │      │
-│    │        ▼                                             │      │      │
-│    │   ┌─────────┐     ┌─────────┐                       │      │      │
-│    │   │ DETECT  │────▶│ SCAM?   │                       │      │      │
-│    │   │  SCAM   │     │ Y/N     │                       │      │      │
-│    │   └─────────┘     └────┬────┘                       │      │      │
-│    │                        │                            │      │      │
-│    │        ┌───────────────┴───────────────┐            │      │      │
-│    │        │ YES                       NO  │            │      │      │
-│    │        ▼                               ▼            │      │      │
-│    │   ┌─────────┐                    ┌─────────┐       │      │      │
-│    │   │ SELECT  │                    │  POLITE │       │      │      │
-│    │   │ PERSONA │                    │  EXIT   │       │      │      │
-│    │   └────┬────┘                    └─────────┘       │      │      │
-│    │        │                                            │      │      │
-│    │        ▼                                            │      │      │
-│    │   ┌─────────┐                                       │      │      │
-│    │   │ EXTRACT │ ◀─── Intelligence (phones, UPIs)     │      │      │
-│    │   │  INTEL  │                                       │      │      │
-│    │   └────┬────┘                                       │      │      │
-│    │        │                                            │      │      │
-│    │        ▼                                            │      │      │
-│    │   ┌─────────┐     ┌─────────┐                       │      │      │
-│    │   │ GENERATE│────▶│  LLM    │                       │      │      │
-│    │   │ RESPONSE│     │ (Groq)  │                       │      │      │
-│    │   └────┬────┘     └─────────┘                       │      │      │
-│    │        │                                            │      │      │
-│    │        ▼                                            │      │      │
-│    │   ┌─────────┐     ┌──────────────────────────┐     │      │      │
-│    │   │ DECIDE  │────▶│ Continue? Max turns?     │     │      │      │
-│    │   │ ACTION  │     │ Safety boundary hit?     │     │      │      │
-│    │   └────┬────┘     └──────────────────────────┘     │      │      │
-│    │        │                                            │      │      │
-│    │        ├───── CONTINUE ─────────────────────────────┘      │      │
-│    │        │                                                    │      │
-│    │        └───── END ──▶ ┌─────────┐                          │      │
-│    │                       │ CALLBACK│ (GUVI Report)            │      │
-│    │                       └─────────┘                          │      │
-│    │                                                             │      │
-│    └─────────────────────────────────────────────────────────────┘      │
+│       ┌─────────┐                                                        │
+│       │ RECEIVE │◀──────────────────────────────────────┐               │
+│       │ MESSAGE │                                        │               │
+│       └────┬────┘                                        │               │
+│            │                                             │               │
+│            ▼                                             │               │
+│       ┌─────────┐     ┌─────────┐                       │               │
+│       │ DETECT  │────▶│ SCAM?   │                       │               │
+│       │  SCAM   │     │ Y/N     │                       │               │
+│       └─────────┘     └────┬────┘                       │               │
+│                            │                            │               │
+│            ┌───────────────┴───────────────┐            │               │
+│            │ YES                       NO  │            │               │
+│            ▼                               ▼            │               │
+│       ┌─────────┐                    ┌─────────┐       │               │
+│       │ SELECT  │                    │  POLITE │       │               │
+│       │ PERSONA │                    │  EXIT   │       │               │
+│       └────┬────┘                    └─────────┘       │               │
+│            │                                            │               │
+│            ▼                                            │               │
+│       ┌─────────┐                                       │               │
+│       │ EXTRACT │ ◀─── Intelligence (phones, UPIs)     │               │
+│       │  INTEL  │                                       │               │
+│       └────┬────┘                                       │               │
+│            │                                            │               │
+│            ▼                                            │               │
+│       ┌─────────┐     ┌─────────┐                       │               │
+│       │ GENERATE│────▶│  LLM    │                       │               │
+│       │ RESPONSE│     │ (Groq)  │                       │               │
+│       └────┬────┘     └─────────┘                       │               │
+│            │                                            │               │
+│            ▼                                            │               │
+│       ┌─────────┐     ┌──────────────────────────┐     │               │
+│       │ DECIDE  │────▶│ Continue? Max turns?     │     │               │
+│       │ ACTION  │     │ Safety boundary hit?     │     │               │
+│       └────┬────┘     └──────────────────────────┘     │               │
+│            │                                            │               │
+│            ├───── CONTINUE ─────────────────────────────┘               │
+│            │                                                             │
+│            └───── END ──▶ ┌─────────┐                                   │
+│                           │ CALLBACK│ (GUVI Report)                     │
+│                           └─────────┘                                   │
 │                                                                          │
 └──────────────────────────────────────────────────────────────────────────┘
 ```
@@ -301,7 +291,6 @@ The core of ScamShield is an **autonomous agent loop** that handles multi-turn c
    │ 200 OK           │                   │                │            │
    │ {session_id...}  │                   │                │            │
    │◀─────────────────│                   │                │            │
-   │                  │                   │                │            │
 ```
 
 ### Conversation Continuation
@@ -366,6 +355,7 @@ The core of ScamShield is an **autonomous agent loop** that handles multi-turn c
 ## 🎨 Design Patterns
 
 ### 1. Repository Pattern
+
 ```python
 # Abstraction over data access
 class SessionRepository(BaseRepository[SessionModel]):
@@ -374,6 +364,7 @@ class SessionRepository(BaseRepository[SessionModel]):
 ```
 
 ### 2. Strategy Pattern (Personas)
+
 ```python
 # Interchangeable personas
 class BasePersona(ABC):
@@ -386,6 +377,7 @@ class ElderlyVictim(BasePersona):
 ```
 
 ### 3. Dependency Injection
+
 ```python
 # FastAPI dependency injection
 @router.post("/engage")
@@ -396,6 +388,7 @@ async def engage(
 ```
 
 ### 4. Singleton (LLM Client)
+
 ```python
 # Single LLM client instance
 _llm_client: Optional[GroqClient] = None
@@ -456,14 +449,14 @@ def get_llm_client() -> GroqClient:
 
 | Decision | Rationale |
 |----------|-----------|
-| **FastAPI** | Async, fast, automatic OpenAPI docs |
-| **SQLite** | Zero config, portable, sufficient for MVP |
-| **Groq** | Fastest LLM inference, free tier |
-| **LLaMA 3.3-70b** | Best open-source quality/speed ratio |
-| **Pydantic v2** | Fastest validation, great DX |
-| **aiosqlite** | Async SQLite for non-blocking I/O |
-| **Repository Pattern** | Clean separation, testable |
-| **API Key Auth** | Simple, sufficient for this use case |
+| FastAPI | Async, fast, automatic OpenAPI docs |
+| SQLite | Zero config, portable, sufficient for MVP |
+| Groq | Fastest LLM inference, free tier |
+| LLaMA 3.3-70b | Best open-source quality/speed ratio |
+| Pydantic v2 | Fastest validation, great DX |
+| aiosqlite | Async SQLite for non-blocking I/O |
+| Repository Pattern | Clean separation, testable |
+| API Key Auth | Simple, sufficient for this use case |
 
 ---
 
@@ -472,4 +465,3 @@ def get_llm_client() -> GroqClient:
 - [API Reference](./API_REFERENCE.md)
 - [Database Schema](./DATABASE_SCHEMA.md)
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
-]]>

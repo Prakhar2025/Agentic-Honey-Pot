@@ -1,13 +1,8 @@
-<![CDATA[# 🧪 Testing Guide
-
-<div align="center">
-
-![Testing](https://img.shields.io/badge/Tests-100%20Scenarios-success?style=for-the-badge)
-![Coverage](https://img.shields.io/badge/Coverage-85%25-green?style=for-the-badge)
+# 🧪 Testing Guide
 
 **Comprehensive Testing Documentation**
 
-</div>
+Tests: 100 Scenarios | Coverage: 85%
 
 ---
 
@@ -234,7 +229,6 @@ async def test_full_scam_conversation():
 ### Sample Scenario File
 
 ```json
-// data/test_scenarios/kyc_fraud.json
 [
   {
     "id": "kyc_001",
@@ -318,4 +312,3 @@ jobs:
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
 - [API Reference](./API_REFERENCE.md)
 - [Troubleshooting](./TROUBLESHOOTING.md)
-]]>

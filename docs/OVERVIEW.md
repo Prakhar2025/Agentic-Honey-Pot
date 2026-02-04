@@ -1,12 +1,8 @@
-<![CDATA[# 📖 Project Overview
+# 📖 Project Overview
 
-<div align="center">
-
-![ScamShield](https://img.shields.io/badge/ScamShield-Agentic%20Honeypot-blueviolet?style=for-the-badge)
+**ScamShield - Agentic Honeypot**
 
 **Protecting India from Online Scams Through AI-Powered Intelligence**
-
-</div>
 
 ---
 
@@ -18,14 +14,15 @@ Online scams have become increasingly sophisticated:
 
 | Scam Type | Impact |
 |-----------|--------|
-| **UPI Fraud** | ₹14,000+ crore lost in 2024 |
-| **KYC Phishing** | 45% of all reported scams |
-| **Investment Scams** | Average loss ₹2.5 lakhs per victim |
-| **Lottery/Prize Scams** | Target 60+ age group primarily |
+| UPI Fraud | ₹14,000+ crore lost in 2024 |
+| KYC Phishing | 45% of all reported scams |
+| Investment Scams | Average loss ₹2.5 lakhs per victim |
+| Lottery/Prize Scams | Target 60+ age group primarily |
 
 ### The Challenge
 
 Traditional detection methods fail because:
+
 - 🔄 Scammers rapidly change tactics
 - 🎭 Social engineering bypasses technical filters
 - ⏱️ Real-time response is impossible manually
@@ -59,50 +56,53 @@ ScamShield is an **AI-powered autonomous system** that:
 ## ✨ Key Features
 
 ### 🤖 Autonomous Agent
+
 | Feature | Description |
 |---------|-------------|
-| **Multi-turn Conversations** | Maintains context across 10+ message exchanges |
-| **Self-Correction** | Adjusts persona if scammer suspects detection |
-| **Dynamic Responses** | No two conversations are identical |
-| **Safe Boundaries** | Never provides real sensitive information |
+| Multi-turn Conversations | Maintains context across 10+ message exchanges |
+| Self-Correction | Adjusts persona if scammer suspects detection |
+| Dynamic Responses | No two conversations are identical |
+| Safe Boundaries | Never provides real sensitive information |
 
 ### 🎭 Victim Personas (5 Types)
 
 | Persona | Behavior | Best For |
 |---------|----------|----------|
-| **Elderly Victim** | Confused, trusting, slow to understand | KYC, Tech Support |
-| **Tech Novice** | Overwhelmed, asks many questions | All scam types |
-| **Eager Investor** | Greedy, impatient, wants quick returns | Investment, Lottery |
-| **Busy Professional** | Distracted, in hurry, minimal attention | OTP, Quick scams |
-| **Helpful Auntie** | Oversharing, chatty, gives extra info | All scam types |
+| Elderly Victim | Confused, trusting, slow to understand | KYC, Tech Support |
+| Tech Novice | Overwhelmed, asks many questions | All scam types |
+| Eager Investor | Greedy, impatient, wants quick returns | Investment, Lottery |
+| Busy Professional | Distracted, in hurry, minimal attention | OTP, Quick scams |
+| Helpful Auntie | Oversharing, chatty, gives extra info | All scam types |
 
 ### 🔍 Intelligence Extraction (7 Entity Types)
 
 | Entity | Pattern | Example |
 |--------|---------|---------|
-| **Phone Number** | +91-XXXXXXXXXX | +91-9876543210 |
-| **UPI ID** | user@bank | scammer@ybl |
-| **Bank Account** | 11-16 digit number | 50100123456789 |
-| **IFSC Code** | 11 character code | HDFC0001234 |
-| **Email** | email@domain | scam@fake.com |
-| **URL** | http(s)://... | http://phishing.site |
-| **Crypto Wallet** | 26-42 character hash | 0x1234...abcd |
+| Phone Number | +91-XXXXXXXXXX | +91-9876543210 |
+| UPI ID | user@bank | scammer@ybl |
+| Bank Account | 11-16 digit number | 50100123456789 |
+| IFSC Code | 11 character code | HDFC0001234 |
+| Email | email@domain | scam@fake.com |
+| URL | http(s)://... | http://phishing.site |
+| Crypto Wallet | 26-42 character hash | 0x1234...abcd |
 
 ### 📊 8 Scam Types Detected
 
-```
-┌────────────────┬────────────────┬────────────────┬────────────────┐
-│   KYC_FRAUD    │ LOTTERY_SCAM   │  TECH_SUPPORT  │INVESTMENT_FRAUD│
-├────────────────┼────────────────┼────────────────┼────────────────┤
-│   JOB_SCAM     │   LOAN_SCAM    │   OTP_FRAUD    │    UNKNOWN     │
-└────────────────┴────────────────┴────────────────┴────────────────┘
-```
+- KYC_FRAUD - KYC/bank verification scams
+- LOTTERY_SCAM - Fake lottery/prize scams
+- TECH_SUPPORT - Fake tech support
+- INVESTMENT_FRAUD - Fake investment schemes
+- JOB_SCAM - Fake job offers
+- LOAN_SCAM - Fake loan offers
+- OTP_FRAUD - OTP theft attempts
+- UNKNOWN - Unclassified scams
 
 ---
 
 ## 🛠️ Technology Stack
 
 ### Backend
+
 | Component | Technology | Version |
 |-----------|------------|---------|
 | Framework | FastAPI | 0.109.0 |
@@ -113,6 +113,7 @@ ScamShield is an **AI-powered autonomous system** that:
 | LLM | Groq API | LLaMA 3.3-70b-versatile |
 
 ### Frontend (Planned)
+
 | Component | Technology | Version |
 |-----------|------------|---------|
 | Framework | Next.js | 14 |
@@ -122,6 +123,7 @@ ScamShield is an **AI-powered autonomous system** that:
 | State | TanStack Query | 5.x |
 
 ### Infrastructure
+
 | Component | Provider |
 |-----------|----------|
 | Backend Hosting | Render.com |
@@ -135,12 +137,12 @@ ScamShield is an **AI-powered autonomous system** that:
 
 | Metric | Value |
 |--------|-------|
-| **Response Latency** | < 2 seconds |
-| **Concurrent Sessions** | 100+ |
-| **Conversation Length** | Up to 20 turns |
-| **Entity Accuracy** | 95%+ |
-| **Scam Detection** | 90%+ accuracy |
-| **API uptime** | 99.9% target |
+| Response Latency | < 2 seconds |
+| Concurrent Sessions | 100+ |
+| Conversation Length | Up to 20 turns |
+| Entity Accuracy | 95%+ |
+| Scam Detection | 90%+ accuracy |
+| API uptime | 99.9% target |
 
 ---
 
@@ -148,29 +150,32 @@ ScamShield is an **AI-powered autonomous system** that:
 
 | User Type | Use Case |
 |-----------|----------|
-| **Law Enforcement** | Scammer network identification |
-| **Cybersecurity Teams** | Threat intelligence |
-| **Banks & Fintech** | Fraud prevention |
-| **Telecom Providers** | Number blacklisting |
-| **Researchers** | Scam pattern analysis |
+| Law Enforcement | Scammer network identification |
+| Cybersecurity Teams | Threat intelligence |
+| Banks & Fintech | Fraud prevention |
+| Telecom Providers | Number blacklisting |
+| Researchers | Scam pattern analysis |
 
 ---
 
 ## 📍 Use Cases
 
 ### 1. Proactive Scammer Engagement
+
 ```
 User forwards suspicious message → ScamShield engages →
 Intelligence extracted → Reported to authorities
 ```
 
 ### 2. Honeypot Deployment
+
 ```
 Decoy phone numbers published → Scammers call/text →
 AI handles conversation → Data collected at scale
 ```
 
 ### 3. Training Data Generation
+
 ```
 Real scam conversations captured → Anonymized →
 Used to train better detection models
@@ -193,6 +198,7 @@ Used to train better detection models
 ## 🗺️ Roadmap
 
 ### Phase 1: Backend (✅ Complete)
+
 - [x] FastAPI server setup
 - [x] Database schema design
 - [x] LLM integration (Groq)
@@ -203,6 +209,7 @@ Used to train better detection models
 - [x] Production deployment
 
 ### Phase 2: Frontend (🚧 In Progress)
+
 - [ ] Dashboard with real-time stats
 - [ ] Session management UI
 - [ ] Intelligence browser
@@ -210,6 +217,7 @@ Used to train better detection models
 - [ ] Chat simulation interface
 
 ### Phase 3: Advanced Features (📋 Planned)
+
 - [ ] Webhook notifications
 - [ ] Multi-language support
 - [ ] Voice call integration
@@ -226,9 +234,4 @@ Used to train better detection models
 
 ---
 
-<div align="center">
-
 **ScamShield: Turning the tables on scammers with AI**
-
-</div>
-]]>

@@ -1,13 +1,8 @@
-<![CDATA[# 🎨 Frontend Development Guide
-
-<div align="center">
-
-![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)
+# 🎨 Frontend Development Guide
 
 **Guide to Frontend Development**
 
-</div>
+Next.js 14 | Tailwind CSS 3.4
 
 ---
 
@@ -25,13 +20,13 @@
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
-| **Framework** | Next.js 14 (App Router) | React framework |
-| **Styling** | Tailwind CSS 3.4 | Utility-first CSS |
-| **Components** | shadcn/ui | UI component library |
-| **Charts** | Recharts | Data visualization |
-| **State** | TanStack Query | Server state management |
-| **Forms** | React Hook Form + Zod | Form handling |
-| **Icons** | Lucide React | Icon library |
+| Framework | Next.js 14 (App Router) | React framework |
+| Styling | Tailwind CSS 3.4 | Utility-first CSS |
+| Components | shadcn/ui | UI component library |
+| Charts | Recharts | Data visualization |
+| State | TanStack Query | Server state management |
+| Forms | React Hook Form + Zod | Form handling |
+| Icons | Lucide React | Icon library |
 
 ---
 
@@ -245,6 +240,7 @@ export function useSession(id: string) {
 ### Dashboard (Home)
 
 Features:
+
 - Total sessions count
 - Active sessions
 - Intelligence extracted
@@ -255,6 +251,7 @@ Features:
 ### Sessions
 
 Features:
+
 - Paginated session list
 - Filter by status, scam type
 - Search functionality
@@ -264,6 +261,7 @@ Features:
 ### Intelligence
 
 Features:
+
 - Entity browser
 - Filter by entity type
 - Confidence scores
@@ -272,6 +270,7 @@ Features:
 ### Analytics
 
 Features:
+
 - Scam type pie chart
 - Timeline bar chart
 - Session metrics
@@ -280,6 +279,7 @@ Features:
 ### Chat Simulation
 
 Features:
+
 - Start new session
 - Send test messages
 - View AI responses
@@ -367,4 +367,3 @@ vercel
 - [API Reference](./API_REFERENCE.md)
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
 - [Deployment](./DEPLOYMENT.md)
-]]>

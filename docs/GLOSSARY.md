@@ -1,10 +1,6 @@
-<![CDATA[# 📘 Glossary
-
-<div align="center">
+# 📘 Glossary
 
 **Terms & Definitions**
-
-</div>
 
 ---
 
@@ -129,4 +125,3 @@
 
 - [Overview](./OVERVIEW.md)
 - [API Reference](./API_REFERENCE.md)
-]]>

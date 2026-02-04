@@ -1,20 +1,12 @@
-<![CDATA[<div align="center">
-
 # 🛡️ ScamShield
 
 ### Agentic Honey-Pot for Scam Detection & Intelligence Extraction
 
-![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688?logo=fastapi&logoColor=white)
-![Groq](https://img.shields.io/badge/LLM-Groq%20LLaMA%203.3-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Production-success)
+**Python 3.11+** | **FastAPI 0.109.0** | **Groq LLaMA 3.3** | **MIT License** | **Production Ready**
 
 **AI-powered autonomous system that engages scammers and extracts intelligence**
 
 [Documentation](./docs/index.md) · [API Reference](./docs/API_REFERENCE.md) · [Live Demo](https://scamshield-honeypot.onrender.com/docs)
-
-</div>
 
 ---
 
@@ -81,8 +73,8 @@ cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
-📍 **API**: http://localhost:8000  
-📍 **Docs**: http://localhost:8000/docs
+- **API**: http://localhost:8000
+- **Docs**: http://localhost:8000/docs
 
 ---
 
@@ -99,6 +91,7 @@ curl -X POST "http://localhost:8000/v1/honeypot/engage" \
 ```
 
 **Response:**
+
 ```json
 {
   "session_id": "sess_abc123",
@@ -155,9 +148,9 @@ app/
 
 | Environment | URL |
 |-------------|-----|
-| **Production API** | https://scamshield-honeypot.onrender.com |
-| **Swagger Docs** | https://scamshield-honeypot.onrender.com/docs |
-| **Health Check** | https://scamshield-honeypot.onrender.com/v1/health |
+| Production API | https://scamshield-honeypot.onrender.com |
+| Swagger Docs | https://scamshield-honeypot.onrender.com/docs |
+| Health Check | https://scamshield-honeypot.onrender.com/v1/health |
 
 ---
 
@@ -191,11 +184,6 @@ MIT License - see [LICENSE](./LICENSE)
 
 ---
 
-<div align="center">
-
 **Made with ❤️ for a safer India**
 
 [⭐ Star this repo](https://github.com/Prakhar2025/Agentic-Honey-Pot) · [🐛 Report Bug](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues) · [✨ Request Feature](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues)
-
-</div>
-]]>

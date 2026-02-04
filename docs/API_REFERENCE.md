@@ -1,30 +1,20 @@
-<![CDATA[# 📡 API Reference
+# 📡 API Reference
 
-<div align="center">
-
-![API Version](https://img.shields.io/badge/API%20Version-v1-blue?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Stable-success?style=for-the-badge)
+**API Version:** v1 | **Status:** Stable
 
 **Complete API Documentation for ScamShield Honeypot**
-
-</div>
 
 ---
 
 ## 📋 Table of Contents
 
-- [Base URL](#base-url)
-- [Authentication](#authentication)
-- [Rate Limiting](#rate-limiting)
-- [Response Format](#response-format)
-- [Endpoints](#endpoints)
-  - [Honeypot](#honeypot-endpoints)
-  - [Sessions](#session-endpoints)
-  - [Intelligence](#intelligence-endpoints)
-  - [Analytics](#analytics-endpoints)
-  - [Health](#health-endpoints)
-- [Error Codes](#error-codes)
-- [Pagination](#pagination)
+- [Base URL](#-base-url)
+- [Authentication](#-authentication)
+- [Rate Limiting](#️-rate-limiting)
+- [Response Format](#-response-format)
+- [Endpoints](#-endpoints)
+- [Error Codes](#-error-codes)
+- [Pagination](#-pagination)
 
 ---
 
@@ -32,8 +22,8 @@
 
 | Environment | Base URL |
 |-------------|----------|
-| **Production** | `https://scamshield-honeypot.onrender.com` |
-| **Local Development** | `http://localhost:8000` |
+| Production | `https://scamshield-honeypot.onrender.com` |
+| Local Development | `http://localhost:8000` |
 
 **API Version:** All endpoints are prefixed with `/v1/`
 
@@ -43,11 +33,12 @@
 
 All protected endpoints require an API key in the request header:
 
-```http
+```
 x-api-key: YOUR_API_KEY
 ```
 
 ### Public Endpoints (No Auth Required)
+
 - `GET /` - Root endpoint
 - `GET /v1/health` - Health check
 - `GET /v1/health/ready` - Readiness check
@@ -56,6 +47,7 @@ x-api-key: YOUR_API_KEY
 - `GET /redoc` - ReDoc UI
 
 ### Protected Endpoints
+
 All other endpoints require valid API key.
 
 ---
@@ -64,12 +56,13 @@ All other endpoints require valid API key.
 
 | Tier | Requests/Minute | Burst |
 |------|-----------------|-------|
-| **Free** | 60 | 10 |
-| **Standard** | 300 | 50 |
-| **Enterprise** | Unlimited | - |
+| Free | 60 | 10 |
+| Standard | 300 | 50 |
+| Enterprise | Unlimited | - |
 
 Rate limit headers:
-```http
+
+```
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 45
 X-RateLimit-Reset: 1706184000
@@ -80,6 +73,7 @@ X-RateLimit-Reset: 1706184000
 ## 📦 Response Format
 
 ### Success Response
+
 ```json
 {
   "status": "success",
@@ -92,6 +86,7 @@ X-RateLimit-Reset: 1706184000
 ```
 
 ### Error Response
+
 ```json
 {
   "status": "error",
@@ -114,6 +109,7 @@ X-RateLimit-Reset: 1706184000
 Start a new honeypot session with an incoming scam message.
 
 **Request:**
+
 ```http
 POST /v1/honeypot/engage
 Content-Type: application/json
@@ -140,6 +136,7 @@ x-api-key: YOUR_API_KEY
 | `metadata` | object | No | Additional context |
 
 **Response:**
+
 ```json
 {
   "session_id": "sess_abc123def456",
@@ -161,6 +158,7 @@ x-api-key: YOUR_API_KEY
 ```
 
 **Example (cURL):**
+
 ```bash
 curl -X POST "https://scamshield-honeypot.onrender.com/v1/honeypot/engage" \
   -H "Content-Type: application/json" \
@@ -178,11 +176,6 @@ curl -X POST "https://scamshield-honeypot.onrender.com/v1/honeypot/engage" \
 Continue an existing honeypot conversation.
 
 **Request:**
-```http
-POST /v1/honeypot/continue
-Content-Type: application/json
-x-api-key: YOUR_API_KEY
-```
 
 ```json
 {
@@ -199,6 +192,7 @@ x-api-key: YOUR_API_KEY
 | `metadata` | object | No | Additional context |
 
 **Response:**
+
 ```json
 {
   "session_id": "sess_abc123def456",
@@ -223,13 +217,8 @@ x-api-key: YOUR_API_KEY
 
 Get details of a specific session.
 
-**Request:**
-```http
-GET /v1/honeypot/session/sess_abc123def456
-x-api-key: YOUR_API_KEY
-```
-
 **Response:**
+
 ```json
 {
   "id": "sess_abc123def456",
@@ -270,13 +259,8 @@ x-api-key: YOUR_API_KEY
 
 Delete a session and all associated data.
 
-**Request:**
-```http
-DELETE /v1/honeypot/session/sess_abc123def456
-x-api-key: YOUR_API_KEY
-```
-
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -293,6 +277,7 @@ x-api-key: YOUR_API_KEY
 List all sessions with optional filtering.
 
 **Query Parameters:**
+
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `page` | int | 1 | Page number |
@@ -303,12 +288,13 @@ List all sessions with optional filtering.
 | `end_date` | string | - | ISO date filter |
 
 **Example:**
-```http
+
+```
 GET /v1/sessions?page=1&page_size=10&status=ONGOING
-x-api-key: YOUR_API_KEY
 ```
 
 **Response:**
+
 ```json
 {
   "items": [
@@ -334,6 +320,7 @@ x-api-key: YOUR_API_KEY
 Get extracted intelligence for a session.
 
 **Response:**
+
 ```json
 {
   "session_id": "sess_abc123",
@@ -382,12 +369,14 @@ Get extracted intelligence for a session.
 List all extracted intelligence across sessions.
 
 **Query Parameters:**
+
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `entity_type` | string | `bank_account`, `upi_id`, `phone`, `url` |
 | `min_confidence` | float | Minimum confidence score (0-1) |
 
 **Response:**
+
 ```json
 {
   "items": [
@@ -413,6 +402,7 @@ List all extracted intelligence across sessions.
 Get overall analytics summary.
 
 **Response:**
+
 ```json
 {
   "total_sessions": 1250,
@@ -437,6 +427,7 @@ Get overall analytics summary.
 Get scam type distribution.
 
 **Response:**
+
 ```json
 {
   "distribution": [
@@ -460,12 +451,14 @@ Get scam type distribution.
 Get session timeline data.
 
 **Query Parameters:**
+
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
 | `period` | string | `7d` | `24h`, `7d`, `30d`, `90d` |
 | `granularity` | string | `day` | `hour`, `day`, `week` |
 
 **Response:**
+
 ```json
 {
   "data": [
@@ -488,6 +481,7 @@ Get session timeline data.
 Basic health check.
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -503,6 +497,7 @@ Basic health check.
 Readiness check with component status.
 
 **Response:**
+
 ```json
 {
   "status": "ready",
@@ -522,6 +517,7 @@ Readiness check with component status.
 Liveness probe (Kubernetes compatible).
 
 **Response:**
+
 ```json
 {
   "status": "alive"
@@ -567,4 +563,3 @@ List endpoints support cursor-based pagination:
 - [Architecture](./ARCHITECTURE.md) - System design
 - [Backend Development](./BACKEND_DEVELOPMENT.md) - Development guide
 - [Testing](./TESTING.md) - API testing guide
-]]>

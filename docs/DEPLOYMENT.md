@@ -1,27 +1,21 @@
-<![CDATA[# 🚀 Deployment Guide
-
-<div align="center">
-
-![Deployment](https://img.shields.io/badge/Deployment-Production%20Ready-success?style=for-the-badge)
+# 🚀 Deployment Guide
 
 **Complete Deployment Documentation**
-
-</div>
 
 ---
 
 ## 📋 Table of Contents
 
-- [Environment Variables](#environment-variables)
-- [Backend Deployment (Render)](#backend-deployment-rendercom)
-- [Frontend Deployment (Vercel)](#frontend-deployment-vercel)
-- [Docker Deployment](#docker-deployment)
-- [Docker Compose](#docker-compose)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Health Checks](#health-checks)
-- [Monitoring](#monitoring)
-- [Logging](#logging)
-- [Scaling](#scaling)
+- [Environment Variables](#-environment-variables)
+- [Backend Deployment (Render)](#-backend-deployment-rendercom)
+- [Frontend Deployment (Vercel)](#-frontend-deployment-vercel)
+- [Docker Deployment](#-docker-deployment)
+- [Docker Compose](#-docker-compose)
+- [CI/CD Pipeline](#-cicd-pipeline)
+- [Health Checks](#-health-checks)
+- [Monitoring](#-monitoring)
+- [Logging](#-logging)
+- [Scaling](#-scaling)
 
 ---
 
@@ -67,7 +61,9 @@ DATABASE_URL=sqlite+aiosqlite:///./honeypot.db
 
 ### Method 1: One-Click Deploy
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+Click the button below to deploy to Render:
+
+[Deploy to Render](https://render.com/deploy)
 
 ### Method 2: Manual Setup
 
@@ -81,15 +77,16 @@ DATABASE_URL=sqlite+aiosqlite:///./honeypot.db
 
 | Setting | Value |
 |---------|-------|
-| **Name** | scamshield-honeypot |
-| **Runtime** | Python 3 |
-| **Build Command** | `pip install -r requirements.txt` |
-| **Start Command** | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
-| **Plan** | Free |
+| Name | scamshield-honeypot |
+| Runtime | Python 3 |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| Plan | Free |
 
 #### 3. Set Environment Variables
 
 In Render Dashboard → Environment:
+
 ```
 GROQ_API_KEY=gsk_xxx
 API_KEY=ss_live_xxx
@@ -129,7 +126,7 @@ services:
 
 ### Method 1: One-Click Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+[Deploy with Vercel](https://vercel.com/new)
 
 ### Method 2: CLI Deploy
 
@@ -150,7 +147,6 @@ vercel --prod
 ### Vercel Configuration
 
 ```json
-// vercel.json
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
@@ -175,7 +171,6 @@ vercel --prod
 ### Dockerfile
 
 ```dockerfile
-# Dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -342,7 +337,6 @@ jobs:
 ### Render Health Check
 
 ```yaml
-# render.yaml
 healthCheckPath: /v1/health
 ```
 
@@ -379,9 +373,9 @@ readinessProbe:
 
 1. Create account at [uptimerobot.com](https://uptimerobot.com)
 2. Add new monitor:
-   - **Type**: HTTP(s)
-   - **URL**: `https://scamshield-honeypot.onrender.com/v1/health`
-   - **Interval**: 5 minutes
+   - Type: HTTP(s)
+   - URL: `https://scamshield-honeypot.onrender.com/v1/health`
+   - Interval: 5 minutes
 
 ### Metrics to Monitor
 
@@ -396,6 +390,7 @@ readinessProbe:
 ### Render Dashboard
 
 Render provides built-in metrics:
+
 - Request count
 - Response time
 - Memory usage
@@ -408,14 +403,13 @@ Render provides built-in metrics:
 ### Configuration
 
 ```python
-# app/main.py
 import logging
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.StreamHandler(),  # Console
+        logging.StreamHandler(),
     ]
 )
 ```
@@ -449,6 +443,7 @@ logger.info(json.dumps({
 ### Log Aggregation (Optional)
 
 For production, consider:
+
 - **Papertrail** - Log aggregation
 - **Datadog** - Full observability
 - **Sentry** - Error tracking
@@ -460,11 +455,10 @@ For production, consider:
 ### Horizontal Scaling
 
 ```yaml
-# render.yaml
 services:
   - type: web
     name: scamshield-honeypot
-    plan: standard  # Enables autoscaling
+    plan: standard
     autoDeploy: true
     scaling:
       minInstances: 1
@@ -483,10 +477,10 @@ services:
 
 ### Performance Tips
 
-1. **Enable Response Caching** for analytics endpoints
-2. **Use Connection Pooling** for database
-3. **Implement Rate Limiting** to prevent abuse
-4. **Add CDN** for static assets (frontend)
+1. Enable Response Caching for analytics endpoints
+2. Use Connection Pooling for database
+3. Implement Rate Limiting to prevent abuse
+4. Add CDN for static assets (frontend)
 
 ---
 
@@ -495,4 +489,3 @@ services:
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
 - [Security](./SECURITY.md)
 - [Troubleshooting](./TROUBLESHOOTING.md)
-]]>

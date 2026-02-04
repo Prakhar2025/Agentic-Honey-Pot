@@ -1,19 +1,10 @@
-<![CDATA[# 📚 ScamShield Documentation
+# 📚 ScamShield Documentation
 
-<div align="center">
-
-![ScamShield Logo](https://img.shields.io/badge/ScamShield-Agentic%20Honeypot-blueviolet?style=for-the-badge&logo=shield)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Production-success?style=flat-square)
-![Python](https://img.shields.io/badge/Python-3.11+-blue?style=flat-square&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.109.0-009688?style=flat-square&logo=fastapi)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+**ScamShield - Agentic Honeypot** | Version 1.0.0 | Status: Production
 
 **AI-Powered Autonomous Scam Engagement & Intelligence Extraction System**
 
 *Built for India AI Impact Buildathon 2026*
-
-</div>
 
 ---
 
@@ -39,32 +30,23 @@
 
 ## ✨ Key Features
 
-<table>
-<tr>
-<td width="50%">
-
 ### 🤖 Agentic AI Core
+
 - Autonomous multi-turn conversations
 - Self-correcting behavior
 - Dynamic persona switching
 - Intelligent engagement timing
 
-</td>
-<td width="50%">
-
 ### 🎭 5 Victim Personas
+
 - Elderly Victim (confused grandparent)
 - Tech Novice (overwhelmed user)
 - Eager Investor (greedy target)
 - Busy Professional (distracted)
 - Helpful Auntie (oversharing)
 
-</td>
-</tr>
-<tr>
-<td width="50%">
-
 ### 🔍 Intelligence Extraction
+
 - Bank account numbers
 - UPI IDs
 - Phone numbers
@@ -72,10 +54,8 @@
 - Email addresses
 - Crypto wallets
 
-</td>
-<td width="50%">
-
 ### 📊 8 Scam Types Detected
+
 - KYC Fraud
 - Lottery Scam
 - Tech Support Scam
@@ -85,23 +65,19 @@
 - OTP Fraud
 - Unknown/Other
 
-</td>
-</tr>
-</table>
-
 ---
 
 ## 🛠️ Technology Stack
 
 | Layer | Technology |
 |-------|------------|
-| **Backend Framework** | FastAPI 0.109.0 |
-| **Language** | Python 3.11+ |
-| **LLM Provider** | Groq (LLaMA 3.3-70b-versatile) |
-| **Database** | SQLAlchemy 2.0 + aiosqlite |
-| **Validation** | Pydantic 2.5.3 |
-| **Frontend** | Next.js 14 + Tailwind CSS (Planned) |
-| **Deployment** | Render.com (Backend) + Vercel (Frontend) |
+| Backend Framework | FastAPI 0.109.0 |
+| Language | Python 3.11+ |
+| LLM Provider | Groq (LLaMA 3.3-70b-versatile) |
+| Database | SQLAlchemy 2.0 + aiosqlite |
+| Validation | Pydantic 2.5.3 |
+| Frontend | Next.js 14 + Tailwind CSS (Planned) |
+| Deployment | Render.com (Backend) + Vercel (Frontend) |
 
 ---
 
@@ -125,8 +101,8 @@ cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
-📍 API available at: `http://localhost:8000`  
-📍 Documentation: `http://localhost:8000/docs`
+- **API available at:** `http://localhost:8000`
+- **Documentation:** `http://localhost:8000/docs`
 
 ---
 
@@ -146,6 +122,7 @@ curl -X POST "http://localhost:8000/v1/honeypot/engage" \
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -159,9 +136,9 @@ curl -X POST "http://localhost:8000/v1/honeypot/engage" \
 
 | Environment | URL |
 |-------------|-----|
-| **Production API** | https://scamshield-honeypot.onrender.com |
-| **API Docs** | https://scamshield-honeypot.onrender.com/docs |
-| **Health Check** | https://scamshield-honeypot.onrender.com/v1/health |
+| Production API | https://scamshield-honeypot.onrender.com |
+| API Docs | https://scamshield-honeypot.onrender.com/docs |
+| Health Check | https://scamshield-honeypot.onrender.com/v1/health |
 
 ---
 
@@ -194,11 +171,6 @@ This project is licensed under the MIT License - see [LICENSE](../LICENSE) file.
 
 ---
 
-<div align="center">
-
 **Made with ❤️ for a safer India**
 
 [Report Bug](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues) · [Request Feature](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues)
-
-</div>
-]]>

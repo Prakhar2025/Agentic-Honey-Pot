@@ -1,12 +1,6 @@
-<![CDATA[# 🔒 Security Documentation
-
-<div align="center">
-
-![Security](https://img.shields.io/badge/Security-Enterprise%20Grade-green?style=for-the-badge&logo=shield)
+# 🔒 Security Documentation
 
 **Security Practices & Considerations**
-
-</div>
 
 ---
 
@@ -39,11 +33,12 @@
 
 All protected endpoints require a valid API key:
 
-```http
+```
 x-api-key: YOUR_API_KEY
 ```
 
 **Implementation:**
+
 ```python
 # app/middleware/auth.py
 class APIKeyMiddleware(BaseHTTPMiddleware):
@@ -166,7 +161,7 @@ class EngageRequest(BaseModel):
 
 ### Response Headers
 
-```http
+```
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 45
 X-RateLimit-Reset: 1706184000
@@ -203,6 +198,7 @@ app.add_middleware(
 ### Purpose
 
 ScamShield is designed to:
+
 - ✅ Protect potential scam victims
 - ✅ Gather intelligence on scam operations
 - ✅ Support law enforcement
@@ -211,6 +207,7 @@ ScamShield is designed to:
 ### Boundaries
 
 ScamShield will NEVER:
+
 - ❌ Provide real personal information
 - ❌ Complete actual transactions
 - ❌ Share real OTPs or credentials
@@ -268,6 +265,7 @@ python scripts/cleanup_old_data.py --days 90
 ### Contact
 
 For security issues, contact:
+
 - Email: security@scamshield.example
 - GitHub: Create private security advisory
 
@@ -278,4 +276,3 @@ For security issues, contact:
 - [API Reference](./API_REFERENCE.md)
 - [Deployment](./DEPLOYMENT.md)
 - [Troubleshooting](./TROUBLESHOOTING.md)
-]]>

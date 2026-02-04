@@ -1,12 +1,8 @@
-<![CDATA[# 🤝 Contributing Guide
-
-<div align="center">
-
-![Contributors](https://img.shields.io/badge/Contributors-Welcome-brightgreen?style=for-the-badge)
+# 🤝 Contributing Guide
 
 **Guidelines for Contributing to ScamShield**
 
-</div>
+Contributors Welcome!
 
 ---
 
@@ -254,6 +250,7 @@ Any other information
 ## 🏆 Recognition
 
 Contributors are recognized in:
+
 - README.md contributors section
 - Release notes
 - GitHub contributors page
@@ -273,4 +270,3 @@ Contributors are recognized in:
 - [Backend Development](./BACKEND_DEVELOPMENT.md)
 - [Testing Guide](./TESTING.md)
 - [Security](./SECURITY.md)
-]]>
