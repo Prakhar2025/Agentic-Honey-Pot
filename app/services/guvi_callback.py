@@ -81,17 +81,23 @@ class GUVICallbackService:
             bool: True if callback succeeded, False otherwise
         """
         try:
-            # Build payload
+            # Build payload - extract string values from intelligence objects
+            bank_accounts = [b.get("account_number", "") for b in intelligence.get("bank_accounts", [])]
+            upi_ids = [u.get("id", "") for u in intelligence.get("upi_ids", [])]
+            phishing_links = [p.get("url", "") for p in intelligence.get("phishing_links", [])]
+            phone_numbers = [p.get("number", "") for p in intelligence.get("phone_numbers", [])]
+            suspicious_keywords = intelligence.get("suspicious_keywords", [])
+            
             payload = GUVICallbackPayload(
                 sessionId=session_id,
                 scamDetected=scam_detected,
                 totalMessagesExchanged=total_messages,
                 extractedIntelligence=ExtractedIntelligencePayload(
-                    bankAccounts=intelligence.get("bank_accounts", []),
-                    upiIds=intelligence.get("upi_ids", []),
-                    phishingLinks=intelligence.get("phishing_links", []),
-                    phoneNumbers=intelligence.get("phone_numbers", []),
-                    suspiciousKeywords=intelligence.get("suspicious_keywords", []),
+                    bankAccounts=bank_accounts,
+                    upiIds=upi_ids,
+                    phishingLinks=phishing_links,
+                    phoneNumbers=phone_numbers,
+                    suspiciousKeywords=suspicious_keywords,
                 ),
                 agentNotes=agent_notes or f"Scam engagement completed at {datetime.utcnow().isoformat()}",
             )
