@@ -150,8 +150,17 @@ class AgentOrchestrator:
                 turn_count=turn_count,
             )
             
-            # 3. Extract intelligence from scammer message
-            new_intel = self.extractor.extract_all(scammer_message)
+            # 3. Extract intelligence from full conversation context
+            # We aggregate all scammer messages to catch entities split across messages
+            # or to provide better context for patterns.
+            all_scammer_text = " ".join([
+                msg.get("content", "") 
+                for msg in conversation_history 
+                if msg.get("role") == "scammer"
+            ])
+            all_scammer_text += f" {scammer_message}"
+            
+            new_intel = self.extractor.extract_all(all_scammer_text)
             
             # 4. Merge with existing intelligence
             merged_intel = self.aggregator.merge_intelligence(
