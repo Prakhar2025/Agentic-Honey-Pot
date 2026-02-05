@@ -251,12 +251,32 @@ async def hackathon_honeypot(
             )
             
             if should_send_callback:
-                # Build suspicious keywords from message
+                # Build suspicious keywords from ALL messages (not just current)
                 suspicious_keywords = []
-                keywords_to_check = ["urgent", "verify", "blocked", "suspended", "otp", "upi", "bank", "account"]
+                keywords_to_check = ["urgent", "verify", "blocked", "suspended", "otp", "upi", "bank", "account", 
+                                   "kyc", "expir", "click", "link", "password", "pin", "cvv", "card", "transfer",
+                                   "prize", "lottery", "winner", "refund", "cashback", "immediately", "now"]
+                
+                # Check current message
+                message_lower = message_text.lower()
                 for kw in keywords_to_check:
-                    if kw in message_text.lower():
+                    if kw in message_lower:
                         suspicious_keywords.append(kw)
+                
+                # Check ALL conversation history
+                for msg in request.conversationHistory:
+                    if msg.sender == "scammer":
+                        msg_lower = msg.text.lower()
+                        for kw in keywords_to_check:
+                            if kw in msg_lower and kw not in suspicious_keywords:
+                                suspicious_keywords.append(kw)
+                
+                # CRITICAL FIX: Fallback scam detection using keyword analysis
+                # If orchestrator returns 0% but we have high-risk keywords, mark as scam
+                keyword_scam_detected = len(suspicious_keywords) >= 2 or any(
+                    kw in suspicious_keywords for kw in ["otp", "password", "pin", "cvv", "kyc", "blocked"]
+                )
+                final_scam_detected = scam_confidence > 0.3 or keyword_scam_detected or has_extracted_intel
                 
                 # Prepare intelligence for callback (pass raw extracted_intel)
                 intel_for_callback = {
@@ -290,6 +310,7 @@ async def hackathon_honeypot(
                 
                 # DETAILED LOGGING for debugging GUVI callback
                 logger.info(f"[GUVI_CALLBACK] Session: {session_id}")
+                logger.info(f"[GUVI_CALLBACK] Scam Detected: {final_scam_detected} (confidence={scam_confidence:.0%}, keywords={len(suspicious_keywords)}, intel={has_extracted_intel})")
                 logger.info(f"[GUVI_CALLBACK] Intel: UPIs={[u.get('id') for u in intel_for_callback.get('upi_ids', [])]}, "
                            f"Phones={[p.get('number') for p in intel_for_callback.get('phone_numbers', [])]}, "
                            f"Accounts={[a.get('account_number') for a in intel_for_callback.get('bank_accounts', [])]}")
@@ -299,7 +320,7 @@ async def hackathon_honeypot(
                 try:
                     callback_success = await send_guvi_callback(
                         session_id=session_id,
-                        scam_detected=scam_confidence > 0.3,
+                        scam_detected=final_scam_detected,  # Use fallback detection
                         total_messages=turn_count * 2,  # Approximate (scammer + agent messages)
                         intelligence=intel_for_callback,
                         agent_notes=agent_notes,
