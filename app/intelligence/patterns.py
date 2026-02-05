@@ -41,8 +41,10 @@ PHONE_PATTERN: Pattern[str] = re.compile(
 )
 
 # More flexible phone pattern for noisy text
+# Requires stronger boundary checks to avoid matching random number sequences
 PHONE_PATTERN_FLEXIBLE: Pattern[str] = re.compile(
     r"""
+    (?<!\d)                     # Not preceded by digit
     (?:
         (?:\+91|91|0)?[\s.\-]?
     )?
@@ -51,6 +53,7 @@ PHONE_PATTERN_FLEXIBLE: Pattern[str] = re.compile(
         (?:\d[\s.\-]?){8}
         \d
     )
+    (?!\d)                      # Not followed by digit
     """,
     re.VERBOSE
 )
@@ -121,7 +124,7 @@ UPI_PATTERN_GENERIC: Pattern[str] = re.compile(
 # Excludes patterns that look like phone numbers
 BANK_ACCOUNT_PATTERN: Pattern[str] = re.compile(
     r"""
-    (?<![0-9+])                 # Not preceded by digit or +
+    (?<![0-9])                  # Not preceded by digit
     (?!(?:\+91|91)?[6-9]\d{9})  # Not a phone number
     \(?                         # Optional opening parenthesis
     (
@@ -146,7 +149,7 @@ BANK_ACCOUNT_CONTEXT_PATTERN: Pattern[str] = re.compile(
     )
     [\s.:]*
     \(?                         # Optional opening parenthesis
-    (\d{9,18})                  # Account number
+    (\d{8,18})                  # Account number (8-18 digits)
     \)?                         # Optional closing parenthesis
     """,
     re.VERBOSE | re.IGNORECASE
