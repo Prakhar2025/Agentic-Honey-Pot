@@ -236,14 +236,35 @@ async def hackathon_honeypot(
                     "suspicious_keywords": suspicious_keywords,
                 }
                 
+                # Build detailed agent notes for evaluation
+                intel_summary_parts = []
+                if extracted_intel.get("phone_numbers"):
+                    intel_summary_parts.append(f"{len(extracted_intel['phone_numbers'])} phone(s)")
+                if extracted_intel.get("upi_ids"):
+                    intel_summary_parts.append(f"{len(extracted_intel['upi_ids'])} UPI(s)")
+                if extracted_intel.get("bank_accounts"):
+                    intel_summary_parts.append(f"{len(extracted_intel['bank_accounts'])} account(s)")
+                if extracted_intel.get("phishing_links"):
+                    intel_summary_parts.append(f"{len(extracted_intel['phishing_links'])} link(s)")
+                
+                intel_summary = ", ".join(intel_summary_parts) if intel_summary_parts else "none"
+                agent_notes = (
+                    f"Scam Type: {scam_type} | "
+                    f"Confidence: {scam_confidence:.0%} | "
+                    f"Turns: {turn_count} | "
+                    f"Intel Extracted: {intel_summary} | "
+                    f"Persona: {result.get('persona_used', 'elderly_victim')} | "
+                    f"Status: {conversation_status}"
+                )
+                
                 # Send callback asynchronously (don't block response)
                 try:
                     callback_success = await send_guvi_callback(
                         session_id=session_id,
                         scam_detected=scam_confidence > 0.3,
-                        total_messages=turn_count * 2,  # Approximate
+                        total_messages=turn_count * 2,  # Approximate (scammer + agent messages)
                         intelligence=intel_for_callback,
-                        agent_notes=f"Detected {scam_type} scam with {scam_confidence:.0%} confidence. Persona: {result.get('persona_used', 'unknown')}",
+                        agent_notes=agent_notes,
                     )
                     if callback_success:
                         logger.info(f"[HACKATHON] GUVI callback sent for session {session_id}")

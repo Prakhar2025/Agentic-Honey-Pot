@@ -28,6 +28,7 @@ from typing import Pattern
 # Allows: spaces, dashes, dots as separators
 PHONE_PATTERN: Pattern[str] = re.compile(
     r"""
+    (?<!\d)                     # Not preceded by digit (prevents matching inside longer numbers)
     (?:
         (?:\+91|91|0)?          # Optional country/STD code
         [\s.\-]?                # Optional separator

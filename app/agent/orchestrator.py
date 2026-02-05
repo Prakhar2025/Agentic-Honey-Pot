@@ -18,8 +18,9 @@ Usage:
 
 import asyncio
 import logging
+import random
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 from app.agent.decision_engine import DecisionEngine, get_decision_engine
 from app.agent.state_machine import ConversationStateMachine, ConversationState, ConversationEvent
@@ -93,6 +94,10 @@ class AgentOrchestrator:
         
         self.settings = get_settings()
         self._state_machines: Dict[str, ConversationStateMachine] = {}
+        
+        # Track used responses per session to prevent repetition
+        self._used_responses: Dict[str, Set[str]] = {}
+        self._used_fallbacks: Dict[str, List[int]] = {}
         
         logger.info("AgentOrchestrator initialized")
     
@@ -218,6 +223,7 @@ class AgentOrchestrator:
                 error=str(e),
                 turn_count=turn_count,
                 processing_time=(time.perf_counter() - start_time) * 1000,
+                session_id=session_id,
             )
         except Exception as e:
             logger.exception(f"Unexpected error during processing: {e}")
@@ -225,6 +231,7 @@ class AgentOrchestrator:
                 error=str(e),
                 turn_count=turn_count,
                 processing_time=(time.perf_counter() - start_time) * 1000,
+                session_id=session_id,
             )
     
     async def generate_response(
@@ -400,22 +407,35 @@ class AgentOrchestrator:
             return """
 CURRENT PHASE: BUILD TRUST
 - Act confused but interested
-- Ask basic clarifying questions
+- Ask basic clarifying questions like "What bank? Which account?"
 - Show concern about the issue they mentioned
+- Express worry about your money being safe
 """
         elif turn_count <= 5:
             return """
-CURRENT PHASE: EXTRACT INFORMATION
-- Ask for their contact details to "verify"
-- Request payment/bank details (where to pay, account number)
-- Ask them to confirm your details first
+CURRENT PHASE: EXTRACT INFORMATION (CRITICAL)
+- Ask for THEIR details: "Where should I send the money? Give me your account number"
+- Request THEIR phone number: "Give me your number so I can call you back"
+- Ask for THEIR UPI: "What is your UPI ID for the refund?"
+- Say things like: "Let me note down your details for my records"
+- Pretend you want to send payment and need THEIR bank account
+- Ask: "Which branch should I visit? What is the IFSC code?"
+"""
+        elif turn_count <= 8:
+            return """
+CURRENT PHASE: CONFIRM AND VERIFY
+- Repeat back details they gave to "confirm" (this makes them repeat info)
+- Ask them to send the link again "just to be sure"
+- Request another phone number "in case this one doesn't work"
+- Ask for alternate UPI ID for backup
 """
         else:
             return """
-CURRENT PHASE: STALL AND CONFIRM
-- Stall by being confused or distracted
-- Ask them to repeat important details
-- Mention obstacles (glasses, grandchild not home, etc.)
+CURRENT PHASE: STALL AND EXTEND
+- Stall by being confused: "Wait, which account number did you say?"
+- Mention obstacles: "Let me find my reading glasses"
+- Ask them to wait: "One minute, let me get pen and paper"
+- KEEP ASKING FOR THEIR DETAILS even while stalling
 """
     
     def _format_history(
@@ -486,32 +506,87 @@ CURRENT PHASE: STALL AND CONFIRM
         
         return response.strip()
     
+    # SMS-appropriate fallback phrases (no voice/call references - this is TEXT messaging)
+    FALLBACK_PHRASES = [
+        # Confusion stalls
+        "Haan... ek minute... phone hang ho gaya...",
+        "Wait beta, message properly nahi dikh raha... screen blur hai...",
+        "Ek second, let me read this again slowly...",
+        "Beta mujhe samajh nahi aa raha, please phir se explain karo...",
+        "Arey, ye message cut ho gaya kya? Poora nahi dikha...",
+        
+        # Technical stalls (SMS appropriate)
+        "Wait, mera phone slow ho gaya hai...",
+        "Ek minute, battery low hai, charger lagata hoon...",
+        "Screen pe kuch aur aa gaya, ek second...",
+        "Message type karne mein time lag raha hai, patience rakhiye...",
+        "Mera phone restart ho raha hai, please wait...",
+        
+        # Personal stalls
+        "Haan haan, bass ek minute, chai lene gaya tha...",
+        "Beta abhi busy hoon, but batao kya karna hai...",
+        "Let me find my reading glasses first...",
+        "Wait, door pe koi aaya hai... ek minute...",
+        "Sorry beta, dusra message aa gaya tha...",
+        
+        # Confused but engaged
+        "Acha acha, toh aapka matlab kya hai exactly?",
+        "Haan beta, but ye KYC kya hota hai? Samjhao...",
+        "Main confused hoon, please step by step batao...",
+        "Thoda slowly explain karo na beta...",
+        "Arey ye sab mujhe samajh nahi aata, grandson se help leni padegi...",
+        
+        # Asking for scammer details (extraction attempt)
+        "Acha, but aapka number kya hai? Main note kar loon...",
+        "Ye payment kahan bhejna hai? Account number do apna...",
+        "Aapka UPI ID kya hai? Main likh leti hoon...",
+        "Aap konsi branch se ho? Address batao...",
+        "Aapka naam kya hai beta? Main yaad rakhna chahti hoon...",
+    ]
+    
+    def _get_varied_fallback(self, session_id: str) -> str:
+        """
+        Get a fallback phrase that hasn't been used recently in this session.
+        Prevents repetitive responses.
+        """
+        if session_id not in self._used_fallbacks:
+            self._used_fallbacks[session_id] = []
+        
+        used_indices = self._used_fallbacks[session_id]
+        available_indices = [i for i in range(len(self.FALLBACK_PHRASES)) if i not in used_indices]
+        
+        # Reset if all phrases used
+        if not available_indices:
+            self._used_fallbacks[session_id] = []
+            available_indices = list(range(len(self.FALLBACK_PHRASES)))
+        
+        # Pick random from available
+        chosen_idx = random.choice(available_indices)
+        self._used_fallbacks[session_id].append(chosen_idx)
+        
+        # Keep only last 10 to allow recycling after a while
+        if len(self._used_fallbacks[session_id]) > 10:
+            self._used_fallbacks[session_id] = self._used_fallbacks[session_id][-10:]
+        
+        return self.FALLBACK_PHRASES[chosen_idx]
+    
     def _error_response(
         self,
         error: str,
         turn_count: int,
         processing_time: float,
+        session_id: str = "unknown",
     ) -> Dict[str, Any]:
-        """Generate error response."""
-        """Generate error response."""
-        import random
-        
-        fallback_phrases = [
-            "Haan... ek minute... network problem ho raha hai...",
-            "Beta, I cannot hear you properly... voice is breaking...",
-            "Wait, my phone is hanging... screen is stuck...",
-            "Hello? Hello? Are you there? My signal is weak...",
-            "Beta, let me go to the other room, signal is bad here...",
-            "One second beta, my grandson is calling on the other line...",
-        ]
+        """Generate error response with varied, non-repetitive fallback."""
+        fallback = self._get_varied_fallback(session_id)
         
         return {
-            "response": random.choice(fallback_phrases),
+            "response": fallback,
             "persona_used": "elderly_victim",
             "persona_display_name": "Elderly Victim",
             "extracted_intel": {},
             "new_intel_this_turn": {},
-            "conversation_status": "ERROR",
+            "conversation_status": "ONGOING",  # Keep going even on error
             "scam_type": "UNKNOWN",
             "scam_confidence": 0.0,
             "turn_count": turn_count,
