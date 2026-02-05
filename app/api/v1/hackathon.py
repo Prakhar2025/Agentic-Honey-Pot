@@ -227,12 +227,12 @@ async def hackathon_honeypot(
                     if kw in message_text.lower():
                         suspicious_keywords.append(kw)
                 
-                # Prepare intelligence for callback
+                # Prepare intelligence for callback (pass raw extracted_intel)
                 intel_for_callback = {
-                    "bank_accounts": [b.get("account_number", "") for b in extracted_intel.get("bank_accounts", [])],
-                    "upi_ids": [u.get("id", "") for u in extracted_intel.get("upi_ids", [])],
-                    "phishing_links": [l.get("url", "") for l in extracted_intel.get("phishing_links", [])],
-                    "phone_numbers": [p.get("number", "") for p in extracted_intel.get("phone_numbers", [])],
+                    "bank_accounts": extracted_intel.get("bank_accounts", []),
+                    "upi_ids": extracted_intel.get("upi_ids", []),
+                    "phishing_links": extracted_intel.get("phishing_links", []),
+                    "phone_numbers": extracted_intel.get("phone_numbers", []),
                     "suspicious_keywords": suspicious_keywords,
                 }
                 
