@@ -493,8 +493,20 @@ CURRENT PHASE: STALL AND CONFIRM
         processing_time: float,
     ) -> Dict[str, Any]:
         """Generate error response."""
+        """Generate error response."""
+        import random
+        
+        fallback_phrases = [
+            "Haan... ek minute... network problem ho raha hai...",
+            "Beta, I cannot hear you properly... voice is breaking...",
+            "Wait, my phone is hanging... screen is stuck...",
+            "Hello? Hello? Are you there? My signal is weak...",
+            "Beta, let me go to the other room, signal is bad here...",
+            "One second beta, my grandson is calling on the other line...",
+        ]
+        
         return {
-            "response": "Haan... ek minute... network problem ho raha hai...",
+            "response": random.choice(fallback_phrases),
             "persona_used": "elderly_victim",
             "persona_display_name": "Elderly Victim",
             "extracted_intel": {},
