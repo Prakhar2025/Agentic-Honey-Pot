@@ -123,15 +123,18 @@ BANK_ACCOUNT_PATTERN: Pattern[str] = re.compile(
     r"""
     (?<![0-9+])                 # Not preceded by digit or +
     (?!(?:\+91|91)?[6-9]\d{9})  # Not a phone number
+    \(?                         # Optional opening parenthesis
     (
         \d{9,18}                # 9-18 digits
     )
+    \)?                         # Optional closing parenthesis
     (?![0-9])                   # Not followed by digit
     """,
     re.VERBOSE
 )
 
 # Bank account with common prefixes/contexts
+# Handles optional parentheses around the account number: (1234567890)
 BANK_ACCOUNT_CONTEXT_PATTERN: Pattern[str] = re.compile(
     r"""
     (?:
@@ -142,7 +145,9 @@ BANK_ACCOUNT_CONTEXT_PATTERN: Pattern[str] = re.compile(
         (?:transfer|send|pay)[\s\w]*(?:to)?[\s.:]*
     )
     [\s.:]*
-    (\d{9,18})
+    \(?                         # Optional opening parenthesis
+    (\d{9,18})                  # Account number
+    \)?                         # Optional closing parenthesis
     """,
     re.VERBOSE | re.IGNORECASE
 )
