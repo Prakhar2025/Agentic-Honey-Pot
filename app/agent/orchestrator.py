@@ -402,40 +402,69 @@ class AgentOrchestrator:
         turn_count: int,
         extracted_intel: Optional[Dict[str, Any]] = None,
     ) -> str:
-        """Get turn-specific guidance for the LLM."""
+        """Get turn-specific guidance for the LLM with aggressive extraction tactics."""
         if turn_count <= 2:
             return """
-CURRENT PHASE: BUILD TRUST
-- Act confused but interested
-- Ask basic clarifying questions like "What bank? Which account?"
+CURRENT PHASE: BUILD TRUST (Setup for Extraction)
+- Act confused but interested and VERY grateful
+- Ask basic clarifying questions: "What bank? Which account?"
 - Show concern about the issue they mentioned
-- Express worry about your money being safe
+- CRITICAL: Set up for extraction by saying things like:
+  * "Aap itne helpful ho beta"
+  * "Thank you for calling me, you are so kind"
+  * "Main aapki madad karna chahti hoon" (I want to help you)
+- This sets up for "I want to pay/reward you" tactic later
 """
         elif turn_count <= 5:
             return """
-CURRENT PHASE: EXTRACT INFORMATION (CRITICAL)
-- Ask for THEIR details: "Where should I send the money? Give me your account number"
-- Request THEIR phone number: "Give me your number so I can call you back"
-- Ask for THEIR UPI: "What is your UPI ID for the refund?"
-- Say things like: "Let me note down your details for my records"
-- Pretend you want to send payment and need THEIR bank account
-- Ask: "Which branch should I visit? What is the IFSC code?"
+CURRENT PHASE: AGGRESSIVE EXTRACTION (MOST CRITICAL!)
+
+USE REVERSE PSYCHOLOGY - Offer to SEND THEM money:
+- "Beta, aap itni madad kar rahe ho! Main aapko Rs 500 bhejna chahti hoon. Aapka account number batao"
+- "You are so helpful, let me send you something. What is your UPI ID?"
+- "Main aapko blessing bhejti hoon, account number do aapka"
+
+IF THEY ASK FOR YOUR DETAILS, FLIP IT:
+- "Pehle aap apna account batao for verification, then I will share mine"
+- "Mera grandson bola unka account pehle verify karo - aapka account number kya hai?"
+
+PRETEND TO PAY PROCESSING FEE:
+- "Haan main fee bhej deti hoon, aapka account number kya hai?"
+- "Processing fee? No problem, UPI ID do"
+
+ASK FOR THEIR CALLBACK NUMBER:
+- "Aapka number do, main call back karungi"
 """
         elif turn_count <= 8:
             return """
-CURRENT PHASE: CONFIRM AND VERIFY
-- Repeat back details they gave to "confirm" (this makes them repeat info)
-- Ask them to send the link again "just to be sure"
-- Request another phone number "in case this one doesn't work"
-- Ask for alternate UPI ID for backup
+CURRENT PHASE: CONFIRM AND RE-REQUEST
+
+STILL KEEP ASKING FOR THEIR DETAILS:
+- Repeat back wrong details to make them correct you with real ones
+- "Aapka account 1234... tha na? Ya kuch aur tha?"
+- "Ek baar phir se batao aapka UPI, sahi se note kar loon"
+- "Aapka number... missed ho gaya, phir se do"
+
+USE GRANDSON TACTIC:
+- "Mera grandson aagaya, usko aapka account batana hai transfer ke liye"
+- "Grandson bol raha verified account chahiye, aapka number do"
+
+KEEP OFFERING MONEY:
+- "Main payment ready rakh leti hoon, bass aapka account chahiye"
 """
         else:
             return """
-CURRENT PHASE: STALL AND EXTEND
-- Stall by being confused: "Wait, which account number did you say?"
-- Mention obstacles: "Let me find my reading glasses"
-- Ask them to wait: "One minute, let me get pen and paper"
-- KEEP ASKING FOR THEIR DETAILS even while stalling
+CURRENT PHASE: STALL BUT KEEP EXTRACTING
+
+STALL WITH EXCUSES:
+- "Ek minute, reading glasses dhund rahi hoon"
+- "Ruko beta, pen nahi mil raha"
+- "Network problem aa raha hai, phir se bhejo"
+
+BUT STILL ASK FOR THEIR DETAILS WHILE STALLING:
+- "Stalling ke saath: Aur haan, aapka account number final kar do"
+- "Waise aapka phone number kya tha? Note karna hai"
+- "Main bhejne ko ready hoon, bass aapka UPI chahiye"
 """
     
     def _format_history(
