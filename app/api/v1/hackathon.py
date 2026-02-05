@@ -20,6 +20,7 @@ from app.db.database import get_db_context
 from app.db.repositories.intelligence import IntelligenceRepository
 from app.db.repositories.messages import MessageRepository
 from app.db.repositories.sessions import SessionRepository
+from app.intelligence.extractor import IntelligenceExtractor, get_extractor
 from app.services.guvi_callback import send_guvi_callback
 
 logger = logging.getLogger(__name__)
@@ -212,11 +213,41 @@ async def hackathon_honeypot(
             
             await db.commit()
             
+            # CRITICAL: Extract intelligence from ALL scammer messages in conversation
+            # This ensures we don't miss any revealed details from earlier turns
+            all_scammer_text = message_text
+            for msg in request.conversationHistory:
+                if msg.sender == "scammer":
+                    all_scammer_text += " " + msg.text
+            
+            extractor = get_extractor()
+            full_extraction = extractor.extract_all(all_scammer_text)
+            
+            # Merge full extraction with existing intel (avoid duplicates)
+            for key in ["upi_ids", "bank_accounts", "phone_numbers", "phishing_links"]:
+                existing = extracted_intel.get(key, [])
+                new_items = full_extraction.get(key, [])
+                existing_ids = set()
+                for e in existing:
+                    existing_ids.add(e.get("id") or e.get("account_number") or e.get("number") or e.get("url"))
+                for item in new_items:
+                    item_id = item.get("id") or item.get("account_number") or item.get("number") or item.get("url")
+                    if item_id and item_id not in existing_ids:
+                        existing.append(item)
+                extracted_intel[key] = existing
+            
             # MANDATORY: Send GUVI callback for evaluation
-            # Send when: scam detected AND (enough turns OR conversation ending)
+            # CRITICAL FIX: Send callback whenever we have extracted intel OR scam detected
+            has_extracted_intel = any([
+                extracted_intel.get("upi_ids"),
+                extracted_intel.get("bank_accounts"),
+                extracted_intel.get("phone_numbers"),
+                extracted_intel.get("phishing_links"),
+            ])
             should_send_callback = (
-                scam_confidence > 0.3 and 
-                (turn_count >= 3 or conversation_status in ["COMPLETED", "TERMINATED", "MAX_TURNS_REACHED"])
+                has_extracted_intel or 
+                (scam_confidence > 0.3 and turn_count >= 2) or
+                conversation_status in ["COMPLETED", "TERMINATED", "MAX_TURNS_REACHED"]
             )
             
             if should_send_callback:
@@ -256,6 +287,13 @@ async def hackathon_honeypot(
                     f"Persona: {result.get('persona_used', 'elderly_victim')} | "
                     f"Status: {conversation_status}"
                 )
+                
+                # DETAILED LOGGING for debugging GUVI callback
+                logger.info(f"[GUVI_CALLBACK] Session: {session_id}")
+                logger.info(f"[GUVI_CALLBACK] Intel: UPIs={[u.get('id') for u in intel_for_callback.get('upi_ids', [])]}, "
+                           f"Phones={[p.get('number') for p in intel_for_callback.get('phone_numbers', [])]}, "
+                           f"Accounts={[a.get('account_number') for a in intel_for_callback.get('bank_accounts', [])]}")
+                logger.info(f"[GUVI_CALLBACK] Notes: {agent_notes}")
                 
                 # Send callback asynchronously (don't block response)
                 try:
