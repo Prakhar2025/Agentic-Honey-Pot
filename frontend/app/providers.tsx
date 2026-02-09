@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { useState, type ReactNode } from 'react'
 import { Toaster } from 'sonner'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 interface ProvidersProps {
     children: ReactNode
@@ -32,7 +33,9 @@ export function Providers({ children }: ProvidersProps) {
                 enableSystem
                 disableTransitionOnChange
             >
-                {children}
+                <TooltipProvider delayDuration={300}>
+                    {children}
+                </TooltipProvider>
                 <Toaster
                     position="top-right"
                     richColors

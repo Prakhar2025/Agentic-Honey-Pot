@@ -55,7 +55,7 @@ export function SessionsList({ initialFilters = {} }: SessionsListProps) {
         scam_type: searchParams.get('scam_type') || '',
         persona: searchParams.get('persona') || '',
         search: searchParams.get('search') || '',
-        sort: searchParams.get('sort') || 'created_at',
+        sort: (searchParams.get('sort') || 'created_at') as 'created_at' | 'updated_at' | 'turn_count' | 'extracted_count',
         order: (searchParams.get('order') as 'asc' | 'desc') || 'desc',
         page: parseInt(searchParams.get('page') || '1'),
         limit: parseInt(searchParams.get('limit') || '20'),

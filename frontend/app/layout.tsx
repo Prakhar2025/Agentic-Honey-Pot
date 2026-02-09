@@ -10,6 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://scamshield.app'),
     title: {
         default: 'ScamShield | AI-Powered Scam Intelligence Platform',
         template: '%s | ScamShield',
