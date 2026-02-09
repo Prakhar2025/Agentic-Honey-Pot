@@ -146,8 +146,7 @@ function SessionRow({ session }: SessionRowProps) {
                     <div className="flex items-center gap-2 flex-wrap">
                         <Badge
                             variant="outline"
-                            className={cn('text-xs', scamType?.textColor)}
-                            style={{ backgroundColor: `${scamType?.color}20` }}
+                            className={cn('text-xs', scamType?.color)}
                         >
                             {scamType?.label || session.scam_type}
                         </Badge>
