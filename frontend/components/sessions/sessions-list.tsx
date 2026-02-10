@@ -104,7 +104,7 @@ export function SessionsList({ initialFilters = {} }: SessionsListProps) {
 
     // Handle grid selection
     const handleGridSelection = React.useCallback((id: string, selected: boolean) => {
-        const index = sessions.findIndex(s => s.id === id)
+        const index = sessions.findIndex((s: any) => s.id === id)
         if (index !== -1) {
             setRowSelection(prev => ({
                 ...prev,

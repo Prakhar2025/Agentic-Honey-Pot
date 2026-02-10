@@ -37,3 +37,19 @@ export interface FilterState {
         to: Date
     }
 }
+
+export interface ApiError {
+    status: number
+    message: string
+    code?: string
+    detail?: string
+    details?: Record<string, unknown>
+}
+
+export interface PaginatedResponse<T = unknown> {
+    items: T[]
+    total: number
+    limit: number
+    offset: number
+    has_more: boolean
+}
