@@ -21,11 +21,8 @@ import { ChatErrorBoundary } from '@/components/chat/chat-error-boundary'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TooltipProvider } from '@/components/ui/tooltip'
-import { useChat } from '@/lib/hooks/use-chat'
-import { useChatStore } from '@/lib/stores/chat-store'
-import { useTypingIndicator } from '@/lib/hooks/use-typing-indicator'
-import { useMediaQuery } from '@/lib/hooks/use-media-query'
-import { useKeyboardShortcuts } from '@/lib/hooks/use-keyboard-shortcuts'
+import { useChat, useTypingIndicator, useMediaQuery, useKeyboardShortcuts } from '@/lib/hooks'
+import { useChatStore } from '@/lib/stores'
 import { cn } from '@/lib/utils/cn'
 
 function ChatPageContent() {
