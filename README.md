@@ -2,8 +2,6 @@
 
 <div align="center">
 
-<img src="frontend/public/logo.svg" alt="ScamShield Logo" width="80" />
-
 # 🛡️ ScamShield — AI-Powered Scam Intelligence Platform
 
 **Autonomous Agentic Honeypot for Combating Digital Fraud in India**
