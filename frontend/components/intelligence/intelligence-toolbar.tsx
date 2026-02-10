@@ -28,8 +28,8 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useDebouncedCallback } from 'use-debounce'
-import { useIntelligenceFiltersStore } from '@/lib/stores/intelligence-filters'
-import { useExportEntities } from '@/lib/hooks/use-entity-detail'
+import { useIntelligenceFiltersStore } from '@/lib/stores'
+import { useExportEntities } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 
 export function IntelligenceToolbar() {

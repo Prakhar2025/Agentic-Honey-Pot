@@ -20,7 +20,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useBulkDeleteSessions, useExportSessions } from '@/lib/hooks/use-sessions'
+import { useBulkDeleteSessions, useExportSessions } from '@/lib/hooks'
 
 interface SessionsBulkActionsProps {
     selectedCount: number

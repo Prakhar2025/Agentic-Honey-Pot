@@ -16,7 +16,7 @@ import {
     Wallet,
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { useIntelligenceStats } from '@/lib/hooks/use-intelligence'
+import { useIntelligenceStats } from '@/lib/hooks'
 import { IntelligenceStatsSkeleton } from './skeletons'
 import { cn } from '@/lib/utils'
 import { formatNumber, formatPercentage } from '@/lib/utils/entity-formatters'

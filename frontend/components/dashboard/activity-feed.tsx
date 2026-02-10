@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useActivityFeed } from '@/lib/hooks/use-dashboard-data'
+import { useActivityFeed } from '@/lib/hooks'
 import { cn } from '@/lib/utils/cn'
 
 const activityConfig = {

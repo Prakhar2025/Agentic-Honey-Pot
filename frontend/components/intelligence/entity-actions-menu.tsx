@@ -30,7 +30,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { useDeleteEntity, useVerifyEntity } from '@/lib/hooks/use-entity-detail'
+import { useDeleteEntity, useVerifyEntity } from '@/lib/hooks'
 import type { ExtractedEntity } from '@/types/intelligence'
 import { toast } from 'sonner'
 

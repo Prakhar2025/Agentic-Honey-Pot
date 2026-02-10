@@ -18,7 +18,7 @@ import { Cpu, Clock, DollarSign, Zap } from 'lucide-react'
 import { ChartContainer } from '@/components/charts/chart-container'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { useLLMPerformance } from '@/lib/hooks/use-analytics'
+import { useLLMPerformance } from '@/lib/hooks'
 import { formatNumber, formatLatency, formatCurrency, formatTokens } from '@/lib/utils/format'
 import { SERIES_COLORS } from '@/lib/constants/chart-colors'
 

@@ -8,7 +8,7 @@ import { Filter, ArrowDown, CheckCircle } from 'lucide-react'
 import { ChartContainer } from '@/components/charts/chart-container'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
-import { useDetectionFunnel } from '@/lib/hooks/use-analytics'
+import { useDetectionFunnel } from '@/lib/hooks'
 import { formatNumber, formatPercentage } from '@/lib/utils/format'
 import { CHART_COLORS } from '@/lib/constants/chart-colors'
 

@@ -18,7 +18,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useSystemHealth } from '@/lib/hooks/use-dashboard-data'
+import { useSystemHealth } from '@/lib/hooks'
 import { cn } from '@/lib/utils/cn'
 
 const statusIcons = {

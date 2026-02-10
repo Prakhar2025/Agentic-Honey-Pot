@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
 import { SessionInfo } from '@/types/chat'
-import { useChatStore } from '@/lib/stores/chat-store'
+import { useChatStore } from '@/lib/stores'
 import { PERSONAS } from '@/lib/constants/personas'
 import { cn } from '@/lib/utils/cn'
 

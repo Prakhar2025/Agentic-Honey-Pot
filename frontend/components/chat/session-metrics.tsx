@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import { TrendingUp, Clock, Zap, Target } from 'lucide-react'
 import { SessionInfo } from '@/types/chat'
-import { useChatStore } from '@/lib/stores/chat-store'
+import { useChatStore } from '@/lib/stores'
 
 interface SessionMetricsProps {
     session: SessionInfo

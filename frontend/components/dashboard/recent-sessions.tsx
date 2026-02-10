@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useRecentSessions } from '@/lib/hooks/use-dashboard-data'
+import { useRecentSessions } from '@/lib/hooks'
 import { SCAM_TYPES, PERSONAS } from '@/lib/constants'
 import { cn } from '@/lib/utils/cn'
 

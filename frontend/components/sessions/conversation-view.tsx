@@ -16,7 +16,7 @@ import { Badge } from '@/components/ui/badge'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { ConversationMessage } from './conversation-message'
-import { useSessionMessages } from '@/lib/hooks/use-sessions'
+import { useSessionMessages } from '@/lib/hooks'
 import { groupMessagesByDate } from '@/lib/utils/message-parser'
 import { cn } from '@/lib/utils/cn'
 

@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { ChartContainer } from '@/components/charts/chart-container'
 import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
-import { useGeographicDistribution } from '@/lib/hooks/use-analytics'
+import { useGeographicDistribution } from '@/lib/hooks'
 import { formatNumber, formatPercentage } from '@/lib/utils/format'
 import { getGeoHeatColor, STATE_NAMES, INDIA_STATES_PATH } from '@/lib/utils/geo-data'
 import { SCAM_TYPE_COLORS } from '@/lib/constants/chart-colors'

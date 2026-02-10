@@ -6,7 +6,7 @@ import { PieChart as PieChartIcon } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useScamTypesData } from '@/lib/hooks/use-dashboard-data'
+import { useScamTypesData } from '@/lib/hooks'
 import { SCAM_TYPES } from '@/lib/constants'
 
 const COLORS: Record<string, string> = {

@@ -29,11 +29,11 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useSessionFiltersStore } from '@/lib/stores/session-filters'
+import { useSessionFiltersStore } from '@/lib/stores'
 import { cn } from '@/lib/utils/cn'
 import Link from 'next/link'
 import { useQueryClient } from '@tanstack/react-query'
-import { sessionKeys } from '@/lib/hooks/use-sessions'
+import { sessionKeys } from '@/lib/hooks'
 
 export function SessionsToolbar() {
     const router = useRouter()

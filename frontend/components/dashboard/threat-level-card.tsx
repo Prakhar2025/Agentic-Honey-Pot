@@ -6,7 +6,7 @@ import { AlertTriangle, Shield, TrendingUp, TrendingDown } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useThreatLevel } from '@/lib/hooks/use-dashboard-data'
+import { useThreatLevel } from '@/lib/hooks'
 import { cn } from '@/lib/utils/cn'
 
 const threatColors = [

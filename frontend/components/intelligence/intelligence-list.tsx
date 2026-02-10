@@ -14,7 +14,7 @@ import {
     SortingState,
     Updater,
 } from '@tanstack/react-table'
-import { useIntelligence } from '@/lib/hooks/use-intelligence'
+import { useIntelligence } from '@/lib/hooks'
 import { IntelligenceTable } from './intelligence-table'
 import { IntelligenceGrid } from './intelligence-grid'
 import { IntelligencePagination } from './intelligence-pagination'
@@ -31,7 +31,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent } from '@/components/ui/sheet'
-import { useBulkDeleteEntities, useBulkVerifyEntities, useExportEntities } from '@/lib/hooks/use-entity-detail'
+import { useBulkDeleteEntities, useBulkVerifyEntities, useExportEntities } from '@/lib/hooks'
 import type { ExtractedEntity } from '@/types/intelligence'
 import { maskSensitiveValue, formatEntityValue } from '@/lib/utils/entity-formatters'
 import { formatRelativeTime } from '@/lib/utils/date'

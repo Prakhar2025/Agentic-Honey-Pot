@@ -12,7 +12,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { useChatStore } from '@/lib/stores/chat-store'
+import { useChatStore } from '@/lib/stores'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils/cn'
 

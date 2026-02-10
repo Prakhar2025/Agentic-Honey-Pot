@@ -12,7 +12,7 @@ import {
     RowSelectionState,
     SortingState,
 } from '@tanstack/react-table'
-import { useSessions } from '@/lib/hooks/use-sessions'
+import { useSessions } from '@/lib/hooks'
 import { SessionsTable } from './sessions-table'
 import { SessionsGrid } from './sessions-grid'
 import { SessionsPagination } from './sessions-pagination'

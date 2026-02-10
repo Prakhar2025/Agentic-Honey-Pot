@@ -24,8 +24,8 @@ import {
 } from '@/components/ui/popover'
 import { Switch } from '@/components/ui/switch'
 import { cn } from '@/lib/utils'
-import { useAnalyticsStore } from '@/lib/stores/analytics-store'
-import { useRefreshAnalytics } from '@/lib/hooks/use-analytics'
+import { useAnalyticsStore } from '@/lib/stores'
+import { useRefreshAnalytics } from '@/lib/hooks'
 import { TIME_RANGES, EXTENDED_TIME_RANGES, type TimeRangeKey } from '@/lib/constants/time-ranges'
 
 export function AnalyticsHeader() {

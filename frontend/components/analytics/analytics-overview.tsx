@@ -20,10 +20,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Sparkline } from '@/components/charts/sparkline'
 import { cn } from '@/lib/utils'
-import { useAnalyticsOverview } from '@/lib/hooks/use-analytics'
+import { useAnalyticsOverview } from '@/lib/hooks'
 import { formatNumber, formatPercentage, formatDuration } from '@/lib/utils/format'
 import { CHART_COLORS } from '@/lib/constants/chart-colors'
-import { useAnalyticsStore } from '@/lib/stores/analytics-store'
+import { useAnalyticsStore } from '@/lib/stores'
 import { TIME_RANGES } from '@/lib/constants/time-ranges'
 
 interface KPICardProps {

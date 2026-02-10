@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChartContainer } from '@/components/charts/chart-container'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { useScamTypeDistribution } from '@/lib/hooks/use-analytics'
+import { useScamTypeDistribution } from '@/lib/hooks'
 import { formatNumber, formatPercentage } from '@/lib/utils/format'
 import { SCAM_TYPE_COLORS, SERIES_COLORS } from '@/lib/constants/chart-colors'
 

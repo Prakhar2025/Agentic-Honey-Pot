@@ -37,7 +37,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { useReports, useDownloadReport, useDeleteReport } from '@/lib/hooks/use-reports'
+import { useReports, useDownloadReport, useDeleteReport } from '@/lib/hooks'
 import { formatBytes } from '@/lib/utils/format'
 import type { Report, ReportStatus } from '@/types/analytics'
 import { cn } from '@/lib/utils'

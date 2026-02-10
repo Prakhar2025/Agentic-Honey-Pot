@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { DatePickerWithRange } from '@/components/ui/date-picker-with-range'
-import { useIntelligenceFiltersStore } from '@/lib/stores/intelligence-filters'
+import { useIntelligenceFiltersStore } from '@/lib/stores'
 import { ENTITY_TYPES, RISK_LEVELS } from '@/types/filters'
 import { cn } from '@/lib/utils'
 import { DateRange } from 'react-day-picker'

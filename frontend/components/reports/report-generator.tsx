@@ -25,7 +25,7 @@ import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { useGenerateReport } from '@/lib/hooks/use-reports'
+import { useGenerateReport } from '@/lib/hooks'
 import type { ReportType, ReportFormat } from '@/types/analytics'
 import { cn } from '@/lib/utils'
 

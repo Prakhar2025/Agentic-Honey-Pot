@@ -30,7 +30,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { useDeleteSession } from '@/lib/hooks/use-sessions'
+import { useDeleteSession } from '@/lib/hooks'
 import { toast } from 'sonner'
 
 interface SessionActionsMenuProps {

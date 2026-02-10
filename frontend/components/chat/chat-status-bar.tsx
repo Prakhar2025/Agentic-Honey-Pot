@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import { Wifi, Clock, MessageSquare, Brain } from 'lucide-react'
 import { SessionInfo } from '@/types/chat'
-import { useChatStore } from '@/lib/stores/chat-store'
+import { useChatStore } from '@/lib/stores'
 import { cn } from '@/lib/utils/cn'
 
 interface ChatStatusBarProps {

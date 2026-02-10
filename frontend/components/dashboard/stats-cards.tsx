@@ -15,7 +15,7 @@ import {
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Sparkline } from '@/components/charts/sparkline'
-import { useDashboardStats } from '@/lib/hooks/use-dashboard-data'
+import { useDashboardStats } from '@/lib/hooks'
 import { cn } from '@/lib/utils/cn'
 
 interface StatCardProps {

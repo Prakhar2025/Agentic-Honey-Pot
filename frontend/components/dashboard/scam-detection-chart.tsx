@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ChartTooltip } from '@/components/charts/chart-tooltip'
-import { useTimelineData } from '@/lib/hooks/use-dashboard-data'
+import { useTimelineData } from '@/lib/hooks'
 
 interface ScamDetectionChartProps {
     timeRange?: string

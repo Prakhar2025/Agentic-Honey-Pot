@@ -12,7 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
-import { useInvalidateDashboard } from '@/lib/hooks/use-dashboard-data'
+import { useInvalidateDashboard } from '@/lib/hooks'
 import { TIME_RANGES } from '@/types/dashboard'
 
 interface DashboardHeaderProps {

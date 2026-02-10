@@ -16,7 +16,7 @@ import {
 import { Users } from 'lucide-react'
 
 import { ChartContainer } from '@/components/charts/chart-container'
-import { usePersonaEffectiveness } from '@/lib/hooks/use-analytics'
+import { usePersonaEffectiveness } from '@/lib/hooks'
 import { formatNumber, formatPercentage } from '@/lib/utils/format'
 import { PERSONA_COLORS, SERIES_COLORS } from '@/lib/constants/chart-colors'
 

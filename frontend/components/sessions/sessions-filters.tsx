@@ -21,7 +21,7 @@ import {
     PopoverTrigger,
 } from '@/components/ui/popover'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useSessionFiltersStore } from '@/lib/stores/session-filters'
+import { useSessionFiltersStore } from '@/lib/stores'
 import { SCAM_TYPES, PERSONAS } from '@/lib/constants'
 import { cn } from '@/lib/utils/cn'
 import type { DateRange } from 'react-day-picker'

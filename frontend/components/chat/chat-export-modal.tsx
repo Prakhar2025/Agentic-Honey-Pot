@@ -13,7 +13,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
-import { useChatStore } from '@/lib/stores/chat-store'
+import { useChatStore } from '@/lib/stores'
 import { toast } from 'sonner'
 
 interface ChatExportModalProps {

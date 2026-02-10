@@ -14,7 +14,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useIntelligenceSummary } from '@/lib/hooks/use-dashboard-data'
+import { useIntelligenceSummary } from '@/lib/hooks'
 import { cn } from '@/lib/utils/cn'
 
 const entityIcons: Record<string, React.ElementType> = {

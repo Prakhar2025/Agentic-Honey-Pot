@@ -32,7 +32,7 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from '@/components/ui/collapsible'
-import { useSessionIntelligence } from '@/lib/hooks/use-sessions'
+import { useSessionIntelligence } from '@/lib/hooks'
 import { formatDuration, formatDateTime, getSessionDuration } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import { IntelligenceSkeleton } from './skeletons'

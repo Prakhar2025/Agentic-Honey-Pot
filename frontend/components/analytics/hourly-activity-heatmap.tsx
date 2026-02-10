@@ -8,7 +8,7 @@ import { Clock, Info } from 'lucide-react'
 import { ChartContainer } from '@/components/charts/chart-container'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Badge } from '@/components/ui/badge'
-import { useHourlyActivity } from '@/lib/hooks/use-analytics'
+import { useHourlyActivity } from '@/lib/hooks'
 import { formatNumber, formatDuration } from '@/lib/utils/format'
 import { getIntensityColor } from '@/lib/constants/chart-colors'
 
