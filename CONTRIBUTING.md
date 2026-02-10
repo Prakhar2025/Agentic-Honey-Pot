@@ -1,67 +1,88 @@
 # Contributing to ScamShield
 
-Thank you for your interest in contributing to ScamShield! We welcome contributions from the community to help us build a safer digital environment for everyone.
+Thank you for your interest in contributing to ScamShield! This document provides guidelines and instructions for contributing. 🙌
 
-## 🌟 Our Philosophy
+## 🚀 Getting Started
 
-We believe in:
-- **Quality**: Code should be clean, well-tested, and documented.
-- **Safety**: Security is paramount. Never expose real victim data.
-- **Ethics**: We target scammers, but we operate within legal boundaries.
+### Prerequisites
+- Node.js 20+
+- Python 3.11+
+- Git
 
-## 🛠️ Development Setup
+### Setting Up Development Environment
 
-1. **Fork and Clone**
+```bash
+# Clone the repository
+git clone https://github.com/Prakhar2025/Agentic-Honey-Pot.git
+cd Agentic-Honey-Pot
+
+# Switch to develop branch
+git checkout develop
+
+# Frontend setup
+cd frontend
+npm install
+npm run dev
+
+# Backend setup (in another terminal)
+cd app
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+## 📋 Development Workflow
+
+1. **Create a branch** from `develop`:
    ```bash
-   git clone https://github.com/your-username/scamshield-honeypot.git
-   cd scamshield-honeypot
+   git checkout -b feature/your-feature-name
    ```
 
-2. **Environment Setup**
+2. **Make your changes** following code standards
+
+3. **Test locally**:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   cp .env.example .env
+   cd frontend && npm run build
    ```
 
-3. **Running Requirements**
-   - Python 3.11+
-   - Groq Cloud Account (for LLM)
-   - SQLite
+4. **Commit** with conventional commits:
+   ```bash
+   git commit -m "feat: add new scam type detection"
+   ```
 
-## 📝 Pull Request Process
+5. **Push** and create a PR to `develop`
 
-1. **Branch Naming**
-   - Feature: `feat/add-new-persona`
-   - Fix: `fix/api-key-validation`
-   - Docs: `docs/update-readme`
+## 📐 Code Standards
 
-2. **Code Style**
-   - We use `ruff` for linting and formatting.
-   - Run `pip install ruff` and then `ruff check .` before committing.
-   - All public functions must have docstrings (Google style).
+### TypeScript / React
+- Use TypeScript for all frontend code
+- Follow existing component patterns
+- Use `shadcn/ui` components where possible
+- Write `'use client'` directive for interactive components
+- Use `cn()` for conditional class names
 
-3. **Testing**
-   - Run existing tests: `pytest`
-   - Add new tests for your feature.
-   - Ensure `scripts/test_with_scenarios.py` passes.
+### Python / FastAPI
+- Follow PEP 8
+- Type annotations on all function signatures
+- Docstrings for public functions
 
-4. **Submission**
-   - Create a Pull Request (PR) against the `main` branch.
-   - Fill out the PR template completely.
-   - Link any related issues.
+### Commit Messages
 
-## 🧪 Testing Guidelines
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
+- `feat:` — New feature
+- `fix:` — Bug fix
+- `docs:` — Documentation
+- `style:` — Formatting
+- `refactor:` — Code refactoring
+- `test:` — Tests
+- `chore:` — Maintenance
 
-For this project, verification is key. Before submitting:
-1. Run the scenario tester: `python scripts/test_with_scenarios.py 5`
-2. Verify API key auth works: `python scripts/verify_production.py`
+## 🏗️ Branch Strategy
 
-## 🤝 Community
+- `main` — Production (deployed)
+- `develop` — Development (active work)
+- `feature/*` — Feature branches (from develop)
+- `fix/*` — Bug fix branches (from develop)
 
-Join our Discord [link] or open a Discussion on GitHub.
+## 📄 License
 
----
-
-**Note:** This is an open-source project for the India AI Impact Buildathon.
+By contributing, you agree that your contributions will be licensed under the MIT License.

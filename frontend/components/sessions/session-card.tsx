@@ -90,7 +90,7 @@ export function SessionCard({ session, isSelected = false, onSelect }: SessionCa
                         </div>
                         {initialMessage && (
                             <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                                "{initialMessage}"
+                                &ldquo;{initialMessage}&rdquo;
                             </p>
                         )}
                     </div>
@@ -135,8 +135,10 @@ export function SessionCard({ session, isSelected = false, onSelect }: SessionCa
 
                         <Button variant="ghost" size="sm" className="gap-1" asChild>
                             <Link href={`/sessions/${session.id}`}>
-                                View
-                                <ArrowRight className="h-3.5 w-3.5" />
+                                <span className="flex items-center gap-1">
+                                    View
+                                    <ArrowRight className="h-3.5 w-3.5" />
+                                </span>
                             </Link>
                         </Button>
                     </div>

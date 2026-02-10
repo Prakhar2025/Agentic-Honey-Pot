@@ -47,8 +47,10 @@ export default function DashboardError({
                         </Button>
                         <Button variant="outline" asChild>
                             <a href="/">
-                                <Home className="mr-2 h-4 w-4" />
-                                Go Home
+                                <span className="flex items-center gap-2">
+                                    <Home className="h-4 w-4" />
+                                    Go Home
+                                </span>
                             </a>
                         </Button>
                     </div>

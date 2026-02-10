@@ -35,7 +35,7 @@ export default function SessionDetailPage() {
                 </div>
                 <h2 className="text-xl font-semibold">Session Not Found</h2>
                 <p className="text-muted-foreground text-center max-w-sm">
-                    The session you're looking for doesn't exist or may have been deleted.
+                    The session you&apos;re looking for doesn&apos;t exist or may have been deleted.
                 </p>
                 <div className="flex gap-2 mt-2">
                     <Button variant="outline" asChild>

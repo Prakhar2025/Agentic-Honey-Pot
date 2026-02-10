@@ -1,0 +1,17 @@
+{
+    "name": "ScamShield",
+    "short_name": "ScamShield",
+    "description": "AI-Powered Scam Intelligence Platform",
+    "start_url": "/dashboard",
+    "display": "standalone",
+    "background_color": "#0a0a0a",
+    "theme_color": "#3b82f6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/logo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}

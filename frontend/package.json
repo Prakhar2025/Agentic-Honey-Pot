@@ -14,6 +14,14 @@
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "type-check": "tsc --noEmit",
+        "test": "vitest",
+        "test:ui": "vitest --ui",
+        "test:coverage": "vitest --coverage",
+        "test:ci": "vitest run --coverage",
+        "test:e2e": "playwright test",
+        "test:e2e:ui": "playwright test --ui",
+        "analyze": "ANALYZE=true npm run build",
+        "postbuild": "next-sitemap",
         "clean": "rm -rf .next out node_modules"
     },
     "dependencies": {
@@ -64,7 +72,17 @@
         "tailwind-merge": "^2.2.0",
         "use-debounce": "^10.1.0",
         "zod": "^3.22.4",
-        "zustand": "^5.0.11"
+        "zustand": "^5.0.11",
+        "next-sitemap": "^4.2.3",
+        "@vercel/analytics": "^1.1.1",
+        "@vercel/speed-insights": "^1.0.2",
+        "prism-react-renderer": "^2.3.1",
+        "react-syntax-highlighter": "^15.5.0",
+        "@types/react-syntax-highlighter": "^15.5.11",
+        "gray-matter": "^4.0.3",
+        "@mdx-js/loader": "^3.0.0",
+        "@mdx-js/react": "^3.0.0",
+        "next-mdx-remote": "^4.4.1"
     },
     "devDependencies": {
         "@types/node": "^20.11.0",
@@ -78,6 +96,22 @@
         "prettier": "^3.2.4",
         "prettier-plugin-tailwindcss": "^0.5.11",
         "tailwindcss": "^3.4.1",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "@playwright/test": "^1.40.1",
+        "vitest": "^1.1.0",
+        "@vitest/ui": "^1.1.0",
+        "@testing-library/react": "^14.1.2",
+        "@testing-library/jest-dom": "^6.1.6",
+        "@testing-library/user-event": "^14.5.1",
+        "jsdom": "^23.0.1",
+        "@axe-core/playwright": "^4.8.2",
+        "lighthouse": "^11.4.0",
+        "@lhci/cli": "^0.13.0",
+        "webpack-bundle-analyzer": "^4.10.1",
+        "@vitejs/plugin-react": "^4.2.1",
+        "@types/aria-query": "^5.0.4",
+        "@types/hast": "^3.0.4",
+        "@types/mdx": "^2.0.11",
+        "@types/unist": "^3.0.2"
     }
 }

@@ -67,9 +67,11 @@ export function SessionDetailHeader({ session }: SessionDetailHeaderProps) {
             {/* Back button row */}
             <div className="flex items-center gap-2 px-4 py-2 border-b bg-muted/30">
                 <Button variant="ghost" size="sm" asChild>
-                    <Link href="/sessions" className="gap-2">
-                        <ArrowLeft className="h-4 w-4" />
-                        Back to Sessions
+                    <Link href="/sessions">
+                        <span className="flex items-center gap-2">
+                            <ArrowLeft className="h-4 w-4" />
+                            Back to Sessions
+                        </span>
                     </Link>
                 </Button>
             </div>

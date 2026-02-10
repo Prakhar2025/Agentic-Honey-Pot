@@ -29,8 +29,10 @@ export function SessionsEmpty({ hasFilters = false, onClearFilters }: SessionsEm
                     </Button>
                     <Button asChild>
                         <Link href="/chat">
-                            <Plus className="mr-2 h-4 w-4" />
-                            New Session
+                            <span className="flex items-center gap-2">
+                                <Plus className="h-4 w-4" />
+                                New Session
+                            </span>
                         </Link>
                     </Button>
                 </div>
@@ -50,8 +52,10 @@ export function SessionsEmpty({ hasFilters = false, onClearFilters }: SessionsEm
             </p>
             <Button className="mt-6" asChild>
                 <Link href="/chat">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Start New Session
+                    <span className="flex items-center gap-2">
+                        <Plus className="h-4 w-4" />
+                        Start New Session
+                    </span>
                 </Link>
             </Button>
         </div>

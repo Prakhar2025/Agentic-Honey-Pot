@@ -51,6 +51,22 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, asChild = false, loading, leftIcon, rightIcon, fullWidth, children, disabled, ...props }, ref) => {
         const Comp = asChild ? Slot : 'button'
+
+        // NUCLEAR FIX: Auto-wrap multiple children to prevent React.Children.only errors
+        let processedChildren = (
+            <>
+                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {!loading && leftIcon && <span className="mr-2">{leftIcon}</span>}
+                {children}
+                {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+            </>
+        )
+
+        // If asChild and we have multiple React children, wrap in a single span
+        if (asChild && (loading || leftIcon || rightIcon || React.Children.count(children) > 1)) {
+            processedChildren = <span className="contents">{processedChildren}</span>
+        }
+
         return (
             <Comp
                 className={cn(
@@ -62,10 +78,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 disabled={disabled || loading}
                 {...props}
             >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {!loading && leftIcon && <span className="mr-2">{leftIcon}</span>}
-                {children}
-                {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+                {processedChildren}
             </Comp>
         )
     }

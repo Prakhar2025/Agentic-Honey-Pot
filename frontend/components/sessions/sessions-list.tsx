@@ -173,7 +173,7 @@ export function SessionsList({ initialFilters = {} }: SessionsListProps) {
                         </span>
                         {initialMessage && (
                             <span className="text-xs text-muted-foreground line-clamp-1 max-w-[200px] mt-0.5">
-                                "{initialMessage}"
+                                &ldquo;{initialMessage}&rdquo;
                             </span>
                         )}
                     </div>
@@ -262,8 +262,10 @@ export function SessionsList({ initialFilters = {} }: SessionsListProps) {
                 <div className="flex items-center gap-2">
                     <Button variant="ghost" size="sm" asChild>
                         <Link href={`/sessions/${row.original.id}`}>
-                            View
-                            <ExternalLink className="ml-1.5 h-3 w-3" />
+                            <span className="flex items-center gap-1.5">
+                                View
+                                <ExternalLink className="h-3 w-3" />
+                            </span>
                         </Link>
                     </Button>
                     <SessionActionsMenu session={row.original} />

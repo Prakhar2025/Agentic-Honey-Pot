@@ -50,8 +50,10 @@ export function IntelligenceEmpty({ hasFilters = false }: IntelligenceEmptyProps
                 ) : (
                     <Button asChild>
                         <a href="/sessions">
-                            <Plus className="mr-2 h-4 w-4" />
-                            Start Session
+                            <span className="flex items-center gap-2">
+                                <Plus className="h-4 w-4" />
+                                Start Session
+                            </span>
                         </a>
                     </Button>
                 )}
