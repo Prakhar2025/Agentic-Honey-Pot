@@ -33,9 +33,6 @@ const nextConfig = {
                 : false,
     },
 
-    // Output standalone for Docker (commented out for Vercel deployment)
-    // output: 'standalone',  // For Docker deployment only, not needed for Vercel
-
     // Remove X-Powered-By header
     poweredByHeader: false,
 
@@ -74,21 +71,6 @@ const nextConfig = {
                 ],
             },
         ]
-    },
-
-    // Webpack configuration for bundle analysis
-    webpack: (config, { isServer }) => {
-        if (process.env.ANALYZE === 'true') {
-            const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-            config.plugins.push(
-                new BundleAnalyzerPlugin({
-                    analyzerMode: 'static',
-                    openAnalyzer: true,
-                    generateStatsFile: true,
-                })
-            )
-        }
-        return config
     },
 
     // Environment variables
