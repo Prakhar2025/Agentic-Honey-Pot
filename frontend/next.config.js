@@ -33,8 +33,8 @@ const nextConfig = {
                 : false,
     },
 
-    // Output standalone for Docker
-    output: 'standalone',
+    // Output standalone for Docker (commented out for Vercel deployment)
+    // output: 'standalone',  // For Docker deployment only, not needed for Vercel
 
     // Remove X-Powered-By header
     poweredByHeader: false,
