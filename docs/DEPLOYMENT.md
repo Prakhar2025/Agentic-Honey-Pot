@@ -1,135 +1,172 @@
 # 🚀 Deployment Guide
 
-> ScamShield Agentic Honeypot — Production Deployment on Render.com
+**Complete Deployment Documentation**
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Environment Variables](#environment-variables)
-- [Deployment Options](#deployment-options)
-- [Render.com Deployment](#rendercom-deployment)
-- [Docker Deployment](#docker-deployment)
-- [Health Checks](#health-checks)
-- [Monitoring & Logging](#monitoring--logging)
-- [Troubleshooting](#troubleshooting)
-
----
-
-## Prerequisites
-
-| Requirement | Version | Purpose |
-|-------------|---------|---------|
-| Python | 3.11+ | Runtime environment |
-| Groq API Key | - | LLM inference |
-| Git | Latest | Version control |
-| Render Account | Free tier | Cloud hosting |
+- [Environment Variables](#-environment-variables)
+- [Backend Deployment (Render)](#-backend-deployment-rendercom)
+- [Frontend Deployment (Vercel)](#-frontend-deployment-vercel)
+- [Docker Deployment](#-docker-deployment)
+- [Docker Compose](#-docker-compose)
+- [CI/CD Pipeline](#-cicd-pipeline)
+- [Health Checks](#-health-checks)
+- [Monitoring](#-monitoring)
+- [Logging](#-logging)
+- [Scaling](#-scaling)
 
 ---
 
-## Environment Variables
+## 🔐 Environment Variables
 
-Create a `.env` file or configure in your deployment platform:
+### Required Variables
 
-| Variable | Required | Description | Example |
-|----------|----------|-------------|---------|
-| `GROQ_API_KEY` | ✅ | Groq API authentication key | `gsk_abc123xyz...` |
-| `DATABASE_URL` | ❌ | SQLite database path | `sqlite:///./data/scamshield.db` |
-| `ENVIRONMENT` | ❌ | Runtime environment | `production` |
-| `LOG_LEVEL` | ❌ | Logging verbosity | `INFO` |
-| `MAX_TURNS` | ❌ | Max conversation turns per session | `10` |
-| `DEFAULT_PERSONA` | ❌ | Default victim persona | `elderly_victim` |
-| `MOCK_SCAMMER_URL` | ❌ | Mock Scammer API base URL | `https://mock-scammer.hackathon.ai` |
-| `CORS_ORIGINS` | ❌ | Allowed CORS origins | `["https://yourdomain.com"]` |
-| `RATE_LIMIT_RPM` | ❌ | Default rate limit per minute | `60` |
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `GROQ_API_KEY` | Groq LLM API key | `gsk_abc123...` |
+| `API_KEY` | API authentication key | `ss_live_abc123` |
+| `GROQ_MODEL` | LLM model name | `llama-3.3-70b-versatile` |
 
-### Production Values
+### Optional Variables
 
-```bash
-GROQ_API_KEY=gsk_your_production_key
-DATABASE_URL=sqlite:///./data/scamshield.db
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DATABASE_URL` | `sqlite+aiosqlite:///./honeypot.db` | Database connection |
+| `ENVIRONMENT` | `development` | `development`/`production` |
+| `DEBUG` | `false` | Enable debug mode |
+| `LOG_LEVEL` | `INFO` | Logging level |
+| `MAX_TURNS` | `20` | Max conversation turns |
+| `CORS_ORIGINS` | `*` | Allowed CORS origins |
+
+### Example .env File
+
+```env
+# Required
+GROQ_API_KEY=gsk_your_api_key_here
+GROQ_MODEL=llama-3.3-70b-versatile
+API_KEY=ss_live_your_secure_key
+
+# Optional
 ENVIRONMENT=production
-LOG_LEVEL=WARNING
-MAX_TURNS=10
-DEFAULT_PERSONA=elderly_victim
-MOCK_SCAMMER_URL=https://mock-scammer.hackathon.ai
-CORS_ORIGINS=["https://api.scamshield.in"]
-RATE_LIMIT_RPM=100
+DEBUG=false
+LOG_LEVEL=INFO
+DATABASE_URL=sqlite+aiosqlite:///./honeypot.db
 ```
 
 ---
 
-## Deployment Options
+## 🌐 Backend Deployment (Render.com)
 
-| Platform | Difficulty | Cost | Best For |
-|----------|------------|------|----------|
-| **Render.com** | ⭐ Easy | Free tier available | Hackathon/MVP |
-| **Railway** | ⭐ Easy | $5 credit/month | Quick prototypes |
-| **Docker + VPS** | ⭐⭐ Medium | ~$5/month | Custom control |
-| **AWS Lambda** | ⭐⭐⭐ Complex | Pay-per-use | High scale |
+### Method 1: One-Click Deploy
 
----
+Click the button below to deploy to Render:
 
-## Render.com Deployment
+[Deploy to Render](https://render.com/deploy)
 
-### Step 1: Prepare Repository
+### Method 2: Manual Setup
 
-Ensure your repository has these files:
+#### 1. Create Web Service
+
+1. Go to [render.com](https://render.com) → Dashboard
+2. Click **New** → **Web Service**
+3. Connect GitHub repository
+
+#### 2. Configure Service
+
+| Setting | Value |
+|---------|-------|
+| Name | scamshield-honeypot |
+| Runtime | Python 3 |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| Plan | Free |
+
+#### 3. Set Environment Variables
+
+In Render Dashboard → Environment:
 
 ```
-scamshield-honeypot/
-├── app/
-│   └── main.py
-├── requirements.txt
-├── render.yaml          # Render configuration
-└── .python-version      # Optional: Python version
+GROQ_API_KEY=gsk_xxx
+API_KEY=ss_live_xxx
+GROQ_MODEL=llama-3.3-70b-versatile
+PYTHON_VERSION=3.11.9
 ```
 
-### Step 2: Create `render.yaml`
+#### 4. Deploy
+
+Render auto-deploys on push to `main` branch.
+
+### render.yaml (Infrastructure as Code)
 
 ```yaml
 services:
   - type: web
-    name: scamshield-api
+    name: scamshield-honeypot
     runtime: python
-    region: singapore  # Closest to India
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /v1/health
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
       - key: GROQ_API_KEY
-        sync: false  # Set manually in dashboard
-      - key: ENVIRONMENT
-        value: production
-      - key: LOG_LEVEL
-        value: INFO
-    healthCheckPath: /health
-    autoDeploy: true
-```
-
-### Step 3: Deploy
-
-1. Go to [render.com](https://render.com) and sign in
-2. Click **New +** → **Web Service**
-3. Connect your GitHub repository
-4. Render will auto-detect `render.yaml`
-5. Add `GROQ_API_KEY` in Environment settings
-6. Click **Deploy**
-
-### Step 4: Verify Deployment
-
-```bash
-# Check health endpoint
-curl https://scamshield-api.onrender.com/health
-
-# Expected response:
-# {"status": "healthy", "version": "1.0.0"}
+        sync: false
+      - key: API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
 ```
 
 ---
 
-## Docker Deployment
+## 🎨 Frontend Deployment (Vercel)
+
+### Method 1: One-Click Deploy
+
+[Deploy with Vercel](https://vercel.com/new)
+
+### Method 2: CLI Deploy
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Navigate to frontend
+cd frontend
+
+# Deploy
+vercel
+
+# Production deploy
+vercel --prod
+```
+
+### Vercel Configuration
+
+```json
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://scamshield-honeypot.onrender.com"
+  }
+}
+```
+
+### Environment Variables
+
+| Variable | Value |
+|----------|-------|
+| `NEXT_PUBLIC_API_URL` | https://scamshield-honeypot.onrender.com |
+| `NEXT_PUBLIC_API_KEY` | Your API key |
+
+---
+
+## 🐳 Docker Deployment
 
 ### Dockerfile
 
@@ -145,20 +182,38 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application
 COPY . .
 
-# Create non-root user
-RUN adduser --disabled-password --gecos '' appuser
-USER appuser
-
 # Expose port
 EXPOSE 8000
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD curl -f http://localhost:8000/v1/health || exit 1
 
-# Start server
+# Run application
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
+
+### Build and Run
+
+```bash
+# Build image
+docker build -t scamshield:latest .
+
+# Run container
+docker run -d \
+  --name scamshield \
+  -p 8000:8000 \
+  -e GROQ_API_KEY=your_key \
+  -e API_KEY=your_api_key \
+  scamshield:latest
+
+# View logs
+docker logs -f scamshield
+```
+
+---
+
+## 🐳 Docker Compose
 
 ### docker-compose.yml
 
@@ -168,190 +223,269 @@ version: '3.8'
 services:
   api:
     build: .
+    container_name: scamshield-api
     ports:
       - "8000:8000"
     environment:
       - GROQ_API_KEY=${GROQ_API_KEY}
-      - ENVIRONMENT=production
-      - DATABASE_URL=sqlite:///./data/scamshield.db
+      - API_KEY=${API_KEY}
+      - GROQ_MODEL=llama-3.3-70b-versatile
+      - DATABASE_URL=sqlite+aiosqlite:///./data/honeypot.db
     volumes:
       - ./data:/app/data
-    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: scamshield-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    depends_on:
+      - api
+
+volumes:
+  data:
 ```
 
-### Build & Run
+### Commands
 
 ```bash
-# Build image
-docker build -t scamshield-api .
-
-# Run container
-docker run -d \
-  --name scamshield \
-  -p 8000:8000 \
-  -e GROQ_API_KEY=your_key_here \
-  scamshield-api
-
-# Using docker-compose
+# Start all services
 docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+
+# Rebuild
+docker-compose up -d --build
 ```
 
 ---
 
-## Health Checks
+## 🔄 CI/CD Pipeline
+
+### GitHub Actions
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Run tests
+        run: pytest tests/ -v
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Render
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+```
+
+### Branch Strategy
+
+| Branch | Deployment |
+|--------|------------|
+| `main` | Production (auto-deploy) |
+| `develop` | Staging (manual) |
+| `feature/*` | Preview (PR deploys) |
+
+---
+
+## ❤️ Health Checks
 
 ### Endpoints
 
-| Endpoint | Method | Auth | Response |
-|----------|--------|------|----------|
-| `/health` | GET | None | Service status |
-| `/docs` | GET | None | OpenAPI docs |
+| Endpoint | Purpose | Response |
+|----------|---------|----------|
+| `/v1/health` | Basic health | `{"status": "healthy"}` |
+| `/v1/health/ready` | Readiness | DB + LLM status |
+| `/v1/health/live` | Liveness | `{"status": "alive"}` |
 
-### Health Response
+### Render Health Check
 
-```json
-{
-  "status": "healthy",
-  "version": "1.0.0",
-  "timestamp": "2026-01-30T15:40:00+05:30",
-  "components": {
-    "database": "healthy",
-    "llm_service": "healthy",
-    "agent_loop": "healthy"
-  },
-  "active_sessions": 3
-}
+```yaml
+healthCheckPath: /v1/health
 ```
 
-### Monitoring Script
+### Docker Health Check
 
-```bash
-#!/bin/bash
-# health_check.sh
+```dockerfile
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/v1/health || exit 1
+```
 
-API_URL="https://scamshield-api.onrender.com"
+### Kubernetes Probes
 
-response=$(curl -s -o /dev/null -w "%{http_code}" "$API_URL/health")
+```yaml
+livenessProbe:
+  httpGet:
+    path: /v1/health/live
+    port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 10
 
-if [ "$response" -eq 200 ]; then
-    echo "✅ API is healthy"
-    exit 0
-else
-    echo "❌ API is down (HTTP $response)"
-    exit 1
-fi
+readinessProbe:
+  httpGet:
+    path: /v1/health/ready
+    port: 8000
+  initialDelaySeconds: 10
+  periodSeconds: 5
 ```
 
 ---
 
-## Monitoring & Logging
+## 📊 Monitoring
 
-### Render.com Logs
+### UptimeRobot Setup
 
-```bash
-# View logs in Render dashboard
-# Or use Render CLI
-render logs scamshield-api --tail
-```
+1. Create account at [uptimerobot.com](https://uptimerobot.com)
+2. Add new monitor:
+   - Type: HTTP(s)
+   - URL: `https://scamshield-honeypot.onrender.com/v1/health`
+   - Interval: 5 minutes
 
-### Log Format (Structured JSON)
+### Metrics to Monitor
 
-```json
-{
-  "timestamp": "2026-01-30T11:50:00Z",
-  "level": "INFO",
-  "message": "Request processed",
-  "request_id": "req_abc123",
-  "path": "/v1/honeypot",
-  "method": "POST",
-  "status_code": 200,
-  "duration_ms": 156
-}
-```
+| Metric | Threshold | Alert |
+|--------|-----------|-------|
+| Response Time | > 3s | Warning |
+| Error Rate | > 5% | Critical |
+| Uptime | < 99% | Critical |
+| CPU Usage | > 80% | Warning |
+| Memory | > 90% | Critical |
 
-### Recommended Monitoring Tools
+### Render Dashboard
 
-| Tool | Purpose | Integration |
-|------|---------|-------------|
-| **Render Metrics** | CPU, Memory, Requests | Built-in |
-| **UptimeRobot** | Uptime monitoring | Free tier |
-| **Sentry** | Error tracking | SDK available |
-| **Logflare** | Log aggregation | Render add-on |
+Render provides built-in metrics:
+
+- Request count
+- Response time
+- Memory usage
+- CPU usage
 
 ---
 
-## Troubleshooting
+## 📝 Logging
 
-### Common Issues
+### Configuration
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| `503 Service Unavailable` | Cold start on free tier | Wait 30s, Render spins up |
-| `401 Unauthorized` | Invalid/missing API key | Check `X-API-Key` header |
-| `429 Too Many Requests` | Rate limit exceeded | Wait and retry |
-| `500 Internal Error` | Groq API failure | Check `GROQ_API_KEY` |
+```python
+import logging
 
-### Debug Mode
-
-```bash
-# Local debugging
-export LOG_LEVEL=DEBUG
-uvicorn app.main:app --reload
-
-# Check specific issues
-curl -v https://your-api.onrender.com/health
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(),
+    ]
+)
 ```
 
-### Cold Start Optimization
+### Log Levels
 
-Render.com free tier sleeps after 15 minutes of inactivity.
+| Level | Usage |
+|-------|-------|
+| `DEBUG` | Detailed debugging |
+| `INFO` | General information |
+| `WARNING` | Potential issues |
+| `ERROR` | Error occurred |
+| `CRITICAL` | System failure |
 
-**Solutions:**
-1. Use a cron job to ping `/health` every 10 minutes
-2. Upgrade to paid tier ($7/month) for always-on
-3. Use UptimeRobot for free pings
+### Structured Logging
 
-```bash
-# Cron job (on external server)
-*/10 * * * * curl -s https://scamshield-api.onrender.com/health > /dev/null
+```python
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info(json.dumps({
+    "event": "session_created",
+    "session_id": session_id,
+    "scam_type": scam_type,
+    "timestamp": datetime.utcnow().isoformat()
+}))
 ```
 
----
+### Log Aggregation (Optional)
 
-## Production Checklist
+For production, consider:
 
-- [ ] `GROQ_API_KEY` set in environment
-- [ ] `ENVIRONMENT=production` configured
-- [ ] `MAX_TURNS` set appropriately (default: 10)
-- [ ] `DEFAULT_PERSONA` configured
-- [ ] `MOCK_SCAMMER_URL` configured (for hackathon)
-- [ ] Health check endpoint responding
-- [ ] CORS origins configured correctly
-- [ ] Rate limiting enabled
-- [ ] Monitoring/alerting set up
-- [ ] Database backups configured (if applicable)
-- [ ] SSL/TLS enabled (automatic on Render)
+- **Papertrail** - Log aggregation
+- **Datadog** - Full observability
+- **Sentry** - Error tracking
 
 ---
 
-## Render.com Free Tier Limits
+## 📈 Scaling
 
-| Resource | Limit |
-|----------|-------|
-| **Instances** | 1 |
-| **RAM** | 512 MB |
-| **CPU** | Shared |
-| **Bandwidth** | 100 GB/month |
-| **Sleep** | After 15 min inactive |
-| **Build Time** | 500 min/month |
+### Horizontal Scaling
 
-> 💡 **Tip:** For hackathon demo, free tier is sufficient. Consider upgrading for production use.
+```yaml
+services:
+  - type: web
+    name: scamshield-honeypot
+    plan: standard
+    autoDeploy: true
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetMemoryPercent: 80
+      targetCPUPercent: 70
+```
+
+### Database Scaling
+
+| Stage | Database | When |
+|-------|----------|------|
+| MVP | SQLite | < 10K sessions |
+| Growth | PostgreSQL | < 100K sessions |
+| Scale | PostgreSQL + Read Replicas | > 100K sessions |
+
+### Performance Tips
+
+1. Enable Response Caching for analytics endpoints
+2. Use Connection Pooling for database
+3. Implement Rate Limiting to prevent abuse
+4. Add CDN for static assets (frontend)
 
 ---
 
-<p align="center"><em>Deploy with confidence. Scale when ready.</em></p>
+## 🔗 Related Documentation
+
+- [Backend Development](./BACKEND_DEVELOPMENT.md)
+- [Security](./SECURITY.md)
+- [Troubleshooting](./TROUBLESHOOTING.md)

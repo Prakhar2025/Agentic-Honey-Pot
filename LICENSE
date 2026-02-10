@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 ScamShield Team - India AI Impact Buildathon
+Copyright (c) 2026 ScamShield — India AI Impact Buildathon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,18 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## Ethical Use Disclaimer
-
-This software is designed to protect citizens from digital fraud by engaging 
-with potential scammers using AI-powered personas. Users of this software 
-must ensure:
-
-1. Compliance with all applicable laws and regulations
-2. Extracted intelligence is used only for law enforcement reporting
-3. No real personal or financial information is processed through the system
-4. The system is not used to harass or harm individuals
-
-The authors are not responsible for misuse of this software.
