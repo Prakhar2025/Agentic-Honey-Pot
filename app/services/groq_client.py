@@ -358,6 +358,7 @@ class GroqLLMClient:
             messages=messages,
             temperature=temperature,
             max_tokens=max_tokens,
+            timeout=30.0,  # Prevent hanging if GROQ is slow (finals safety)
         )
     
     async def health_check(self) -> bool:
