@@ -58,10 +58,6 @@ def _get_database_url() -> str:
     if url.startswith("sqlite://"):
         url = url.replace("sqlite://", "sqlite+aiosqlite://", 1)
     
-    # Convert postgresql:// to postgresql+asyncpg://
-    if url.startswith("postgresql://"):
-        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
-    
     return url
 
 
