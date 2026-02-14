@@ -1,10 +1,10 @@
 name: Keep Render Service Alive
 
 on:
-  # schedule:
-  #   # Run every 10 minutes (more frequent than UptimeRobot)
-  #   - cron: '*/10 * * * *'
-  workflow_dispatch: # Allow manual trigger only (auto-schedule disabled)
+  schedule:
+    # Run every 5 minutes during finals
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   ping:
