@@ -180,7 +180,7 @@ class IntelligenceExtractor:
         results: List[Dict[str, Any]] = []
         seen: Set[str] = set()
         
-        # Primary pattern
+        # PRIMARY: Standard phone pattern
         for match in PHONE_PATTERN.finditer(text):
             raw = match.group(0)
             normalized = normalize_phone(raw)
@@ -200,7 +200,7 @@ class IntelligenceExtractor:
                     "type": "mobile",
                 })
         
-        # Flexible pattern for noisy text
+        # FLEXIBLE: Noisy text with separators
         for match in PHONE_PATTERN_FLEXIBLE.finditer(text):
             raw = match.group(0)
             # Clean up the match
@@ -215,6 +215,44 @@ class IntelligenceExtractor:
                     "confidence": 0.75,  # Lower confidence for flexible match
                     "type": "mobile",
                 })
+        
+        # EDGE CASE: Numbers in parentheses/brackets - (9876543210) or [+91-9876-543210]
+        bracket_pattern = re.compile(r'[\(\[][\s]*([\+\d\s\-().]+?)[\s]*[\)\]]')
+        for match in bracket_pattern.finditer(text):
+            raw = match.group(1)
+            # Normalize: remove separators
+            cleaned = re.sub(r'[\s\-().]', '', raw)
+            
+            # Check if it has enough digits to be a phone number
+            digit_only = re.sub(r'\D', '', cleaned)
+            if len(digit_only) >= 10:
+                normalized = normalize_phone(cleaned)
+                if normalized and normalized not in seen:
+                    seen.add(normalized)
+                    results.append({
+                        "number": normalized,
+                        "raw": match.group(0),  # Include brackets in raw
+                        "confidence": 0.80,  # Medium-high confidence
+                        "type": "mobile",
+                    })
+        
+        # NORMALIZATION FALLBACK: Create normalized version of entire text and re-scan
+        # This catches numbers with unusual separators
+        text_normalized = re.sub(r'[-()\s]', '', text)
+        if text_normalized != text:
+            # Only re-scan if normalization changed something
+            for match in PHONE_PATTERN.finditer(text_normalized):
+                raw = match.group(0)
+                normalized = normalize_phone(raw)
+                
+                if normalized and normalized not in seen:
+                    seen.add(normalized)
+                    results.append({
+                        "number": normalized,
+                        "raw": raw,
+                        "confidence": 0.70,  # Lower confidence for normalized scan
+                        "type": "mobile",
+                    })
         
         return results
     

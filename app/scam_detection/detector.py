@@ -233,23 +233,57 @@ class ScamDetector:
         # Check high-risk indicators
         high_risk_score = self._check_high_risk(message_lower)
         
+        # FALLBACK: Critical keyword detection (for borderline scams)
+        CRITICAL_KEYWORDS = {
+            "otp", "pin", "cvv", "password", "kyc", "blocked",
+            "suspended", "verify", "urgent", "expire", "expir",
+            "click link", "update now", "share otp", "send otp"
+        }
+        
+        message_words = set(message_lower.split())
+        critical_matches = message_words & CRITICAL_KEYWORDS
+        
+        # Also check for multi-word critical phrases
+        for phrase in ["click link", "update now", "share otp", "send otp", "verify now"]:
+            if phrase in message_lower:
+                critical_matches.add(phrase)
+        
+        # Calculate fallback confidence
+        fallback_confidence = 0.0
+        if len(critical_matches) >= 2:
+            # Multiple critical keywords = likely scam
+            fallback_confidence = min(0.75, 0.35 + (len(critical_matches) * 0.10))
+        elif len(critical_matches) == 1:
+            # Single critical keyword = moderate suspicion
+            fallback_confidence = 0.40
+        
         if not scores:
-            if high_risk_score > 0:
-                return True, ScamType.UNKNOWN, min(0.6, high_risk_score)
+            if high_risk_score > 0 or fallback_confidence > 0:
+                combined = max(high_risk_score, fallback_confidence)
+                # Determine scam type based on keywords
+                scam_type_fallback = ScamType.UNKNOWN
+                if "otp" in critical_matches or "pin" in critical_matches:
+                    scam_type_fallback = ScamType.OTP_THEFT
+                elif "kyc" in critical_matches or "verify" in critical_matches:
+                    scam_type_fallback = ScamType.KYC_PHISHING
+                elif "blocked" in critical_matches or "suspended" in critical_matches:
+                    scam_type_fallback = ScamType.KYC_PHISHING
+                
+                return combined >= 0.3, scam_type_fallback, min(0.75, combined)
             return False, ScamType.UNKNOWN, 0.0
         
         # Get highest scoring scam type
         best_type = max(scores.keys(), key=lambda k: scores[k])
         best_score = scores[best_type]
         
-        # Boost with high-risk indicators
-        final_confidence = min(0.98, best_score + high_risk_score * 0.2)
+        # Boost with high-risk indicators and fallback
+        final_confidence = min(0.98, best_score + high_risk_score * 0.2 + fallback_confidence * 0.15)
         
-        # Determine if it's a scam
-        is_scam = final_confidence >= 0.4
+        # LOWERED THRESHOLD: Determine if it's a scam (was 0.4, now 0.3)
+        is_scam = final_confidence >= 0.3
         
         if is_scam:
-            logger.info(f"Scam detected: type={best_type}, confidence={final_confidence:.2f}")
+            logger.info(f"Scam detected: type={best_type}, confidence={final_confidence:.2f}, critical_keywords={list(critical_matches)}")
         
         return is_scam, best_type, round(final_confidence, 2)
     
