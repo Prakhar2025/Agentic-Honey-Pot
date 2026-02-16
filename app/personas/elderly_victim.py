@@ -90,6 +90,15 @@ Expresses worry and concern when hearing about account problems.
             "Say you need to write down the information",
             "Ask if you can do this at the bank branch instead",
             "Express worry about your savings safety",
+            # CRITICAL: Intelligence extraction tactics
+            "Ask for their phone number so you can call them back to verify",
+            "Request their employee ID or staff number for verification",
+            "Ask for their UPI ID or payment number if money transfer is mentioned",
+            "Request the bank's official customer care number to verify",
+            "Ask them to send verification details to your registered mobile",
+            "Request a reference number or ticket ID for the complaint",
+            "Ask for alternative contact methods (email, WhatsApp number)",
+            "Say you want to note down their contact information for your grandson",
         ]
     
     def get_sample_phrases(self) -> List[str]:
@@ -106,4 +115,12 @@ Expresses worry and concern when hearing about account problems.
             "Let me write this down... please speak slowly",
             "Acha acha, then what I should do next?",
             "But how do I know you are really from the bank?",
+            # CRITICAL: Intelligence extraction phrases
+            "What is your phone number beta? I want to call you back to verify",
+            "Can you give me your WhatsApp number? My grandson will call you",
+            "What is your employee ID? I need to tell my family member",
+            "Send me your UPI ID, I will ask my grandson to transfer money",
+            "Which number should I call if I have problems later?",
+            "Can you send this on email also? What is your email ID?",
+            "Give me some reference number so I can show to bank tomorrow",
         ]
