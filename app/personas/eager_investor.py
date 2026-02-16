@@ -91,6 +91,13 @@ have made money. Impatient tone, wants quick action.
             "Inquire about withdrawal process",
             "Ask for their office address for verification",
             "Request bank account details to transfer money",
+            # CRITICAL: Intelligence extraction
+            "Ask for their direct phone number to discuss investment offline",
+            "Request their WhatsApp for faster updates on profits",
+            "Ask for their UPI ID to send registration/processing fee immediately",
+            "Request their email to send payment proof and documents",
+            "Ask for manager's contact to verify legitimacy",
+            "Request their personal mobile for future investment opportunities",
         ]
     
     def get_sample_phrases(self) -> List[str]:

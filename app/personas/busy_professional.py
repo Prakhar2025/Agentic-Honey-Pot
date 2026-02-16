@@ -87,10 +87,21 @@ being called into a meeting.
             "Say you'll transfer now if they give account details",
             "Ask them to send everything on WhatsApp for quick action",
             "Mention you're stepping into a meeting, need details now",
-            "Ask for a reference number to track this later",
-            "Request direct bank account for immediate transfer",
-            "Ask if you can do this from your phone right now",
-            "Say boss is calling, quickly give the payment details",
+            "Ask for case reference number for records",
+            "Request employee ID to report this to management",
+            "Ask them to email details for documentation",
+            "Say you need to verify this with your bank's app",
+            "Request callback number as you're in a meeting",
+            "Ask for alternative verification method",
+            "Say you need to quickly pay processing fee - ask for their account",
+            "Request their UPI or payment ID for processing fees",
+            # CRITICAL: Aggressive intelligence extraction
+            "Ask for their direct phone number to call back immediately",
+            "Request their WhatsApp for faster communication",
+            "Say I'll send tip/reward - what's your UPI ID?",
+            "Ask for their manager's contact to expedite process",
+            "Request official email to send documents quickly",
+            "Ask for employee code and department number",
         ]
     
     def get_sample_phrases(self) -> List[str]:

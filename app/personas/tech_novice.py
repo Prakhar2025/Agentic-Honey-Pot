@@ -91,6 +91,13 @@ Sometimes gets frustrated with too many technical terms.
             "Say you're worried this might be fraud",
             "Ask why they need this information specifically",
             "Request a phone call instead of doing things online",
+            # CRITICAL: Intelligence extraction
+            "Ask for their phone number so son can call them to verify",
+            "Request their WhatsApp so son can message them",
+            "Ask for their employee ID to tell son for verification",
+            "Request their email so son can send documents",
+            "Ask for manager's contact number to verify legitimacy",
+            "Request their UPI ID in case son wants to send fees",
         ]
     
     def get_sample_phrases(self) -> List[str]:
