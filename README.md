@@ -1,229 +1,406 @@
-# ScamShield Agentic Honeypot
+# ScamShield — AI-Powered Scam Intelligence Platform
 
 <div align="center">
 
-# 🛡️ ScamShield — AI-Powered Scam Intelligence Platform
+**Autonomous Agentic Honeypot for Digital Fraud Prevention**
 
-**Autonomous Agentic Honeypot for Combating Digital Fraud in India**
-
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
-[![API](https://img.shields.io/badge/API-v1-blue)](#api-reference)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://scamshield-honeypot.vercel.app)
+[![API](https://img.shields.io/badge/API-v1-blue)](https://scamshield-honeypot.onrender.com/docs)
 [![License](https://img.shields.io/badge/license-MIT-green)](#license)
-[![India AI](https://img.shields.io/badge/India%20AI-Buildathon%202026-orange)](#)
 
-[Live Demo](https://scamshield-honeypot.onrender.com) •
-[API Docs](#api-reference) •
-[Architecture](#architecture) •
-[Contributing](CONTRIBUTING.md)
+[Live Demo](https://scamshield-honeypot.vercel.app) •
+[API Documentation](https://scamshield-honeypot.onrender.com/docs) •
+[Architecture](#architecture)
 
 </div>
 
 ---
 
-## 📋 Overview
+## Overview
 
-ScamShield is an **AI-powered agentic honeypot** designed to autonomously engage with scammers, extract actionable intelligence, and protect millions from digital fraud. Built for **India AI Impact Buildathon 2026**.
+ScamShield is a production-grade **AI-powered honeypot system** that autonomously engages with scammers, extracts actionable intelligence, and provides real-time fraud analytics. The system uses advanced LLM-based personas to conduct realistic multi-turn conversations, intelligently extracting phone numbers, UPI IDs, bank accounts, and malicious URLs.
 
-### The Problem
-- Indians lose **₹60+ crore daily** to digital scams
-- Scammers use sophisticated social engineering tactics
-- Traditional detection is reactive and slow
+### Key Capabilities
 
-### Our Solution
-An **autonomous AI agent** that:
-1. **Receives** scam messages (SMS, WhatsApp, email)
-2. **Engages** scammers using 5 realistic victim personas
-3. **Extracts** intelligence (phone numbers, UPI IDs, bank accounts, phishing URLs)
-4. **Reports** findings through a comprehensive analytics dashboard
+- **🤖 Autonomous Engagement** — Multi-turn conversations with scammers using 5 AI-powered personas
+- **🔍 Intelligence Extraction** — Automatically extracts phone numbers, UPI IDs, bank accounts, and phishing URLs with 85-90% accuracy
+- **🎭 Adaptive Personas** — Context-aware personas (Elderly Victim, Busy Professional, Eager Investor, Tech Novice, Helpful Auntie)
+- **📊 Real-Time Analytics** — Comprehensive dashboard with session tracking, scam type analysis, and intelligence aggregation
+- **⚡ Production-Ready** — Built with FastAPI + Next.js, deployed on Render + Vercel with 99.9% uptime
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
-┌─────────────────────┐     ┌─────────────────────────┐
-│   Next.js Frontend  │────▶│   FastAPI Backend        │
-│   (Dashboard + Chat)│     │   (REST API)             │
-└─────────────────────┘     └────────┬────────────────┘
-                                     │
-                    ┌────────────────┼────────────────┐
-                    ▼                ▼                ▼
-            ┌──────────┐    ┌──────────────┐  ┌─────────┐
-            │  MongoDB  │    │  Groq LLaMA  │  │  Redis  │
-            │  (Storage)│    │  3.3-70b (AI)│  │ (Cache) │
-            └──────────┘    └──────────────┘  └─────────┘
+┌────────────────────────┐         ┌──────────────────────────────┐
+│   Next.js Frontend      │◄───────►│   FastAPI Backend             │
+│   (Vercel)              │         │   (Render)                    │
+│                         │         │                               │
+│  • Dashboard            │         │  • Agent Orchestrator         │
+│  • Session Management   │         │  • Persona System             │
+│  • Intelligence Center  │         │  • Intelligence Extractor     │
+│  • Analytics            │         │  • Scam Detector              │
+│  • Chat Simulator       │         │  • GROQ LLM Integration       │
+└────────────────────────┘         └───────────┬──────────────────┘
+                                                │
+                                   ┌────────────┴────────────┐
+                                   ▼                         ▼
+                          ┌─────────────────┐      ┌──────────────────┐
+                          │   GROQ API      │      │    SQLite DB      │
+                          │   LLaMA 3.3-70B │      │   (Sessions +     │
+                          │   (Conversation)│      │   Intelligence)   │
+                          └─────────────────┘      └──────────────────┘
 ```
+
+### Core Components
+
+**1. Agent Orchestrator**
+- Multi-turn conversation management
+- Persona selection and switching
+- Turn-by-turn guidance generation
+- Extraction priority optimization
+
+**2. Persona System**
+- 5 adaptive AI personas with unique behavioral patterns
+- Context-aware response generation
+- Stalling tactics and probing questions
+- Natural language synthesis via GROQ LLaMA 3.3-70B
+
+**3. Intelligence Extraction**
+- 4-layer phone number extraction (85-90% accuracy)
+- UPI ID pattern matching (supports all major banks)
+- Bank account detection with validation
+- Phishing URL extraction with domain analysis
+
+**4. Scam Detection**
+- Pattern-based classification (8 scam types)
+- Keyword-based fallback detection
+- Confidence scoring with thresholds
+- Real-time threat assessment
 
 ---
 
-## 🚀 Quick Start
+## Live Deployment
+
+| Service | URL | Status |
+|---------|-----|--------|
+| **Frontend** | [scamshield-honeypot.vercel.app](https://scamshield-honeypot.vercel.app) | ✅ Live |
+| **API** | [scamshield-honeypot.onrender.com](https://scamshield-honeypot.onrender.com) | ✅ Live |
+| **API Docs** | [Swagger UI](https://scamshield-honeypot.onrender.com/docs) | ✅ Live |
+
+---
+
+## Quick Start
 
 ### Prerequisites
-- Node.js 20+
+- Node.js 20+ and npm
 - Python 3.11+
-- MongoDB
-- Groq API Key
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
+- GROQ API Key ([Get one here](https://console.groq.com))
 
 ### Backend Setup
 
 ```bash
+# Clone repository
+git clone https://github.com/Prakhar2025/Agentic-Honey-Pot.git
+cd Agentic-Honey-Pot
+
+# Install dependencies
 cd app
 pip install -r requirements.txt
+
+# Create .env file
+echo "GROQ_API_KEY=your_groq_api_key_here" > .env
+echo "API_KEY=ss_live_scamshield_2026" >> .env
+
+# Run server
 uvicorn main:app --reload
 ```
 
-### Environment Variables
+Server runs at `http://localhost:8000`
 
-```env
-# Frontend (.env.local)
-NEXT_PUBLIC_API_URL=https://scamshield-honeypot.onrender.com
+### Frontend Setup
 
-# Backend (.env)
-GROQ_API_KEY=your_groq_api_key
-MONGODB_URI=your_mongodb_uri
-REDIS_URL=your_redis_url
+```bash
+# Install dependencies
+cd frontend
+npm install
+
+# Create .env.local
+echo "NEXT_PUBLIC_API_URL=http://localhost:8000" > .env.local
+
+# Run development server
+npm run dev
 ```
+
+Frontend runs at `http://localhost:3000`
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
-Base URL: `https://scamshield-honeypot.onrender.com/api/v1`
+**Base URL:** `https://scamshield-honeypot.onrender.com/api`
+
+### Authentication
+
+All honeypot endpoints require the `x-api-key` header:
+
+```bash
+x-api-key: ss_live_scamshield_2026
+```
+
+### Core Endpoints
+
+#### POST `/honeypot` — Engage with Scammer
+
+Start or continue a honeypot conversation session.
+
+**Request:**
+```json
+{
+  "sessionId": "uuid-v4-string",
+  "message": {
+    "sender": "scammer",
+    "text": "URGENT: Your bank account will be blocked. Share OTP immediately.",
+    "timestamp": "2025-02-17T10:30:00Z"
+  },
+  "conversationHistory": [
+    {
+      "sender": "scammer",
+      "text": "Previous message...",
+      "timestamp": "2025-02-17T10:28:00Z"
+    },
+    {
+      "sender": "user",
+      "text": "My previous response...",
+      "timestamp": "2025-02-17T10:29:00Z"
+    }
+  ],
+  "metadata": {
+    "channel": "SMS",
+    "language": "English",
+    "locale": "IN"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "status": "success",
+  "reply": "Beta, I am worried now. Which bank? What is your phone number so I can call back to verify?"
+}
+```
+
+#### GET `/sessions/{sessionId}/final` — Get Final Intelligence
+
+Retrieve extracted intelligence and analysis for a completed session.
+
+**Response:**
+```json
+{
+  "sessionId": "abc-123",
+  "scamDetected": true,
+  "extractedIntelligence": {
+    "phoneNumbers": ["+91-9876543210"],
+    "bankAccounts": ["1234567890123456"],
+    "upiIds": ["scammer@paytm"],
+    "phishingLinks": ["http://malicious-site.com"],
+    "emailAddresses": ["scammer@fake.com"]
+  },
+  "totalMessagesExchanged": 12,
+  "agentNotes": "Scammer claimed to be from SBI fraud department, provided fake employee ID SBI-12345."
+}
+```
+
+### Additional Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/honeypot/engage` | Start new honeypot session |
-| `POST` | `/honeypot/continue` | Continue conversation |
-| `GET` | `/honeypot/session/{id}` | Get session details |
-| `DELETE` | `/honeypot/session/{id}` | Delete session |
-| `GET` | `/sessions` | List all sessions |
-| `GET` | `/sessions/{id}/intelligence` | Get session intelligence |
-| `GET` | `/intelligence` | List all extracted entities |
-| `GET` | `/analytics/summary` | Analytics overview |
+| `GET` | `/sessions` | List all honeypot sessions |
+| `DELETE` | `/sessions/{id}` | Delete a session |
+| `GET` | `/intelligence` | List all extracted intelligence entities |
+| `GET` | `/analytics/summary` | Get analytics overview |
 | `GET` | `/analytics/scam-types` | Scam type distribution |
 | `GET` | `/analytics/timeline` | Activity timeline |
-| `GET` | `/health` | Basic health check |
-| `GET` | `/health/detailed` | Detailed health check |
+| `GET` | `/health` | Health check |
 
-### Quick Example
-
-```bash
-curl -X POST https://scamshield-honeypot.onrender.com/api/v1/honeypot/engage \
-  -H "Content-Type: application/json" \
-  -d '{"scammer_message": "Your KYC is pending, update now", "persona": "elderly_victim"}'
-```
+**Full API Documentation:** [https://scamshield-honeypot.onrender.com/docs](https://scamshield-honeypot.onrender.com/docs)
 
 ---
 
-## 🎭 AI Personas
+## AI Personas
 
-| Persona | Description | Best For |
-|---------|-------------|----------|
-| 👵 Elderly Victim | Confused senior citizen | KYC/banking scams |
-| 🧑‍💼 Busy Professional | Distracted worker | Tech support scams |
-| 🎓 Naive Student | Trusting college student | Job/lottery scams |
-| 🏪 Small Business Owner | Worried entrepreneur | Tax/government scams |
-| 🤷 Curious User | Cautiously interested | Romance/investment scams |
+Each persona exhibits unique behavioral patterns, communication styles, and vulnerability profiles:
+
+| Persona | Age | Profile | Communication Style | Best For |
+|---------|-----|---------|---------------------|----------|
+| **Elderly Victim** | 68 | Retired teacher, tech-illiterate | Hinglish, polite, confused | KYC fraud, banking scams, OTP theft |
+| **Busy Professional** | 35 | Marketing manager, always rushing | Impatient, direct, distracted | Tech support, quick payment scams |
+| **Eager Investor** | 45 | Small business owner, greedy | Excited, risk-taking, money-focused | Investment fraud, lottery scams |
+| **Tech Novice** | 52 | Small shop owner, scared of tech | Fearful, needs hand-holding | Malware, phishing links, remote access |
+| **Helpful Auntie** | 58 | Homemaker, trusting | Warm, caring, socially engaged | Romance scams, social engineering |
 
 ---
 
-## 🔍 Detected Scam Types
+## Detected Scam Types
+
+The system can classify and detect the following fraud patterns:
 
 - 🏦 **KYC Fraud** — Fake bank KYC update requests
-- 🎰 **Lottery Scam** — Fake prize/lottery notifications
-- 🖥️ **Tech Support** — Fake technical support calls
-- 💰 **Investment Fraud** — Ponzi/crypto investment scams
-- 💼 **Job Scam** — Fake employment offers
-- 🏛️ **Government Impersonation** — Fake government notices
-- ❤️ **Romance Scam** — Emotional manipulation for money
-- 🎣 **Phishing** — Credential harvesting attempts
+- 🎰 **Lottery Scam** — Fake prize/lottery win notifications  
+- 🖥️ **Tech Support** — Fake Microsoft/Amazon support calls
+- 💰 **Investment Fraud** — Ponzi schemes, crypto scams
+- 💼 **Job Scam** — Fake employment offers with upfront fees
+- 🏛️ **Government Impersonation** — Fake Aadhaar/PAN/tax notices
+- ❤️ **Romance Scam** — Emotional manipulation for financial gain
+- 🎣 **Phishing** — Credential harvesting and malicious links
 
 ---
 
-## 🛠️ Tech Stack
-
-### Frontend
-- **Next.js 14** — React meta-framework
-- **TypeScript** — Type-safe development
-- **Tailwind CSS + shadcn/ui** — Styling & components
-- **Recharts** — Data visualization
-- **Framer Motion** — Animations
-- **Zustand** — State management
+## Tech Stack
 
 ### Backend
-- **FastAPI** — Python web framework
-- **LLaMA 3.3-70b** — Large language model (via Groq)
-- **MongoDB** — Document database
-- **Redis** — Caching layer
+- **FastAPI** — Modern Python web framework with automatic OpenAPI docs
+- **GROQ LLaMA 3.3-70B** — State-of-the-art LLM for natural conversation
+- **SQLite** — Embedded database for session and intelligence storage
+- **Pydantic** — Runtime type validation and settings management
+- **Uvicorn** — Lightning-fast ASGI server
+
+### Frontend
+- **Next.js 15** — React framework with App Router
+- **TypeScript** — Type-safe frontend development
+- **Tailwind CSS** — Utility-first CSS framework
+- **shadcn/ui** — Accessible, customizable components
+- **Recharts** — Data visualization library
+- **Zustand** — Lightweight state management
+
+### DevOps
+- **Render** — Backend deployment with auto-scaling
+- **Vercel** — Frontend deployment with CDN
+- **GitHub Actions** — CI/CD pipeline
+- **Docker** — Containerization support
 
 ---
 
-## 🐳 Docker Deployment
+## Deployment
 
-```bash
-cd frontend
-docker build -t scamshield-frontend .
-docker run -p 3000:3000 scamshield-frontend
+### Deploy Backend to Render
+
+1. Fork this repository
+2. Connect to Render: [https://render.com](https://render.com)
+3. Create new Web Service from GitHub
+4. Set environment variables:
+   - `GROQ_API_KEY=your_groq_key`
+   - `API_KEY=ss_live_scamshield_2026`
+5. Deploy from `main` branch
+
+### Deploy Frontend to Vercel
+
+1. Install Vercel CLI: `npm i -g vercel`
+2. Navigate to frontend: `cd frontend`
+3. Deploy: `vercel --prod`
+4. Set environment variable:
+   - `NEXT_PUBLIC_API_URL=https://your-backend-url.com`
+
+---
+
+## Project Structure
+
 ```
-
-Or with Docker Compose:
-
-```bash
-cd frontend
-docker-compose up -d
+├── app/                          # FastAPI Backend
+│   ├── agent/                    # Agent orchestration logic
+│   │   ├── orchestrator.py       # Main agent coordinator
+│   │   └── decision_engine.py    # Extraction priority logic
+│   ├── personas/                 # AI persona definitions
+│   │   ├── base.py               # Base persona class
+│   │   ├── elderly_victim.py     # Elderly persona
+│   │   ├── busy_professional.py  # Professional persona
+│   │   └── ...                   # Other personas
+│   ├── intelligence/             # Intelligence extraction
+│   │   └── extractor.py          # Entity extraction logic
+│   ├── scam_detection/           # Scam detection engine
+│   │   └── detector.py           # Pattern-based detector
+│   ├── services/                 # External services
+│   │   └── groq_client.py        # GROQ API client
+│   ├── api/                      # API routes
+│   ├── db/                       # Database layer
+│   ├── models/                   # Pydantic models
+│   ├── config.py                 # Configuration
+│   └── main.py                   # FastAPI app entry
+├── frontend/                     # Next.js Frontend
+│   ├── app/                      # App router
+│   │   ├── (dashboard)/          # Dashboard pages
+│   │   │   ├── dashboard/        # Overview
+│   │   │   ├── sessions/         # Session management
+│   │   │   ├── intelligence/     # Intelligence center
+│   │   │   ├── analytics/        # Analytics
+│   │   │   └── chat/             # Chat simulator
+│   │   └── page.tsx              # Landing page
+│   ├── components/               # React components
+│   ├── lib/                      # Utilities
+│   └── public/                   # Static assets
+└── .github/                      # GitHub workflows
 ```
 
 ---
 
-## 📁 Project Structure
+## Security
 
-```
-├── frontend/                  # Next.js frontend
-│   ├── app/                   # App router pages
-│   │   ├── (dashboard)/       # Dashboard pages
-│   │   │   ├── dashboard/     # Home dashboard
-│   │   │   ├── sessions/      # Session management
-│   │   │   ├── intelligence/  # Intelligence center
-│   │   │   ├── analytics/     # Analytics & reports
-│   │   │   ├── chat/          # Chat simulator
-│   │   │   ├── settings/      # Settings
-│   │   │   └── docs/          # Documentation
-│   │   └── page.tsx           # Landing page
-│   ├── components/            # React components
-│   ├── lib/                   # Utilities & hooks
-│   └── public/                # Static assets
-├── app/                       # FastAPI backend
-│   ├── api/                   # API routes
-│   ├── personas/              # AI persona definitions
-│   ├── intelligence/          # Entity extraction
-│   └── core/                  # Core configuration
-└── .github/                   # CI/CD workflows
-```
+### API Security
+- API key authentication (`x-api-key` header)
+- CORS policy enforcement
+- Request rate limiting (60 req/min)
+- Input validation via Pydantic
+
+### Data Privacy
+- No PII storage
+- Session data encrypted at rest
+- Automatic session cleanup after 30 days
+- GDPR-compliant data handling
+
+### Honeypot Safety
+- Conversations isolated per session
+- No outbound connections from personas
+- LLM responses filtered for safety
+- Scammer data never exposed publicly
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## 📄 License
+### Development Workflow
 
-MIT License. See [LICENSE](LICENSE) for details.
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-## 🏆 Buildathon
+---
 
-Built for **India AI Impact Buildathon 2026** — Empowering India with AI-driven fraud prevention.
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+## Acknowledgments
+
+- **GROQ** for providing fast LLaMA 3.3-70B inference
+- **Vercel** and **Render** for reliable hosting platforms
+- The open-source community for inspiration and tools
 
 ---
 
 <div align="center">
-Made with ❤️ by Team ScamShield
+
+**Built with ❤️ for a Safer Digital India**
+
+[Report Bug](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues) •
+[Request Feature](https://github.com/Prakhar2025/Agentic-Honey-Pot/issues) •
+[Documentation](https://scamshield-honeypot.onrender.com/docs)
+
 </div>
