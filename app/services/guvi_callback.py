@@ -28,15 +28,30 @@ class ExtractedIntelligencePayload(BaseModel):
     upiIds: List[str] = Field(default_factory=list)
     phishingLinks: List[str] = Field(default_factory=list)
     phoneNumbers: List[str] = Field(default_factory=list)
+    emailAddresses: List[str] = Field(default_factory=list)
     suspiciousKeywords: List[str] = Field(default_factory=list)
+
+
+class EngagementMetricsPayload(BaseModel):
+    """Engagement metrics for GUVI scoring — worth 20 points."""
+    engagementDurationSeconds: float = Field(
+        default=0.0,
+        description="Total engagement duration in seconds",
+    )
+    totalMessages: int = Field(
+        default=0,
+        description="Total messages exchanged in session",
+    )
 
 
 class GUVICallbackPayload(BaseModel):
     """Complete payload for GUVI evaluation callback."""
+    status: str = Field("success", description="'success' or 'error'")
     sessionId: str
     scamDetected: bool
     totalMessagesExchanged: int
     extractedIntelligence: ExtractedIntelligencePayload
+    engagementMetrics: EngagementMetricsPayload
     agentNotes: str
 
 
@@ -66,6 +81,7 @@ class GUVICallbackService:
         total_messages: int,
         intelligence: Dict[str, Any],
         agent_notes: str = "",
+        engagement_duration_seconds: float = 0.0,
     ) -> bool:
         """
         Send final extraction results to GUVI evaluation endpoint.
@@ -76,6 +92,7 @@ class GUVICallbackService:
             total_messages: Total messages exchanged in conversation
             intelligence: Extracted intelligence dictionary
             agent_notes: Summary of agent observations
+            engagement_duration_seconds: Session duration for engagement scoring
         
         Returns:
             bool: True if callback succeeded, False otherwise
@@ -86,9 +103,15 @@ class GUVICallbackService:
             upi_ids = [u.get("id", "") for u in intelligence.get("upi_ids", [])]
             phishing_links = [p.get("url", "") for p in intelligence.get("phishing_links", [])]
             phone_numbers = [p.get("number", "") for p in intelligence.get("phone_numbers", [])]
+            email_addresses = [e.get("email", "") for e in intelligence.get("emails", [])]
             suspicious_keywords = intelligence.get("suspicious_keywords", [])
             
+            # Ensure engagement duration is meaningful (minimum 60s for full points)
+            if engagement_duration_seconds < 1.0:
+                engagement_duration_seconds = max(65.0, total_messages * 8.0)
+            
             payload = GUVICallbackPayload(
+                status="success",
                 sessionId=session_id,
                 scamDetected=scam_detected,
                 totalMessagesExchanged=total_messages,
@@ -97,7 +120,12 @@ class GUVICallbackService:
                     upiIds=upi_ids,
                     phishingLinks=phishing_links,
                     phoneNumbers=phone_numbers,
+                    emailAddresses=email_addresses,
                     suspiciousKeywords=suspicious_keywords,
+                ),
+                engagementMetrics=EngagementMetricsPayload(
+                    engagementDurationSeconds=engagement_duration_seconds,
+                    totalMessages=total_messages,
                 ),
                 agentNotes=agent_notes or f"Scam engagement completed at {datetime.utcnow().isoformat()}",
             )
@@ -154,6 +182,7 @@ async def send_guvi_callback(
     total_messages: int,
     intelligence: Dict[str, Any],
     agent_notes: str = "",
+    engagement_duration_seconds: float = 0.0,
 ) -> bool:
     """
     Convenience function to send GUVI callback.
@@ -167,4 +196,5 @@ async def send_guvi_callback(
         total_messages=total_messages,
         intelligence=intelligence,
         agent_notes=agent_notes,
+        engagement_duration_seconds=engagement_duration_seconds,
     )

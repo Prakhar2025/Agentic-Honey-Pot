@@ -193,14 +193,29 @@ IFSC_CONTEXT_PATTERN: Pattern[str] = re.compile(
 # URL PATTERNS
 # =============================================================================
 
-# HTTP/HTTPS URLs
+# HTTP/HTTPS URLs (with or without protocol prefix)
 URL_PATTERN: Pattern[str] = re.compile(
     r"""
     (
-        https?://               # Protocol
-        (?:www\.)?              # Optional www
-        [a-zA-Z0-9]             # Domain start
-        [a-zA-Z0-9\-._~:/?#\[\]@!$&'()*+,;=%]*  # Rest of URL
+        (?:                             # Branch 1: Explicit protocol (matches ANY domain)
+            https?://
+            (?:www\.)?
+            [a-zA-Z0-9]
+            [a-zA-Z0-9\-._~:/?#\[\]@!$&'()*+,;=%]*
+        )
+        |
+        (?:                             # Branch 2: Bare domain with suspicious TLDs
+            (?:www\.)?
+            [a-zA-Z0-9][a-zA-Z0-9\-]*
+            \.
+            (?:
+                com|org|net|in|co\.in|xyz|tk|ml|ga|cf|gq|
+                info|top|buzz|club|online|site|website|tech|
+                io|me|biz|us|uk|co\.uk|co|app|dev|page|link|
+                lol|zip|mov|ing
+            )
+            (?:/[a-zA-Z0-9\-._~:/?#\[\]@!$&'()*+,;=%]*)?
+        )
     )
     """,
     re.VERBOSE | re.IGNORECASE

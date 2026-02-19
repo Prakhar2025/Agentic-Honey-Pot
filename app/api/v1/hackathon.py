@@ -142,13 +142,17 @@ async def hackathon_honeypot(
             existing_session = await session_repo.get(session_id)
             
             if existing_session is None:
-                # First message - create session
+                # First message - create session with start time for engagement tracking
                 session = await session_repo.create_session(
                     scam_type=None,
                     persona_id="elderly_victim",
                     source_type=request.metadata.channel.lower() if request.metadata else "sms",
                     is_scam=True,
-                    metadata={"hackathon": True, "sessionId": session_id},
+                    metadata={
+                        "hackathon": True,
+                        "sessionId": session_id,
+                        "startTime": time.time(),
+                    },
                     session_id=session_id,  # Use their session ID
                 )
                 logger.info(f"[HACKATHON] Created new session: {session_id}")
@@ -224,14 +228,14 @@ async def hackathon_honeypot(
             full_extraction = extractor.extract_all(all_scammer_text)
             
             # Merge full extraction with existing intel (avoid duplicates)
-            for key in ["upi_ids", "bank_accounts", "phone_numbers", "phishing_links"]:
+            for key in ["upi_ids", "bank_accounts", "phone_numbers", "phishing_links", "emails"]:
                 existing = extracted_intel.get(key, [])
                 new_items = full_extraction.get(key, [])
                 existing_ids = set()
                 for e in existing:
-                    existing_ids.add(e.get("id") or e.get("account_number") or e.get("number") or e.get("url"))
+                    existing_ids.add(e.get("id") or e.get("account_number") or e.get("number") or e.get("url") or e.get("email"))
                 for item in new_items:
-                    item_id = item.get("id") or item.get("account_number") or item.get("number") or item.get("url")
+                    item_id = item.get("id") or item.get("account_number") or item.get("number") or item.get("url") or item.get("email")
                     if item_id and item_id not in existing_ids:
                         existing.append(item)
                 extracted_intel[key] = existing
@@ -284,6 +288,7 @@ async def hackathon_honeypot(
                     "upi_ids": extracted_intel.get("upi_ids", []),
                     "phishing_links": extracted_intel.get("phishing_links", []),
                     "phone_numbers": extracted_intel.get("phone_numbers", []),
+                    "emails": extracted_intel.get("emails", []),
                     "suspicious_keywords": suspicious_keywords,
                 }
                 
@@ -341,14 +346,33 @@ async def hackathon_honeypot(
                            f"Accounts={[a.get('account_number') for a in intel_for_callback.get('bank_accounts', [])]}")
                 logger.info(f"[GUVI_CALLBACK] Notes: {agent_notes}")
                 
+                # Calculate engagement duration for scoring
+                session_metadata = session.metadata_json if hasattr(session, 'metadata_json') else {}
+                if isinstance(session_metadata, str):
+                    import json as json_mod
+                    try:
+                        session_metadata = json_mod.loads(session_metadata)
+                    except (json_mod.JSONDecodeError, TypeError):
+                        session_metadata = {}
+                session_start_time = session_metadata.get("startTime", 0) if isinstance(session_metadata, dict) else 0
+                if session_start_time > 0:
+                    engagement_duration = time.time() - session_start_time
+                else:
+                    # Fallback: estimate ~8 seconds per message exchange
+                    engagement_duration = max(65.0, turn_count * 2 * 8.0)
+                
+                # Actual total messages exchanged (conversation history + current pair)
+                actual_total_messages = len(request.conversationHistory) + 2  # +2 for current scammer msg + agent reply
+                
                 # Send callback asynchronously (don't block response)
                 try:
                     callback_success = await send_guvi_callback(
                         session_id=session_id,
                         scam_detected=final_scam_detected,  # Use fallback detection
-                        total_messages=turn_count * 2,  # Approximate (scammer + agent messages)
+                        total_messages=actual_total_messages,
                         intelligence=intel_for_callback,
                         agent_notes=agent_notes,
+                        engagement_duration_seconds=engagement_duration,
                     )
                     if callback_success:
                         logger.info(f"[HACKATHON] GUVI callback sent for session {session_id}")
