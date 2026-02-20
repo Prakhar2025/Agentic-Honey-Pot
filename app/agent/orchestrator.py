@@ -288,7 +288,7 @@ class AgentOrchestrator:
             user_message=safe_user_message,
             history=formatted_history,
             temperature=self.settings.llm_temperature,
-            max_tokens=150,  # Keep responses short
+            max_tokens=250,  # Room for question + red flag + elicitation
         )
         
         # Clean up response
