@@ -29,6 +29,9 @@ class ExtractedIntelligencePayload(BaseModel):
     phishingLinks: List[str] = Field(default_factory=list)
     phoneNumbers: List[str] = Field(default_factory=list)
     emailAddresses: List[str] = Field(default_factory=list)
+    caseIds: List[str] = Field(default_factory=list)
+    policyNumbers: List[str] = Field(default_factory=list)
+    orderNumbers: List[str] = Field(default_factory=list)
     suspiciousKeywords: List[str] = Field(default_factory=list)
 
 
@@ -49,7 +52,10 @@ class GUVICallbackPayload(BaseModel):
     status: str = Field("success", description="'success' or 'error'")
     sessionId: str
     scamDetected: bool
+    scamType: str = Field("FINANCIAL_FRAUD", description="Detected scam type")
+    confidenceLevel: float = Field(0.0, description="Scam detection confidence 0-1")
     totalMessagesExchanged: int
+    engagementDurationSeconds: float = Field(0.0, description="Top-level engagement duration")
     extractedIntelligence: ExtractedIntelligencePayload
     engagementMetrics: EngagementMetricsPayload
     agentNotes: str
@@ -82,6 +88,8 @@ class GUVICallbackService:
         intelligence: Dict[str, Any],
         agent_notes: str = "",
         engagement_duration_seconds: float = 0.0,
+        scam_type: str = "FINANCIAL_FRAUD",
+        confidence_level: float = 0.0,
     ) -> bool:
         """
         Send final extraction results to GUVI evaluation endpoint.
@@ -104,6 +112,9 @@ class GUVICallbackService:
             phishing_links = [p.get("url", "") for p in intelligence.get("phishing_links", [])]
             phone_numbers = [p.get("number", "") for p in intelligence.get("phone_numbers", [])]
             email_addresses = [e.get("email", "") for e in intelligence.get("emails", [])]
+            case_ids = intelligence.get("case_ids", [])
+            policy_numbers = intelligence.get("policy_numbers", [])
+            order_numbers = intelligence.get("order_numbers", [])
             suspicious_keywords = intelligence.get("suspicious_keywords", [])
             
             # Ensure engagement duration is meaningful (minimum 60s for full points)
@@ -114,13 +125,19 @@ class GUVICallbackService:
                 status="success",
                 sessionId=session_id,
                 scamDetected=scam_detected,
+                scamType=scam_type,
+                confidenceLevel=round(confidence_level, 2),
                 totalMessagesExchanged=total_messages,
+                engagementDurationSeconds=round(engagement_duration_seconds, 1),
                 extractedIntelligence=ExtractedIntelligencePayload(
                     bankAccounts=bank_accounts,
                     upiIds=upi_ids,
                     phishingLinks=phishing_links,
                     phoneNumbers=phone_numbers,
                     emailAddresses=email_addresses,
+                    caseIds=case_ids,
+                    policyNumbers=policy_numbers,
+                    orderNumbers=order_numbers,
                     suspiciousKeywords=suspicious_keywords,
                 ),
                 engagementMetrics=EngagementMetricsPayload(
@@ -183,6 +200,8 @@ async def send_guvi_callback(
     intelligence: Dict[str, Any],
     agent_notes: str = "",
     engagement_duration_seconds: float = 0.0,
+    scam_type: str = "FINANCIAL_FRAUD",
+    confidence_level: float = 0.0,
 ) -> bool:
     """
     Convenience function to send GUVI callback.
@@ -197,4 +216,6 @@ async def send_guvi_callback(
         intelligence=intelligence,
         agent_notes=agent_notes,
         engagement_duration_seconds=engagement_duration_seconds,
+        scam_type=scam_type,
+        confidence_level=confidence_level,
     )

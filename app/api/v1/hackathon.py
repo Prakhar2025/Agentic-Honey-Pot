@@ -240,6 +240,15 @@ async def hackathon_honeypot(
                         existing.append(item)
                 extracted_intel[key] = existing
             
+            # Merge reference IDs (case IDs, policy numbers, order numbers)
+            for key in ["case_ids", "policy_numbers", "order_numbers"]:
+                existing_list = extracted_intel.get(key, [])
+                new_list = full_extraction.get(key, [])
+                for item in new_list:
+                    if item not in existing_list:
+                        existing_list.append(item)
+                extracted_intel[key] = existing_list
+            
             # MANDATORY: Send GUVI callback for evaluation
             # CRITICAL FIX: Send callback whenever we have extracted intel OR scam detected
             has_extracted_intel = any([
@@ -289,6 +298,9 @@ async def hackathon_honeypot(
                     "phishing_links": extracted_intel.get("phishing_links", []),
                     "phone_numbers": extracted_intel.get("phone_numbers", []),
                     "emails": extracted_intel.get("emails", []),
+                    "case_ids": extracted_intel.get("case_ids", []),
+                    "policy_numbers": extracted_intel.get("policy_numbers", []),
+                    "order_numbers": extracted_intel.get("order_numbers", []),
                     "suspicious_keywords": suspicious_keywords,
                 }
                 
@@ -373,6 +385,8 @@ async def hackathon_honeypot(
                         intelligence=intel_for_callback,
                         agent_notes=agent_notes,
                         engagement_duration_seconds=engagement_duration,
+                        scam_type=detected_scam_type,
+                        confidence_level=final_confidence,
                     )
                     if callback_success:
                         logger.info(f"[HACKATHON] GUVI callback sent for session {session_id}")

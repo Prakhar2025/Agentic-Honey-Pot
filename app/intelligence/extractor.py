@@ -130,6 +130,7 @@ class IntelligenceExtractor:
         urls = self.extract_urls(text)
         emails = self.extract_emails(text)
         other = self.extract_other(text)
+        reference_ids = self.extract_reference_ids(text)
         
         # Filter low confidence if needed
         if not include_low_confidence:
@@ -146,9 +147,15 @@ class IntelligenceExtractor:
             "phishing_links": urls,
             "emails": emails,
             "other_intel": other,
+            "case_ids": reference_ids.get("caseIds", []),
+            "policy_numbers": reference_ids.get("policyNumbers", []),
+            "order_numbers": reference_ids.get("orderNumbers", []),
             "total_entities": (
                 len(phone_numbers) + len(upi_ids) + len(bank_accounts) +
-                len(ifsc_codes) + len(urls) + len(emails) + len(other)
+                len(ifsc_codes) + len(urls) + len(emails) + len(other) +
+                len(reference_ids.get("caseIds", [])) +
+                len(reference_ids.get("policyNumbers", [])) +
+                len(reference_ids.get("orderNumbers", []))
             ),
             "extraction_method": "regex",
         }
@@ -552,6 +559,64 @@ class IntelligenceExtractor:
         
         return results
     
+    def extract_reference_ids(self, text: str) -> Dict[str, List[str]]:
+        """
+        Extract case IDs, policy numbers, and order numbers from text.
+        
+        These are commonly used by scammers as fake reference numbers
+        to appear legitimate.
+        
+        Args:
+            text: Text to extract from.
+        
+        Returns:
+            Dict with 'caseIds', 'policyNumbers', 'orderNumbers' lists.
+        """
+        result: Dict[str, List[str]] = {
+            "caseIds": [],
+            "policyNumbers": [],
+            "orderNumbers": [],
+        }
+        seen: Set[str] = set()
+        
+        # Case/Reference IDs: "case ID SBI-12345", "ref no. ABC123", "complaint #12345"
+        case_patterns = [
+            r"(?:case|reference|ref|complaint|ticket|id|number|no)[.:\s#-]*([A-Z]{2,5}[\-/]?\d{3,10})",
+            r"(?:case|reference|ref|complaint|ticket)[.:\s#-]*(\d{4,12})",
+        ]
+        for pattern in case_patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                value = match.group(1).strip()
+                if value not in seen and len(value) >= 4:
+                    seen.add(value)
+                    result["caseIds"].append(value)
+        
+        # Policy Numbers: "policy no. POL123456", "policy number 12345678"
+        policy_patterns = [
+            r"policy[.:\s#-]*(?:no|number|num)?[.:\s#-]*([A-Z]{2,5}[\-/]?\d{4,12})",
+            r"policy[.:\s#-]*(?:no|number|num)?[.:\s#-]*(\d{5,15})",
+        ]
+        for pattern in policy_patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                value = match.group(1).strip()
+                if value not in seen and len(value) >= 4:
+                    seen.add(value)
+                    result["policyNumbers"].append(value)
+        
+        # Order Numbers: "order #ORD12345", "order ID 98765"
+        order_patterns = [
+            r"order[.:\s#-]*(?:id|no|number|num)?[.:\s#-]*([A-Z]{2,5}[\-/]?\d{4,12})",
+            r"order[.:\s#-]*(?:id|no|number|num)?[.:\s#-]*(\d{5,15})",
+        ]
+        for pattern in order_patterns:
+            for match in re.finditer(pattern, text, re.IGNORECASE):
+                value = match.group(1).strip()
+                if value not in seen and len(value) >= 4:
+                    seen.add(value)
+                    result["orderNumbers"].append(value)
+        
+        return result
+    
     def extract_from_conversation(
         self,
         messages: List[Dict[str, str]],
@@ -618,6 +683,9 @@ class IntelligenceExtractor:
             "phishing_links": [],
             "emails": [],
             "other_intel": [],
+            "case_ids": [],
+            "policy_numbers": [],
+            "order_numbers": [],
             "total_entities": 0,
             "extraction_method": "regex",
         }
