@@ -124,7 +124,7 @@ export default function LandingPage() {
                         >
                             <Badge variant="outline" className="px-4 py-1.5 text-sm border-primary/30 bg-primary/5">
                                 <Sparkles className="h-3 w-3 mr-2 text-primary" />
-                                India AI Impact Buildathon 2026
+                                Agentic AI Honeypot System
                             </Badge>
                         </motion.div>
 

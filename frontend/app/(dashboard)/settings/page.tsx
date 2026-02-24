@@ -378,7 +378,7 @@ export default function SettingsPage() {
                                         { label: 'API Version', value: 'v1' },
                                         { label: 'Framework', value: 'Next.js 14' },
                                         { label: 'AI Model', value: 'LLaMA 3.3-70b (Groq)' },
-                                        { label: 'Built for', value: 'India AI Impact Buildathon 2026' },
+                                        { label: 'Category', value: 'Cybersecurity & AI' },
                                         { label: 'License', value: 'MIT' },
                                     ].map((info) => (
                                         <div key={info.label} className="flex items-center justify-between py-1.5">

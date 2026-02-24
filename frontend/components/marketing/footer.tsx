@@ -37,7 +37,7 @@ export function Footer() {
                             ScamShield
                         </Link>
                         <p className="text-sm text-muted-foreground mb-4">
-                            AI-powered scam intelligence platform built for India AI Impact Buildathon 2026.
+                            AI-powered scam intelligence platform for detecting and combating digital fraud.
                         </p>
                         <div className="flex gap-3">
                             <Link href="https://github.com/Prakhar2025/Agentic-Honey-Pot" target="_blank" className="text-muted-foreground hover:text-foreground">
@@ -72,7 +72,7 @@ export function Footer() {
                 <Separator className="my-8" />
 
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-                    <p>© 2026 ScamShield. Built with ❤️ for India AI Impact Buildathon.</p>
+                    <p>© 2026 ScamShield. Built with ❤️ to fight digital fraud.</p>
                     <p>Powered by Groq LLaMA 3.3-70b</p>
                 </div>
             </div>

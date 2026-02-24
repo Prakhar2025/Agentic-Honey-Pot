@@ -81,7 +81,7 @@ export function Sidebar() {
                             ScamShield v1.0.0
                         </p>
                         <p className="text-xs text-muted-foreground">
-                            India AI Impact Buildathon
+                            Open Source Project
                         </p>
                     </div>
                 </div>

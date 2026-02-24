@@ -115,8 +115,8 @@ phishing links).
 - `/v1/sessions` - Manage and view sessions
 - `/v1/analytics` - Dashboard and intelligence summary
 
-### Built for
-India AI Impact Buildathon 2026 - Agentic Honey-Pot for Scam Detection & Intelligence Extraction
+### About
+Agentic Honey-Pot — AI-powered Scam Detection & Intelligence Extraction Platform
         """,
         version="1.0.0",
         docs_url="/docs",
