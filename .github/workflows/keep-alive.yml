@@ -1,37 +1,19 @@
-name: Keep Render Service Alive
+# DISABLED - Hackathon is over, no need to keep Render alive every 5 min
+# Re-enable if needed by uncommenting the 'on' section below
 
-on:
-  schedule:
-    # Run every 5 minutes during finals
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allow manual trigger
+name: Keep Render Service Alive (DISABLED)
+
+# on:
+#   schedule:
+#     - cron: '*/5 * * * *'
+#   workflow_dispatch:
 
 jobs:
   ping:
+    if: false  # Never runs
     runs-on: ubuntu-latest
     steps:
       - name: Ping Health Endpoint
         run: |
           echo "Pinging ScamShield API at $(date)"
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://scamshield-honeypot.onrender.com/v1/health)
-          echo "Response code: $response"
-          
-          if [ "$response" -eq 200 ]; then
-            echo "✅ Service is healthy"
-          else
-            echo "⚠️ Service returned $response"
-            # Try to wake it up with multiple requests
-            for i in {1..3}; do
-              echo "Attempt $i to wake service..."
-              curl -s https://scamshield-honeypot.onrender.com/v1/health
-              sleep 5
-            done
-          fi
-      
-      - name: Ping Root Endpoint
-        run: |
-          curl -s https://scamshield-honeypot.onrender.com/ || echo "Root endpoint failed"
-      
-      - name: Log Status
-        run: |
-          echo "Keep-alive ping completed at $(date)"
+          curl -s -o /dev/null -w "%{http_code}" https://scamshield-honeypot.onrender.com/v1/health
